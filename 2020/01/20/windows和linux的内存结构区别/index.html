@@ -1,0 +1,166 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"><title>windows和linux的内存结构区别 | Asc0t6e</title><meta name="description" content="windows和linux的内存结构区别"><meta name="author" content="Asc0t6e"><meta name="copyright" content="Asc0t6e"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="windows和linux的内存结构区别"><meta name="twitter:description" content="windows和linux的内存结构区别"><meta name="twitter:image" content="https://www.ascotbe.com/img/1.jpg"><meta property="og:type" content="article"><meta property="og:title" content="windows和linux的内存结构区别"><meta property="og:url" content="https://www.ascotbe.com/2020/01/20/windows%E5%92%8Clinux%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E5%8C%BA%E5%88%AB/"><meta property="og:site_name" content="Asc0t6e"><meta property="og:description" content="windows和linux的内存结构区别"><meta property="og:image" content="https://www.ascotbe.com/img/1.jpg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="https://www.ascotbe.com/2020/01/20/windows%E5%92%8Clinux%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E5%8C%BA%E5%88%AB/"><link rel="prev" title="使用C++进行免杀" href="https://www.ascotbe.com/2020/03/07/%E4%BD%BF%E7%94%A8C++%E8%BF%9B%E8%A1%8C%E5%85%8D%E6%9D%80/"><link rel="next" title="利用树莓派来监听任务目标(上)" href="https://www.ascotbe.com/2019/12/21/raspberry_monitor/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://www.ascotbe.com/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  isHome: false,
+  isPost: true
+  
+}</script><meta name="generator" content="Hexo 4.2.0"></head><body><canvas class="fireworks"></canvas><header> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">Asc0t6e</a></span><span class="toggle-menu pull_right close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor_Swift"><i class="fa-fw fa fa-link"></i><span> Taylor_Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></span></div></header><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">85</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor_Swift"><i class="fa-fw fa fa-link"></i><span> Taylor_Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><div class="sidebar-toc__content"></div></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"></div></div></div><main id="content-outer"><div id="top-container" style="background-image: url(/img/42.png)"><div id="post-info"><div id="post-title"><div class="posttitle">windows和linux的内存结构区别</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 发表于 2020-01-20<span class="post-meta__separator">|</span><i class="fa fa-history fa-fw" aria-hidden="true"></i> 更新于 2020-03-08</time><div class="post-meta-wordcount"><div class="post-meta-pv-cv"><span><i class="fa fa-eye post-meta__icon fa-fw" aria-hidden="true"> </i>阅读量:</span><span id="busuanzi_value_page_pv"></span></div></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><blockquote>
+<p><code>windows</code>的内存结构分布</p>
+</blockquote>
+<ul>
+<li><p>首先是内存结构分布图，<code>windows</code>的内存默认是从<code>0x80000000</code>位置开始的</p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/%E5%A4%A7%E6%9D%82%E7%83%A9/6.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="windows" class="fancybox"><img alt="windows" title="windows" data-src="https://github.com/Ascotbe/Random-img/blob/master/%E5%A4%A7%E6%9D%82%E7%83%A9/6.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+</li>
+<li><p>栈的增长方向是从高地址到低地址递增的，用下面一个例子来解释</p>
+<ul>
+<li><p>例子一:</p>
+<p><strong><code>esp</code>是栈指针</strong>，是<code>cpu</code>机制决定的，<code>push</code>、<code>pop</code>指令会自动调整<code>esp</code>的值；</p>
+<p><strong><code>ebp</code>只是存取某时刻的<code>esp</code></strong>，<strong>这个时刻就是进入一个函数内后，<code>cpu</code>会将<code>esp</code>的值赋给<code>ebp</code>，此时就可以通过<code>ebp</code>对栈进行操作，比如获取函数参数，局部变量等，实际上使用<code>esp</code>也可以；</strong></p>
+<p>假设执行<code>print</code>函数之前<code>esp=Q</code></p>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">main() &#123;</span><br><span class="line">&#x2F;&#x2F;执行test前</span><br><span class="line">print(int p1,int p2);</span><br><span class="line">&#x2F;&#x2F;执行test后</span><br><span class="line">&#125;</span><br><span class="line">#############开始执行print函数#############</span><br><span class="line">push p2; &#x2F;&#x2F;函数参数p2入栈，esp&#x3D;Q-4H</span><br><span class="line">push p1; &#x2F;&#x2F;函数参数p1入栈，esp&#x3D;Q-8H</span><br><span class="line">call print; &#x2F;&#x2F;函数返回地址入栈，esp&#x3D;Q-0CH</span><br><span class="line">&#x2F;&#x2F;现在进入print内，做些准备工作：</span><br><span class="line">push ebp; &#x2F;&#x2F;保护先前ebp指针，ebp入栈，esp&#x3D;Q-10H</span><br><span class="line">mov ebp,esp; &#x2F;&#x2F;设置ebp等于当前的esp</span><br><span class="line">&#x2F;&#x2F; 此时，ebp+0CH&#x3D;Q-4H，即p2的位置</span><br><span class="line">&#x2F;&#x2F; 同样，ebp+08H&#x3D;Q-8H，即p1的位置</span><br><span class="line">&#x2F;&#x2F; 下面是print内的一些操作：</span><br><span class="line">sub esp,20H; &#x2F;&#x2F;设置长度为10H大小的局部变量空间，esp&#x3D;Q-20H</span><br><span class="line">&#x2F;&#x2F; ... ...</span><br><span class="line">&#x2F;&#x2F; 一系列操作</span><br><span class="line">&#x2F;&#x2F; ... ...</span><br><span class="line">add esp,20H; &#x2F;&#x2F;释放局部变量空间，esp&#x3D;Q-10H</span><br><span class="line">pop ebp; &#x2F;&#x2F;出栈，恢复原先的ebp的值，esp&#x3D;Q-0CH</span><br><span class="line">ret 8; &#x2F;&#x2F;ret返回，弹出先前入栈的返回地址，esp&#x3D;Q-08H，后面加操作数8H为平衡堆栈</span><br><span class="line">&#x2F;&#x2F; 之后，弹出函数参数，esp&#x3D;Q，恢复执行print函数前的堆栈；</span><br></pre></td></tr></table></figure></div>
+
+<ul>
+<li>整个的流程图如下，要执行函数之前把<code>p2</code>和<code>p1</code>压入栈中，栈向低地址递增(<code>Q-4h</code>)，接着把函数地址放入栈中，然后把<code>ebp</code>的值放入栈中保存</li>
+</ul>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/%E5%A4%A7%E6%9D%82%E7%83%A9/14.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="img" class="fancybox"><img alt="img" title="img" data-src="https://github.com/Ascotbe/Random-img/blob/master/%E5%A4%A7%E6%9D%82%E7%83%A9/14.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+</li>
+<li><p>例子二:</p>
+<p><code>EBP</code>是当前函数的存取指针，即存储或者读取数时的指针基地址；<code>ESP</code>就是当前函数的栈顶指针。每一次发生函数的调用（主函数调用子函数）时，在被调用函数初始时，都会把当前函数（主函数）的<code>EBP</code>压栈，以便从子函数返回到主函数时可以获取<code>EBP</code>。</p>
+<p>下面是按调用约定<code>__stdcall</code> 调用函数<code>test(int p1,int p2)</code>的汇编代码</p>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">假设执行函数前堆栈指针ESP为0xAAAAAAA ；EBP为0xAAAAAB0</span><br><span class="line">push   p2    ;参数2入栈, ESP -&#x3D; 4h , ESP &#x3D; 0xAAAAAAA - 4h &#x3D;    0xAAAAAA6</span><br><span class="line">push   p1    ;参数1入栈, ESP -&#x3D; 4h , ESP &#x3D; 0xAAAAAAA - 8h &#x3D;    0xAAAAAA2</span><br><span class="line">call test    ;压入返回地址 ESP -&#x3D; 4h, ESP &#x3D; 0xAAAAAAA- 0Ch  &#x3D; 0xAAAAA9D,注意：这里是test函数的返回地址，即在代码段中的地址（偏移）。</span><br><span class="line">;&#x2F;&#x2F;进入函数内</span><br><span class="line">&#123;</span><br><span class="line">push   ebp                           ;保护先前EBP指针， EBP入栈(即0xAAAAAB0入栈，注意与返回地址区别)， ESP-&#x3D;4h, ESP &#x3D; 0xAAAAA99</span><br><span class="line">mov    ebp, esp                   ;设置EBP指针指向栈顶 0xAAAAA99</span><br><span class="line">mov    eax, dword ptr  [ebp+0ch]   ;ebp+0ch为0xAAAAAA6即参数2的位置</span><br><span class="line">mov    ebx, dword ptr  [ebp+08h]   ;ebp+08h为0xAAAAAA2,即参数1的位置</span><br><span class="line">sub    esp, 8                     ;局部变量所占空间ESP-&#x3D;8, ESP &#x3D; 0xAAAAA91</span><br><span class="line">...</span><br><span class="line">add    esp, 8                     ;释放局部变量, ESP+&#x3D;8, ESP &#x3D;  0xAAAAA99</span><br><span class="line">pop    ebp                        ;出栈,恢复EBP, ESP+&#x3D;4, ESP &#x3D; 0xAAAAA9D,即把栈中地址0xAAAAA99的内容pop到ebp中</span><br><span class="line">ret    8                          ;ret返回,弹出返回地址,ESP+&#x3D;4, ESP&#x3D;0xAAAAAA2, 后面加操作数8为平衡堆栈,ESP+&#x3D;8,ESP&#x3D;0xAAAAAAA, 恢复进入函数前的堆栈.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></div>
+
+<p>原来<code>ESP</code>就是一直指向栈顶的指针,而<code>EBP</code>只是存取某时刻的栈顶指针,以方便对栈的操作,如获取函数参数、局部变量等。</p>
+</li>
+</ul>
+</li>
+<li><p>堆分为堆块和堆表</p>
+<ul>
+<li><p>引用大佬的图</p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/%E5%A4%A7%E6%9D%82%E7%83%A9/12.jpg?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="img" class="fancybox"><img alt="img" title="img" data-src="https://github.com/Ascotbe/Random-img/blob/master/%E5%A4%A7%E6%9D%82%E7%83%A9/12.jpg?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>堆表</p>
+<p>为了合理地组织堆区中的空闲堆块，提出了堆表的概念。堆表的数据结构决定了整个堆区的组织方式，一般位于堆区的起始位置，用于索引堆区中空闲堆块的重要信息，包括堆块的位置、大小、状态（空闲或占用）。</p>
+</li>
+<li><p>堆块</p>
+<p>传统内存统计单位往往是以字节位标准，但处于性能的考虑，堆内存按照大小不同组成不同的块，以堆块为单位进行标识。一个堆块包括两个部分：<code>header</code>部分和<code>data</code>部分。<code>header</code>是一个堆块头部的几个字节，用来标识这个堆块自身的信息。<code>data</code>是用来在最终分配给用户使用的数据区。</p>
+<ul>
+<li><p>堆块分配</p>
+<p>堆块的分配可以分为三类，<code>Lookaside</code>分配、普通<code>Freelist</code>分配以及<code>0</code>号<code>Freelist（free[0]）</code>分配。</p>
+<p><code>Lookaside</code>分配：寻找到大小匹配的空闲堆块 -&gt; 修改状态为占用 -&gt; 从堆表中解链 -&gt; 给程序返回一个指向堆块的指针</p>
+<p>普通<code>Freelist</code>分配：寻找最优的空闲堆块 -&gt; 若失败，寻找次优空闲堆块分配</p>
+<p><code>0</code>号<code>Freelist</code>分配：从<code>free[0]</code>反向寻找最后一个堆块（最大的堆块） -&gt; 若满足要求，再正向搜索最小的满足要求的空闲堆块。</p>
+<p>堆块分配中的“找零钱”现象：当在<code>Freelist</code>中无法找到刚好合适的堆块时，此时会分配一个稍微大一点的空闲堆块给程序使用，其过程是首先在这个大块中分配出大小刚好等于请求堆块大小的堆块给程序，然后剩下的部分修改堆块的<code>header</code>信息，重新链入到<code>Freelist</code>合适的位置。这种方法节约了内存的使用，不会造成大量的内存浪费。</p>
+<p>由于<code>Lookaside</code>只有在精确匹配时才会分配，因此不存在“找零钱”现象。</p>
+</li>
+<li><p>堆块释放</p>
+<p>堆块的释放主要是将堆块修改为空闲状态，然后将堆块链入相应的堆表。所有的释放块都链入堆表的末尾，分配的时候也会首先从堆表末尾分配。</p>
+</li>
+<li><p>堆块合并</p>
+<p>为了减少内存中的内存碎片，合理有效地利用内存，堆管理系统还需要进行堆块合并操作。</p>
+<p>当两个空闲堆块彼此相邻的时候就会进行堆块合并操作。其过程大致为：</p>
+<p>将两个块从<code>Freelist</code>中解链 -&gt; 合并堆块 -&gt; 调整合并后堆块的<code>header</code>信息 -&gt; 将合并后的堆块放入<code>Freelist</code>合适的位置</p>
+</li>
+</ul>
+</li>
+<li><p>堆上的漏洞</p>
+<ul>
+<li><p>堆溢出漏洞</p>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">堆溢出与栈溢出在本质上是相通的，都是精心构造特制的数据去覆盖正常数据，覆盖到某个特定位置后跳转到自己的shellcode的地址去执行shellcode。</span><br><span class="line">但从技术层面来讲，堆溢出比栈溢出难度更大。而且现在基本很少有软件存在典型的栈溢出漏洞，相反由于堆的复杂性，很多软件仍然存在诸多的堆溢出漏洞。</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><code>UAF</code>漏洞</p>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Use After Free（UAF），释放后重引用漏洞， 一块内存已经被释放后，在程序中仍然存在对该块内存的引用，并且在一定情况下可能使用内存中的数据。</span><br><span class="line">由于这块原本已经被释放不应该再使用的内存被程序中的其他地方进行了使用，因此该块内存中的数据是不可信的。这种方式甚至会造成内存崩溃或者任意代码执行。此类型的漏洞在浏览器中比较常见。</span><br><span class="line">UAF漏洞比较有名的是CVE-2013-1347 Microsoft IE CGenericElementUAF漏洞，该漏洞被用在了当时著名的“水坑”事件中，影响巨大。</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><code>Double Free</code>漏洞</p>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">双重释放漏洞，主要是由于对同一块内存进行二次重复释放。在释放过程中，邻近的已释放的堆块存在合并动作，这会导致原有的堆header信息发生改变，同时前向指针和后向指针也会发生改变，随后再对其中的地址进行引用，就会导致访问异常，最终导致程序崩溃或者任意代码执行。</span><br><span class="line">从另外一个角度来说，由于发生了对释放后的堆块内存的引用，因此Double Free漏洞也是UAF漏洞的一个子集。</span><br><span class="line">双重释放漏洞比较经典的是CVE-2014-1767，该漏洞位于Windows AFD.sys文件中。</span><br><span class="line">在2014年的Pwn2Own上，Siberas团队使用该漏洞进行内核提权，绕过了Windows 8.1平台上的IE11沙箱，并在随后获得了Pwnie Awards的“最佳提权漏洞奖”。该漏洞通杀Windows系统，影响较大。</span><br></pre></td></tr></table></figure></div>
+
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><code>linux</code>的内存结构分布</p>
+</blockquote>
+<ul>
+<li><p>首先依旧是先放个内存结构图，<code>linux</code>内存默认是从<code>0xC0000000</code>位置开始的</p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/%E5%A4%A7%E6%9D%82%E7%83%A9/13.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="linux" class="fancybox"><img alt="linux" title="linux" data-src="https://github.com/Ascotbe/Random-img/blob/master/%E5%A4%A7%E6%9D%82%E7%83%A9/13.png?raw=true" src="/img/loading.gif" class="lazyload"></a>  </p>
+</li>
+<li><p>栈地址也是依旧是高地址到低地址递增，但是栈的整体地址是可以向高地址增加的，不像<code>windows</code>一样<code>ebp</code>直接就在最高地址了</p>
+</li>
+<li><p>堆（待更新）</p>
+</li>
+</ul>
+<blockquote>
+<p>参考文章</p>
+</blockquote>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.cnblogs.com&#x2F;xiangtingshen&#x2F;p&#x2F;11221277.html</span><br><span class="line">https:&#x2F;&#x2F;zhuanlan.zhihu.com&#x2F;p&#x2F;92827074</span><br></pre></td></tr></table></figure></div>
+
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">Asc0t6e</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/2020/01/20/windows%E5%92%8Clinux%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E5%8C%BA%E5%88%AB/">https://www.ascotbe.com/2020/01/20/windows%E5%92%8Clinux%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E5%8C%BA%E5%88%AB/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com">Asc0t6e</a>！</span></div></div><div class="tag_share"><div class="post_share"><div class="social-share" data-image="/img/1.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/03/07/%E4%BD%BF%E7%94%A8C++%E8%BF%9B%E8%A1%8C%E5%85%8D%E6%9D%80/"><img class="prev_cover lazyload" data-src="/img/1.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>使用C++进行免杀</span></div></a></div><div class="next-post pull_right"><a href="/2019/12/21/raspberry_monitor/"><img class="next_cover lazyload" data-src="/img/1.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>利用树莓派来监听任务目标(上)</span></div></a></div></nav></div></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2020 By Asc0t6e</div><span>呐呐呐ฅ(๑*д*๑)ฅ到底啦~</span></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/fireworks.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/click_heart.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/Bronya.model.json"},"display":{"position":"right","width":400,"height":500,"hOffset":-80,"vOffset":0},"mobile":{"show":false},"log":false});</script></body></html>
