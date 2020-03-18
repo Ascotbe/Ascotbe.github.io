@@ -76,14 +76,14 @@ function activateLightMode(){
 </p><p>隔了一天后我想到了一个思路，既然是网页而且是动态的那岂不是可以用Selenium+Chrome模拟登陆不就好了吗？！</p><p>
 </p><h1>思路如下：</h1>
 <p>找到用户和密码标签页ID号分别是username和password如下图</p>
-<p> <a href="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/1.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img class="aligncenter lazyload" alt data-original="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/1.png?raw=true" style title data-src="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/1.png?raw=true" src="/img/loading.gif"></a></p>
- <p><a href="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/2.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img class="aligncenter lazyload" alt data-original="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/2.png?raw=true" style title data-src="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/2.png?raw=true" src="/img/loading.gif"></a></p>
+<p> <a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img class="aligncenter lazyload" alt data-original="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/1.png?raw=true" style data-src="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/1.png?raw=true" src="/img/loading.gif" title></a></p>
+ <p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img class="aligncenter lazyload" alt data-original="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/2.png?raw=true" style data-src="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/2.png?raw=true" src="/img/loading.gif" title></a></p>
 
 <p>然后找到登陆按钮的ID号</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/3.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img class="aligncenter lazyload" alt data-original="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/3.png?raw=true" style title data-src="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/3.png?raw=true" src="/img/loading.gif"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img class="aligncenter lazyload" alt data-original="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/3.png?raw=true" style data-src="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/3.png?raw=true" src="/img/loading.gif" title></a></p>
 
 <p>接下来需要登陆错误的页面会有什么不同</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/4.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img class="aligncenter lazyload" alt data-original="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/4.png?raw=true" style title data-src="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/4.png?raw=true" src="/img/loading.gif"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img class="aligncenter lazyload" alt data-original="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/4.png?raw=true" style data-src="https://github.com/Ascotbe/Random-img/blob/master/ScanHikvisionMonitor/4.png?raw=true" src="/img/loading.gif" title></a></p>
 
 <p>这边会多出几个字(英文版的是这边显示的是英文的错误信息，有的版本会弹出JS弹框)</p>
 <p>知道了这些只要写一个动态爬的脚本就能用了</p>

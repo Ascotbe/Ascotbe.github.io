@@ -186,15 +186,15 @@ type =<span style="color: #008080">gettype</span>(name)        <span style="colo
 <h4 id="8-WAF绕过">8.WAF绕过</h4>
 <h5 id="8-1-垃圾数据">8.1 垃圾数据</h5>
 <p>　　有些主机WAF软件为了不影响web服务器的性能，会对校验的用户数据设置大小上限，比如1M。此种情况可以构造一个大文件，前面1M的内容为垃圾内容，后面才是真正的木马内容，便可以绕过WAF对文件内容的校验；</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/1.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/1.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/1.png?raw=true" src="/img/loading.gif" class="lazyload" title></a></p>
 <p>当然也可以将垃圾数据放在数据包最开头，这样便可以绕过对文件名的校验。</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/2.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/2.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/2.png?raw=true" src="/img/loading.gif" class="lazyload" title></a></p>
 <p>可以将垃圾数据加上Content-Disposition参数后面，参数内容过长，可能会导致waf检测出错。</p>
 <h5 id="8-2-filename">8.2 filename</h5>
 <p>针对早期版本安全狗，可以多加一个filename</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/3.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/3.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/3.png?raw=true" src="/img/loading.gif" class="lazyload" title></a></p>
 <p>或者将filename换位置，在IIS6.0下如果我们换一种书写方式，把filename放在其他地方：</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/4.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt width="755" height="320" title style data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/4.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt width="755" height="320" title style data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/4.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
 <h5 id="8-3-POST-GET">8.3 POST/GET</h5>
 <p>有些WAF的规则是：如果数据包为POST类型，则校验数据包内容。<br>此种情况可以上传一个POST型的数据包，抓包将POST改为GET。</p>
 <h5 id="8-4-以上方式">8.4 以上方式</h5>
@@ -202,7 +202,7 @@ type =<span style="color: #008080">gettype</span>(name)        <span style="colo
 <p>&nbsp;</p>
 <h5 id="8-5-利用waf本身缺陷">8.5 利用waf本身缺陷</h5>
 <h6 id="删除实体里面的Conten-Type字段">删除实体里面的Conten-Type字段</h6>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/5.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/5.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/5.png?raw=true" src="/img/loading.gif" class="lazyload" title></a></p>
 <p>&nbsp;</p>
 <p>&nbsp;<br>第一种是删除Content整行，第二种是删除C后面的字符。删除掉ontent-Type: image/jpeg只留下c，将.php加c后面即可，但是要注意额，双引号要跟着c.php。</p>
 <p>&nbsp;</p>
@@ -212,11 +212,11 @@ type =<span style="color: #008080">gettype</span>(name)        <span style="colo
 C.php"</span></pre>
 </div>
 <h6 id="删除Content-Disposition字段里的空格">删除Content-Disposition字段里的空格</h6>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/6.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/6.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/6.png?raw=true" src="/img/loading.gif" class="lazyload" title></a></p>
 <p>&nbsp;</p>
 <p>&nbsp;增加一个空格导致安全狗被绕过案列：<br>Content-Type: multipart/form-data; boundary=—————————4714631421141173021852555099<br>尝试在boundary后面加个空格或者其他可被正常处理的字符：<br>boundary= —————————47146314211411730218525550</p>
 <h6 id="修改Content-Disposition字段值的大小写">修改Content-Disposition字段值的大小写</h6>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/7.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/7.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/7.png?raw=true" src="/img/loading.gif" class="lazyload" title></a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <h6 id="Boundary边界不一致">Boundary边界不一致</h6>
@@ -231,29 +231,29 @@ Content-Type: application/octet-stream
 -----------------------------4714631421141173021852555099--</span></pre>
 <div class="cnblogs_code_toolbar"><span class="cnblogs_code_copy"></span></div></div>
 <p>但如果容器在处理的过程中并没有严格要求一致的话可能会导致一个问题，两段Boundary不一致使得waf认为这段数据是无意义的，可是容器并没有那么严谨：<br>Win2k3 + IIS6.0 + ASP</p>
-<p>&nbsp;<a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/8.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt width="896" height="368" title data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/8.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p>&nbsp;<a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt width="896" height="368" data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/8.png?raw=true" src="/img/loading.gif" class="lazyload" title></a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;文件名处回车</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/9.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt width="825" height="146" title data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/9.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt width="825" height="146" data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/9.png?raw=true" src="/img/loading.gif" class="lazyload" title></a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <h6 id="多个Content-Disposition">多个Content-Disposition</h6>
 <p>在IIS的环境下，上传文件时如果存在多个Content-Disposition的话，IIS会取第一个Content-Disposition中的值作为接收参数，而如果waf只是取最后一个的话便会被绕过，Win2k8 + IIS7.0 + PHP</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/10.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt width="807" height="383" title data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/10.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt width="807" height="383" data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/10.png?raw=true" src="/img/loading.gif" class="lazyload" title></a></p>
 <h5 id="利用NTFS-ADS特性">利用NTFS ADS特性</h5>
 <p>ADS是NTFS磁盘格式的一个特性，用于NTFS交换数据流。在上传文件时，如果waf对请求正文的filename匹配不当的话可能会导致绕过</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/11.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt width="797" height="367" title style data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/11.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt width="797" height="367" title style data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/11.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
 <p>&nbsp;</p>
 <p>&nbsp;</p>
 <h5 id="文件重命名绕过">文件重命名绕过</h5>
-<p>如果web程序会将filename除了扩展名的那段重命名的话，那么还可以构造更多的点、符号等等。<br><a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/12.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt width="876" height="356" title style data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/12.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p>如果web程序会将filename除了扩展名的那段重命名的话，那么还可以构造更多的点、符号等等。<br><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt width="876" height="356" title style data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/12.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
 <h5 id="特殊的长文件名绕过">特殊的长文件名绕过</h5>
 <p>文件名使用非字母数字，比如中文等最大程度的拉长，不行的话再结合一下其他的特性进行测试：<br>shell.asp;王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王王.jpg</p>
 <h5 id="反删除">反删除</h5>
-<p>将下图file1改成了file4，这样就不会把这个文件删除了。（JCMS漏洞）<br><a href="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/13.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/13.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p>将下图file1改成了file4，这样就不会把这个文件删除了。（JCMS漏洞）<br><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/Upload%20bypassing/13.png?raw=true" src="/img/loading.gif" class="lazyload" title></a></p>
 <p>&nbsp;</p>
 <h3 id="文件校验的几点建议">文件校验的几点建议</h3>
 <ul>

