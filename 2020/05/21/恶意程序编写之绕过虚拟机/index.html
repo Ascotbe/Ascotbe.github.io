@@ -74,6 +74,8 @@ function activateLightMode(){
 </blockquote>
 <p>郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！</p>
 <h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>新篇章开始了，主要讲一些探测沙盒以及编译工具的方法，之前我写的那个勒索病毒用到的大部分方法我都会总结到这里，也会参考一些师傅的文章，算是一个巩固吧，最后会把所有代码上传到GitHub中，之前免杀里面说的一些像加密之类的操作这里就不在重复写了。</p>
+<a href="https://github.com/Ascotbe/Random-img/blob/master/ShellCode/67.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="B79A6672434BA2BBDDF34E537B3CD05D" class="fancybox"><img alt="B79A6672434BA2BBDDF34E537B3CD05D" style="zoom:50%;" title="B79A6672434BA2BBDDF34E537B3CD05D" data-src="https://github.com/Ascotbe/Random-img/blob/master/ShellCode/67.png?raw=true" src="/img/loading.gif" class="lazyload"></a>
+
 <p>这是半成品，还有几个代码没敲完，还有点瑕疵</p>
 <h3 id="从编译角度来看免杀"><a href="#从编译角度来看免杀" class="headerlink" title="从编译角度来看免杀"></a>从编译角度来看免杀</h3><p>全篇文章以免杀中的<strong>VirtualAllocPlanA</strong>作为基础例子来验证我们的猜想，</p>
 <h4 id="删除链接库"><a href="#删除链接库" class="headerlink" title="删除链接库"></a>删除链接库</h4><p>有些反病毒软件会识别链接器中的问题，如果说xxx.lib这些编译器会自动帮我们加上，如果把链接器选项中的其他依赖项删除掉(尤其是<code>kernel32.lib</code>)，某些反恶意软件引擎就不会把生成的可执行文件标记为恶意的。</p>
