@@ -77,6 +77,8 @@ function activateLightMode(){
 <p>前言</p>
 </blockquote>
 <p>对没错这是这星期的第四篇文章了，我感觉要肝不动了啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊啊</p>
+<a href="https://github.com/Ascotbe/Random-img/blob/master/XXE/12.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="image-20200729093326798" class="fancybox"><img alt="image-20200729093326798" style="zoom:50%;" title="image-20200729093326798" data-src="https://github.com/Ascotbe/Random-img/blob/master/XXE/12.png?raw=true" src="/img/loading.gif" class="lazyload"></a>
+
 <h3 id="XXE是什么"><a href="#XXE是什么" class="headerlink" title="XXE是什么"></a>XXE是什么</h3><p>XXE(XML External Entity Injection) 全称为 XML 外部实体注入，从名字就能看出来，这是一个注入漏洞，注入的是什么？XML外部实体。(看到这里肯定有人要说：你这不是在废话)，固然，其实我这里废话只是想强调我们的利用点是 <strong>外部实体</strong> ，也是提醒读者将注意力集中于外部实体中，而不要被 XML 中其他的一些名字相似的东西扰乱了思维(<strong>盯好外部实体就行了</strong>)，如果能注入 外部实体并且成功解析的话，这就会大大拓宽我们 XML 注入的攻击面（这可能就是为什么单独说 而没有说 XML 注入的原因吧，或许普通的 XML 注入真的太鸡肋了，现实中几乎用不到）</p>
 <p><a href="https://github.com/Ascotbe/Random-img/blob/master/XXE/1.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption="img" class="fancybox"><img alt="img" title="img" data-src="https://github.com/Ascotbe/Random-img/blob/master/XXE/1.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
 <h3 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h3><p>XML是一种用于标记电子文件使其具有结构性的标记语言，用于标记电子文件使其具有结构性的标记语言，可以用来标记数据、定义数据类型，是一种允许用户对自己的标记语言进行定义的源语言。XML文档结构包括XML声明、DTD文档类型定义（可选）、文档元素。</p>
