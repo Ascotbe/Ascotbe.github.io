@@ -69,7 +69,7 @@ function activateLightMode(){
   isHome: false,
   isPost: true
   
-}</script><meta name="generator" content="Hexo 4.2.1"></head><body><canvas class="fireworks"></canvas><header> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">ascotbe</a></span><span class="toggle-menu pull_right close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></span></div></header><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">98</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><div class="sidebar-toc__content"><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#DLL劫持"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">DLL劫持</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#DLL搜索顺序和劫持"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">DLL搜索顺序和劫持</span></a></li></ol></div></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DLL劫持"><span class="toc-number">1.</span> <span class="toc-text">DLL劫持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DLL搜索顺序和劫持"><span class="toc-number">2.</span> <span class="toc-text">DLL搜索顺序和劫持</span></a></li></ol></div></div></div><main id="content-outer"><div id="top-container" style="background-image: url(https://gitee.com/asc0t6e/Random-img/raw/master/Blog/115.jpg)"><div id="post-info"><div id="post-title"><div class="posttitle">恶意程序研究之DLL劫持</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 发表于 2020-09-20<span class="post-meta__separator">|</span><i class="fa fa-history fa-fw" aria-hidden="true"></i> 更新于 2020-09-20</time><div class="post-meta-wordcount"><div class="post-meta-pv-cv"><span><i class="fa fa-eye post-meta__icon fa-fw" aria-hidden="true"> </i>阅读量:</span><span id="busuanzi_value_page_pv"></span></div></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><blockquote>
+}</script><meta name="generator" content="Hexo 4.2.1"></head><body><canvas class="fireworks"></canvas><header> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">ascotbe</a></span><span class="toggle-menu pull_right close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></span></div></header><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">98</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><div class="sidebar-toc__content"><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#DLL劫持"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">DLL劫持</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#DLL加载顺序"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">DLL加载顺序</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#如何寻找DLL劫持"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text">如何寻找DLL劫持</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#简单利用"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text">简单利用</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#创建一个DLL工程"><span class="toc_mobile_items-number">5.</span> <span class="toc_mobile_items-text">创建一个DLL工程</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#参考文章"><span class="toc_mobile_items-number">6.</span> <span class="toc_mobile_items-text">参考文章</span></a></li></ol></div></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#DLL劫持"><span class="toc-number">1.</span> <span class="toc-text">DLL劫持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#DLL加载顺序"><span class="toc-number">2.</span> <span class="toc-text">DLL加载顺序</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何寻找DLL劫持"><span class="toc-number">3.</span> <span class="toc-text">如何寻找DLL劫持</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#简单利用"><span class="toc-number">4.</span> <span class="toc-text">简单利用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#创建一个DLL工程"><span class="toc-number">5.</span> <span class="toc-text">创建一个DLL工程</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#参考文章"><span class="toc-number">6.</span> <span class="toc-text">参考文章</span></a></li></ol></div></div></div><main id="content-outer"><div id="top-container" style="background-image: url(https://gitee.com/asc0t6e/Random-img/raw/master/Blog/115.jpg)"><div id="post-info"><div id="post-title"><div class="posttitle">恶意程序研究之DLL劫持</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 发表于 2020-09-20<span class="post-meta__separator">|</span><i class="fa fa-history fa-fw" aria-hidden="true"></i> 更新于 2020-09-21</time><div class="post-meta-wordcount"><div class="post-meta-pv-cv"><span><i class="fa fa-eye post-meta__icon fa-fw" aria-hidden="true"> </i>阅读量:</span><span id="busuanzi_value_page_pv"></span></div></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><blockquote>
 <p>声明</p>
 </blockquote>
 <p>郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！</p>
@@ -79,30 +79,106 @@ function activateLightMode(){
 <p>新开一个坑，HVV的时候感觉还不是太忙，就新开一篇文章吧，目前只是写了个开头，我先研究研究</p>
 <h2 id="DLL劫持"><a href="#DLL劫持" class="headerlink" title="DLL劫持"></a>DLL劫持</h2><p>DLL劫持一直深受黑客们的喜欢，利用此技术可以实现启动木马后门，游戏外挂插件的注入，绕过UAC等操作。</p>
 <p>全文约定：全文中系统盘所在的位置默认为C盘</p>
-<h2 id="DLL搜索顺序和劫持"><a href="#DLL搜索顺序和劫持" class="headerlink" title="DLL搜索顺序和劫持"></a>DLL搜索顺序和劫持</h2><p>DLL是以文件的形式存在在硬盘中，那么应用程序又是如何索引所需的DLL呢？其实，Microsoft已在<a href="https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order" target="_blank" rel="noopener">此处</a>完整记录了DLL搜索顺序。</p>
+<h2 id="DLL加载顺序"><a href="#DLL加载顺序" class="headerlink" title="DLL加载顺序"></a>DLL加载顺序</h2><p>DLL是以文件的形式存在在硬盘中，那么应用程序又是如何索引所需的DLL呢？其实，Microsoft已在<a href="https://docs.microsoft.com/en-us/windows/win32/dlls/dynamic-link-library-search-order" target="_blank" rel="noopener">此处</a>完整记录了DLL搜索顺序。</p>
 <blockquote>
 <p>Windows XP SP2之前</p>
 </blockquote>
 <ol>
 <li>进程对应的应用程序所在目录；</li>
-<li>当前目录（Current Directory）；</li>
-<li>系统目录（通过 GetSystemDirectory 获取）；</li>
-<li>16位系统目录；</li>
+<li>加载 DLL 时所在的当前目录；</li>
+<li>系统目录即 SYSTEM32 目录（通过 GetSystemDirectory 获取）；</li>
+<li>16位系统目录即 SYSTEM 目录；</li>
 <li>Windows目录（通过 GetWindowsDirectory 获取）；</li>
 <li>PATH环境变量中的各个目录；</li>
 </ol>
 <blockquote>
 <p>Windows XP SP2之后</p>
 </blockquote>
-<p>“安全DLL查找模式”默认是启用的, 启用”安全DLL查找模式”时，查找顺序如下：</p>
+<p>微软为了防止DLL劫持漏洞的产生，在XP SP2之后，添加了一个SafeDllSearchMode的注册表属性。注册表路径如下：</p>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session</span><br><span class="line">Manager\SafeDllSearchMode</span><br></pre></td></tr></table></figure></div>
+
+<p>当SafeDllSearchMode的值设置为1，即安全DLL搜索模式开启时，查找DLL的目录顺序如下：</p>
 <ol>
 <li>应用程序所在目录；</li>
-<li>系统目录。<strong>GetSystemDirectory</strong>返回的目录，通常是<strong>C:\Windows\System32</strong>；</li>
-<li>16位系统目录。该项只是为了向前兼容的处理，可以不考虑；</li>
-<li><strong>Windows</strong>目录。<strong>GetWindowsDirectory</strong>返回的目录，通常是<strong>C:\Windows</strong>；</li>
-<li>当前目录。</li>
+<li>系统目录SYSTEM32 目录；</li>
+<li>16位系统目录即SYSTEM 目录。该项只是为了向前兼容的处理，可以不考虑；</li>
+<li>Windows目录。通常是<strong>C:\Windows</strong>；</li>
+<li>加载 DLL 时所在的当前目录；</li>
 <li>环境变量<strong>PATH</strong>中所有目录。需要注意的是，这里不包括<strong>App Paths</strong>注册表项指定的应用程序路径。</li>
 </ol>
-<p>如果应用程序没有指定<strong>DLL</strong>加载位置，则<strong>Windows</strong>将默认使用上述搜索次序。<strong>DLL</strong>搜索顺序中的第一个位置，即加载应用程序的目录，是攻击者感兴趣的。</p>
-<p><strong>DLL</strong>劫持是指通过一些手段来劫持或者替换正常的<strong>DLL</strong>，欺骗正常程序加载预先准备好的恶意<strong>DLL</strong>。例如开发人员想要调用<code>C:\Windows\system32</code>中的<strong>dll</strong>，但由于windows优先搜索当前路径，所以当我们把恶意dll放在应用程序同一路径下，便会被程序成功加载，从而执行恶意操作。</p>
+<p><strong>PS：</strong>“安全DLL查找模式”默认是启用的</p>
+<blockquote>
+<p>更深层的保护</p>
+</blockquote>
+<p>微软为了更进一步的防御系统的DLL被劫持，将一些容易被劫持的系统DLL写进了一个注册表项中，<strong>那么凡是此项下的DLL文件就会被禁止从EXE自身所在的目录下调用</strong>，而只能从系统目录即SYSTEM32目录下调用。注册表路径如下：</p>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\KnownDLLs</span><br></pre></td></tr></table></figure></div>
+
+<p>Windows 10中的如下</p>
+<p>![image-20200921151524382](/Users/ascotbe/Library/Application Support/typora-user-images/image-20200921151524382.png)</p>
+<h2 id="如何寻找DLL劫持"><a href="#如何寻找DLL劫持" class="headerlink" title="如何寻找DLL劫持"></a>如何寻找DLL劫持</h2><blockquote>
+<p>劫持系统DLL</p>
+</blockquote>
+<p>要分析一个应用程序是否存在劫持系统DLL的漏洞，需要这么几个步骤</p>
+<ul>
+<li>启动应用程序</li>
+<li>使用Process Explorer等类似软件查看该应用程序启动后加载的动态链接库。</li>
+<li>从该应用程序已经加载的DLL列表中，查找在上述“KnownDLLs注册表项”中不存在的DLL。</li>
+<li>编写从上一步获取到的DLL的劫持DLL。</li>
+<li>将编写好的劫持DLL放到该应用程序目录下，重新启动该应用程序，检测是否劫持成功。</li>
+</ul>
+<p>如果对以上步骤都没问题还是没有实现劫持的话，具体可能有一下情况</p>
+<ul>
+<li>DLL不在KnownDLLs注册表中但是已经被微软做了保护，比如ntdll.dll等系统核心dll</li>
+<li>宿主进程在调用LoadLibrary函数时使用了“绝对路径”</li>
+<li>宿主进程对调用的DLL进行了校检，比如文件MD5、HASH等值</li>
+<li>宿主调用DLL时使用了SetDllDirectory函数把当前目录从DLL的搜索顺序列表中删除</li>
+</ul>
+<blockquote>
+<p>劫持应用DLL</p>
+</blockquote>
+<p>劫持这个DLL就方便多了，只要宿主没有对自己的DLL做校检的话就可以进行劫持替换</p>
+<h2 id="简单利用"><a href="#简单利用" class="headerlink" title="简单利用"></a>简单利用</h2><p>利用<code>NDP461-KB3102438-Web.exe</code>程序进行进行测试</p>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#微软下载地址</span><br><span class="line">http:&#x2F;&#x2F;www.microsoft.com&#x2F;zh-cn&#x2F;download&#x2F;details.aspx?id&#x3D;49981&amp;134b2bb0-86c1-fe9f-d523-281faef41695&#x3D;1&amp;fa43d42b-25b5-4a42-fe9b-1634f450f5ee&#x3D;True</span><br><span class="line">#备用下载地址</span><br><span class="line">XXX</span><br></pre></td></tr></table></figure></div>
+
+<p>然后使用Process Monitor做如下设置</p>
+<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">Include the following filters:</span><br><span class="line">Operation is CreateFile</span><br><span class="line">Operation is LoadImage</span><br><span class="line">Path contains .cpl</span><br><span class="line">Path contains .dll</span><br><span class="line">Path contains .drv</span><br><span class="line">Path contains .exe</span><br><span class="line">Path contains .ocx</span><br><span class="line">Path contains .scr</span><br><span class="line">Path contains .sys</span><br><span class="line"></span><br><span class="line">Exclude the following filters:</span><br><span class="line">Process Name is procmon.exe</span><br><span class="line">Process Name is Procmon64.exe</span><br><span class="line">Process Name is System</span><br><span class="line">Operation begins with IRP_MJ_</span><br><span class="line">Operation begins with FASTIO_</span><br><span class="line">Result is SUCCESS</span><br><span class="line">Path ends with pagefile.sys</span><br></pre></td></tr></table></figure></div>
+
+<p>PS：设置Exclude Result is SUCCESS后会只显示NAME NOT FOUND项，也就是只查看未成功加载的dll项，即KnownDLLs的列表中不包含的dll名称，可用于查找存在漏洞的dll路径</p>
+<p>![image-20200921182038245](/Users/ascotbe/Library/Application Support/typora-user-images/image-20200921182038245.png)</p>
+<p>可以看到<code>NDP461-KB3102438-Web.exe</code>在启动的过程中会加载<code>VERSION.dll</code>，同时显示<code>NAME NOT FOUND</code>，表示无法找到该文件，加载失败</p>
+<p>![image-20200921183824472](/Users/ascotbe/Library/Application Support/typora-user-images/image-20200921183824472.png)</p>
+<p>既然他优先加载桌面的DLL，那我们就对这个DLL做个丛定新即可</p>
+<h2 id="创建一个DLL工程"><a href="#创建一个DLL工程" class="headerlink" title="创建一个DLL工程"></a>创建一个DLL工程</h2><p>可以看到主入口中有四个switch分支，分别对应如下表内容</p>
+<p>![image-20200921122437432](/Users/ascotbe/Library/Application Support/typora-user-images/image-20200921122437432.png)</p>
+<table>
+<thead>
+<tr>
+<th>载入状态</th>
+<th>值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>DLL_PROCESS_ATTACH</td>
+<td>1</td>
+<td>被进程装载时</td>
+</tr>
+<tr>
+<td>DLL_PROCESS_DETACH</td>
+<td>0</td>
+<td>被进程卸载时</td>
+</tr>
+<tr>
+<td>DLL_THREAD_ATTACH</td>
+<td>2</td>
+<td>被线程装载时</td>
+</tr>
+<tr>
+<td>DLL_THREAD_DETACH</td>
+<td>3</td>
+<td>被线程卸载时</td>
+</tr>
+</tbody></table>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.freebuf.com&#x2F;articles&#x2F;78807.html</span><br><span class="line">https:&#x2F;&#x2F;github.com&#x2F;sensepost&#x2F;rattler</span><br><span class="line">https:&#x2F;&#x2F;3gstudent.github.io&#x2F;DLL%E5%8A%AB%E6%8C%81%E6%BC%8F%E6%B4%9E%E8%87%AA%E5%8A%A8%E5%8C%96%E8%AF%86%E5%88%AB%E5%B7%A5%E5%85%B7Rattler%E6%B5%8B%E8%AF%95&#x2F;</span><br></pre></td></tr></table></figure></div>
+
 </div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ascotbe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/2020/09/20/DllHijacking/">https://www.ascotbe.com/2020/09/20/DllHijacking/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com">ascotbe</a>！</span></div></div><div class="tag_share"><div class="post_share"><div class="social-share" data-image="https://gitee.com/asc0t6e/Random-img/raw/master/BlogCover/115.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.jpg" alt="微信"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.jpg" alt="支付寶"><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="next-post pull-full"><a href="/2020/08/10/KernelHub/"><img class="next_cover lazyload" data-src="https://gitee.com/asc0t6e/Random-img/raw/master/BlogCover/114.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>近20年Windows权限提升集合</span></div></a></div></nav></div></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2020 By ascotbe</div><span>呐呐呐ฅ(๑*д*๑)ฅ到底啦~</span><div class="icp"><a href="http://www.beian.miit.gov.cn/state/outPortal/loginPortal.action" target="_blank" rel="noopener"><img class="icp-icon" src="/img/icp.png"><span>闽ICP备20002178号-1</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/fireworks.js"></script><script id="ribbon_piao" mobile="false" src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/piao.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/click_heart.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/Bronya.model.json"},"display":{"position":"right","width":400,"height":500,"hOffset":-110,"vOffset":-40},"mobile":{"show":false},"log":false});</script></body></html>
