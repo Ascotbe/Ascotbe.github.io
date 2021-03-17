@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>mimikatz使用说明 | ascotbe</title><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言  有些命令没用过所以没有添加 基本命令  exit:退出当前程序  cls:清屏  answer:对生命、宇宙和万物的终极问题的回答。  coffee：显示一杯咖啡图案，请阿姨喝杯卡布奇诺。  sleep：默认睡眠 1000ms，后跟时间参数，比如sleep 5000，就会睡眠5000ms。  log：记录 Mimikatz 所有的输入和输出到当前目录下的 log.txt文件，它只会记录输">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>mimikatz使用说明 | ascotbe</title><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言  有些命令没用过所以没有添加 基本命令  exit:退出当前程序  cls:清屏  answer:对生命、宇宙和万物的终极问题的回答。  coffee：显示一杯咖啡图案，请阿姨喝杯卡布奇诺。  sleep：默认睡眠 1000ms，后跟时间参数，比如sleep 5000，就会睡眠5000ms。  log：记录 Mimikatz 所有的输入和输出到当前目录下的 log.txt 文件，它只会记录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="mimikatz使用说明">
 <meta property="og:url" content="https://www.ascotbe.com/2020/04/14/mimikatz/index.html">
 <meta property="og:site_name" content="ascotbe">
-<meta property="og:description" content="前言  有些命令没用过所以没有添加 基本命令  exit:退出当前程序  cls:清屏  answer:对生命、宇宙和万物的终极问题的回答。  coffee：显示一杯咖啡图案，请阿姨喝杯卡布奇诺。  sleep：默认睡眠 1000ms，后跟时间参数，比如sleep 5000，就会睡眠5000ms。  log：记录 Mimikatz 所有的输入和输出到当前目录下的 log.txt文件，它只会记录输">
+<meta property="og:description" content="前言  有些命令没用过所以没有添加 基本命令  exit:退出当前程序  cls:清屏  answer:对生命、宇宙和万物的终极问题的回答。  coffee：显示一杯咖啡图案，请阿姨喝杯卡布奇诺。  sleep：默认睡眠 1000ms，后跟时间参数，比如sleep 5000，就会睡眠5000ms。  log：记录 Mimikatz 所有的输入和输出到当前目录下的 log.txt 文件，它只会记录">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://gitee.com/asc0t6e/Random-img/raw/master/BlogCover/92.jpg">
 <meta property="article:published_time" content="2020-04-14T15:07:46.000Z">
@@ -16,7 +16,7 @@
   localSearch: undefined,
   translate: undefined,
   noticeOutdate: undefined,
-  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
   copy: {
     success: '复制成功',
     error: '复制错误',
@@ -138,11 +138,11 @@
           document.documentElement.classList.remove('hide-aside')
         }
       }
-    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">98</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/asc0t6e/Random-img/raw/master/Blog/91.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ascotbe</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">mimikatz使用说明</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-04-14T15:07:46.000Z" title="发表于 2020-04-14 23:07:46">2020-04-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-19T15:33:38.517Z" title="更新于 2021-01-19 23:33:38">2021-01-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="mimikatz使用说明"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">98</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://gitee.com/asc0t6e/Random-img/raw/master/Blog/91.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ascotbe</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">mimikatz使用说明</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-04-14T15:07:46.000Z" title="发表于 2020-04-14 23:07:46">2020-04-14</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-01-19T15:33:38.517Z" title="更新于 2021-01-19 23:33:38">2021-01-19</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
 <p>前言</p>
 </blockquote>
 <p>有些命令没用过所以没有添加</p>
-<h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/1.png?raw=true" data-fancybox="group" data-caption="1" class="fancybox"><img alt="1" title="1" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/1.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<h3 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h3><p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/1.png?raw=true" alt="1"></p>
 <ul>
 <li><p><code>exit</code>:退出当前程序</p>
 </li>
@@ -154,7 +154,7 @@
 </li>
 <li><p><code>sleep</code>：默认睡眠 <code>1000ms</code>，后跟时间参数，比如<code>sleep 5000</code>，就会睡眠<code>5000ms</code>。</p>
 </li>
-<li><p><code>log</code>：记录 <strong>Mimikatz</strong> 所有的输入和输出到当前目录下的 <code>log.txt</code>文件，它只会记录输入<code>log</code>命令后的输入和输出，当你没有启动这个命令之前的所有命令都不会记入进去。</p>
+<li><p><code>log</code>：记录 <strong>Mimikatz</strong> 所有的输入和输出到当前目录下的 <code>log.txt </code>文件，它只会记录输入<code>log</code>命令后的输入和输出，当你没有启动这个命令之前的所有命令都不会记入进去。</p>
 </li>
 <li><p><code>base64</code>：将输入/输出转换成 <code>base64</code> 编码。</p>
 </li>
@@ -168,7 +168,7 @@
 </li>
 </ul>
 <h3 id="使用模块"><a href="#使用模块" class="headerlink" title="使用模块"></a>使用模块</h3><p>输入<code>::</code>显示其支持模块信息。</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/2.png?raw=true" data-fancybox="group" data-caption="2" class="fancybox"><img alt="2" title="2" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/2.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/2.png?raw=true" alt="2"></p>
 <blockquote>
 <p>standard：标准模块，基本命令，不需要模块信息</p>
 </blockquote>
@@ -177,8 +177,8 @@
 <p>crypto：加密模块，其后跟以下参数</p>
 </blockquote>
 <p>下图是参数列表</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/3.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/3.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
-<p> CRYPTO模块提供了与Windows加密功能（<a href="https://msdn.microsoft.com/en-us/library/ms867086.aspx" target="_blank" rel="noopener">CryptoAPI</a>）交互的高级功能。<br>通常的用途是导出未标记为“可导出”的证书。</p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/3.png?raw=true" alt="3"></p>
+<p> CRYPTO模块提供了与Windows加密功能（<a target="_blank" rel="noopener" href="https://msdn.microsoft.com/en-us/library/ms867086.aspx">CryptoAPI</a>）交互的高级功能。<br>通常的用途是导出未标记为“可导出”的证书。</p>
 <table>
 <thead>
 <tr>
@@ -238,8 +238,7 @@
 <ul>
 <li><p><strong>providers</strong></p>
 <p>此命令列出所有提供程序：CryptoAPI，然后列出CNG（如果可用）</p>
-<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::providers</span><br><span class="line"></span><br><span class="line">CryptoAPI providers :</span><br><span class="line"> 0. RSA_FULL      ( 1) - Microsoft Base Cryptographic Provider v1.0</span><br><span class="line"> 1. DSS_DH        (13) - Microsoft Base DSS and Diffie-Hellman Cryptographic Provider</span><br><span class="line"> 2. DSS           ( 3) - Microsoft Base DSS Cryptographic Provider</span><br><span class="line"> 3. RSA_FULL      ( 1) - Microsoft Base Smart Card Crypto Provider</span><br><span class="line"> 4. DH_SCHANNEL   (18) - Microsoft DH SChannel Cryptographic Provider</span><br><span class="line"> 5. RSA_FULL      ( 1) - Microsoft Enhanced Cryptographic Provider v1.0</span><br><span class="line"> 6. DSS_DH        (13) - Microsoft Enhanced DSS and Diffie-Hellman Cryptographic Provider</span><br><span class="line"> 7. RSA_AES       (24) - Microsoft Enhanced RSA and AES Cryptographic Provider</span><br><span class="line"> 8. RSA_SCHANNEL  (12) - Microsoft RSA SChannel Cryptographic Provider</span><br><span class="line"> 9. RSA_FULL      ( 1) - Microsoft Strong Cryptographic Provider</span><br><span class="line"></span><br><span class="line">CryptoAPI provider types:</span><br><span class="line"> 0. RSA_FULL      ( 1) - RSA Full (Signature and Key Exchange)</span><br><span class="line"> 1. DSS           ( 3) - DSS Signature</span><br><span class="line"> 2. RSA_SCHANNEL  (12) - RSA SChannel</span><br><span class="line"> 3. DSS_DH        (13) - DSS Signature with Diffie-Hellman Key Exchange</span><br><span class="line"> 4. DH_SCHANNEL   (18) - Diffie-Hellman SChannel</span><br><span class="line"> 5. RSA_AES       (24) - RSA Full and AES</span><br><span class="line"></span><br><span class="line">CNG providers :</span><br><span class="line"> 0. Microsoft Key Protection Provider</span><br><span class="line"> 1. Microsoft Passport Key Storage Provider</span><br><span class="line"> 2. Microsoft Platform Crypto Provider</span><br><span class="line"> 3. Microsoft Primitive Provider</span><br><span class="line"> 4. Microsoft Smart Card Key Storage Provider</span><br><span class="line"> 5. Microsoft Software Key Storage Provider</span><br><span class="line"> 6. Microsoft SSL Protocol Provider</span><br><span class="line"> 7. Windows Client Key Protection Provider</span><br></pre></td></tr></table></figure></div>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::providers</span><br><span class="line"></span><br><span class="line">CryptoAPI providers :</span><br><span class="line"> 0. RSA_FULL      ( 1) - Microsoft Base Cryptographic Provider v1.0</span><br><span class="line"> 1. DSS_DH        (13) - Microsoft Base DSS and Diffie-Hellman Cryptographic Provider</span><br><span class="line"> 2. DSS           ( 3) - Microsoft Base DSS Cryptographic Provider</span><br><span class="line"> 3. RSA_FULL      ( 1) - Microsoft Base Smart Card Crypto Provider</span><br><span class="line"> 4. DH_SCHANNEL   (18) - Microsoft DH SChannel Cryptographic Provider</span><br><span class="line"> 5. RSA_FULL      ( 1) - Microsoft Enhanced Cryptographic Provider v1.0</span><br><span class="line"> 6. DSS_DH        (13) - Microsoft Enhanced DSS and Diffie-Hellman Cryptographic Provider</span><br><span class="line"> 7. RSA_AES       (24) - Microsoft Enhanced RSA and AES Cryptographic Provider</span><br><span class="line"> 8. RSA_SCHANNEL  (12) - Microsoft RSA SChannel Cryptographic Provider</span><br><span class="line"> 9. RSA_FULL      ( 1) - Microsoft Strong Cryptographic Provider</span><br><span class="line"></span><br><span class="line">CryptoAPI provider types:</span><br><span class="line"> 0. RSA_FULL      ( 1) - RSA Full (Signature and Key Exchange)</span><br><span class="line"> 1. DSS           ( 3) - DSS Signature</span><br><span class="line"> 2. RSA_SCHANNEL  (12) - RSA SChannel</span><br><span class="line"> 3. DSS_DH        (13) - DSS Signature with Diffie-Hellman Key Exchange</span><br><span class="line"> 4. DH_SCHANNEL   (18) - Diffie-Hellman SChannel</span><br><span class="line"> 5. RSA_AES       (24) - RSA Full and AES</span><br><span class="line"></span><br><span class="line">CNG providers :</span><br><span class="line"> 0. Microsoft Key Protection Provider</span><br><span class="line"> 1. Microsoft Passport Key Storage Provider</span><br><span class="line"> 2. Microsoft Platform Crypto Provider</span><br><span class="line"> 3. Microsoft Primitive Provider</span><br><span class="line"> 4. Microsoft Smart Card Key Storage Provider</span><br><span class="line"> 5. Microsoft Software Key Storage Provider</span><br><span class="line"> 6. Microsoft SSL Protocol Provider</span><br><span class="line"> 7. Windows Client Key Protection Provider</span><br></pre></td></tr></table></figure></li>
 <li><p><strong>stores</strong></p>
 <p>此命令列出系统存储中的逻辑存储。</p>
 <ul>
@@ -255,19 +254,12 @@
 <li><code>CERT_SYSTEM_STORE_SERVICES</code> or <code>SERVICES</code></li>
 </ul>
 <p>使用方法如下</p>
-<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::stores &#x2F;systemstore:local_machine</span><br><span class="line">Asking for System Store &#39;local_machine&#39; (0x00020000)</span><br><span class="line"> 0. My</span><br><span class="line"> 1. Root</span><br><span class="line"> 2. Trust</span><br><span class="line"> 3. CA</span><br><span class="line"> 4. TrustedPublisher</span><br><span class="line"> 5. Disallowed</span><br><span class="line"> 6. AuthRoot</span><br><span class="line"> 7. TrustedPeople</span><br><span class="line"> 8. ADDRESSBOOK</span><br><span class="line"> 9. ipcu</span><br><span class="line">10. Remote Desktop</span><br><span class="line">11. REQUEST</span><br><span class="line">12. SmartCardRoot</span><br><span class="line">13. TrustedDevices</span><br><span class="line">14. Windows Live ID Token Issuer</span><br></pre></td></tr></table></figure></div>
-
-
-
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::stores &#x2F;systemstore:local_machine</span><br><span class="line">Asking for System Store &#39;local_machine&#39; (0x00020000)</span><br><span class="line"> 0. My</span><br><span class="line"> 1. Root</span><br><span class="line"> 2. Trust</span><br><span class="line"> 3. CA</span><br><span class="line"> 4. TrustedPublisher</span><br><span class="line"> 5. Disallowed</span><br><span class="line"> 6. AuthRoot</span><br><span class="line"> 7. TrustedPeople</span><br><span class="line"> 8. ADDRESSBOOK</span><br><span class="line"> 9. ipcu</span><br><span class="line">10. Remote Desktop</span><br><span class="line">11. REQUEST</span><br><span class="line">12. SmartCardRoot</span><br><span class="line">13. TrustedDevices</span><br><span class="line">14. Windows Live ID Token Issuer</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-</ul>
-<ul>
 <li><p><strong>sc</strong></p>
 <p>能列出读取智能卡或者令牌读取器，如果用CSP的时候能读取出智能卡的密钥</p>
-<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::sc</span><br><span class="line">SmartCard readers:</span><br><span class="line"></span><br><span class="line"> * OMNIKEY CardMan 3x21 0</span><br><span class="line">    ATR  : 3bb794008131fe6553504b32339000d1</span><br><span class="line">    Model: G&amp;D SPK 2.3 T&#x3D;1</span><br><span class="line">    CSP  : SafeSign Standard Cryptographic Service Provider</span><br><span class="line"></span><br><span class="line"> 0. 34C99D73A1FAE4D44F9966DF626623DF18858C83</span><br><span class="line">    34C99D73A1FAE4D44F9966DF626623DF18858C83</span><br><span class="line">        Type           : AT_KEYEXCHANGE (0x00000001)</span><br><span class="line">        Exportable key : NO</span><br><span class="line">        Key size       : 1024</span><br><span class="line"></span><br><span class="line"> * SCM Microsystems Inc. SCR35xx USB Smart Card Reader 0</span><br></pre></td></tr></table></figure></div>
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::sc</span><br><span class="line">SmartCard readers:</span><br><span class="line"></span><br><span class="line"> * OMNIKEY CardMan 3x21 0</span><br><span class="line">    ATR  : 3bb794008131fe6553504b32339000d1</span><br><span class="line">    Model: G&amp;D SPK 2.3 T&#x3D;1</span><br><span class="line">    CSP  : SafeSign Standard Cryptographic Service Provider</span><br><span class="line"></span><br><span class="line"> 0. 34C99D73A1FAE4D44F9966DF626623DF18858C83</span><br><span class="line">    34C99D73A1FAE4D44F9966DF626623DF18858C83</span><br><span class="line">        Type           : AT_KEYEXCHANGE (0x00000001)</span><br><span class="line">        Exportable key : NO</span><br><span class="line">        Key size       : 1024</span><br><span class="line"></span><br><span class="line"> * SCM Microsystems Inc. SCR35xx USB Smart Card Reader 0</span><br></pre></td></tr></table></figure></li>
 <li><p><strong>scauth</strong></p>
 <p>创建用于用于智能卡身份验证的客户端证书</p>
 <p>该命令中的参数</p>
@@ -285,13 +277,7 @@
 <p>保存最终证书的文件名（默认：无文件，存储在<code>CERT_SYSTEM_STORE_CURRENT_USER</code>中）</p>
 </li>
 </ul>
-<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::scauth &#x2F;caname:KiwiAC &#x2F;upn:user@lab.local &#x2F;pfx:user.pfx</span><br><span class="line">CA store       : LOCAL_MACHINE</span><br><span class="line">CA name        : KiwiAC</span><br><span class="line">CA validity    : 22&#x2F;08&#x2F;2016 22:00:36 -&gt; 22&#x2F;08&#x2F;2021 22:10:35</span><br><span class="line">Certificate UPN: user@lab.local</span><br><span class="line">Key container  : &#123;a1bd29ec-4203-4aac-8159-40f28f96335b&#125;</span><br><span class="line">Key provider   : Microsoft Enhanced Cryptographic Provider v1.0</span><br><span class="line">Private Export : user.pfx - OK</span><br></pre></td></tr></table></figure></div>
-
-
-
-</li>
-</ul>
-<ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::scauth &#x2F;caname:KiwiAC &#x2F;upn:user@lab.local &#x2F;pfx:user.pfx</span><br><span class="line">CA store       : LOCAL_MACHINE</span><br><span class="line">CA name        : KiwiAC</span><br><span class="line">CA validity    : 22&#x2F;08&#x2F;2016 22:00:36 -&gt; 22&#x2F;08&#x2F;2021 22:10:35</span><br><span class="line">Certificate UPN: user@lab.local</span><br><span class="line">Key container  : &#123;a1bd29ec-4203-4aac-8159-40f28f96335b&#125;</span><br><span class="line">Key provider   : Microsoft Enhanced Cryptographic Provider v1.0</span><br><span class="line">Private Export : user.pfx - OK</span><br></pre></td></tr></table></figure></li>
 <li><p><strong>certificates</strong></p>
 <p>该参数里面有三个可以选值</p>
 <ul>
@@ -301,13 +287,7 @@
 <li><strong>/silent</strong> –可选–如果需要用户交互，则中止</li>
 <li><strong>/nokey</strong> –可选–不要尝试与私钥进行交互</li>
 </ul>
-<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::capi</span><br><span class="line">Local CryptoAPI patched</span><br><span class="line"></span><br><span class="line">mimikatz # privilege::debug</span><br><span class="line">Privilege &#39;20&#39; OK</span><br><span class="line"></span><br><span class="line">mimikatz # crypto::cng</span><br><span class="line">&quot;KeyIso&quot; service patched</span><br><span class="line"></span><br><span class="line">mimikatz # crypto::certificates &#x2F;systemstore:local_machine &#x2F;store:my &#x2F;export</span><br><span class="line"> * System Store  : &#39;local_machine&#39; (0x00020000)</span><br><span class="line"> * Store         : &#39;my&#39;</span><br><span class="line"></span><br><span class="line"> 0. example.domain.local</span><br><span class="line">        Key Container  : example.domain.local</span><br><span class="line">        Provider       : Microsoft Software Key Storage Provider</span><br><span class="line">        Type           : CNG Key (0xffffffff)</span><br><span class="line">        Exportable key : NO</span><br><span class="line">        Key size       : 2048</span><br><span class="line">        Public export  : OK - &#39;local_machine_my_0_example.domain.local.der&#39;</span><br><span class="line">        Private export : OK - &#39;local_machine_my_0_example.domain.local.pfx&#39;</span><br></pre></td></tr></table></figure></div>
-
-
-
-</li>
-</ul>
-<ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::capi</span><br><span class="line">Local CryptoAPI patched</span><br><span class="line"></span><br><span class="line">mimikatz # privilege::debug</span><br><span class="line">Privilege &#39;20&#39; OK</span><br><span class="line"></span><br><span class="line">mimikatz # crypto::cng</span><br><span class="line">&quot;KeyIso&quot; service patched</span><br><span class="line"></span><br><span class="line">mimikatz # crypto::certificates &#x2F;systemstore:local_machine &#x2F;store:my &#x2F;export</span><br><span class="line"> * System Store  : &#39;local_machine&#39; (0x00020000)</span><br><span class="line"> * Store         : &#39;my&#39;</span><br><span class="line"></span><br><span class="line"> 0. example.domain.local</span><br><span class="line">        Key Container  : example.domain.local</span><br><span class="line">        Provider       : Microsoft Software Key Storage Provider</span><br><span class="line">        Type           : CNG Key (0xffffffff)</span><br><span class="line">        Exportable key : NO</span><br><span class="line">        Key size       : 2048</span><br><span class="line">        Public export  : OK - &#39;local_machine_my_0_example.domain.local.der&#39;</span><br><span class="line">        Private export : OK - &#39;local_machine_my_0_example.domain.local.pfx&#39;</span><br></pre></td></tr></table></figure></li>
 <li><p><strong>hash</strong></p>
 <p>使用可选的用户名对密码进行哈希处理</p>
 </li>
@@ -321,26 +301,18 @@
 <li><code>/silent</code> - 可选 - 如果需要用户交互，则中止</li>
 </ul>
 <p>提供者详细信息的完整列表<code>crypto::providers</code></p>
-<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::keys &#x2F;export</span><br><span class="line"> * Store         : &#39;user&#39;</span><br><span class="line"> * Provider      : &#39;MS_ENHANCED_PROV&#39; (&#39;Microsoft Enhanced Cryptographic Provider v1.0&#39;)</span><br><span class="line"> * Provider type : &#39;PROV_RSA_FULL&#39; (1)</span><br><span class="line"> * CNG Provider  : &#39;Microsoft Software Key Storage Provider&#39;</span><br><span class="line"></span><br><span class="line">CryptoAPI keys :</span><br><span class="line"></span><br><span class="line"> 0. myCapiKey</span><br><span class="line">    223311d3b5d990f48c65070b883b9ef1_33b8db1c-b3d2-4912-b24e-fc0742b704c1</span><br><span class="line">        Type           : AT_KEYEXCHANGE (0x00000001)</span><br><span class="line">        Exportable key : YES</span><br><span class="line">        Key size       : 2048</span><br><span class="line">        Private export : OK - &#39;user_capi_0_myCapiKey.pvk&#39;</span><br><span class="line"></span><br><span class="line"> 1. OC_KeyContainer_Lync_user@domain.local</span><br><span class="line">    49e3a9228aa9a33357545413fba35d07_33b8db1c-b3d2-4912-b24e-fc0742b704c1</span><br><span class="line">        Type           : AT_SIGNATURE (0x00000002)</span><br><span class="line">        Exportable key : NO</span><br><span class="line">        Key size       : 2048</span><br><span class="line">        Private export : KO - ERROR kuhl_m_crypto_exportKeyToFile ; Export &#x2F; CreateFile (0x8009000b)</span><br><span class="line"></span><br><span class="line">CNG keys :</span><br><span class="line"></span><br><span class="line"> 0. mykey-d535a6d8-70f5-496f-8c85-17c8fd26f379</span><br><span class="line">    98a436bd6f4caa9b24379112b577f688_33b8db1c-b3d2-4912-b24e-fc0742b704c1</span><br><span class="line">        Exportable key : NO</span><br><span class="line">        Key size       : 2048</span><br><span class="line">        Private export : KO - ERROR kuhl_m_crypto_exportKeyToFile ; Export &#x2F; CreateFile (0x80090029)</span><br></pre></td></tr></table></figure></div>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # crypto::keys &#x2F;export</span><br><span class="line"> * Store         : &#39;user&#39;</span><br><span class="line"> * Provider      : &#39;MS_ENHANCED_PROV&#39; (&#39;Microsoft Enhanced Cryptographic Provider v1.0&#39;)</span><br><span class="line"> * Provider type : &#39;PROV_RSA_FULL&#39; (1)</span><br><span class="line"> * CNG Provider  : &#39;Microsoft Software Key Storage Provider&#39;</span><br><span class="line"></span><br><span class="line">CryptoAPI keys :</span><br><span class="line"></span><br><span class="line"> 0. myCapiKey</span><br><span class="line">    223311d3b5d990f48c65070b883b9ef1_33b8db1c-b3d2-4912-b24e-fc0742b704c1</span><br><span class="line">        Type           : AT_KEYEXCHANGE (0x00000001)</span><br><span class="line">        Exportable key : YES</span><br><span class="line">        Key size       : 2048</span><br><span class="line">        Private export : OK - &#39;user_capi_0_myCapiKey.pvk&#39;</span><br><span class="line"></span><br><span class="line"> 1. OC_KeyContainer_Lync_user@domain.local</span><br><span class="line">    49e3a9228aa9a33357545413fba35d07_33b8db1c-b3d2-4912-b24e-fc0742b704c1</span><br><span class="line">        Type           : AT_SIGNATURE (0x00000002)</span><br><span class="line">        Exportable key : NO</span><br><span class="line">        Key size       : 2048</span><br><span class="line">        Private export : KO - ERROR kuhl_m_crypto_exportKeyToFile ; Export &#x2F; CreateFile (0x8009000b)</span><br><span class="line"></span><br><span class="line">CNG keys :</span><br><span class="line"></span><br><span class="line"> 0. mykey-d535a6d8-70f5-496f-8c85-17c8fd26f379</span><br><span class="line">    98a436bd6f4caa9b24379112b577f688_33b8db1c-b3d2-4912-b24e-fc0742b704c1</span><br><span class="line">        Exportable key : NO</span><br><span class="line">        Key size       : 2048</span><br><span class="line">        Private export : KO - ERROR kuhl_m_crypto_exportKeyToFile ; Export &#x2F; CreateFile (0x80090029)</span><br></pre></td></tr></table></figure>
 
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/6.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/6.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/6.png?raw=true" alt="3"></p>
 </li>
 <li><p><strong>cng</strong></p>
 <p>此补丁在LSASS进程中修改KeyIso服务，以使不可导出的密钥可导出。仅当密钥提供者是Microsoft软件密钥存储提供者（您无需为其他提供者修补CNG）时，此功能才有用。可以与<code>crypto::certificates</code>和<code>crypto::keys</code>一起使用</p>
-<div class="code-area-wrap"><div class="highlight-tools"><i class="fa fa-angle-down code-expand" aria-hidden="true"></i><div class="code_lang">Code</div><div class="copy-notice"></div><i class="fa fa-clipboard" aria-hidden="true"></i></div><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # privilege::debug</span><br><span class="line">Privilege &#39;20&#39; OK</span><br><span class="line"></span><br><span class="line">mimikatz # crypto::cng</span><br><span class="line">&quot;KeyIso&quot; service patched</span><br></pre></td></tr></table></figure></div>
-
-
-
-
-
-
-
-</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mimikatz # privilege::debug</span><br><span class="line">Privilege &#39;20&#39; OK</span><br><span class="line"></span><br><span class="line">mimikatz # crypto::cng</span><br><span class="line">&quot;KeyIso&quot; service patched</span><br></pre></td></tr></table></figure></li>
 </ul>
 <blockquote>
 <p>sekurlsa 枚举用户凭证</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/4.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/4.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/4.png?raw=true" alt="3"></p>
 <table>
 <thead>
 <tr>
@@ -419,7 +391,7 @@
 <blockquote>
 <p>privilege 特权模块</p>
 </blockquote>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/5.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/5.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/5.png?raw=true" alt="3"></p>
 <table>
 <thead>
 <tr>
@@ -510,32 +482,32 @@
 <ul>
 <li><p><strong>list</strong></p>
 <p>列出正在运行的进程，左边为PID右边是进程名字</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/7.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/7.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/7.png?raw=true" alt="3"></p>
 </li>
 <li><p><strong>exports</strong>和<strong>imports</strong></p>
 <p>这两个参数我没搞懂他有啥用，使用后一堆显示一堆windows API，疯狂刷屏</p>
 </li>
 <li><p><strong>start</strong></p>
 <p>后跟进程的绝对路径，并且用<code>&quot;&quot;</code>号包含。比如启动计算器<code>process::start &quot;C:\Windows\SysWOW64\calc.exe&quot;</code></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/8.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/8.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/8.png?raw=true" alt="3"></p>
 </li>
 <li><p><strong>stop</strong></p>
 <p>用法<code>process::stop /pid:5376</code>（结束 pid 为5376的进程，注意空格别漏了）</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/9.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/9.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/9.png?raw=true" alt="3"></p>
 </li>
 <li><p><strong>suspend</strong></p>
 <p>挂起一个进程，挂起的进程点击它没有任何反应</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/10.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/10.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/10.png?raw=true" alt="3"></p>
 </li>
 <li><p><strong>resume</strong></p>
 <p>可以恢复挂起的进程，如下图恢复了记事本的运行</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/11.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/11.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/11.png?raw=true" alt="3"></p>
 </li>
 <li><p><strong>run</strong></p>
 <p>他会去寻找你想运行的<code>exe</code>进程，用法<code>process::run calc.exe</code></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/12.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/12.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/12.png?raw=true" alt="3"></p>
 <p>运行<code>cmd.exe</code></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/13.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/13.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/13.png?raw=true" alt="3"></p>
 </li>
 </ul>
 <blockquote>
@@ -593,18 +565,18 @@
 <ul>
 <li><p><strong>stop</strong></p>
 <p>暂停某个服务</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/14.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/14.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/14.png?raw=true" alt="3"></p>
 </li>
 <li><p><strong>start</strong></p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/15.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/15.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/15.png?raw=true" alt="3"></p>
 </li>
 <li><p><strong>remove</strong></p>
 <p>当我们删除一个服务的时候，如果改任务还在运行的话，你不会看到该服务消失，只有你删除的服务暂停运行的时候，该服务就会从列表中消失，看下图，删除后我们还能停止他，但是后面就不能启动他了，因为他已经不存在了</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/16.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/16.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/16.png?raw=true" alt="3"></p>
 </li>
-<li><p><strong>+ -</strong>和<strong>- -</strong></p>
+<li><p><strong>+ -<strong>和</strong>- -</strong></p>
 <p>分别是安装和卸载<code>mimikatz</code>服务</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/17.png?raw=true" data-fancybox="group" data-caption="3" class="fancybox"><img alt="3" title="3" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/17.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/17.png?raw=true" alt="3"></p>
 </li>
 <li><p>其他命令用法没什么好讲的这里就不再概述了</p>
 </li>
@@ -682,7 +654,7 @@
 <ul>
 <li><p><strong>sessions</strong></p>
 <p>该命令有点像<code>linux</code>上面的查看ssh终端有谁登录，上面时候登录，登录了多久一样</p>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/18.png?raw=true" data-fancybox="group" data-caption="image-20200414223024341" class="fancybox"><img alt="image-20200414223024341" title="image-20200414223024341" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/18.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/18.png?raw=true" alt="image-20200414223024341"></p>
 </li>
 <li><p><strong>multirdp</strong></p>
 <p>没有用过这个，站个坑后面会了在写</p>
@@ -715,9 +687,9 @@
 <p>清除日志</p>
 </li>
 </ul>
-<p><a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/19.png?raw=true" data-fancybox="group" data-caption="image-20200414223725607" class="fancybox"><img alt="image-20200414223725607" title="image-20200414223725607" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/19.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p><img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/19.png?raw=true" alt="image-20200414223725607"></p>
 <p>​        安全位置的日志全被清空了</p>
-<p>​        <a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/20.png?raw=true" data-fancybox="group" data-caption="image-20200414224028608" class="fancybox"><img alt="image-20200414224028608" title="image-20200414224028608" data-src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/20.png?raw=true" src="/img/loading.gif" class="lazyload"></a></p>
+<p>​        <img src="https://github.com/Ascotbe/Random-img/blob/master/Mimikatz/20.png?raw=true" alt="image-20200414224028608"></p>
 <blockquote>
 <p>misc 杂项模块</p>
 </blockquote>
@@ -785,7 +757,7 @@
 
 function loadGitalk () {
   function initGitalk () {
-    var gitalk = new Gitalk(Object.assign({
+    var gitalk = new Gitalk({
       clientID: '2b0d9f936769aea333c8',
       clientSecret: '92a2ac17a3aa5ae238bea3a4369aa6379d809aff',
       repo: 'https://github.com/Ascotbe/Ascotbe.github.io',
@@ -798,8 +770,7 @@ function loadGitalk () {
       pagerDirection: 'last',
       createIssueManually: false,
       updateCountCallback: commentCount
-    },null))
-
+    })
     gitalk.render('gitalk-container')
   }
 
@@ -817,8 +788,8 @@ function commentCount(n){
   }
 }
 
-if ('Gitalk' === 'Gitalk' || !true) {
-  if (true) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
+if ('Gitalk' === 'Gitalk' || !false) {
+  if (false) btf.loadComment(document.getElementById('gitalk-container'), loadGitalk)
   else loadGitalk()
 } else {
   function loadOtherComment () {
