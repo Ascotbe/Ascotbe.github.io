@@ -1,0 +1,439 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>ascotbe</title>
+  
+  
+  <link href="https://www.ascotbe.com/atom.xml" rel="self"/>
+  
+  <link href="https://www.ascotbe.com/"/>
+  <updated>2021-03-09T10:42:38.410Z</updated>
+  <id>https://www.ascotbe.com/</id>
+  
+  <author>
+    <name>ascotbe</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Office Excel Macro</title>
+    <link href="https://www.ascotbe.com/2021/01/27/OfficeExcelMacro/"/>
+    <id>https://www.ascotbe.com/2021/01/27/OfficeExcelMacro/</id>
+    <published>2021-01-27T10:45:42.000Z</published>
+    <updated>2021-03-09T10:42:38.410Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>从零开始编写XSS平台</title>
+    <link href="https://www.ascotbe.com/2021/01/08/CrossSiteScripting/"/>
+    <id>https://www.ascotbe.com/2021/01/08/CrossSiteScripting/</id>
+    <published>2021-01-08T10:45:42.000Z</published>
+    <updated>2021-01-15T07:53:47.474Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Linux ELF格式解析</title>
+    <link href="https://www.ascotbe.com/2020/12/06/ExecutableLinkableFormat/"/>
+    <id>https://www.ascotbe.com/2020/12/06/ExecutableLinkableFormat/</id>
+    <published>2020-12-06T15:45:42.000Z</published>
+    <updated>2020-12-06T08:51:07.598Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>栈溢出总结（0x02）</title>
+    <link href="https://www.ascotbe.com/2020/11/20/StackOverflow_0x02/"/>
+    <id>https://www.ascotbe.com/2020/11/20/StackOverflow_0x02/</id>
+    <published>2020-11-20T10:45:42.000Z</published>
+    <updated>2021-03-17T13:24:43.105Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>栈溢出总结（0x01）</title>
+    <link href="https://www.ascotbe.com/2020/11/19/StackOverflow_0x01/"/>
+    <id>https://www.ascotbe.com/2020/11/19/StackOverflow_0x01/</id>
+    <published>2020-11-19T10:45:42.000Z</published>
+    <updated>2021-03-06T06:05:57.725Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>恶意程序研究之DLL劫持</title>
+    <link href="https://www.ascotbe.com/2020/11/13/DynamicLinkLibraryHijack/"/>
+    <id>https://www.ascotbe.com/2020/11/13/DynamicLinkLibraryHijack/</id>
+    <published>2020-11-13T07:45:42.000Z</published>
+    <updated>2020-11-13T07:44:35.905Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Windows杂谈</title>
+    <link href="https://www.ascotbe.com/2020/11/02/WindowsTalk/"/>
+    <id>https://www.ascotbe.com/2020/11/02/WindowsTalk/</id>
+    <published>2020-11-02T10:45:42.000Z</published>
+    <updated>2020-11-14T08:25:55.305Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>红蓝功防相关笔记总结</title>
+    <link href="https://www.ascotbe.com/2020/08/03/IntranetPenetration/"/>
+    <id>https://www.ascotbe.com/2020/08/03/IntranetPenetration/</id>
+    <published>2020-08-03T13:45:42.000Z</published>
+    <updated>2020-09-13T01:22:37.739Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>关于邮件钓鱼的哪些事</title>
+    <link href="https://www.ascotbe.com/2020/07/26/Office_0x01/"/>
+    <id>https://www.ascotbe.com/2020/07/26/Office_0x01/</id>
+    <published>2020-07-26T13:45:42.000Z</published>
+    <updated>2021-01-26T06:26:28.069Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>XXE的一些利用方式</title>
+    <link href="https://www.ascotbe.com/2020/07/24/XXE/"/>
+    <id>https://www.ascotbe.com/2020/07/24/XXE/</id>
+    <published>2020-07-24T13:45:42.000Z</published>
+    <updated>2020-07-29T01:35:02.002Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>信息收集总结</title>
+    <link href="https://www.ascotbe.com/2020/07/23/InformationGathering/"/>
+    <id>https://www.ascotbe.com/2020/07/23/InformationGathering/</id>
+    <published>2020-07-23T13:45:42.000Z</published>
+    <updated>2020-09-29T05:39:16.929Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>常见数据库写入Webshell汇总</title>
+    <link href="https://www.ascotbe.com/2020/07/21/DatabaseWriteWebshell/"/>
+    <id>https://www.ascotbe.com/2020/07/21/DatabaseWriteWebshell/</id>
+    <published>2020-07-21T13:45:42.000Z</published>
+    <updated>2020-07-29T01:39:55.050Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>解决安卓单向/双向认证导致无法抓包</title>
+    <link href="https://www.ascotbe.com/2020/07/20/HttpCertificate/"/>
+    <id>https://www.ascotbe.com/2020/07/20/HttpCertificate/</id>
+    <published>2020-07-20T12:45:53.000Z</published>
+    <updated>2020-07-23T10:01:14.556Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>恶意程序研究之远程下载恶意程序</title>
+    <link href="https://www.ascotbe.com/2020/07/12/RemoteDownload/"/>
+    <id>https://www.ascotbe.com/2020/07/12/RemoteDownload/</id>
+    <published>2020-07-12T07:45:42.000Z</published>
+    <updated>2021-03-09T07:19:13.590Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>恶意程序研究之PE解析器</title>
+    <link href="https://www.ascotbe.com/2020/07/05/PortableExecutableParser/"/>
+    <id>https://www.ascotbe.com/2020/07/05/PortableExecutableParser/</id>
+    <published>2020-07-05T12:45:53.000Z</published>
+    <updated>2020-07-17T02:28:05.957Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>恶意程序研究之绕过虚拟机</title>
+    <link href="https://www.ascotbe.com/2020/05/21/BypassTheVirtualMachine/"/>
+    <id>https://www.ascotbe.com/2020/05/21/BypassTheVirtualMachine/</id>
+    <published>2020-05-21T15:00:00.000Z</published>
+    <updated>2020-07-05T10:51:33.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>恶意程序研究之Meterpreter后渗透常用命令</title>
+    <link href="https://www.ascotbe.com/2020/05/06/MeterpreterCommand/"/>
+    <id>https://www.ascotbe.com/2020/05/06/MeterpreterCommand/</id>
+    <published>2020-05-06T15:45:42.000Z</published>
+    <updated>2020-08-12T10:31:04.674Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>恶意程序研究之定义ShellCode</title>
+    <link href="https://www.ascotbe.com/2020/04/18/ShellCode/"/>
+    <id>https://www.ascotbe.com/2020/04/18/ShellCode/</id>
+    <published>2020-04-18T15:07:46.000Z</published>
+    <updated>2020-07-05T10:51:25.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>mimikatz使用说明</title>
+    <link href="https://www.ascotbe.com/2020/04/14/mimikatz/"/>
+    <id>https://www.ascotbe.com/2020/04/14/mimikatz/</id>
+    <published>2020-04-14T15:07:46.000Z</published>
+    <updated>2021-01-19T15:33:38.517Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+  <entry>
+    <title>利用树莓派来监听任务目标(下)</title>
+    <link href="https://www.ascotbe.com/2020/03/31/raspberry_monitor_0x02/"/>
+    <id>https://www.ascotbe.com/2020/03/31/raspberry_monitor_0x02/</id>
+    <published>2020-03-31T14:57:46.000Z</published>
+    <updated>2020-04-08T14:18:18.000Z</updated>
+    
+    
+      
+      
+        
+        
+    <summary type="html"></summary>
+        
+      
+    
+    
+    
+    
+  </entry>
+  
+</feed>
