@@ -6,7 +6,7 @@
   <link href="https://www.ascotbe.com/atom.xml" rel="self"/>
   
   <link href="https://www.ascotbe.com/"/>
-  <updated>2021-05-13T13:31:24.220Z</updated>
+  <updated>2021-05-16T09:49:50.153Z</updated>
   <id>https://www.ascotbe.com/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="https://www.ascotbe.com/2021/05/13/HeapOverflow_0x02/"/>
     <id>https://www.ascotbe.com/2021/05/13/HeapOverflow_0x02/</id>
     <published>2021-05-13T15:45:42.000Z</published>
-    <updated>2021-05-13T13:31:24.220Z</updated>
+    <updated>2021-05-16T09:49:50.153Z</updated>
     
     <content type="html"><![CDATA[<blockquote><p>声明</p></blockquote><p>郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！</p><blockquote><p>前言</p></blockquote><p>我还是太天真了，HVV还在继续，GTMD！但是学习不能落下，只能先放弃写其他项目的代码了</p><h2 id="Tcache"><a href="#Tcache" class="headerlink" title="Tcache"></a>Tcache</h2>]]></content>
     
