@@ -1,0 +1,238 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>数据结构图 | ascotbe</title><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="浅析数据结构-图的基本概念 线性表和树两类数据结构，线性表中的元素是“一对一”的关系，树中的元素是“一对多”的关系，本章所述的图结构中的元素则是“多对多”的关系。图（Graph）是一种复杂的非线性结构，在图结构中，每个元素都可以有零个或多个前驱，也可以有零个或多个后继，也就是说，元素之间的关系是任意的。  一、图的定义与术语 定义：图（Graph）是由顶点的有穷非空集合和顶点之间边的集合组成，通常">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构图">
+<meta property="og:url" content="https://www.ascotbe.com/2018/12/10/DataStructureDiagram/index.html">
+<meta property="og:site_name" content="ascotbe">
+<meta property="og:description" content="浅析数据结构-图的基本概念 线性表和树两类数据结构，线性表中的元素是“一对一”的关系，树中的元素是“一对多”的关系，本章所述的图结构中的元素则是“多对多”的关系。图（Graph）是一种复杂的非线性结构，在图结构中，每个元素都可以有零个或多个前驱，也可以有零个或多个后继，也就是说，元素之间的关系是任意的。  一、图的定义与术语 定义：图（Graph）是由顶点的有穷非空集合和顶点之间边的集合组成，通常">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/6.jpg">
+<meta property="article:published_time" content="2018-12-10T11:18:39.000Z">
+<meta property="article:modified_time" content="2021-05-17T00:32:35.016Z">
+<meta property="article:author" content="ascotbe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/6.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.ascotbe.com/2018/12/10/DataStructureDiagram/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-05-17 08:32:35'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="ascotbe" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.staticdn.net/Ascotbe/Random-img/master/Blog/6.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ascotbe</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">数据结构图</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2018-12-10T11:18:39.000Z" title="发表于 2018-12-10 19:18:39">2018-12-10</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-05-17T00:32:35.016Z" title="更新于 2021-05-17 08:32:35">2021-05-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1>浅析数据结构-图的基本概念</h1>
+线性表和树两类数据结构，线性表中的元素是“一对一”的关系，树中的元素是“一对多”的关系，本章所述的图结构中的元素则是“多对多”的关系。图（Graph）是一种复杂的非线性结构，在图结构中，每个元素都可以有零个或多个前驱，也可以有零个或多个后继，也就是说，元素之间的关系是任意的。</span></strong></p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/1.jpg" alt="" width="857" height="547"></p>
+<h1>一、图的定义与术语</h1>
+<p><span style="font-family: 华文仿宋;"><span style="font-size: large;"><strong>定义：</strong>图（Graph）是由顶点的有穷非空集合和顶点之间边的集合组成，通常表示为：<strong>G(V,E)</strong>，其中，<strong>G</strong>表示一个图，<strong>V</strong>是图G中顶点的集合，<strong>E</strong>是图G中边的集合。</span></span></p>
+<h2 class="post_body_title" id="1">1、图的分类</h2>
+<p><span style="font-family: 华文仿宋; font-size: large;">图是按照无方向和有方向分为无向图和有向图。</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/2.png" title="" style=""><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/2.png" alt="clip_image001" width="450" height="172" border="0"></a></p>
+<p><span style="font-family: 华文楷体; font-size: large;">左图为无向图是由顶点和边构成，右图为有向图是由顶点和弧（有向边构成）。弧有弧头和弧尾区别。</span></p>
+<p><span style="color: #ff0000; font-family: 华文仿宋; font-size: large;">按照边分为稀疏图和稠密图，这是个模糊的概念，同样是相对的概念。</span></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">如果任意两个顶点之间都存在边叫完全图，有向的边叫有向完全图。如果无重复的边或者顶点到自身的边叫简单图。在用数学方式表示时，<span style="color: #ff0000;">无向边用()表示，有向边用&lt;&gt;表示</span>。现在我们讲解的图全是简单图。</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/3.png" title="" style=""><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/3.png" alt="clip_image002" width="549" height="164" border="0"></a></p>
+<p><span style="font-family: 华文楷体; font-size: large;">左图没有重复的边或者到自身的边（简单图），右图则有。</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/4.png" title="" style=""><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/4.png" alt="clip_image005" width="343" height="213" border="0"></a></p>
+<p><span style="font-family: 华文楷体; font-size: large;">这种边带权值的图叫网</span></p>
+<h2 class="post_body_title" id="2"><span style="font-family: 华文仿宋; font-size: large;">2.图的顶点和边间关系</span></h2>
+<p><span style="font-family: 华文仿宋; font-size: large;">顶点的度：顶点关联边的数目。<span style="font-family: 华文仿宋; font-size: large;">有向图图中有，</span></span><span style="font-family: 华文仿宋; font-size: large;">入度：方向指向顶点的边；</span><span style="font-family: 华文仿宋; font-size: large;">出度：方向背向顶点的边。在有向图中顶点的度就是两者之和。</span></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">路径长度：路径上边或者弧的数目。</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/5.png" title="" style=""><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/5.png" alt="clip_image006" width="511" height="183" border="0"></a></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">左图中，从B到D的路径度为2，在右图中就是3了（粗线的边）。</span></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">右图中A的入度是2，出度是1；B的入度为0，出度是2.</span></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">连通</span></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">在无向图G中，任意两个顶点是相通的就是连通图。</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/6.png" title="" style=""><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/6.png" alt="clip_image007" width="448" height="246" border="0"></a></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">左图不是连通图，AE之间没有连通。</span></p>
+<h1 class="post_body_title" id="3">二、图的存储结构</h1>
+<p><span style="font-family: 华文仿宋; font-size: large;">图的结构比价复杂，任意两个顶点之间都可能存在关系，不能用简单的顺序存储结构来表示。如果运用多重链表，即一个数据域多个指针域组成的结点表示图中一个结点，则造成大量存储单元浪费。</span></p>
+<h2 class="post_body_title" id="4">1、邻接矩阵</h2>
+<p><span style="font-family: 华文仿宋; font-size: large;">邻接矩阵用两个数组保存数据。一个一维数组存储图中顶点信息，一个二维数组存储图中边或弧的信息。</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/7.png" title="" style=""><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/7.png" alt="clip_image009" width="491" height="189" border="0"></a></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">无向图中二维数组是个对称矩阵。</span></p>
+<p><span style="font-family: 华文仿宋; font-size: large;"><strong>特点：</strong></span></p>
+<ul>
+<li><span style="font-family: 华文仿宋; font-size: large;">1、0表示无边，1表示有边</span>
+<p><span style="font-family: 华文仿宋; font-size: large;">&nbsp;&nbsp;&nbsp; 2、顶点的度是行内数组之和。</span></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">&nbsp;&nbsp;&nbsp; 3、求取顶点邻接点，将行内元素遍历下。</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/8.png" title="" style=""><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/8.png" alt="clip_image010" width="468" height="223" border="0"></a></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">有向图的邻接矩阵：</span><span style="font-family: 华文仿宋; font-size: large;">有向图中讲究入度和出度，各行之和是出度，各列之和是入度。</span></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">带权的图叫网，用邻接矩阵表示为：</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/9.png"><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/9.png" alt="clip_image012" width="486" height="231" border="0"></a></p>
+<h3><span style="color: #ff0000; font-family: 华文仿宋; font-size: large;"><span style="font-weight: normal;">邻接矩阵对于边数相对顶点较少的图，就是对存储空间极大的浪费。</span></span></h3>
+<h2 class="post_body_title" id="5">2、邻接表</h2>
+<p><span style="font-family: 华文仿宋; font-size: large;">邻接表：数组和链表相结合的存储方法为邻接表。</span></p>
+</li>
+<li><span style="font-family: 华文仿宋; font-size: large;">图中顶点用一个一维数组存储。</span></li>
+<li><span style="font-family: 华文仿宋; font-size: large;">图中每个顶点Vi的所有邻接点构成一个线性表。</span>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/10.png"><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/10.png" alt="clip_image013" width="605" height="204" border="0"></a></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">从图中得知，顶点表的各个结点由data和Firstedge两个域表示，data是数据域，存储顶点信息，firstedge是指针域，指向边表的第一个结点，即顶点的第一个邻接点。边表结点由adjvex和next两个域组成。adjvex是邻接点域，存储某顶点的邻接点在顶点表中坐标，next存储边表中下一个结点指针。比如v1顶点与v2、v0互为邻接点，则在v1边表中，adjvex分别为0和2。</span></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">有向图也可以用邻接表，出度表叫邻接表，入度表尾逆邻接表。</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/11.png"><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/11.png" alt="clip_image014" width="645" height="285" border="0"></a></p>
+<h2 class="post_body_title" id="6">3、十字链表</h2>
+<p><span style="font-family: 华文仿宋; font-size: large;">在邻接表中针对有向图，分为邻接表和逆邻接表，导致无法从一个表中获取图的入读和出度的情况，有人提出了十字链表。</span></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">定点表：</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/12.png"><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="clip_image015" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/12.png" alt="clip_image015" width="322" height="56" border="0"></a></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">其中firstin：入边表头指针，指向顶点入边表的第一个结点。</span></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">firstout：出边表头指针，指向顶点出边表第一个结点。</span></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">边表：</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/13.png"><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="clip_image016" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/13.png" alt="clip_image016" width="330" height="49" border="0"></a></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">其中tailvex是指弧起点在顶点表的下标，headvex弧终点在顶点表的下标，headlink入边表指针域，指向终点相同的下一条边，taillink是指边表指针域，指向起点相同的下一条边。</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/14.png"><img style="background-image: none; float: none; padding-top: 0px; padding-left: 0px; margin-left: auto; display: block; padding-right: 0px; margin-right: auto; border-width: 0px;" title="" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/14.png" alt="clip_image017" width="534" height="245" border="0"></a></p>
+<h2 class="post_body_title" id="7">4、邻接多重表</h2>
+<p><span style="font-family: 华文仿宋; font-size: large;">邻接多重表结构如图：</span></p>
+<p><a target="_blank" rel="noopener" href="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/15.png"><span style="font-family: 华文仿宋; font-size: large;"><img style="background-image: none; padding-top: 0px; padding-left: 0px; display: inline; padding-right: 0px; border-width: 0px;" title="clip_image018" src="https://raw.staticdn.net/Ascotbe/Random-img/master/Data%20structure%20diagram/15.png" alt="clip_image018" width="244" height="23" border="0"></span></a></p>
+<p><span style="font-family: 华文仿宋; font-size: large;">ivex和jvex是与某条边依附的两个顶点在顶点表中的下标。ilink指向依附项点ivex的下一条边，jlink指向依附顶点jvex的下一条边。</span></p>
+<a>转载自互联网</a></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ascotbe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/2018/12/10/DataStructureDiagram/">https://www.ascotbe.com/2018/12/10/DataStructureDiagram/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com" target="_blank">ascotbe</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/6.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/01/13/SteganographicFileIdentification/"><img class="prev-cover" src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/45.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">隐写文件标识</div></div></a></div><div class="next-post pull-right"><a href="/2018/12/08/C++TheProblemOfIncomingParameters/"><img class="next-cover" src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/36.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">c++传入参数的问题</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">ascotbe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ascotbe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:ascotbe@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">所有文章都是本人学习笔记仅限交流探讨，禁止利用文章思路进行违法操作，如有违规和作者无关！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">1.</span> <span class="toc-text">浅析数据结构-图的基本概念</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-number">2.</span> <span class="toc-text">一、图的定义与术语</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1"><span class="toc-number">2.1.</span> <span class="toc-text">1、图的分类</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2"><span class="toc-number">2.2.</span> <span class="toc-text">2.图的顶点和边间关系</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3"><span class="toc-number">3.</span> <span class="toc-text">二、图的存储结构</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#4"><span class="toc-number">3.1.</span> <span class="toc-text">1、邻接矩阵</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link"><span class="toc-number">3.1.1.</span> <span class="toc-text">邻接矩阵对于边数相对顶点较少的图，就是对存储空间极大的浪费。</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5"><span class="toc-number">3.2.</span> <span class="toc-text">2、邻接表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6"><span class="toc-number">3.3.</span> <span class="toc-text">3、十字链表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7"><span class="toc-number">3.4.</span> <span class="toc-text">4、邻接多重表</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/09/WindowsGrabPassword/" title="Windows本地密码抓取"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/127.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows本地密码抓取"/></a><div class="content"><a class="title" href="/2021/06/09/WindowsGrabPassword/" title="Windows本地密码抓取">Windows本地密码抓取</a><time datetime="2021-06-09T15:45:42.000Z" title="发表于 2021-06-09 23:45:42">2021-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/18/SampleAnalysis/0b2a794bac4bf650b6ba537137504162520b67266449be979679afbb14e8e5c0/" title="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/126.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析"/></a><div class="content"><a class="title" href="/2021/05/18/SampleAnalysis/0b2a794bac4bf650b6ba537137504162520b67266449be979679afbb14e8e5c0/" title="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析">蔓灵花APT组织针对巴基斯坦定向攻击的样本分析</a><time datetime="2021-05-18T15:45:42.000Z" title="发表于 2021-05-18 23:45:42">2021-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/04/HeapOverflow_Linux_0x01/" title="Linux堆溢出总结（0x01）"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/123.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux堆溢出总结（0x01）"/></a><div class="content"><a class="title" href="/2021/05/04/HeapOverflow_Linux_0x01/" title="Linux堆溢出总结（0x01）">Linux堆溢出总结（0x01）</a><time datetime="2021-05-04T15:45:42.000Z" title="发表于 2021-05-04 23:45:42">2021-05-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/26/StackOverflow_Linux_0x03/" title="Linux栈溢出总结（0x03）"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/122.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux栈溢出总结（0x03）"/></a><div class="content"><a class="title" href="/2021/03/26/StackOverflow_Linux_0x03/" title="Linux栈溢出总结（0x03）">Linux栈溢出总结（0x03）</a><time datetime="2021-03-26T10:45:42.000Z" title="发表于 2021-03-26 18:45:42">2021-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/27/OfficeExcelMacro/" title="Office Excel Macro"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/121.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Office Excel Macro"/></a><div class="content"><a class="title" href="/2021/01/27/OfficeExcelMacro/" title="Office Excel Macro">Office Excel Macro</a><time datetime="2021-01-27T10:45:42.000Z" title="发表于 2021-01-27 18:45:42">2021-01-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By ascotbe</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'Ascotbe/Ascotbe.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme () {
+  if (document.querySelector('.utterances-frame')) {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    const iframe = document.querySelector('.utterances-frame');
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/Bronya.model.json"},"display":{"position":"right","width":400,"height":500,"hOffset":-90,"vOffset":0},"mobile":{"show":false},"log":false});</script></body></html>

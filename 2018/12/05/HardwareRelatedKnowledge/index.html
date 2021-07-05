@@ -1,0 +1,634 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>硬件相关知识 | ascotbe</title><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="前言  对两年前的知识进行了下温习，发现好多坑都填上了，然后把之前的文章删了总结到了一篇，到时候还有些点需要填上 Windows&#x2F;Linux的内存结构 栈的运算  首先会把EBP压入栈中，然后把ESP的值保存到EBP中，接着ESP会像低地址增加，EBP保持在栈底不动（高地址），所有运算结束后弹出所有的值ESP会到和EBP相同的值（大部分是这样的）  Windows的内存结构分布  首先是内存结构">
+<meta property="og:type" content="article">
+<meta property="og:title" content="硬件相关知识">
+<meta property="og:url" content="https://www.ascotbe.com/2018/12/05/HardwareRelatedKnowledge/index.html">
+<meta property="og:site_name" content="ascotbe">
+<meta property="og:description" content="前言  对两年前的知识进行了下温习，发现好多坑都填上了，然后把之前的文章删了总结到了一篇，到时候还有些点需要填上 Windows&#x2F;Linux的内存结构 栈的运算  首先会把EBP压入栈中，然后把ESP的值保存到EBP中，接着ESP会像低地址增加，EBP保持在栈底不动（高地址），所有运算结束后弹出所有的值ESP会到和EBP相同的值（大部分是这样的）  Windows的内存结构分布  首先是内存结构">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/39.jpg">
+<meta property="article:published_time" content="2018-12-05T12:02:59.000Z">
+<meta property="article:modified_time" content="2021-05-17T00:31:53.721Z">
+<meta property="article:author" content="ascotbe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/39.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.ascotbe.com/2018/12/05/HardwareRelatedKnowledge/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-05-17 08:31:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="ascotbe" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.staticdn.net/Ascotbe/Random-img/master/Blog/39.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ascotbe</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">硬件相关知识</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2018-12-05T12:02:59.000Z" title="发表于 2018-12-05 20:02:59">2018-12-05</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-05-17T00:31:53.721Z" title="更新于 2021-05-17 08:31:53">2021-05-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>前言</p>
+</blockquote>
+<p>对两年前的知识进行了下温习，发现好多坑都填上了，然后把之前的文章删了总结到了一篇，到时候还有些点需要填上</p>
+<h3 id="Windows-Linux的内存结构"><a href="#Windows-Linux的内存结构" class="headerlink" title="Windows/Linux的内存结构"></a>Windows/Linux的内存结构</h3><blockquote>
+<p>栈的运算</p>
+</blockquote>
+<p>首先会把<code>EBP</code>压入栈中，然后把<code>ESP</code>的值保存到<code>EBP</code>中，接着<code>ESP</code>会像低地址增加，<code>EBP</code>保持在栈底不动（高地址），所有运算结束后弹出所有的值<code>ESP</code>会到和<code>EBP</code>相同的值（大部分是这样的）</p>
+<blockquote>
+<h4 id="Windows的内存结构分布"><a href="#Windows的内存结构分布" class="headerlink" title="Windows的内存结构分布"></a>Windows的内存结构分布</h4></blockquote>
+<ul>
+<li><p>首先是内存结构分布图，<code>windows</code>的内存默认是从<code>0x80000000</code>位置开始的</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/HardwareRelated/Windows_X86_RAM.png" alt="windows"></p>
+</li>
+<li><p>栈的增长方向是从高地址到低地址递增的，用下面一个例子来解释</p>
+<ul>
+<li><p>例子一:</p>
+<p><code>esp</code>是栈指针，是<code>cpu</code>机制决定的，<code>push</code>、<code>pop</code>指令会自动调整<code>esp</code>的值；</p>
+<p><code>ebp</code>只是存取某时刻的<code>esp</code>，这个时刻就是进入一个函数内后，<code>cpu</code>会将<code>esp</code>的值赋给<code>ebp</code>，此时就可以通过<code>ebp</code>对栈进行操作，比如获取函数参数，局部变量等，实际上使用<code>esp</code>也可以；</p>
+<p>假设执行<code>print</code>函数之前<code>esp=Q</code></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">main() &#123;</span><br><span class="line">&#x2F;&#x2F;执行test前</span><br><span class="line">print(int p1,int p2);</span><br><span class="line">&#x2F;&#x2F;执行test后</span><br><span class="line">&#125;</span><br><span class="line">#############开始执行print函数#############</span><br><span class="line">push p2; &#x2F;&#x2F;函数参数p2入栈，esp&#x3D;Q-4H</span><br><span class="line">push p1; &#x2F;&#x2F;函数参数p1入栈，esp&#x3D;Q-8H</span><br><span class="line">call print; &#x2F;&#x2F;函数返回地址入栈，esp&#x3D;Q-0CH</span><br><span class="line">#现在进入print内，做些准备工作：</span><br><span class="line">push ebp; &#x2F;&#x2F;保护先前ebp指针，ebp入栈，esp&#x3D;Q-10H</span><br><span class="line">mov ebp,esp; &#x2F;&#x2F;设置ebp等于当前的esp</span><br><span class="line">#此时，ebp+0CH&#x3D;Q-4H，即p2的位置</span><br><span class="line">#同样，ebp+08H&#x3D;Q-8H，即p1的位置</span><br><span class="line">#下面是print内的一些操作：</span><br><span class="line">sub esp,20H; &#x2F;&#x2F;设置长度为10H大小的局部变量空间，esp&#x3D;Q-20H</span><br><span class="line">#... ...</span><br><span class="line">#一系列操作</span><br><span class="line">#... ...</span><br><span class="line">add esp,20H; &#x2F;&#x2F;释放局部变量空间，esp&#x3D;Q-10H</span><br><span class="line">pop ebp; &#x2F;&#x2F;出栈，恢复原先的ebp的值，esp&#x3D;Q-0CH</span><br><span class="line">ret 8; &#x2F;&#x2F;ret返回，弹出先前入栈的返回地址，esp&#x3D;Q-08H，后面加操作数8H为平衡堆栈</span><br><span class="line">#之后，弹出函数参数，esp&#x3D;Q，恢复执行print函数前的堆栈；</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>整个的流程图如下，要执行函数之前把<code>p2</code>和<code>p1</code>压入栈中，栈向低地址递增(<code>Q-4h</code>)，接着把函数地址放入栈中，然后把<code>ebp</code>的值放入栈中保存，<strong>下图中应该是ebp在address_return上面，图片有问题</strong></li>
+</ul>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/HardwareRelated/Windows_x86_Assembly_1.png" alt="img"></p>
+</li>
+<li><p>例子二:</p>
+<p><code>EBP</code>是当前函数的存取指针，即存储或者读取数时的指针基地址；<code>ESP</code>就是当前函数的栈顶指针。每一次发生函数的调用（主函数调用子函数）时，在被调用函数初始时，都会把当前函数（主函数）的<code>EBP</code>压栈，以便从子函数返回到主函数时可以获取<code>EBP</code>。</p>
+<p>下面是按调用约定<code>__stdcall</code> 调用函数<code>test(int p1,int p2)</code>的汇编代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">#假设执行函数前堆栈指针ESP为0xAAAAAAA ；EBP为0xAAAAAB0</span><br><span class="line">push   p2    ;参数2入栈, ESP -&#x3D; 4h , ESP &#x3D; 0xAAAAAAA - 4h &#x3D;    0xAAAAAA6</span><br><span class="line">push   p1    ;参数1入栈, ESP -&#x3D; 4h , ESP &#x3D; 0xAAAAAAA - 8h &#x3D;    0xAAAAAA2</span><br><span class="line">call test    ;压入返回地址 ESP -&#x3D; 4h, ESP &#x3D; 0xAAAAAAA- 0Ch  &#x3D; 0xAAAAA9D,注意：这里是test函数的返回地址，即在代码段中的地址（偏移）。</span><br><span class="line">;&#x2F;&#x2F;进入函数内</span><br><span class="line">&#123;</span><br><span class="line">push   ebp                           ;保护先前EBP指针， EBP入栈(即0xAAAAAB0入栈，注意与返回地址区别)， ESP-&#x3D;4h, ESP &#x3D; 0xAAAAA99</span><br><span class="line">mov    ebp, esp                   ;设置EBP指针指向栈顶 0xAAAAA99</span><br><span class="line">mov    eax, dword ptr  [ebp+0ch]   ;ebp+0ch为0xAAAAAA6即参数2的位置</span><br><span class="line">mov    ebx, dword ptr  [ebp+08h]   ;ebp+08h为0xAAAAAA2,即参数1的位置</span><br><span class="line">sub    esp, 8                     ;局部变量所占空间ESP-&#x3D;8, ESP &#x3D; 0xAAAAA91</span><br><span class="line">...</span><br><span class="line">add    esp, 8                     ;释放局部变量, ESP+&#x3D;8, ESP &#x3D;  0xAAAAA99</span><br><span class="line">pop    ebp                        ;出栈,恢复EBP, ESP+&#x3D;4, ESP &#x3D; 0xAAAAA9D,即把栈中地址0xAAAAA99的内容pop到ebp中</span><br><span class="line">ret    8                          ;ret返回,弹出返回地址,ESP+&#x3D;4, ESP&#x3D;0xAAAAAA2, 后面加操作数8为平衡堆栈,ESP+&#x3D;8,ESP&#x3D;0xAAAAAAA, 恢复进入函数前的堆栈.</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>原来<code>ESP</code>就是一直指向栈顶的指针,而<code>EBP</code>只是存取某时刻的栈顶指针,以方便对栈的操作,如获取函数参数、局部变量等。</p>
+</li>
+</ul>
+</li>
+<li><p>堆分为堆块和堆表</p>
+<ul>
+<li><p>引用大佬的图</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/HardwareRelated/Windows_x86_Assembly_2.png" alt="img"></p>
+</li>
+<li><p>堆表</p>
+<p>为了合理地组织堆区中的空闲堆块，提出了堆表的概念。堆表的数据结构决定了整个堆区的组织方式，一般位于堆区的起始位置，用于索引堆区中空闲堆块的重要信息，包括堆块的位置、大小、状态（空闲或占用）。</p>
+</li>
+<li><p>堆块</p>
+<p>传统内存统计单位往往是以字节位标准，但处于性能的考虑，堆内存按照大小不同组成不同的块，以堆块为单位进行标识。一个堆块包括两个部分：<code>header</code>部分和<code>data</code>部分。<code>header</code>是一个堆块头部的几个字节，用来标识这个堆块自身的信息。<code>data</code>是用来在最终分配给用户使用的数据区。</p>
+<ul>
+<li><p>堆块分配</p>
+<p>堆块的分配可以分为三类，<code>Lookaside</code>分配、普通<code>Freelist</code>分配以及<code>0</code>号<code>Freelist（free[0]）</code>分配。</p>
+<p><code>Lookaside</code>分配：寻找到大小匹配的空闲堆块 -&gt; 修改状态为占用 -&gt; 从堆表中解链 -&gt; 给程序返回一个指向堆块的指针</p>
+<p>普通<code>Freelist</code>分配：寻找最优的空闲堆块 -&gt; 若失败，寻找次优空闲堆块分配</p>
+<p><code>0</code>号<code>Freelist</code>分配：从<code>free[0]</code>反向寻找最后一个堆块（最大的堆块） -&gt; 若满足要求，再正向搜索最小的满足要求的空闲堆块。</p>
+<p>堆块分配中的“找零钱”现象：当在<code>Freelist</code>中无法找到刚好合适的堆块时，此时会分配一个稍微大一点的空闲堆块给程序使用，其过程是首先在这个大块中分配出大小刚好等于请求堆块大小的堆块给程序，然后剩下的部分修改堆块的<code>header</code>信息，重新链入到<code>Freelist</code>合适的位置。这种方法节约了内存的使用，不会造成大量的内存浪费。</p>
+<p>由于<code>Lookaside</code>只有在精确匹配时才会分配，因此不存在“找零钱”现象。</p>
+</li>
+<li><p>堆块释放</p>
+<p>堆块的释放主要是将堆块修改为空闲状态，然后将堆块链入相应的堆表。所有的释放块都链入堆表的末尾，分配的时候也会首先从堆表末尾分配。</p>
+</li>
+<li><p>堆块合并</p>
+<p>为了减少内存中的内存碎片，合理有效地利用内存，堆管理系统还需要进行堆块合并操作。</p>
+<p>当两个空闲堆块彼此相邻的时候就会进行堆块合并操作。其过程大致为：</p>
+<p>将两个块从<code>Freelist</code>中解链 -&gt; 合并堆块 -&gt; 调整合并后堆块的<code>header</code>信息 -&gt; 将合并后的堆块放入<code>Freelist</code>合适的位置</p>
+</li>
+</ul>
+</li>
+<li><p>堆上的漏洞</p>
+<ul>
+<li><p>堆溢出漏洞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">堆溢出与栈溢出在本质上是相通的，都是精心构造特制的数据去覆盖正常数据，覆盖到某个特定位置后跳转到自己的shellcode的地址去执行shellcode。</span><br><span class="line">但从技术层面来讲，堆溢出比栈溢出难度更大。而且现在基本很少有软件存在典型的栈溢出漏洞，相反由于堆的复杂性，很多软件仍然存在诸多的堆溢出漏洞。</span><br></pre></td></tr></table></figure></li>
+<li><p><code>UAF</code>漏洞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Use After Free（UAF），释放后重引用漏洞， 一块内存已经被释放后，在程序中仍然存在对该块内存的引用，并且在一定情况下可能使用内存中的数据。</span><br><span class="line">由于这块原本已经被释放不应该再使用的内存被程序中的其他地方进行了使用，因此该块内存中的数据是不可信的。这种方式甚至会造成内存崩溃或者任意代码执行。此类型的漏洞在浏览器中比较常见。</span><br><span class="line">UAF漏洞比较有名的是CVE-2013-1347 Microsoft IE CGenericElementUAF漏洞，该漏洞被用在了当时著名的“水坑”事件中，影响巨大。</span><br></pre></td></tr></table></figure></li>
+<li><p><code>Double Free</code>漏洞</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">双重释放漏洞，主要是由于对同一块内存进行二次重复释放。在释放过程中，邻近的已释放的堆块存在合并动作，这会导致原有的堆header信息发生改变，同时前向指针和后向指针也会发生改变，随后再对其中的地址进行引用，就会导致访问异常，最终导致程序崩溃或者任意代码执行。</span><br><span class="line">从另外一个角度来说，由于发生了对释放后的堆块内存的引用，因此Double Free漏洞也是UAF漏洞的一个子集。</span><br><span class="line">双重释放漏洞比较经典的是CVE-2014-1767，该漏洞位于Windows AFD.sys文件中。</span><br><span class="line">在2014年的Pwn2Own上，Siberas团队使用该漏洞进行内核提权，绕过了Windows 8.1平台上的IE11沙箱，并在随后获得了Pwnie Awards的“最佳提权漏洞奖”。该漏洞通杀Windows系统，影响较大。</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<h4 id="Linux的内存结构分布"><a href="#Linux的内存结构分布" class="headerlink" title="Linux的内存结构分布"></a>Linux的内存结构分布</h4></blockquote>
+<ul>
+<li><p>首先依旧是先放个内存结构图，<code>linux</code>内存默认是从<code>0xC0000000</code>位置开始的</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/HardwareRelated/Linux_x86_RAM.png" alt="linux">  </p>
+</li>
+<li><p>栈地址也是依旧是高地址到低地址递增</p>
+</li>
+<li><p>堆（待更新）</p>
+</li>
+</ul>
+<h3 id="Windows-Linux的汇编区别"><a href="#Windows-Linux的汇编区别" class="headerlink" title="Windows/Linux的汇编区别"></a>Windows/Linux的汇编区别</h3><p>x86汇编一直存在两种不同的语法，在intel的官方文档中使用intel语法，Windows也使用intel语法，而UNIX平台的汇编器一直使用AT&amp;T语法。而linux是UNIX衍生的一种系统所有也是使用AT&amp;T语法。</p>
+<p>相关区别：</p>
+<ul>
+<li>AT&amp;T使用$表示立即操作数，而Intel的立即操作数是不需要界定的。因此，使用AT&amp;T语法引用十进制值4时，使用$4，使用Intel语法时只需使用4。</li>
+<li>AT&amp;T在寄存器名称前加上前缀%，而Intel不这样做。因此，使用AT&amp;T语法引用EAX寄存器写为%eax。</li>
+<li>AT&amp;T语法处理源和目标操作数时使用相反的顺序。把十进制值4传送给EAX寄存器，AT&amp;T的语法是movl $4, %eax，而Intel语法是mov eax, 4。</li>
+<li>AT&amp;T语法在助记符后面使用一个单独的字符来引用操作中使用的数据长度，而Intel语法中数据长度被声明为单独的操作数。AT&amp;T的指令movl $test, %eax等同于Intel语法的mov eax, dword ptr test。</li>
+<li>长调用和跳转使用不同语法定义段和偏移值。AT&amp;T语法使用ljmp $section, $offset，而Intel语法使用jmp section:offset。</li>
+</ul>
+<p>用一张表就能解释：</p>
+<table>
+<thead>
+<tr>
+<th>AT&amp;T风格</th>
+<th>Intel风格</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>寄存器前加%</td>
+<td>寄存器无需另加符号</td>
+</tr>
+<tr>
+<td>立即数前加$</td>
+<td>立即数无需另加符号</td>
+</tr>
+<tr>
+<td>16进制立即数使用0x前缀</td>
+<td>16进制的立即数使用h后缀</td>
+</tr>
+<tr>
+<td>源操作数在前，目的操作数在后（从前往后读）</td>
+<td>目的操作数在前，源操作数在后（从后往前读）</td>
+</tr>
+<tr>
+<td>间接寻址使用小括号()</td>
+<td>间接寻址使用中括号[]</td>
+</tr>
+<tr>
+<td>间接寻址完整格式：%sreg:disp(%base,index,scale)</td>
+<td>间接寻址完整格式：sreg:[basereg + index*scale + disp]</td>
+</tr>
+<tr>
+<td>操作位数：指令+l、w、b</td>
+<td>指令+ dword ptr、word ptr、byte ptr</td>
+</tr>
+</tbody></table>
+<h3 id="CPU架构"><a href="#CPU架构" class="headerlink" title="CPU架构"></a>CPU架构</h3><blockquote>
+<h4 id="x86-IA-32"><a href="#x86-IA-32" class="headerlink" title="x86(IA-32)"></a>x86(IA-32)</h4></blockquote>
+<p><strong>x86</strong>是16位和32位处理器的统称。</p>
+<p><strong>x86</strong>泛指一系列英特尔公司用于开发处理器的指令集架构，这类处理器最早为1978年面市的intel 8086（并不是32位的处理器，而是16位微处理器，直到1985年32位的80386才是真正的32位处理器），由于之前上市的CPU都是以86结尾的，所以被称为x86，但是数字没办法注册称为商标，最后将其IA-32，全名为“<strong>I</strong>ntel <strong>A</strong>rchitecture, <strong>32</strong>-bit”。IA-32在第三代x86架构才使用上，也就是真正意义上的32位处理器</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/HardwareRelated/8.png" alt="image-20201103100725731"></p>
+<blockquote>
+<h4 id="IA-64"><a href="#IA-64" class="headerlink" title="IA-64"></a>IA-64</h4></blockquote>
+<p><strong>IA-64</strong>，又称<strong>英特尔安腾架构</strong>（Intel Itanium architecture），使用在Itanium处理器家族上的64位元指令集架构，由英特尔与惠普共同开发。<strong>此架构与x86及x86-64并不相容，操作系统与软件需使用IA-64专用版本</strong>。</p>
+<p>第一款安腾于2001年推出，2017年推出最后一代安腾处理器，并停止开发。</p>
+<blockquote>
+<h4 id="x86-64-AMD64"><a href="#x86-64-AMD64" class="headerlink" title="x86-64(AMD64)"></a>x86-64(AMD64)</h4></blockquote>
+<p>目前市面上除了<strong>英特尔安腾</strong>的64位CPU，其他Intel和AMD的支持64位的CPU都是使用这个架构的。</p>
+<p><strong>x86-64</strong>（ 又称<strong>x64</strong>，即英文词<strong>64</strong>-bit e<strong>x</strong>tended，64位拓展 的简写）是x86架构的64位拓展，向后兼容于16位及32位的x86架构。x64于1999年由AMD设计，AMD首次公开64位集以扩展给x86，称为“<strong>AMD64</strong>”。其后也为英特尔所采用，现在英特尔称之为“<strong>Intel 64</strong>”，在之前曾使用过“Clackamas Technology” (CT)、“IA-32e”及“EM64T”来称呼。</p>
+<p>其他各类叫法：</p>
+<ul>
+<li><p>苹果公司和RPM包管理员以“x86-64”或“x86_64”称呼此64位架构。</p>
+</li>
+<li><p>甲骨文公司及Microsoft称之为“x64”。</p>
+</li>
+<li><p>BSD家族及其他Linux发行版则使用“amd64”，32位版本则称为“i386”（或 i486/586/686）。</p>
+</li>
+<li><p>Arch Linux用x86_64称呼此64位架构。</p>
+</li>
+</ul>
+<blockquote>
+<h4 id="ARM"><a href="#ARM" class="headerlink" title="ARM"></a>ARM</h4></blockquote>
+<p><strong>ARM</strong>架构，过去称作<strong>高级精简指令集机器</strong>（英语：Advanced RISC Machine），是一个精简指令集（RISC）处理器架构家族，其广泛地使用在许多嵌入式系统设计。常见的ARM架构CPU设备：树莓派（Broadcom）、手机（HiSilicon、Qualcomm）、大型工作站、超级计算机</p>
+<table>
+<thead>
+<tr>
+<th align="center">架构</th>
+<th align="center">处理器家族</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">ARMv1</td>
+<td align="center">ARM1</td>
+</tr>
+<tr>
+<td align="center">ARMv2</td>
+<td align="center">ARM2、ARM3</td>
+</tr>
+<tr>
+<td align="center">ARMv3</td>
+<td align="center">ARM6、ARM7</td>
+</tr>
+<tr>
+<td align="center">ARMv4</td>
+<td align="center">StrongARM、ARM7TDMI、ARM9TDMI</td>
+</tr>
+<tr>
+<td align="center">ARMv5</td>
+<td align="center">ARM7EJ、ARM9E、ARM10E、XScale</td>
+</tr>
+<tr>
+<td align="center">ARMv6</td>
+<td align="center">ARM11、ARM Cortex-M</td>
+</tr>
+<tr>
+<td align="center">ARMv7</td>
+<td align="center">ARM Cortex-A、ARM Cortex-M、ARM Cortex-R</td>
+</tr>
+<tr>
+<td align="center">ARMv8</td>
+<td align="center">Cortex-A35、Cortex-A50系列、Cortex-A72、Cortex-A73</td>
+</tr>
+</tbody></table>
+<p align="center" >截止2020年CPU架构种类</p>
+
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/HardwareRelated/9.png" alt="image-20201103112307820"></p>
+<blockquote>
+<h4 id="PowerPC"><a href="#PowerPC" class="headerlink" title="PowerPC"></a>PowerPC</h4></blockquote>
+<p><strong>PowerPC</strong>（英语：<strong>P</strong>erformance <strong>O</strong>ptimization <strong>W</strong>ith <strong>E</strong>nhanced <strong>R</strong>ISC – <strong>P</strong>erformance <strong>C</strong>omputing，有时简称<strong>PPC</strong>）是一种基于精简指令集（RISC）的指令集架构 ISA（Instruction set architecture），其基本的设计源自IBM的POWER（Performance Optimized With Enhanced RISC）架构。PowerPC是1991年，Apple、IBM、Motorola组成的AIM联盟所发展出的微处理器架构。PowerPC是整个AIM联盟平台的一部分，并且是到目前为止唯一的一部分。但苹果电脑自2005年起，将旗下电脑产品转用Intel x86。</p>
+<p>较广为人知的产品应用包含：</p>
+<ul>
+<li>苹果公司：Power Macintosh系列、PowerPC PowerBook系列（1995年以后的产品）、iBook系列、iMac系列（2005年以前的产品）、eMac系列产品。</li>
+<li>任天堂：GameCube、Wii和Wii U（之后换成了ARM架构处理器）。</li>
+<li>微软：Xbox 360（之后的产品换成了AMD的处理器）</li>
+<li>索尼：PlayStation 3（之后的产品换成了AMD的处理器）</li>
+</ul>
+<blockquote>
+<h4 id="MIPS"><a href="#MIPS" class="headerlink" title="MIPS"></a>MIPS</h4></blockquote>
+<p><strong>MIPS</strong>（<strong>M</strong>icroprocessor without <strong>I</strong>nterlocked <strong>P</strong>ipeline <strong>S</strong>tages），是一种采取精简指令集（RISC）的指令集架构（ISA），1981年出现，由 MIPS 公司开发。最早的MIPS架构是32比特，最新的版本已经变成64比特。</p>
+<p>MIPS 架构有多个版本。其中包括 MIPS I、II、III、IV，以及 MIPS V，早期的 MIPS 架构只有 32 位的版本，而其 64 位的版本随后才被开发。截至 2017 年 4 月，MIPS32/64 的当前版本是 MIPS32/64 Release 6。MIPS32/64 与 </p>
+<p>相关产品</p>
+<ul>
+<li>北京君正集成电路股份有限公司：Xburst系列微架构半导体IP核</li>
+<li>中国龙芯系列产品</li>
+</ul>
+<blockquote>
+<h4 id="LoongISA"><a href="#LoongISA" class="headerlink" title="LoongISA"></a>LoongISA</h4></blockquote>
+<p><strong>LoongISA</strong>（简称LISA）是龙芯中科注册的自主CPU指令集架构（由MIPS指令集拓展而来，采用MIPS的指令集格式）。LoongISA 指令集架构包括MIPS64 Release 2全套指令集和MIPS64 Release 5中的部分指令模块，以及其他一系列龙芯中科自主扩展的指令集。</p>
+<blockquote>
+<h4 id="SPARC"><a href="#SPARC" class="headerlink" title="SPARC"></a>SPARC</h4></blockquote>
+<p><strong>SPARC</strong>，名称源自于<strong>可扩展处理器架构</strong>（<strong>S</strong>calable <strong>P</strong>rocessor <strong>ARC</strong>hitecture）的缩写，是一种RISC指令集架构，最早于1985年由Sun微系统所设计，也是<strong>SPARC国际公司</strong>的注册商标之一。</p>
+<blockquote>
+<h4 id="RISC-V"><a href="#RISC-V" class="headerlink" title="RISC-V"></a>RISC-V</h4></blockquote>
+<p><strong>RISC-V</strong>（发音为“risk-five”）是一个基于精简指令集（RISC）原则的开源指令集架构（ISA），简易解释为开源软件运动相对应的一种“开源硬件”。该项目2010年始于加州大学柏克莱分校，但许多贡献者是该大学以外的志愿者和行业工作者。RISC-V指令集可以自由地用于任何目的，允许任何人设计、制造和销售RISC-V芯片和软件而不必支付给任何公司专利费。</p>
+<h3 id="X86架构汇编"><a href="#X86架构汇编" class="headerlink" title="X86架构汇编"></a>X86架构汇编</h3><blockquote>
+<p>Intel汇编和AT&amp;T汇编的区别</p>
+</blockquote>
+<ul>
+<li>Intel汇编<ul>
+<li>DOS、Windows，包括我们之前了解的8086处理器</li>
+<li>Windwos派系：VC编译器</li>
+</ul>
+</li>
+<li>AT&amp;T汇编<ul>
+<li>Linux、Unix、Mac OS、iOS模拟器</li>
+<li>Unix派系：GCC编译器</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>以下使用的是Intel汇编语法讲解</p>
+</blockquote>
+<h4 id="32位CPU所含有的寄存器"><a href="#32位CPU所含有的寄存器" class="headerlink" title="32位CPU所含有的寄存器"></a>32位CPU所含有的寄存器</h4><ul>
+<li>8个32位通用寄存器<ul>
+<li>4个数据寄存器(EAX、EBX、ECX和EDX)</li>
+<li>2个变址和指针寄存器(ESI和EDI) 2个指针寄存器(ESP和EBP)</li>
+</ul>
+</li>
+<li>6个段寄存器(ES、CS、SS、DS、FS和GS)</li>
+<li>1个指令指针寄存器(EIP)</li>
+<li>1个标志寄存器(EFlags)</li>
+</ul>
+<p>每个寄存器都可作为一个32位值或两个16位值来寻址使用。某些16位的寄存器能够按照8位值寻址使用。</p>
+<table>
+<thead>
+<tr>
+<th>32</th>
+<th>16</th>
+<th>高8</th>
+<th>低8</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>EAX</td>
+<td>AX</td>
+<td>AH</td>
+<td>AL</td>
+</tr>
+<tr>
+<td>EBX</td>
+<td>BX</td>
+<td>BH</td>
+<td>BL</td>
+</tr>
+<tr>
+<td>ECX</td>
+<td>CX</td>
+<td>CH</td>
+<td>CL</td>
+</tr>
+<tr>
+<td>EDX</td>
+<td>DX</td>
+<td>DH</td>
+<td>DL</td>
+</tr>
+</tbody></table>
+<p>下面几个没有8位模式：</p>
+<table>
+<thead>
+<tr>
+<th>32</th>
+<th>16</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>ESI</td>
+<td>SI</td>
+</tr>
+<tr>
+<td>EDI</td>
+<td>DI</td>
+</tr>
+<tr>
+<td>EBP</td>
+<td>BP</td>
+</tr>
+<tr>
+<td>ESP</td>
+<td>SP</td>
+</tr>
+</tbody></table>
+<p>EAX的低16位称为AX，AX的高8位称为AH，低8位称为AL。</p>
+<blockquote>
+<p>举个例子</p>
+</blockquote>
+<p>寄存器EAX存储了值<code>0xA9DC81F5</code>，代码可以使用其他三种方式来引用EAX中的这个数据：AX（2字节）是<code>0x81F5</code>，AL（1字节）是<code>0xF5</code>，AH（1字节）是<code>0x81</code>，如图下图所示</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/1.png" alt="image-20200831133326546"></p>
+<h5 id="数据寄存器"><a href="#数据寄存器" class="headerlink" title="数据寄存器"></a>数据寄存器</h5><p>数据寄存器主要用来保存操作数和运算结果等信息，从而节省读取操作数所需占用总线和访问存储器的时间。</p>
+<blockquote>
+<p>32位CPU有4个32位的通用寄存器EAX、EBX、ECX和EDX。</p>
+</blockquote>
+<ul>
+<li>对低16位数据的存取，不会影响高16位的数据。</li>
+<li>寄存器EAX通常称为累加器(Accumulator)，用累加器进行的操作可能需要更少时间。可用于乘、 除、输入/输出等操作，使用频率很高；</li>
+<li>寄存器EBX称为基地址寄存器(Base Register)。它可作为存储器指针来使用；</li>
+<li>寄存器ECX称为计数寄存器(Count Register)。 在循环和字符串操作时，要用它来控制循环次数；在位操作中，当移多位时，要用CL来指明移位的位数；</li>
+<li>寄存器EDX称为数据寄存器(Data Register)。在进行乘、除运算时，它可作为默认的操作数参与运算，也可用于存放I/O的端口地址。</li>
+</ul>
+<p>关于乘法和除法注意点：</p>
+<ul>
+<li><p>如果乘法的结果过大，会把结果分别存入EDX和EAX寄存器中，EDX存储高32位数据，EAX存储低32位数据</p>
+</li>
+<li><p>如果要做除法之前，先要把除数赋值到EDX和EAX寄存器中，然后将结果存入EAX中，余数存入EDX中</p>
+</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>指令</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>mul 0x50</td>
+<td>EAX值乘以0x50，并将结果存入EDX:EAX寄存器中</td>
+</tr>
+<tr>
+<td>div 0x75</td>
+<td>将EDX:EAX值除以0x75，并将结果存入EAX，将余数存入EDX</td>
+</tr>
+</tbody></table>
+<h5 id="变址寄存器"><a href="#变址寄存器" class="headerlink" title="变址寄存器"></a>变址寄存器</h5><blockquote>
+<p>32位CPU有2个32位通用寄存器ESI和EDI。</p>
+</blockquote>
+<p>寄存器ESI、EDI、SI和DI称为变址寄存器(Index Register)，它们主要用于存放存储单元在段内的偏移量， 它们可作一般的存储器指针使用。</p>
+<h5 id="指针寄存器"><a href="#指针寄存器" class="headerlink" title="指针寄存器"></a>指针寄存器</h5><blockquote>
+<p>32位CPU有2个32位通用寄存器EBP和ESP。</p>
+</blockquote>
+<p>它们主要用于访问堆栈内的存储单元，并且规定：</p>
+<ul>
+<li><p>EBP为基指针(Base Pointer)寄存器，一般作为当前堆栈的最后单元，用它可直接存取堆栈中的数据；</p>
+</li>
+<li><p>ESP为堆栈指针(Stack Pointer)寄存器，用它只可访问栈顶。</p>
+</li>
+</ul>
+<h5 id="指令指针寄存器"><a href="#指令指针寄存器" class="headerlink" title="指令指针寄存器"></a>指令指针寄存器</h5><blockquote>
+<p>32位CPU把指令指针扩展到32位，并记作EIP</p>
+</blockquote>
+<p>指令指针EIP、IP(Instruction Pointer)是存放下次将要执行的指令在代码段的偏移量。</p>
+<h5 id="标志寄存器"><a href="#标志寄存器" class="headerlink" title="标志寄存器"></a>标志寄存器</h5><blockquote>
+<p>32位CPU的标志寄存器为EFLAG</p>
+</blockquote>
+<p>CF：进位标志<br>OF：溢出标志<br>SF：符号标志<br>ZF：零标志<br>AC：辅助进位标志<br>PF：奇偶标志</p>
+<h4 id="寄存器"><a href="#寄存器" class="headerlink" title="寄存器"></a>寄存器</h4><blockquote>
+<p>以下使用的是AT&amp;T汇编语法讲解</p>
+</blockquote>
+<h5 id="数据格式"><a href="#数据格式" class="headerlink" title="数据格式"></a>数据格式</h5><p><code>Intel</code>用字(<code>word</code>)来表达<code>16</code>位数据类型，因此<code>32</code>位为双字(<code>double words</code>)，<code>64</code>位为四字(<code>quad words</code>)</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/1.1.png" alt="1"></p>
+<h5 id="整数寄存器"><a href="#整数寄存器" class="headerlink" title="整数寄存器"></a>整数寄存器</h5><p><code>X86-64</code>中央处理单元(<code>CPU</code>)中有一组<code>16</code>个存储<code>64</code>位值的通用目的寄存器</p>
+<p>初代<code>8086</code>中有<code>8</code>个<code>16</code>位的寄存器(<code>%ax-%sp</code>)</p>
+<p>扩展带<code>IA32</code>架构时变成了<code>8</code>个<code>32</code>位寄存器(<code>%eax-%esp</code>)</p>
+<p>扩展到<code>X86-64</code>架构时变成<code>16</code>个<code>64</code>位寄存器(<code>%rax-%rsp</code>,<code>%r8-%r15</code>)前<code>8</code>个寄存器是做了扩充，后<code>8</code>个寄存器是新加的</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/1.2%E6%95%B4%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%8816&32&64%EF%BC%89.png" alt="2"></p>
+<p><code>16</code>位操作可以访问最低的<code>2</code>个字节，<code>32</code>位操作可以访问最低的<code>4</code>个字节，而<code>64</code>位操作可以访问整个寄存器。</p>
+<h5 id="操作数指示符"><a href="#操作数指示符" class="headerlink" title="操作数指示符"></a>操作数指示符</h5><p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/1.3%E6%93%8D%E4%BD%9C%E6%A0%BC%E5%BC%8F.png" alt="1"></p>
+<h6 id="例题："><a href="#例题：" class="headerlink" title="例题："></a>例题：</h6><p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/1.3%E4%BE%8B%E9%A2%98.png" alt="1"></p>
+<h6 id="答案："><a href="#答案：" class="headerlink" title="答案："></a>答案：</h6><p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/1.3%E7%AD%94%E6%A1%88.png" alt="1"></p>
+<h4 id="指令"><a href="#指令" class="headerlink" title="指令"></a>指令</h4><h5 id="数据传送"><a href="#数据传送" class="headerlink" title="数据传送"></a>数据传送</h5><h6 id="普通的数据传送如图"><a href="#普通的数据传送如图" class="headerlink" title="普通的数据传送如图"></a>普通的数据传送如图</h6><p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.1%E7%AE%80%E5%8D%95%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4.png" alt="1"></p>
+<h6 id="做了零扩展的数据传送"><a href="#做了零扩展的数据传送" class="headerlink" title="做了零扩展的数据传送"></a>做了零扩展的数据传送</h6><p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.1%E5%81%9A%E4%BA%86%E9%9B%B6%E6%89%A9%E5%B1%95%E5%90%8E%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4.png" alt="11"></p>
+<h6 id="做了符号扩展的数据传送"><a href="#做了符号扩展的数据传送" class="headerlink" title="做了符号扩展的数据传送"></a>做了符号扩展的数据传送</h6><p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.1%E7%AC%A6%E5%8F%B7%E6%89%A9%E5%B1%95%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4.png" alt="11"></p>
+<p>图中给了一个<code>cltq</code>指令，这条指令没有操作数：它总是以寄存器<code>%eax</code>作为源，<code>%rax</code>作为符号扩展结果为目的(它的效果与指令<code>movslq %eax,%rax</code>完全一致,不过编码更紧凑)</p>
+<h6 id="movb-amp-movsbq-amp-movzbq之间的差别："><a href="#movb-amp-movsbq-amp-movzbq之间的差别：" class="headerlink" title="movb&amp;movsbq&amp;movzbq之间的差别："></a><code>movb</code>&amp;<code>movsbq</code>&amp;<code>movzbq</code>之间的差别：</h6><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">movabsq   $0x0011223344556677,%rax                     # %rax&#x3D;0011223344556677</span><br><span class="line">movb      $0xAA,%dl                                    # %dl&#x3D;AA</span><br><span class="line">movb      %dl,%al                                      # %RAX&#x3D;00112233445566AA</span><br><span class="line">movsbq    %dl,%rax                                     # %rax&#x3D;FFFFFFFFFFFFFFAA</span><br><span class="line">movzbq    %dl,%rax                                     # %rax&#x3D;00000000000000AA</span><br><span class="line">#movb指令不改变其他字节</span><br><span class="line">#movsbq将其他7个字节设为全1或全0，由于十六进制A表示二进制值1010，符号扩展会把高位字节都设置为FF</span><br><span class="line">#movzbq讲其他7个字节都设置为0</span><br></pre></td></tr></table></figure>
+
+<h6 id="压入和弹出栈数据"><a href="#压入和弹出栈数据" class="headerlink" title="压入和弹出栈数据"></a>压入和弹出栈数据</h6><p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.2%E5%87%BA%E6%A0%88%E5%92%8C%E5%85%A5%E6%A0%88%E6%8C%87%E4%BB%A4.png" alt="1"></p>
+<p> 将一个四字值压人栈中，首先要将栈指针减<code>8</code>，然后将值写到新的栈顶地址。因此，指令<code>pushq %rbp</code>的行为等价于下面两条指令：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">subq           $8,%rsp</span><br><span class="line">movq           %rbp,(%rsp)</span><br></pre></td></tr></table></figure>
+
+<p> 弹出一个四字的操作包括从栈顶位置读出数据，然后将栈指针加8。因此，指令<code>popq %rax</code>的行为等价于下面两条指令：</p>
+  <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movq          (%rsp),%rax</span><br><span class="line">addq           $8,%rsp</span><br></pre></td></tr></table></figure>
+
+<h6 id="算术和逻辑操作"><a href="#算术和逻辑操作" class="headerlink" title="算术和逻辑操作"></a>算术和逻辑操作</h6><p>这些操作被分成4组：加载有效地址，一元操作，二元操作和移位。二元操作有两个操作数，而一元操作有一个操作数。</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.3%E7%AE%97%E6%9C%AF%E5%92%8C%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C.png" alt="1"></p>
+<h5 id="加载有效地址"><a href="#加载有效地址" class="headerlink" title="加载有效地址"></a>加载有效地址</h5><p>指令<code>leaq</code>实际上是<code>movq</code>指令的变形，它的指令形式是从内存读数据到寄存器，但实际上它根本没有引用内存。</p>
+<h6 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h6><p>假设寄存器<code>%rax</code>的值为<code>X</code>，<code>%rcx</code>的值为<code>y</code>，结果为<code>%rdx</code>中的值<br><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.3.1%E4%BE%8B%E5%AD%90.png" alt="11"></p>
+<h5 id="一元和二元操作"><a href="#一元和二元操作" class="headerlink" title="一元和二元操作"></a>一元和二元操作</h5><p>这里没有什么可以写的直接上例题吧</p>
+<h6 id="例题：-1"><a href="#例题：-1" class="headerlink" title="例题："></a>例题：</h6><p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.3.2%E9%A2%98%E7%9B%AE.png" alt="1"></p>
+<h6 id="答案：-1"><a href="#答案：-1" class="headerlink" title="答案："></a>答案：</h6><p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.3.2%E7%AD%94%E6%A1%88.png" alt="1"></p>
+<h5 id="位移操作"><a href="#位移操作" class="headerlink" title="位移操作"></a>位移操作</h5><p>左移指令有两个名字:<code>SAL</code>和<code>SHL</code>。两者的效果都是一样的，都是将右边填上<code>0</code></p>
+<p>右移指令有两个名字:<code>SAR</code>和<code>SHR</code>。但是效果不同<code>SAR</code>执行算术移位(填上符号位)，<code>SHR</code>执行逻辑移位(填上<code>0</code>)</p>
+<h5 id="特殊的算术操作"><a href="#特殊的算术操作" class="headerlink" title="特殊的算术操作"></a>特殊的算术操作</h5><p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.3.4%E7%89%B9%E6%AE%8A%E7%9A%84%E7%AE%97%E6%9C%AF%E6%93%8D%E4%BD%9C.png" alt="111"></p>
+<h5 id="条件码"><a href="#条件码" class="headerlink" title="条件码"></a>条件码</h5><ul>
+<li><p><code>CF</code>：进位标志。最近的操作使最高位产生了进位。可以用来检查无符号操作数据的溢出。</p>
+</li>
+<li><p><code>ZF</code>：零标志。最近的操作得出的结果为<code>0</code>.</p>
+</li>
+<li><p><code>SF</code>：符号标志。最近的操作得到的结果为负数。</p>
+</li>
+<li><p><code>OF</code>: 溢出标志。最近的操作导致一个补码溢出–正溢出或负溢出。</p>
+</li>
+<li><p>比较和测试指令</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.4.1%E5%AF%B9%E6%AF%94%E5%92%8C%E6%B5%8B%E8%AF%95%E6%8C%87%E4%BB%A4.png" alt="111"></p>
+<p><code>CMP</code>和<code>TEST</code>的区别：<br><code>test</code>逻辑与运算结果为零,就把<code>ZF</code>(零标志)置<code>1</code><br><code>cmp </code>算术减法运算结果为零,就把<code>ZF</code>(零标志)置<code>1</code></p>
+</li>
+<li><p>访问条件码</p>
+<p>直接看图</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.4.2%E8%AE%BF%E9%97%AE%E6%9D%A1%E4%BB%B6%E7%A0%81.png" alt="11"></p>
+</li>
+<li><p>跳转指令</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.5%E8%B7%B3%E8%BD%AC%E6%8C%87%E4%BB%A4.png" alt="111"><br>直接跳转：跳转目标是作为指令的一部分编码。写法<code>jmp .L1</code></p>
+<p>间接跳转：跳转目标是从寄存器或内存位置中读出。写法<code>jmp *%rax</code>或者<code>jmp *(%rax)</code></p>
+<p>用寄存器<code>%rax</code>中的值作为跳转目标</p>
+<p><code>jmp *%rax</code><br>用<code>%rax</code>中的值作为读地址,从内存中读出跳转目标</p>
+<p><code>jmp *(%rax)</code></p>
+</li>
+<li><p>转移控制</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.6%E8%BD%AC%E7%A7%BB%E6%8E%A7%E5%88%B6.png" alt="11"></p>
+</li>
+</ul>
+<p>  <code>call</code>指令有一个目标，指明被调用过程起始的指令地址。同跳转一样，也有直接和间接区别。直接调用的目标是一个标号，而间接调用的目标是<code>*</code>后面跟一个操作数指示符。</p>
+<ul>
+<li><p>条件传送</p>
+<p>是传送指令的变形，用法和跳转指令类似</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/Assembly/2.6%E6%9D%A1%E4%BB%B6%E4%BC%A0%E9%80%81%E6%8C%87%E4%BB%A4.png" alt="1"></p>
+</li>
+</ul>
+<h4 id="关于指针"><a href="#关于指针" class="headerlink" title="关于指针"></a>关于指针</h4><p>指针类型不是机器代码的一部分<br>每个指针都是一个值，这个值是某个指定类型的对象地址。</p>
+<h4 id="浮点代码"><a href="#浮点代码" class="headerlink" title="浮点代码"></a>浮点代码</h4><p>后续在更新</p>
+<h4 id="后话"><a href="#后话" class="headerlink" title="后话"></a>后话</h4><p>关于数组，栈，一些像<code>if</code>,<code>switch</code>等书上讲的更详细</p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;www.cnblogs.com&#x2F;nufangrensheng&#x2F;p&#x2F;3893272.html</span><br><span class="line">https:&#x2F;&#x2F;blog.csdn.net&#x2F;lpwstr&#x2F;article&#x2F;details&#x2F;78817831</span><br><span class="line">《深入了解计算机系统》</span><br><span class="line">https:&#x2F;&#x2F;wikipedia.org</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ascotbe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/2018/12/05/HardwareRelatedKnowledge/">https://www.ascotbe.com/2018/12/05/HardwareRelatedKnowledge/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com" target="_blank">ascotbe</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/39.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2018/12/07/C++Pointer/"><img class="prev-cover" src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/97.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++指针梳理</div></div></a></div><div class="next-post pull-right"><a href="/2018/11/30/SomeAdditionsToTheSubnetMask/"><img class="next-cover" src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/40.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">子网掩码的一些补充</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">ascotbe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ascotbe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:ascotbe@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">所有文章都是本人学习笔记仅限交流探讨，禁止利用文章思路进行违法操作，如有违规和作者无关！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows-Linux%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84"><span class="toc-number">1.</span> <span class="toc-text">Windows&#x2F;Linux的内存结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Windows%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E5%88%86%E5%B8%83"><span class="toc-number">1.1.</span> <span class="toc-text">Windows的内存结构分布</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Linux%E7%9A%84%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84%E5%88%86%E5%B8%83"><span class="toc-number">1.2.</span> <span class="toc-text">Linux的内存结构分布</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Windows-Linux%E7%9A%84%E6%B1%87%E7%BC%96%E5%8C%BA%E5%88%AB"><span class="toc-number">2.</span> <span class="toc-text">Windows&#x2F;Linux的汇编区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CPU%E6%9E%B6%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">CPU架构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#x86-IA-32"><span class="toc-number">3.1.</span> <span class="toc-text">x86(IA-32)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IA-64"><span class="toc-number">3.2.</span> <span class="toc-text">IA-64</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#x86-64-AMD64"><span class="toc-number">3.3.</span> <span class="toc-text">x86-64(AMD64)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ARM"><span class="toc-number">3.4.</span> <span class="toc-text">ARM</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#PowerPC"><span class="toc-number">3.5.</span> <span class="toc-text">PowerPC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#MIPS"><span class="toc-number">3.6.</span> <span class="toc-text">MIPS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#LoongISA"><span class="toc-number">3.7.</span> <span class="toc-text">LoongISA</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#SPARC"><span class="toc-number">3.8.</span> <span class="toc-text">SPARC</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#RISC-V"><span class="toc-number">3.9.</span> <span class="toc-text">RISC-V</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#X86%E6%9E%B6%E6%9E%84%E6%B1%87%E7%BC%96"><span class="toc-number">4.</span> <span class="toc-text">X86架构汇编</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#32%E4%BD%8DCPU%E6%89%80%E5%90%AB%E6%9C%89%E7%9A%84%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">4.1.</span> <span class="toc-text">32位CPU所含有的寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">4.1.1.</span> <span class="toc-text">数据寄存器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8F%98%E5%9D%80%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">4.1.2.</span> <span class="toc-text">变址寄存器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8C%87%E9%92%88%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">4.1.3.</span> <span class="toc-text">指针寄存器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4%E6%8C%87%E9%92%88%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">4.1.4.</span> <span class="toc-text">指令指针寄存器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%A0%87%E5%BF%97%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">4.1.5.</span> <span class="toc-text">标志寄存器</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">4.2.</span> <span class="toc-text">寄存器</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F"><span class="toc-number">4.2.1.</span> <span class="toc-text">数据格式</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B4%E6%95%B0%E5%AF%84%E5%AD%98%E5%99%A8"><span class="toc-number">4.2.2.</span> <span class="toc-text">整数寄存器</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%93%8D%E4%BD%9C%E6%95%B0%E6%8C%87%E7%A4%BA%E7%AC%A6"><span class="toc-number">4.2.3.</span> <span class="toc-text">操作数指示符</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A"><span class="toc-number">4.2.3.1.</span> <span class="toc-text">例题：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%AD%94%E6%A1%88%EF%BC%9A"><span class="toc-number">4.2.3.2.</span> <span class="toc-text">答案：</span></a></li></ol></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%87%E4%BB%A4"><span class="toc-number">4.3.</span> <span class="toc-text">指令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81"><span class="toc-number">4.3.1.</span> <span class="toc-text">数据传送</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E6%99%AE%E9%80%9A%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81%E5%A6%82%E5%9B%BE"><span class="toc-number">4.3.1.1.</span> <span class="toc-text">普通的数据传送如图</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%81%9A%E4%BA%86%E9%9B%B6%E6%89%A9%E5%B1%95%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81"><span class="toc-number">4.3.1.2.</span> <span class="toc-text">做了零扩展的数据传送</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%81%9A%E4%BA%86%E7%AC%A6%E5%8F%B7%E6%89%A9%E5%B1%95%E7%9A%84%E6%95%B0%E6%8D%AE%E4%BC%A0%E9%80%81"><span class="toc-number">4.3.1.3.</span> <span class="toc-text">做了符号扩展的数据传送</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#movb-amp-movsbq-amp-movzbq%E4%B9%8B%E9%97%B4%E7%9A%84%E5%B7%AE%E5%88%AB%EF%BC%9A"><span class="toc-number">4.3.1.4.</span> <span class="toc-text">movb&amp;movsbq&amp;movzbq之间的差别：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E5%8E%8B%E5%85%A5%E5%92%8C%E5%BC%B9%E5%87%BA%E6%A0%88%E6%95%B0%E6%8D%AE"><span class="toc-number">4.3.1.5.</span> <span class="toc-text">压入和弹出栈数据</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%AE%97%E6%9C%AF%E5%92%8C%E9%80%BB%E8%BE%91%E6%93%8D%E4%BD%9C"><span class="toc-number">4.3.1.6.</span> <span class="toc-text">算术和逻辑操作</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E5%8A%A0%E8%BD%BD%E6%9C%89%E6%95%88%E5%9C%B0%E5%9D%80"><span class="toc-number">4.3.2.</span> <span class="toc-text">加载有效地址</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="toc-number">4.3.2.1.</span> <span class="toc-text">例子：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%B8%80%E5%85%83%E5%92%8C%E4%BA%8C%E5%85%83%E6%93%8D%E4%BD%9C"><span class="toc-number">4.3.3.</span> <span class="toc-text">一元和二元操作</span></a><ol class="toc-child"><li class="toc-item toc-level-6"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A-1"><span class="toc-number">4.3.3.1.</span> <span class="toc-text">例题：</span></a></li><li class="toc-item toc-level-6"><a class="toc-link" href="#%E7%AD%94%E6%A1%88%EF%BC%9A-1"><span class="toc-number">4.3.3.2.</span> <span class="toc-text">答案：</span></a></li></ol></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E4%BD%8D%E7%A7%BB%E6%93%8D%E4%BD%9C"><span class="toc-number">4.3.4.</span> <span class="toc-text">位移操作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%89%B9%E6%AE%8A%E7%9A%84%E7%AE%97%E6%9C%AF%E6%93%8D%E4%BD%9C"><span class="toc-number">4.3.5.</span> <span class="toc-text">特殊的算术操作</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%9D%A1%E4%BB%B6%E7%A0%81"><span class="toc-number">4.3.6.</span> <span class="toc-text">条件码</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%85%B3%E4%BA%8E%E6%8C%87%E9%92%88"><span class="toc-number">4.4.</span> <span class="toc-text">关于指针</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E4%BB%A3%E7%A0%81"><span class="toc-number">4.5.</span> <span class="toc-text">浮点代码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%8E%E8%AF%9D"><span class="toc-number">4.6.</span> <span class="toc-text">后话</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">5.</span> <span class="toc-text">参考文章</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/09/WindowsGrabPassword/" title="Windows本地密码抓取"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/127.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows本地密码抓取"/></a><div class="content"><a class="title" href="/2021/06/09/WindowsGrabPassword/" title="Windows本地密码抓取">Windows本地密码抓取</a><time datetime="2021-06-09T15:45:42.000Z" title="发表于 2021-06-09 23:45:42">2021-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/18/SampleAnalysis/0b2a794bac4bf650b6ba537137504162520b67266449be979679afbb14e8e5c0/" title="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/126.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析"/></a><div class="content"><a class="title" href="/2021/05/18/SampleAnalysis/0b2a794bac4bf650b6ba537137504162520b67266449be979679afbb14e8e5c0/" title="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析">蔓灵花APT组织针对巴基斯坦定向攻击的样本分析</a><time datetime="2021-05-18T15:45:42.000Z" title="发表于 2021-05-18 23:45:42">2021-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/04/HeapOverflow_Linux_0x01/" title="Linux堆溢出总结（0x01）"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/123.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux堆溢出总结（0x01）"/></a><div class="content"><a class="title" href="/2021/05/04/HeapOverflow_Linux_0x01/" title="Linux堆溢出总结（0x01）">Linux堆溢出总结（0x01）</a><time datetime="2021-05-04T15:45:42.000Z" title="发表于 2021-05-04 23:45:42">2021-05-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/26/StackOverflow_Linux_0x03/" title="Linux栈溢出总结（0x03）"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/122.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux栈溢出总结（0x03）"/></a><div class="content"><a class="title" href="/2021/03/26/StackOverflow_Linux_0x03/" title="Linux栈溢出总结（0x03）">Linux栈溢出总结（0x03）</a><time datetime="2021-03-26T10:45:42.000Z" title="发表于 2021-03-26 18:45:42">2021-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/27/OfficeExcelMacro/" title="Office Excel Macro"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/121.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Office Excel Macro"/></a><div class="content"><a class="title" href="/2021/01/27/OfficeExcelMacro/" title="Office Excel Macro">Office Excel Macro</a><time datetime="2021-01-27T10:45:42.000Z" title="发表于 2021-01-27 18:45:42">2021-01-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By ascotbe</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'Ascotbe/Ascotbe.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme () {
+  if (document.querySelector('.utterances-frame')) {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    const iframe = document.querySelector('.utterances-frame');
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/Bronya.model.json"},"display":{"position":"right","width":400,"height":500,"hOffset":-90,"vOffset":0},"mobile":{"show":false},"log":false});</script></body></html>

