@@ -1,0 +1,247 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Linux堆溢出总结（0x02） | ascotbe</title><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="声明  郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！  前言  缓冲了2个月重新捡起来，有些地方还是没太懂     寻找堆分配函数分配函数  malloc calloc realloc  通常来说堆是通过调用 glibc 函数 malloc 进行分配的，在某些情况下会使用 calloc 分配。calloc 与">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux堆溢出总结（0x02）">
+<meta property="og:url" content="https://www.ascotbe.com/2021/07/31/HeapOverflow_Linux_0x02/index.html">
+<meta property="og:site_name" content="ascotbe">
+<meta property="og:description" content="声明  郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！  前言  缓冲了2个月重新捡起来，有些地方还是没太懂     寻找堆分配函数分配函数  malloc calloc realloc  通常来说堆是通过调用 glibc 函数 malloc 进行分配的，在某些情况下会使用 calloc 分配。calloc 与">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/125.jpg">
+<meta property="article:published_time" content="2021-07-31T15:45:42.000Z">
+<meta property="article:modified_time" content="2021-07-31T13:36:25.529Z">
+<meta property="article:author" content="ascotbe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/125.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.ascotbe.com/2021/07/31/HeapOverflow_Linux_0x02/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2021-07-31 21:36:25'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="/atom.xml" title="ascotbe" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">104</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.staticdn.net/Ascotbe/Random-img/master/Blog/125.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ascotbe</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw fa fa-link"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Taylor%20Swift"><i class="fa-fw fa fa-link"></i><span> Taylor Swift</span></a></div><div class="menus_item"><a class="site-page" href="/Links/"><i class="fa-fw fa fa-link"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux堆溢出总结（0x02）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-31T15:45:42.000Z" title="发表于 2021-07-31 23:45:42">2021-07-31</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2021-07-31T13:36:25.529Z" title="更新于 2021-07-31 21:36:25">2021-07-31</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><blockquote>
+<p>声明</p>
+</blockquote>
+<p>郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！</p>
+<blockquote>
+<p>前言</p>
+</blockquote>
+<p>缓冲了2个月重新捡起来，有些地方还是没太懂</p>
+<img src="https://raw.staticdn.net/Ascotbe/Random-img/master/HeapOverflow/18.png" alt="image-20210517140400619" style="zoom:33%;" />
+
+
+
+<h2 id="寻找堆分配函数"><a href="#寻找堆分配函数" class="headerlink" title="寻找堆分配函数"></a>寻找堆分配函数</h2><p>分配函数</p>
+<ul>
+<li>malloc</li>
+<li>calloc</li>
+<li>realloc</li>
+</ul>
+<p>通常来说堆是通过调用 glibc 函数 malloc 进行分配的，在某些情况下会使用 calloc 分配。calloc 与 malloc 的区别是：calloc 在分配后会自动进行清空，这对于某些信息泄露漏洞的利用来说是致命的。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">calloc</span>(<span class="number">0x20</span>);</span><br><span class="line"><span class="comment">//等同于</span></span><br><span class="line">ptr=<span class="built_in">malloc</span>(<span class="number">0x20</span>);</span><br><span class="line"><span class="built_in">memset</span>(ptr,<span class="number">0</span>,<span class="number">0x20</span>);</span><br></pre></td></tr></table></figure>
+
+<p>除此之外，还有一种分配是经由 realloc 进行的，realloc 函数可以身兼 malloc 和 free 两个函数的功能。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">(<span class="keyword">void</span>)</span> </span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">  <span class="keyword">char</span> *chunk,*chunk1;</span><br><span class="line">  chunk=<span class="built_in">malloc</span>(<span class="number">16</span>);</span><br><span class="line">  chunk1=<span class="built_in">realloc</span>(chunk,<span class="number">32</span>);</span><br><span class="line">  <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>realloc 的操作并不是像字面意义上那么简单，其内部会根据不同的情况进行不同操作</p>
+<ul>
+<li>当 realloc(ptr,size) 的 size 不等于 ptr 的 size 时<ul>
+<li>如果申请 size &gt; 原来 size<ul>
+<li>如果 chunk 与 top chunk 相邻，直接扩展这个 chunk 到新 size 大小</li>
+<li>如果 chunk 与 top chunk 不相邻，相当于 free(ptr),malloc(new_size)</li>
+</ul>
+</li>
+<li>如果申请 size &lt; 原来 size<ul>
+<li>如果相差不足以容得下一个最小 chunk(64 位下 32 个字节，32 位下 16 个字节)，则保持不变</li>
+<li>如果相差可以容得下一个最小 chunk，则切割原 chunk 为两部分，free 掉后一部分</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>当 realloc(ptr,size) 的 size 等于 0 时，相当于 free(ptr)</li>
+<li>当 realloc(ptr,size) 的 size 等于 ptr 的 size，不进行任何操作</li>
+</ul>
+<h2 id="TCache"><a href="#TCache" class="headerlink" title="TCache"></a>TCache</h2><p>由于glibc-2.26（ubuntu 17.10）加入了TCache机制而有了较大的变化（see <a target="_blank" rel="noopener" href="https://sourceware.org/git/?p=glibc.git;a=commitdiff;h=d5c3fafc4307c9b7a4c7d5cb381fcdbfad340bcc">commit</a>），TCache全名为<strong>Thread Local Caching</strong>，它为每一个线程创建一个缓存，里面包含了一些小堆块，无须对<strong>arena</strong>上锁即可使用，这种无锁的分配算法有不错的性能提升。虽然线程缓存在多年以前已经在另一个内存分配器<strong>TCMalloc（Thread-Caching Malloc）</strong>中实现，但是直到2017年ptmalloc2才在libc-2.26中将其正式加入，并默认开启。</p>
+<h3 id="相关结构体"><a href="#相关结构体" class="headerlink" title="相关结构体"></a>相关结构体</h3><p>tcache引入了两个新的结构体，<code>tcache_entry</code> 和 <code>tcache_perthread_struct</code>。</p>
+<p>这其实和<strong>fast bin</strong>很像，但又不一样。</p>
+<h4 id="tcache-entry"><a href="#tcache-entry" class="headerlink" title="tcache_entry"></a><a target="_blank" rel="noopener" href="https://code.woboq.org/userspace/glibc/malloc/malloc.c.html#tcache_entry">tcache_entry</a></h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* We overlay this structure on the user-data portion of a chunk when</span></span><br><span class="line"><span class="comment">   the chunk is stored in the per-thread cache.  */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="class"><span class="keyword">struct</span> <span class="title">tcache_entry</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125; tcache_entry;</span><br></pre></td></tr></table></figure>
+
+<p><code>tcache_entry</code> 用于链接空闲的 chunk 结构体，其中的 <code>next</code> 指针指向下一个大小相同的 chunk。</p>
+<p>需要注意的是这里的 next 指向 chunk 的 user data，而 fastbin 的 fd 指向 chunk 开头的地址。</p>
+<p>而且，tcache_entry 会复用空闲 chunk 的 user data 部分。</p>
+<h3 id="tcache-perthread-struct"><a href="#tcache-perthread-struct" class="headerlink" title="tcache_perthread_struct"></a><a target="_blank" rel="noopener" href="https://code.woboq.org/userspace/glibc/malloc/malloc.c.html#tcache_perthread_struct">tcache_perthread_struct</a></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* There is one of these for each thread, which contains the</span></span><br><span class="line"><span class="comment">   per-thread cache (hence &quot;tcache_perthread_struct&quot;).  Keeping</span></span><br><span class="line"><span class="comment">   overall size low is mildly important.  Note that COUNTS and ENTRIES</span></span><br><span class="line"><span class="comment">   are redundant (we could have just counted the linked list each</span></span><br><span class="line"><span class="comment">   time), this is for performance reasons.  */</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">tcache_perthread_struct</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">  <span class="keyword">char</span> counts[TCACHE_MAX_BINS];</span><br><span class="line">  tcache_entry *entries[TCACHE_MAX_BINS];</span><br><span class="line">&#125; tcache_perthread_struct;</span><br><span class="line"></span><br><span class="line"><span class="meta"># <span class="meta-keyword">define</span> TCACHE_MAX_BINS                64</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> __thread tcache_perthread_struct *tcache = <span class="literal">NULL</span>;</span><br></pre></td></tr></table></figure>
+
+<p>每个 thread 都会维护一个 <code>tcache_perthread_struct</code>，它是整个 tcache 的管理结构，一共有 <code>TCACHE_MAX_BINS</code> 个计数器和 <code>TCACHE_MAX_BINS</code>项 tcache_entry，其中</p>
+<ul>
+<li><code>tcache_entry</code> 用单向链表的方式链接了相同大小的处于空闲状态（free 后）的 chunk，这一点上和 fastbin 很像。</li>
+<li><code>counts</code> 记录了 <code>tcache_entry</code> 链上空闲 chunk 的数目，每条链上最多可以有 7 个 chunk。</li>
+</ul>
+<h2 id="Off-By-One"><a href="#Off-By-One" class="headerlink" title="Off-By-One"></a>Off-By-One</h2><p>严格来说，off-by-one漏洞是一种特殊的溢出漏洞，指程序向缓冲区中写入时，写入的字节数超过了缓冲区本身的大小，并且只越界了一个字节。这种漏洞的产生往往与边界验证不严或字符串操作有关，当然也有可能写入的size正好就只多了一个字节：</p>
+<ul>
+<li>使用循环语句向缓冲区中写入数据时，循环的次数设置错误导致多写入一个字节</li>
+<li>字符串操作不合适，比如忽略了字符串末尾的<code>\x00</code></li>
+</ul>
+<h3 id="Asis-CTF-2016"><a href="#Asis-CTF-2016" class="headerlink" title="Asis CTF 2016"></a>Asis CTF 2016</h3><p><a href="">题目下载</a></p>
+<p>首先还是需要先关闭ALSR</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo 0 &gt; &#x2F;proc&#x2F;sys&#x2F;kernel&#x2F;randomize_va_space</span><br></pre></td></tr></table></figure>
+
+<p>接着查看保护</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">ascotbe@ubuntu:~&#x2F;Desktop&#x2F;Pwn$ checksec b00ks</span><br><span class="line">[*] &#39;&#x2F;home&#x2F;ascotbe&#x2F;Desktop&#x2F;Pwn&#x2F;b00ks&#39;</span><br><span class="line">    Arch:     amd64-64-little</span><br><span class="line">    RELRO:    Full RELRO</span><br><span class="line">    Stack:    No canary found</span><br><span class="line">    NX:       NX enabled</span><br><span class="line">    PIE:      PIE enabled</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https:&#x2F;&#x2F;ctf-wiki.org&#x2F;pwn&#x2F;linux&#x2F;glibc-heap&#x2F;implementation&#x2F;tcache&#x2F;</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ascotbe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/2021/07/31/HeapOverflow_Linux_0x02/">https://www.ascotbe.com/2021/07/31/HeapOverflow_Linux_0x02/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com" target="_blank">ascotbe</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/125.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button button--animated"><i class="fas fa-qrcode"></i> 打赏</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li><li class="reward-item"><a href="/" target="_blank"><img class="post-qr-code-img" src="/"/></a><div class="post-qr-code-desc"></div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2021/07/12/RedisWritesShell/"><img class="next-cover" src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/129.jpg" onerror="onerror=null;src='/img/404.jpg'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Redis写SHELL</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">ascotbe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">104</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ascotbe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:ascotbe@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">所有文章都是本人学习笔记仅限交流探讨，禁止利用文章思路进行违法操作，如有违规和作者无关！</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BB%E6%89%BE%E5%A0%86%E5%88%86%E9%85%8D%E5%87%BD%E6%95%B0"><span class="toc-number">1.</span> <span class="toc-text">寻找堆分配函数</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TCache"><span class="toc-number">2.</span> <span class="toc-text">TCache</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9B%B8%E5%85%B3%E7%BB%93%E6%9E%84%E4%BD%93"><span class="toc-number">2.1.</span> <span class="toc-text">相关结构体</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#tcache-entry"><span class="toc-number">2.1.1.</span> <span class="toc-text">tcache_entry</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#tcache-perthread-struct"><span class="toc-number">2.2.</span> <span class="toc-text">tcache_perthread_struct</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Off-By-One"><span class="toc-number">3.</span> <span class="toc-text">Off-By-One</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Asis-CTF-2016"><span class="toc-number">3.1.</span> <span class="toc-text">Asis CTF 2016</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">4.</span> <span class="toc-text">参考文章</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2021/07/31/HeapOverflow_Linux_0x02/" title="Linux堆溢出总结（0x02）"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/125.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Linux堆溢出总结（0x02）"/></a><div class="content"><a class="title" href="/2021/07/31/HeapOverflow_Linux_0x02/" title="Linux堆溢出总结（0x02）">Linux堆溢出总结（0x02）</a><time datetime="2021-07-31T15:45:42.000Z" title="发表于 2021-07-31 23:45:42">2021-07-31</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/12/RedisWritesShell/" title="Redis写SHELL"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/129.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Redis写SHELL"/></a><div class="content"><a class="title" href="/2021/07/12/RedisWritesShell/" title="Redis写SHELL">Redis写SHELL</a><time datetime="2021-07-12T15:07:46.000Z" title="发表于 2021-07-12 23:07:46">2021-07-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/07/09/FrequentToolCharacteristics/" title="常见工具特征去除"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/128.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="常见工具特征去除"/></a><div class="content"><a class="title" href="/2021/07/09/FrequentToolCharacteristics/" title="常见工具特征去除">常见工具特征去除</a><time datetime="2021-07-09T15:07:46.000Z" title="发表于 2021-07-09 23:07:46">2021-07-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/06/09/WindowsGrabPassword/" title="Windows本地密码抓取"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/127.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="Windows本地密码抓取"/></a><div class="content"><a class="title" href="/2021/06/09/WindowsGrabPassword/" title="Windows本地密码抓取">Windows本地密码抓取</a><time datetime="2021-06-09T15:45:42.000Z" title="发表于 2021-06-09 23:45:42">2021-06-09</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2021/05/18/SampleAnalysis/0b2a794bac4bf650b6ba537137504162520b67266449be979679afbb14e8e5c0/" title="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析"><img src="https://raw.staticdn.net/Ascotbe/Random-img/master/BlogCover/126.jpg" onerror="this.onerror=null;this.src='/img/404.jpg'" alt="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析"/></a><div class="content"><a class="title" href="/2021/05/18/SampleAnalysis/0b2a794bac4bf650b6ba537137504162520b67266449be979679afbb14e8e5c0/" title="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析">蔓灵花APT组织针对巴基斯坦定向攻击的样本分析</a><time datetime="2021-05-18T15:45:42.000Z" title="发表于 2021-05-18 23:45:42">2021-05-18</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2021 By ascotbe</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><div class="js-pjax"><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'Ascotbe/Ascotbe.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme () {
+  if (document.querySelector('.utterances-frame')) {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    const iframe = document.querySelector('.utterances-frame');
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/Bronya.model.json"},"display":{"position":"right","width":400,"height":500,"hOffset":-90,"vOffset":0},"mobile":{"show":false},"log":false});</script></body></html>
