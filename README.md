@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2022-03** (1)  
+- 2022-03-20 [CSGO破解学习(一)](https://www.ascotbe.com/2022/03/20/CSGO_0x01/)  
+  
+  
 ### **2022-02** (1)  
 - 2022-02-22 [Linux栈溢出总结（0x00）](https://www.ascotbe.com/2022/02/22/StackOverflow_Linux_0x00/)  
   
