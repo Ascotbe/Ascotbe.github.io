@@ -1,5 +1,6 @@
 ## 文章列表  
-### **2022-04** (1)  
+### **2022-04** (2)  
+- 2022-04-14 [SMB匿名访问共享](https://www.ascotbe.com/2022/04/14/SMBAnonymousAccessShare/)  
 - 2022-04-04 [CSGO破解学习(二)](https://www.ascotbe.com/2022/04/04/CSGO_0x02/)  
   
   
