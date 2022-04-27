@@ -1,5 +1,6 @@
 ## 文章列表  
-### **2022-04** (5)  
+### **2022-04** (6)  
+- 2022-04-27 [CSGO破解学习(六)](https://www.ascotbe.com/2022/04/27/CSGO_0x06/)  
 - 2022-04-24 [CSGO破解学习(五)](https://www.ascotbe.com/2022/04/24/CSGO_0x05/)  
 - 2022-04-17 [CSGO破解学习(四)](https://www.ascotbe.com/2022/04/17/CSGO_0x04/)  
 - 2022-04-15 [CSGO破解学习(三)](https://www.ascotbe.com/2022/04/15/CSGO_0x03/)  
