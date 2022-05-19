@@ -1,0 +1,228 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width,initial-scale=1"><title>CSGO破解学习(八) | ascotbe</title><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！    透视看到CS的显示模式是通过OpenGL来做到的，这个是微软官方的动态链接库  作为图形硬件的软件接口，OpenGL 的主要用途是将二维和三维对象呈现为框架缓冲区。 这些对象被描述为顶点序列，这些顶点 (定义几何对象) 或像素 (定义图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSGO破解学习(八)">
+<meta property="og:url" content="https://www.ascotbe.com/2022/05/19/CSGO_0x08/index.html">
+<meta property="og:site_name" content="ascotbe">
+<meta property="og:description" content="郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！    透视看到CS的显示模式是通过OpenGL来做到的，这个是微软官方的动态链接库  作为图形硬件的软件接口，OpenGL 的主要用途是将二维和三维对象呈现为框架缓冲区。 这些对象被描述为顶点序列，这些顶点 (定义几何对象) 或像素 (定义图">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/148.jpg">
+<meta property="article:published_time" content="2022-05-19T15:58:53.000Z">
+<meta property="article:modified_time" content="2022-05-18T01:35:01.730Z">
+<meta property="article:author" content="ascotbe">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/148.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.ascotbe.com/2022/05/19/CSGO_0x08/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    jQuery: 'https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js',
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/js/jquery.justifiedGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/justifiedGallery/dist/css/justifiedGallery.min.css'
+    },
+    fancybox: {
+      js: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isanchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = { 
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-05-18 09:35:01'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/font_3133731_7gzwauh1twg.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="ascotbe" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="author-avatar"><img class="avatar-img" data-lazy-src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">64</div></a></div></div></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-dongwu"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-danger-full"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw iconfont icon-godot-assets1"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery"><i class="fa-fw iconfont icon-forms_dota_dragon_big"></i><span> Gallery</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw iconfont icon-FaceID"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-maomi_touxiang"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.staticdn.net/Ascotbe/Image/master/Blog/148.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ascotbe</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-dongwu"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw iconfont icon-danger-full"></i><span> Archives</span></a></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw iconfont icon-godot-assets1"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery"><i class="fa-fw iconfont icon-forms_dota_dragon_big"></i><span> Gallery</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw iconfont icon-FaceID"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-maomi_touxiang"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">CSGO破解学习(八)</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-19T15:58:53.000Z" title="发表于 2022-05-19 23:58:53">2022-05-19</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-05-18T01:35:01.730Z" title="更新于 2022-05-18 09:35:01">2022-05-18</time></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-pv-cv"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="note danger modern"><p>郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！</p>
+</div>
+
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/00000000.png" alt="000000"></p>
+<h2 id="透视"><a href="#透视" class="headerlink" title="透视"></a>透视</h2><p>看到CS的显示模式是通过OpenGL来做到的，这个是微软官方的动态链接库</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/138.png" alt="image-20220515160028454"></p>
+<p>作为图形硬件的软件接口，OpenGL 的主要用途是将二维和三维对象呈现为框架缓冲区。 这些对象被描述为顶点序列，这些顶点 (定义几何对象) 或像素 (定义图像) 。 OpenGL 对此数据执行多个过程，以将其转换为像素，以在帧缓冲区中形成最终所需的图像。</p>
+<p>以下主题演示 OpenGL 工作原理的全局视图：</p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/win32/opengl/primitives-and-commands">基元和命令</a> 将点、线段和多边形作为绘图的基本单位进行讨论：以及命令的处理。</li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/win32/opengl/opengl-graphic-control">OpenGL 图形控件</a> 描述哪些图形操作 OpenGL 控件及其不控制。</li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/win32/opengl/execution-model">执行模型</a> 讨论用于解释 OpenGL 命令的客户端&#x2F;服务器模型。</li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/win32/opengl/basic-opengl-operation">基本 OpenGL 操作提供有关 OpenGL</a> 如何处理数据以在帧缓冲区中生成相应图像的高级说明。</li>
+<li><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows/win32/opengl/opengl-function-names">OpenGL 函数名称描述 OpenGL</a> 中使用的命名约定。</li>
+</ul>
+<p>我们只需要关注两个函数</p>
+<ul>
+<li>openGL32.dll -&gt; glBegin(开始渲染)</li>
+<li>openGL32.dll -&gt; glDisable(关闭渲染)</li>
+</ul>
+<p>首先我们把CS给附加进去</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/139.png" alt="image-20220515161606329"></p>
+<p>然后在符号表中看数据，并右键点击在反汇编中转到</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/140.png" alt="image-20220515165030293"></p>
+<p>在转到的哪个界面按F2下个断点，这样游戏画面就不会动了</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/141.png" alt="image-20220515165304823"></p>
+<p>接着转到调用堆栈位置，找到这个地址右击后跟随目标</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/142.png" alt="image-20220515165455471"></p>
+<p>可以看到多个函数值，根据微软文档所述（没看过的去看官方文档），这个传入的值就是需要关闭的ID</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/143.png" alt="image-20220515165612544"></p>
+<p>然后我们回到断点位置，禁用我们刚刚的哪个断点，让游戏跑起来，接着看下面动图，在我们未修改值之前，游戏界面的右下角人物手臂是不会阻挡到子弹数量的，而当我们修改这个参数（快捷键空格会弹出修改框），我们把值改为0，需要把剩余字节用NOP填充，就能看到人物手臂遮挡了子弹数量</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/144.gif" alt="1"></p>
+<p>所以我们把这两段汇编获取下来，call可以不用上面的地址直接调用改DLL的函数即可</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push 00000B71</span><br><span class="line">call opengl32.glDisable</span><br></pre></td></tr></table></figure>
+
+<p>接着我们用同样的方式找到glBegin，在我们给<code>&lt;opengl32.dll.glBegin&gt;</code>中下断点后在<strong>调用堆栈</strong>中跟随目标的时候，先不急点开始，可以看到下图</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/145.png" alt="image-20220517210645148"></p>
+<p>可以看到<code>esp+4</code>的值是9，和我们压入的哪个参数一致，所以<code>esp+4</code>就是我们压入的值，接着可以看到调用glBegin</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/146.png" alt="image-20220517203033467"></p>
+<p>可以看到我们跳转到了这里，由于在微软文档中这个函数也是和关闭渲染一样，压入一个值进行调用的，所以我们修改下这个值（正常来说会崩溃）</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/147.gif" alt="2"></p>
+<p>接着我们回到CE中</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/148.png" alt="image-20220517211735975"></p>
+<p>然后在往下+4的位置，按<code>Ctrl+A</code>进入自动汇编</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/149.png" alt="image-20220517213019808"></p>
+<p>然后和之前教程中的一样进行代码注入，接着我们把这段代码拿出来进行编辑，只需要newmem中插入如下代码</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmp [esp+4],0//渲染ID</span><br><span class="line">jne originalcode //判断不成立跳转到原代码</span><br><span class="line">push 00000B71//压入任务值</span><br><span class="line">call opengl32.glDisable//调用关闭渲染</span><br></pre></td></tr></table></figure>
+
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/150.png" alt="image-20220517213343965"></p>
+<p>接着放到CT表中，修改对比的渲染ID，直到人物显示出来，这边测试这个ID是5，有些游戏有上千上万</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/CSGO/151.gif" alt="3"></p>
+<p>可以看到已经是透视了</p>
+<h3 id="CT表下载"><a href="#CT表下载" class="headerlink" title="CT表下载"></a>CT表下载</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://raw.staticdn.net/Ascotbe/Image/master/CSGO/CSGO1.6-8.CT</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:undefined">ascotbe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/2022/05/19/CSGO_0x08/">https://www.ascotbe.com/2022/05/19/CSGO_0x08/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com" target="_blank">ascotbe</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"></div><div class="post_share"><div class="social-share" data-image="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/148.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2022/05/12/CSGO_0x07/"><img class="next-cover" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/147.jpg" onerror="onerror=null;src='/img/404.gif'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CSGO破解学习(七)</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-info-avatar is-center"><img class="avatar-img" data-lazy-src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-info__name">ascotbe</div><div class="author-info__description"></div></div><div class="card-info-data"><div class="card-info-data-item is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">64</div></a></div></div><a class="button--animated" id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ascotbe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:ascotbe@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a><a class="social-icon" href="https://steamcommunity.com/id/ascotbe" target="_blank" title=""><i class="iconfont icon-steam"></i></a><a class="social-icon" href="https://twitter.com/asc0t6e" target="_blank" title=""><i class="iconfont icon-twitter"></i></a><a class="social-icon" href="https://t.me/ascotbe" target="_blank" title=""><i class="iconfont icon-telegram"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn card-announcement-animation"></i><span>公告</span></div><div class="announcement_content">所有文章都是本人学习笔记仅限交流探讨，禁止利用文章思路进行违法操作，否则与作者无关，如果您不同意请关闭本站</div><timing></timing></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%80%8F%E8%A7%86"><span class="toc-number">1.</span> <span class="toc-text">透视</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#CT%E8%A1%A8%E4%B8%8B%E8%BD%BD"><span class="toc-number">1.1.</span> <span class="toc-text">CT表下载</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/05/19/CSGO_0x08/" title="CSGO破解学习(八)"><img data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/148.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(八)"/></a><div class="content"><a class="title" href="/2022/05/19/CSGO_0x08/" title="CSGO破解学习(八)">CSGO破解学习(八)</a><time datetime="2022-05-19T15:58:53.000Z" title="发表于 2022-05-19 23:58:53">2022-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/12/CSGO_0x07/" title="CSGO破解学习(七)"><img data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/147.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(七)"/></a><div class="content"><a class="title" href="/2022/05/12/CSGO_0x07/" title="CSGO破解学习(七)">CSGO破解学习(七)</a><time datetime="2022-05-12T15:58:53.000Z" title="发表于 2022-05-12 23:58:53">2022-05-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/27/CSGO_0x06/" title="CSGO破解学习(六)"><img data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/146.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(六)"/></a><div class="content"><a class="title" href="/2022/04/27/CSGO_0x06/" title="CSGO破解学习(六)">CSGO破解学习(六)</a><time datetime="2022-04-27T15:58:53.000Z" title="发表于 2022-04-27 23:58:53">2022-04-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/24/CSGO_0x05/" title="CSGO破解学习(五)"><img data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/145.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(五)"/></a><div class="content"><a class="title" href="/2022/04/24/CSGO_0x05/" title="CSGO破解学习(五)">CSGO破解学习(五)</a><time datetime="2022-04-24T15:58:53.000Z" title="发表于 2022-04-24 23:58:53">2022-04-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/04/17/CSGO_0x04/" title="CSGO破解学习(四)"><img data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/144.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(四)"/></a><div class="content"><a class="title" href="/2022/04/17/CSGO_0x04/" title="CSGO破解学习(四)">CSGO破解学习(四)</a><time datetime="2022-04-17T15:58:53.000Z" title="发表于 2022-04-17 23:58:53">2022-04-17</time></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2022 By ascotbe</div><!--时间代码--><div id="workboard"></div><script async="async" src="/js/runtime.js"></script></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'Ascotbe/Ascotbe.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme () {
+  if (document.querySelector('.utterances-frame')) {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    const iframe = document.querySelector('.utterances-frame');
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><canvas class="fireworks" mobile="false"></canvas><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1/dist/fireworks.min.js"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/Bronya.model.json"},"display":{"position":"right","width":400,"height":500,"hOffset":-90,"vOffset":0},"mobile":{"show":false},"log":false});</script></body></html>
