@@ -1,6 +1,6 @@
 ## 文章列表  
 ### **2022-07** (1)  
-- 2022-07-14 [BadUSB DIY（上）](https://www.ascotbe.com/2022/07/14/BadUSB_0x01/)  
+- 2022-07-14 [简单的BadUSB](https://www.ascotbe.com/2022/07/14/BadUSB_0x01/)  
   
   
 ### **2022-05** (2)  
