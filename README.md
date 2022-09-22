@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2022-09** (1)  
+- 2022-09-22 [代码审计笔记（Python）](https://www.ascotbe.com/2022/09/22/Python/)  
+  
+  
 ### **2022-07** (1)  
 - 2022-07-14 [简单的BadUSB](https://www.ascotbe.com/2022/07/14/BadUSB_0x01/)  
   
