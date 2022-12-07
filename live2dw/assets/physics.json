@@ -2,92 +2,116 @@
 	"type":"Live2D Physics",
 	"physics_hair":[
 		{
-			"label":"hair",
+			"label":"earring1",
 			"setup":{
-				"length":0.17,
-				"regist":0.6,
+				"length":0.7,
+				"regist":0.8,
+				"mass":0.2
+			},
+			"src":[
+				{
+					"id":"PARAM_ANGLE_Z",
+					"ptype":"x",
+					"scale":0.007,
+					"weight":0.5
+				},
+				{
+					"id":"PARAM_ANGLE_Y",
+					"ptype":"x",
+					"scale":0.008,
+					"weight":1
+				}
+			],
+			"targets":[
+				{
+					"id":"Param31",
+					"ptype":"angle",
+					"scale":0.022,
+					"weight":1
+				}
+			]
+		},
+		{
+			"label":"earringL3",
+			"setup":{
+				"length":0.3,
+				"regist":0.2,
 				"mass":0.1
 			},
 			"src":[
 				{
 					"id":"PARAM_ANGLE_X",
 					"ptype":"x",
-					"scale":0.005,
-					"weight":1
-				},
-				{
-					"id":"PARAM_ANGLE_Z",
-					"ptype":"angle",
-					"scale":0.8,
+					"scale":0.006,
 					"weight":1
 				}
 			],
 			"targets":[
 				{
-					"id":"PARAM_HAIR_FRONT",
+					"id":"Param31",
 					"ptype":"angle",
-					"scale":0.015,
-					"weight":1
-				},
-				{
-					"id":"PARAM_HAIR_SIDE",
-					"ptype":"angle",
-					"scale":0.018,
-					"weight":1
-				},
-				{
-					"id":"PARAM_HAIR_BACK",
-					"ptype":"angle",
-					"scale":0.02,
+					"scale":0.022,
 					"weight":1
 				}
 			]
 		},
 		{
-			"label":"lase",
+			"label":"oppai01",
 			"setup":{
-				"length":0.2,
-				"regist":0.3,
-				"mass":0.05
+				"length":0.5,
+				"regist":0.5,
+				"mass":0.5
 			},
 			"src":[
 				{
 					"id":"PARAM_BODY_ANGLE_X",
 					"ptype":"x",
-					"scale":0.01,
+					"scale":0.02,
+					"weight":0.5
+				},
+				{
+					"id":"PARAM_ANGLE_X",
+					"ptype":"x",
+					"scale":0.008,
 					"weight":1
 				},
 				{
-					"id":"PARAM_ANGLE_Z",
+					"id":"ParamBodyAngleY",
 					"ptype":"angle",
-					"scale":0.01,
+					"scale":0.02,
 					"weight":1
 				}
 			],
 			"targets":[
 				{
-					"id":"PARAM_Lace",
+					"id":"PARAM_OPAISHAKE_X",
 					"ptype":"angle",
-					"scale":0.06,
+					"scale":0.022,
 					"weight":1
-				},
+				}
+			]
+		},
+		{
+			"label":"oppai02",
+			"setup":{
+				"length":0.4,
+				"regist":0.4,
+				"mass":0.4
+			},
+			"src":[
 				{
-					"id":"PARAM_S1",
-					"ptype":"angle",
-					"scale":0.025,
+					"id":"ParamBodyAngleZ",
+					"ptype":"x",
+					"scale":0.02,
 					"weight":1
-				},
+				}
+			],
+			"targets":[
 				{
-					"id":"PARAM_S",
+					"id":"PARAM_OPAISHAKE_Y",
 					"ptype":"angle",
-					"scale":0.04,
-					"weight":0.5
-				},
-				{
-					"id":"PARAM_L_Arm0D",
-					"ptype":"angle",
-					"scale":0.025,
-					"weight":10
+					"scale":0.022,
+					"weight":1
 				}
 			]
 		}
