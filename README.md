@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2022-12** (1)  
+- 2022-12-07 [映射与函数](https://www.ascotbe.com/2022/12/07/FurtherMathematics_0x01/)  
+  
+  
 ### **2022-10** (1)  
 - 2022-10-24 [FPV笔记](https://www.ascotbe.com/2022/10/24/FPV/)  
   
