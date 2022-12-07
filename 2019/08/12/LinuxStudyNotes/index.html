@@ -1,0 +1,730 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Linux学习笔记 | ascotbe</title><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！   于2020&#x2F;3&#x2F;18日重新排版修改 根目录解析 &#x2F; - 根目录 每一个文件和目录都从这里开始。 只有root用户具有该目录下的写权限。此目录和&#x2F;root目录不同，&#x2F;root目录是root用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux学习笔记">
+<meta property="og:url" content="https://www.ascotbe.com/2019/08/12/LinuxStudyNotes/index.html">
+<meta property="og:site_name" content="ascotbe">
+<meta property="og:description" content="郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！   于2020&#x2F;3&#x2F;18日重新排版修改 根目录解析 &#x2F; - 根目录 每一个文件和目录都从这里开始。 只有root用户具有该目录下的写权限。此目录和&#x2F;root目录不同，&#x2F;root目录是root用">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/34.jpg">
+<meta property="article:published_time" content="2019-08-12T15:58:53.000Z">
+<meta property="article:modified_time" content="2022-12-07T10:53:31.186Z">
+<meta property="article:author" content="ascotbe">
+<meta property="article:tag" content="信息收集">
+<meta property="article:tag" content="应急响应">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/34.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.ascotbe.com/2019/08/12/LinuxStudyNotes/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"本篇文章距最近一次更新已过去","messageNext":"天，文章内容有可能过时."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: ascotbe","link":"链接: ","source":"来源: ascotbe","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux学习笔记',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-12-07 18:53:31'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3133731_25dh7dx5bg4.css"><link rel="stylesheet" href="/css/beating_icon.css"><link rel="stylesheet" href="/css/mouse.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="ascotbe" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">24</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-dongwu"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> Contents</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-danger-full"></i><span> Archives</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-zhiwu"></i><span> Categories</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tubiaozhizuomoban-"></i><span> Tags</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw iconfont icon-godot-assets1"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery"><i class="fa-fw iconfont icon-forms_dota_dragon_big"></i><span> Gallery</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw iconfont icon-FaceID"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-maomi_touxiang"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.staticdn.net/Ascotbe/Image/master/Blog/34.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ascotbe</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-dongwu"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> Contents</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-danger-full"></i><span> Archives</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-zhiwu"></i><span> Categories</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tubiaozhizuomoban-"></i><span> Tags</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw iconfont icon-godot-assets1"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery"><i class="fa-fw iconfont icon-forms_dota_dragon_big"></i><span> Gallery</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw iconfont icon-FaceID"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-maomi_touxiang"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux学习笔记</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-08-12T15:58:53.000Z" title="发表于 2019-08-12 23:58:53">2019-08-12</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-07T10:53:31.186Z" title="更新于 2022-12-07 18:53:31">2022-12-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Linux%E7%AC%94%E8%AE%B0/">Linux笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">8.8k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>33分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux学习笔记"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="note danger modern"><p>郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！</p>
+</div>
+
+<p>于2020&#x2F;3&#x2F;18日重新排版修改</p>
+<h2 id="根目录解析"><a href="#根目录解析" class="headerlink" title="根目录解析"></a>根目录解析</h2><ul>
+<li><p>&#x2F; - 根目录</p>
+<p>每一个文件和目录都从这里开始。</p>
+<p>只有root用户具有该目录下的写权限。此目录和&#x2F;root目录不同，&#x2F;root目录是root用户的主目录。</p>
+</li>
+<li><p>&#x2F;bin - 用户二进制文件</p>
+<p>包含二进制可执行文件。</p>
+<p>系统的所有用户使用的命令都设在这里，例如：ps，ls，ping，grep，cp等。</p>
+</li>
+<li><p>&#x2F;sbin - 系统二进制文件</p>
+<p>就像&#x2F;bin，&#x2F;sbin同样也包含二进制可执行文件。</p>
+<p>但是，在这个目录下的linux命令通常由系统管理员使用，对系统进行维护。例如：iptables、reboot、fdisk、ifconfig、swapon命令。</p>
+</li>
+<li><p>&#x2F;etc - 配置文件</p>
+<p>包含所有程序所需的配置文件。</p>
+<p>也包含了用于启动&#x2F;停止单个程序的启动和关闭shell脚本。例如：&#x2F;etc&#x2F;resolv.conf、&#x2F;etc&#x2F;logrotate.conf</p>
+</li>
+<li><p>&#x2F;dev - 设备文件</p>
+<p>这些包括终端设备、USB或连接到系统的任何设备。例如：&#x2F;dev&#x2F;tty1、&#x2F;dev&#x2F;usbmon0</p>
+</li>
+<li><p>&#x2F;proc - 进程信息</p>
+<p>这是一个虚拟的文件系统，包含有关正在运行的进程的信息。例如：&#x2F;proc&#x2F;{pid}目录中包含的与特定pid相关的信息。</p>
+</li>
+<li><p>&#x2F;var - 变量文件</p>
+<p>这个目录下可以找到内容可能增长的文件。比如：系统日志文件（&#x2F;var&#x2F;log）包和数据库文件（&#x2F;var&#x2F;lib）电子邮件（&#x2F;var&#x2F;mail）打印队列（&#x2F;var&#x2F;spool）锁文件（&#x2F;var&#x2F;lock）多次重新启动需要的临时文件（&#x2F;var&#x2F;tmp）</p>
+</li>
+<li><p>&#x2F;tmp - 临时文件</p>
+<p>包含系统和用户创建的临时文件，当系统重新启动时，这个目录下的文件都将被删除。</p>
+</li>
+<li><p>&#x2F;usr - 用户程序</p>
+<p>包含二进制文件、库文件、文档和二级程序的源代码。</p>
+<p>&#x2F;usr&#x2F;bin中包含用户程序的二进制文件。如果你在&#x2F;bin中找不到用户二进制文件，到&#x2F;usr&#x2F;bin目录看看。例如：at、awk、cc、less、scp。</p>
+<p>&#x2F;usr&#x2F;sbin中包含系统管理员的二进制文件。如果你在&#x2F;sbin中找不到系统二进制文件，到&#x2F;usr&#x2F;sbin目录看看。例如：atd、cron、sshd、useradd、userdel。</p>
+<p>&#x2F;usr&#x2F;lib中包含了&#x2F;usr&#x2F;bin和&#x2F;usr&#x2F;sbin用到的库。</p>
+<p>&#x2F;usr&#x2F;local中包含了从源安装的用户程序。例如，当你从源安装Apache，它会在&#x2F;usr&#x2F;local&#x2F;apache2中。</p>
+</li>
+<li><p>&#x2F;home - HOME目录</p>
+<p>所有用户用home目录来存储他们的个人档案。</p>
+</li>
+<li><p>&#x2F;boot - 引导加载程序文件</p>
+</li>
+</ul>
+<p>  包含引导加载程序相关的文件，内核的initrd、vmlinux、grub文件位于&#x2F;boot下。</p>
+<ul>
+<li><p>&#x2F;lib - 系统库</p>
+<p>包含支持位于&#x2F;bin和&#x2F;sbin下的二进制文件的库文件。</p>
+</li>
+<li><p>&#x2F;opt - 可选的附加应用程序</p>
+<p>opt代表opitional，包含从个别厂商的附加应用程序，附加应用程序应该安装在&#x2F;opt&#x2F;或者&#x2F;opt&#x2F;的子目录下。</p>
+</li>
+<li><p>&#x2F;mnt - 挂载目录</p>
+<p>临时安装目录，系统管理员可以挂载文件系统。</p>
+</li>
+<li><p>&#x2F;media - 可移动媒体设备</p>
+<p>用于挂载可移动设备的临时目录。举例来说，挂载CD-ROM的&#x2F;media&#x2F;cdrom，挂载软盘驱动器</p>
+<p>的&#x2F;media&#x2F;floppy</p>
+</li>
+<li><p>&#x2F;srv - 服务数据</p>
+<p>包含服务器特定服务相关的数据。</p>
+</li>
+</ul>
+<h2 id="日志文件"><a href="#日志文件" class="headerlink" title="日志文件"></a>日志文件</h2><table>
+<thead>
+<tr>
+<th>日志文件</th>
+<th>说 明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;var&#x2F;log&#x2F;cron</td>
+<td>记录与系统定时任务相关的曰志</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;cups&#x2F;</td>
+<td>记录打印信息的曰志</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;dmesg</td>
+<td>记录了系统在开机时内核自检的信总。也可以使用dmesg命令直接查看内核自检信息</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;btmp</td>
+<td>记录错误登陆的日志。这个文件是二进制文件，不能直接用Vi查看，而要使用lastb命令查看。命令如下： [root@localhost log]#lastb root tty1 Tue Jun 4 22:38 - 22:38 (00:00) #有人在6月4 日 22:38便用root用户在本地终端 1 登陆错误</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;lasllog</td>
+<td>记录系统中所有用户最后一次的登录时间的曰志。这个文件也是二进制文件.不能直接用Vi 查看。而要使用lastlog命令查看</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;Iog&#x2F;mailog</td>
+<td>记录邮件信息的曰志</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;messages</td>
+<td>它是核心系统日志文件，其中包含了系统启动时的引导信息，以及系统运行时的其他状态消息。I&#x2F;O 错误、网络错误和其他系统错误都会记录到此文件中。其他信息，比如某个人的身份切换为 root，已经用户自定义安装软件的日志，也会在这里列出。</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;secure</td>
+<td>记录验证和授权方面的倍息，只要涉及账户和密码的程序都会记录，比如系统的登录、ssh的登录、su切换用户，sudo授权，甚至添加用户和修改用户密码都会记录在这个日志文件中</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;log&#x2F;wtmp</td>
+<td>永久记录所有用户的登陆、注销信息，同时记录系统的后动、重启、关机事件。同样，这个文件也是二进制文件.不能直接用Vi查看，而要使用last命令查看</td>
+</tr>
+<tr>
+<td>&#x2F;var&#x2F;tun&#x2F;ulmp</td>
+<td>记录当前已经登录的用户的信息。这个文件会随着用户的登录和注销而不断变化，只记录当前登录用户的信息。同样，这个文件不能直接用Vi查看，而要使用w、who、users等命令查看</td>
+</tr>
+</tbody></table>
+<h2 id="基础查看信息杂项"><a href="#基础查看信息杂项" class="headerlink" title="基础查看信息杂项"></a>基础查看信息杂项</h2><h4 id="除root之外，是否还有其它特权用户-uid-为0"><a href="#除root之外，是否还有其它特权用户-uid-为0" class="headerlink" title="除root之外，是否还有其它特权用户(uid 为0)"></a>除<code>root</code>之外，是否还有其它特权用户(<code>uid </code>为<code>0</code>)</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F: <span class="string">&#x27;$3==0&#123;print $1&#125;&#x27;</span> /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<h4 id="可以远程登录的帐号信息"><a href="#可以远程登录的帐号信息" class="headerlink" title="可以远程登录的帐号信息"></a>可以远程登录的帐号信息</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk <span class="string">&#x27;/$1|$6/&#123;print $1&#125;&#x27;</span> /etc/shadow</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看登录失败信息"><a href="#查看登录失败信息" class="headerlink" title="查看登录失败信息"></a>查看登录失败信息</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep -o <span class="string">&quot;Failed password&quot;</span> /var/log/secure|<span class="built_in">uniq</span> -c</span><br></pre></td></tr></table></figure>
+
+<h4 id="输出登录爆破的第一行和最后一行，确认爆破时间范围"><a href="#输出登录爆破的第一行和最后一行，确认爆破时间范围" class="headerlink" title="输出登录爆破的第一行和最后一行，确认爆破时间范围"></a>输出登录爆破的第一行和最后一行，确认爆破时间范围</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;Failed password&quot;</span> /var/log/secure|<span class="built_in">head</span> -1</span><br><span class="line">grep <span class="string">&quot;Failed password&quot;</span> /var/log/secure|<span class="built_in">tail</span> -1</span><br></pre></td></tr></table></figure>
+
+<h4 id="查询爆破的IP有哪些"><a href="#查询爆破的IP有哪些" class="headerlink" title="查询爆破的IP有哪些"></a>查询爆破的<code>IP</code>有哪些</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;Failed password for root&quot;</span> /var/log/auth.log | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">uniq</span> -c | <span class="built_in">sort</span> -nr | more</span><br></pre></td></tr></table></figure>
+
+<h4 id="爆破用户名字典都有哪些？"><a href="#爆破用户名字典都有哪些？" class="headerlink" title="爆破用户名字典都有哪些？"></a>爆破用户名字典都有哪些？</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;Failed password&quot;</span> /var/log/secure|perl -e <span class="string">&#x27;while($_=&lt;&gt;)&#123; /for(.*?) from/; print &quot;$1\n&quot;;&#125;&#x27;</span>|<span class="built_in">uniq</span> -c|<span class="built_in">sort</span> -nr</span><br></pre></td></tr></table></figure>
+
+<h4 id="登录成功的日期、用户名、IP"><a href="#登录成功的日期、用户名、IP" class="headerlink" title="登录成功的日期、用户名、IP"></a>登录成功的日期、用户名、<code>IP</code></h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;Accepted &quot;</span> /var/log/secure | awk <span class="string">&#x27;&#123;print $1,$2,$3,$9,$11&#125;&#x27;</span> </span><br></pre></td></tr></table></figure>
+
+<h4 id="lastlog列出所有用户最近登录的信息"><a href="#lastlog列出所有用户最近登录的信息" class="headerlink" title="lastlog列出所有用户最近登录的信息"></a><code>lastlog</code>列出所有用户最近登录的信息</h4><p><code>lastlog</code>引用的是<code>/var/log/lastlog</code>文件中的信息，包括<code>login-name</code>、<code>port</code>、<code>last login time</code></p>
+<h4 id="last-列出当前和曾经登入系统的用户信息"><a href="#last-列出当前和曾经登入系统的用户信息" class="headerlink" title="last  列出当前和曾经登入系统的用户信息"></a><code>last</code>  列出当前和曾经登入系统的用户信息</h4><p>它默认读取的是<code>/var/log/wtmp</code>文件的信息。输出的内容包括：用户名、终端位置、登录源信息、开始时间、结束时间、持续时间。注意最后一行输出的是<code>wtmp</code>文件起始记录的时间。当然也可以通过<code>last -f</code>参数指定读取文件，可以是<code>/var/log/btmp</code>、<code>/var/run/utmp</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">语法：</span><br><span class="line">last [-R] [-num] [ -n num ] [-adiowx] [ -f file ] [ -t YYYYMMDDHHMMSS ] [name...]  [<span class="built_in">tty</span>...]</span><br><span class="line"></span><br><span class="line">例子：</span><br><span class="line">last -x ：显示系统关闭、用户登录和退出的历史</span><br><span class="line">last -i：显示特定ip登录的情况</span><br><span class="line">last -t  20181010120101： 显示20181010120101之前的登录信息</span><br></pre></td></tr></table></figure>
+
+<h4 id="lastb-列出失败尝试的登录信息"><a href="#lastb-列出失败尝试的登录信息" class="headerlink" title="lastb  列出失败尝试的登录信息"></a><code>lastb</code>  列出失败尝试的登录信息</h4><p>和<code>last</code>命令功能完全相同，只不过它默认读取的是<code>/var/log/btmp</code>文件的信息。当然也可以通过<code>last -f</code>参数指定读取文件，可以是<code>/var/log/btmp</code>、<code>/var/run/utmp</code></p>
+<h4 id="统计一下登录成功的IP有哪些"><a href="#统计一下登录成功的IP有哪些" class="headerlink" title="统计一下登录成功的IP有哪些"></a>统计一下登录成功的<code>IP</code>有哪些</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;Accepted &quot;</span> /var/log/secure | awk <span class="string">&#x27;&#123;print $11&#125;&#x27;</span> | <span class="built_in">sort</span> | <span class="built_in">uniq</span> -c | <span class="built_in">sort</span> -nr | more</span><br></pre></td></tr></table></figure>
+
+<h4 id="除root帐号外，其他帐号是否存在sudo权限。如非管理需要，普通帐号应删除sudo权限"><a href="#除root帐号外，其他帐号是否存在sudo权限。如非管理需要，普通帐号应删除sudo权限" class="headerlink" title="除root帐号外，其他帐号是否存在sudo权限。如非管理需要，普通帐号应删除sudo权限"></a>除<code>root</code>帐号外，其他帐号是否存在<code>sudo</code>权限。如非管理需要，普通帐号应删除<code>sudo</code>权限</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more /etc/sudoers | grep -v <span class="string">&quot;^#\|^$&quot;</span> | grep <span class="string">&quot;ALL=(ALL)&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="禁用或删除多余及可疑的帐号"><a href="#禁用或删除多余及可疑的帐号" class="headerlink" title="禁用或删除多余及可疑的帐号"></a>禁用或删除多余及可疑的帐号</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">usermod -L user    <span class="comment">#禁用帐号，帐号无法登录，/etc/shadow第二栏为!开头</span></span><br><span class="line">userdel user       <span class="comment">#删除user用户</span></span><br><span class="line">userdel -r user    <span class="comment">#将删除user用户，并且将/home目录下的user目录一并删除</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="增加一个用户kali日志"><a href="#增加一个用户kali日志" class="headerlink" title="增加一个用户kali日志"></a>增加一个用户<code>kali</code>日志</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;useradd&quot;</span> /var/log/secure </span><br></pre></td></tr></table></figure>
+
+<h4 id="删除用户kali日志"><a href="#删除用户kali日志" class="headerlink" title="删除用户kali日志"></a>删除用户<code>kali</code>日志</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grep <span class="string">&quot;userdel&quot;</span> /var/log/secure</span><br></pre></td></tr></table></figure>
+
+<h4 id="sudo授权执行"><a href="#sudo授权执行" class="headerlink" title="sudo授权执行"></a><code>sudo</code>授权执行</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看谁有sudo授权执行权限(权限级别)</span></span><br><span class="line">sudo -l</span><br></pre></td></tr></table></figure>
+
+<h4 id="使用ps命令，分析进程"><a href="#使用ps命令，分析进程" class="headerlink" title="使用ps命令，分析进程"></a>使用<code>ps</code>命令，分析进程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps aux | grep pid (pid表示pid号)</span><br></pre></td></tr></table></figure>
+
+<h2 id="专项使用"><a href="#专项使用" class="headerlink" title="专项使用"></a>专项使用</h2><h4 id="SSH相关操作"><a href="#SSH相关操作" class="headerlink" title="SSH相关操作"></a>SSH相关操作</h4><ul>
+<li><p>查看当前SSH登录信息</p>
+<p>可以看到有哪些用户登录了，登录的时间，登录多久</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看当前登录用户（tty本地登陆  pts远程登录）</span></span><br><span class="line">root@iZbp19pfnyuhlghdkeobejZ:~<span class="comment"># who</span></span><br><span class="line">root     pts/0        2020-03-18 10:24 (X.X.X.X)</span><br><span class="line">root     pts/1        2020-03-18 10:24 (X.X.X.X)</span><br><span class="line"><span class="comment">#查看当前登录用户</span></span><br><span class="line">root@iZbp19pfnyuhlghdkeobejZ:~<span class="comment"># last</span></span><br><span class="line">root     pts/2        (X.X.X.X)    Wed Mar 18 10:25   still logged <span class="keyword">in</span></span><br><span class="line">root     pts/1        (X.X.X.X)    Wed Mar 18 10:24 - 10:30  (00:05)</span><br><span class="line">root     pts/0        (X.X.X.X)    Wed Mar 18 10:24 - 10:25  (00:01)</span><br><span class="line">root     pts/0        (X.X.X.X)   Wed Mar 18 00:12 - 00:17  (00:04)</span><br><span class="line">reboot   system boot  4.9.0-11-amd64   Wed Mar 18 08:12   still running</span><br><span class="line"><span class="comment">#查看登陆多久、多少用户，负载</span></span><br><span class="line">root@iZbp19pfnyuhlghdkeobejZ:~<span class="comment"># uptime</span></span><br><span class="line"> 23:00:23 up 22:47,  2 <span class="built_in">users</span>,  load average: 0.00, 0.01, 0.00</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SSH隐身登录</p>
+<p>隐身登录系统，不会被<code>last</code>、<code>who</code> 、<code>w</code>等指令检测到</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ssh -T root@192.168.1.1 /bin/bash -i</span><br><span class="line">ssh -o UserKnownHostsFile=/dev/null -T root@192.168.1.1 /bin/bash -<span class="keyword">if</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>SSH端口复用</p>
+<p>通过<code>SSLH</code>在同一端口上共享<code>SSH</code>与<code>HTTPS</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#安装SSLH</span></span><br><span class="line">apt install sslh</span><br><span class="line"><span class="comment"># 配置SSLH</span></span><br><span class="line"><span class="comment"># 编辑 SSLH 配置文件：</span></span><br><span class="line">sudo vi /etc/default/sslh</span><br><span class="line"><span class="comment">#1、找到下列行：Run=no  将其修改为：Run=yes</span></span><br><span class="line"><span class="comment">#2、修改以下行以允许 SSLH 在所有可用接口上侦听端口 443</span></span><br><span class="line">DAEMON_OPTS=<span class="string">&quot;--user sslh --listen 0.0.0.0:443 --ssh 127.0.0.1:22 --ssl 127.0.0.1:443 --pidfile /var/run/sslh/sslh.pid&quot;</span></span><br><span class="line">service sslh start</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>Kali</code> 开启<code>SSH</code>登录</p>
+<ul>
+<li>查看ssh服务状态</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/ssh status</span><br></pre></td></tr></table></figure>
+
+<p>如果显示为<code>Active: inactive (dead)</code>就表示没有开启</p>
+<ul>
+<li>修改配置文件</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">vim /etc/ssh/sshd_config</span><br><span class="line"><span class="comment">#原来文件内容</span></span><br><span class="line"><span class="comment">#PermitRootLogin prohibit-password</span></span><br><span class="line"><span class="comment">#PasswordAuthentication yes</span></span><br><span class="line"><span class="comment">#修改后的内容</span></span><br><span class="line">PermitRootLogin <span class="built_in">yes</span></span><br><span class="line">PasswordAuthentication <span class="built_in">yes</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>启动ssh服务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/init.d/ssh start</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>设置为开机启动</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">update-rc.d ssh <span class="built_in">enable</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="histroy命令"><a href="#histroy命令" class="headerlink" title="histroy命令"></a><code>histroy</code>命令</h4><p>两个<code>histroy</code>是命令输入可以直接查看历史执行过命令，<code>.bash_history</code>是文件需要复制到别的文件中查看</p>
+<ul>
+<li>历史操作命令清除</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">history</span> -c</span><br><span class="line"><span class="comment">#但此命令并不会清除保存在文件中的记录，因此需要手动删除.bash_profile文件中的记录。</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>历史命令查看</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#把文件内容发送到history.txt文件中</span></span><br><span class="line"><span class="built_in">cat</span> .bash_history &gt;&gt; history.txt</span><br><span class="line"><span class="comment">#直接查看</span></span><br><span class="line">histroy</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>隐藏历史操作命令</li>
+</ul>
+<p>命令会临时禁用历史功能，这意味着在这命令之后你执行的所有操作都不会记录到历史中，然而这个命令之前的所有东西都会原样记录在历史列表中。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#关闭历史记录</span></span><br><span class="line"><span class="comment">#[space] 表示空格。并且由于空格的缘故，该命令本身也不会被记录</span></span><br><span class="line">[space]<span class="built_in">set</span> +o <span class="built_in">history</span></span><br><span class="line"><span class="comment">#开启历史记录</span></span><br><span class="line"><span class="comment">#执行命令之后的命令都会出现在历史中。</span></span><br><span class="line">[Space]<span class="built_in">set</span> -o <span class="built_in">history</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="netstat命令"><a href="#netstat命令" class="headerlink" title="netstat命令"></a><code>netstat</code>命令</h5><p>使用<code>netstat </code>网络连接命令，分析可疑端口、<code>IP</code>、<code>PID</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">netstat -antlp|more</span><br><span class="line">!net</span><br><span class="line">lsof -i:80  <span class="comment">#查看指定端口</span></span><br><span class="line">netstat -anp|grep 158.x.x.x  <span class="comment">#从连接的IP来定位PID，如果是瞬时建立的才找不到</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看下pid所对应的进程文件信息"><a href="#查看下pid所对应的进程文件信息" class="headerlink" title="查看下pid所对应的进程文件信息"></a>查看下<code>pid</code>所对应的进程文件信息</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">ls</span> -l /proc/<span class="variable">$PID</span>/   <span class="comment">#可以查看详细进程信息</span></span><br><span class="line">file /proc/<span class="variable">$PID</span>/exe <span class="comment">#（$PID 为对应的pid 号）</span></span><br><span class="line"><span class="built_in">cd</span> /proc/<span class="variable">$PID</span>    <span class="comment">#可以进入该进程目录</span></span><br><span class="line">ll /proc/PID   <span class="comment">#查看程序对应的启动位置</span></span><br><span class="line"><span class="built_in">which</span> XXXX      <span class="comment">#查看程序在哪个文件夹 XXXX表示程序名 </span></span><br><span class="line">lsof /usr/bin/*  <span class="comment">#查看某个路径下的运行中的进程列表</span></span><br><span class="line">pidof /usr/bin/*  <span class="comment">#查看某个路径下运行进程的 pid</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看定时任务"><a href="#查看定时任务" class="headerlink" title="查看定时任务"></a>查看定时任务</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">crontab -l <span class="comment">#查看当前用户定时任务</span></span><br><span class="line"><span class="built_in">cat</span> /etc/crontab  <span class="comment">#查看定时任务的文件里面是否存在定时任务</span></span><br><span class="line"><span class="built_in">ls</span> -al /var/spool/cron/*        </span><br><span class="line"><span class="built_in">cat</span> /var/spool/cron/*  <span class="comment">#查看文件夹里面是否有其他定时任务的文件	</span></span><br><span class="line"><span class="built_in">ls</span> -al /etc/cron.d/*</span><br><span class="line"><span class="keyword">for</span> u <span class="keyword">in</span> `<span class="built_in">cat</span> /etc/passwd |<span class="built_in">cut</span> -d  <span class="string">&quot;:&quot;</span> -f1`;<span class="keyword">do</span> crontab -l -u <span class="variable">$u</span>; <span class="keyword">done</span>  <span class="comment">#查看所有用户的定时任务</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>删除定时任务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -r <span class="comment">#表面上删除定时任务</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>编辑定时任务</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">crontab -e </span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>定时任务解读：</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#前面5个星分别代表分-时-天-月-星期 后面跟命令</span></span><br><span class="line">*     *	 *	*	*	<span class="built_in">command</span></span><br><span class="line"><span class="comment">#（表示每15分钟运行一次）</span></span><br><span class="line">*/15  *	 *	*	*	<span class="built_in">command</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看ssh秘钥"><a href="#查看ssh秘钥" class="headerlink" title="查看ssh秘钥"></a>查看ssh秘钥</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> .ssh/authorized_keys  <span class="comment">#查看命令</span></span><br><span class="line">/root/.ssh/authorized_keys  <span class="comment">#ssh秘钥文件所在路径</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看CPU运行"><a href="#查看CPU运行" class="headerlink" title="查看CPU运行"></a>查看CPU运行</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top</span><br></pre></td></tr></table></figure>
+
+<h4 id="结束进程"><a href="#结束进程" class="headerlink" title="结束进程"></a>结束进程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">kill</span> PID</span><br><span class="line"><span class="built_in">kill</span> -9 PID <span class="comment">#彻底杀死进程</span></span><br><span class="line"><span class="built_in">kill</span> -KILL PID  <span class="comment">#强制杀死进程</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="查看进程"><a href="#查看进程" class="headerlink" title="查看进程"></a>查看进程</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ps -a <span class="comment">#列出的是当前控制终端启动的进程</span></span><br><span class="line">ps -A <span class="comment">#系统全部启动进程</span></span><br><span class="line">ps auxf <span class="comment">#查看父进程关联的子进程</span></span><br><span class="line">ps -aux <span class="comment">#枚举进程命令行,病毒一般都携带可疑的命令行，比如带有url等奇怪的字符串时</span></span><br><span class="line">pstree　<span class="comment">#查看进程树</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="开机启动的一些路径"><a href="#开机启动的一些路径" class="headerlink" title="开机启动的一些路径"></a>开机启动的一些路径</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">/etc/rc.d/rc</span><br><span class="line">/etc/rc</span><br><span class="line">/etc/rc.local</span><br><span class="line">/etc/rc.d/rc.local</span><br><span class="line">/etc/rc.d/rc</span><br><span class="line">/etc/rc<span class="variable">$runlevel</span>.d/ <span class="comment">#该目录下都是链接的可执行文件，也可以自己添加可执行程序</span></span><br><span class="line">/etc/ld.so.cache   </span><br><span class="line">/etc/ld.so.preload </span><br><span class="line">/usr/local/lib/libioset.so</span><br><span class="line">/etc/init.d</span><br><span class="line"><span class="comment">#另外一个添加启动项的地方在  /etc/profile里面，还有  /etc/profile.d/目录下以sh结尾的文件</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="封禁IP"><a href="#封禁IP" class="headerlink" title="封禁IP"></a>封禁<code>IP</code></h4><ul>
+<li>参数<code>-I</code>是表示<code>Insert</code>（添加），<code>-D</code>表示<code>Delete</code>（删除）。后面跟的是规则，<code>INPUT</code>表示入站，<code>1.1.1.1</code>表示要封停的<code>IP</code>，<code>DROP</code>表示放弃连接。</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -s 1.1.1.1 -j DROP  <span class="comment">#封禁IP进口</span></span><br><span class="line">iptables -I OUTPUT -s 1.1.1.1/24 -j DROP	<span class="comment">#封禁IP出口</span></span><br><span class="line">iptables -I INPUT -s 1.1.1.1/24 -j DROP  <span class="comment">#封禁IP段</span></span><br><span class="line">iptables --list  <span class="comment">#查看规则</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>对<code>IP</code>限制后保存信息</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">yum install iptables-services</span><br><span class="line">chkconfig iptables on</span><br><span class="line">service iptables save</span><br><span class="line"><span class="built_in">cat</span> /etc/sysconfig/iptables</span><br><span class="line">service iptables start</span><br><span class="line">iptables -nL</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看系统服务"><a href="#查看系统服务" class="headerlink" title="查看系统服务"></a>查看系统服务</h4><ul>
+<li>如果删除了计划任务，还有文件删除不了 可以查看系统服务是否存在病毒</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">chkconfig –list        <span class="comment">#列出所有的系统服务</span></span><br><span class="line">chkconfig –add httpd        <span class="comment">#增加httpd服务</span></span><br><span class="line">chkconfig –del httpd        <span class="comment">#删除httpd服务</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="文件下载"><a href="#文件下载" class="headerlink" title="文件下载"></a>文件下载</h4><ul>
+<li>如果关闭了<code>FTP</code>，又无法使用<code>xftp</code>访问卡原始用<code>scp</code>命令下载</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scp -r 目标文件路径  root@1.1.1.1:/home/</span><br></pre></td></tr></table></figure>
+
+<h4 id="对文件进行限制"><a href="#对文件进行限制" class="headerlink" title="对文件进行限制"></a>对文件进行限制</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">chmod</span> 000 /usr/bin/XXXXXX  <span class="comment">#设置一个文件权限为空(就是什么权限都没有</span></span><br><span class="line">chattr +i /usr/bin   <span class="comment">#限制对/usr/bin路径修改</span></span><br><span class="line">chattr -i /usr/bin  <span class="comment">#开放对/usr/bin路径修改</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="alias-定义或显示别名"><a href="#alias-定义或显示别名" class="headerlink" title="alias 定义或显示别名"></a><code>alias</code> 定义或显示别名</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 显示全部已定义的别名</span></span><br><span class="line"><span class="built_in">alias</span></span><br><span class="line"><span class="built_in">alias</span> -p</span><br><span class="line"><span class="comment"># 显示已定义的别名（假设当前环境存在以下别名）</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">ls</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">ls</span> grep</span><br><span class="line"><span class="comment"># 定义或修改别名的值</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">ls</span>=<span class="string">&#x27;ls --color=auto&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> <span class="built_in">ls</span>=<span class="string">&#x27;ls --color=never&#x27;</span> grep=<span class="string">&#x27;grep --color=never&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="cmatrix命令"><a href="#cmatrix命令" class="headerlink" title="cmatrix命令"></a><code>cmatrix</code>命令</h4><p>可以生成《黑客帝国》那种矩阵风格的动画效果</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.github.com/Ascotbe/Image/master/Linux/1.png" alt="1575251948987"></p>
+<h4 id="oneko-命令"><a href="#oneko-命令" class="headerlink" title="oneko 命令"></a><code>oneko</code> 命令</h4><p>输入后有一只小猫跟着你跑</p>
+<h4 id="查看密码"><a href="#查看密码" class="headerlink" title="查看密码"></a>查看密码</h4><ul>
+<li><p><code>/etc/passwd</code> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#每一行都代表一个用户，每一行又通过[:]分为七个部分。</span></span><br><span class="line">root:x:0:0:root:/root:/bin/bash</span><br><span class="line">daemon:x:1:1:daemon:/usr/sbin:/bin/sh</span><br><span class="line">bin:x:2:2:bin:/bin:/bin/sh</span><br><span class="line">sys:x:3:3:sys:/dev:/bin/sh</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>账号名称</li>
+<li>原先用来保存密码的，现在密码都放在<code>/etc/shadow</code>中，所以这里显示<code>x</code></li>
+<li><code>UID</code>，也就是使用者<code>ID</code>。默认的系统管理员的<code>UID</code>为<code>0</code>，我们添加用户的时候最好使用<code>1000</code>以上的<code>UID</code>，<code>1-1000</code>范围的<code>UID</code>最好保留给系统用。</li>
+<li><code>GID</code>，也就是群组<code>ID</code></li>
+<li>关于账号的一些说明信息</li>
+<li>账号的家目录，家目录就是你登陆系统后默认的那个目录</li>
+<li>账号使用的<code>shell</code></li>
+</ul>
+</li>
+<li><p><code>/etc/shadow </code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#由[:]来进行分割，这里一共分出来九个栏目</span></span><br><span class="line">root:!:15324:0:99999:7:::</span><br><span class="line">daemon:*:15259:0:99999:7:::</span><br><span class="line">bin:*:15259:0:99999:7:::</span><br><span class="line">letuknowit:$1<span class="variable">$cPf</span>/cIvr<span class="variable">$sCws95uSip2ljTK052DDB</span>.:15400:5:60:7:2:15490:</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>账户名称（密码需要与账户对应的嘛）</li>
+<li>加密后的密码，如果这一栏的第一个字符为!或者*的话，说明这是一个不能登录的账户，从上面可以看出，<code>ubuntu</code>默认的就不启用<code>root</code>账户。</li>
+<li>最近改动密码的日期（这个是从1970年1月1日算起的总的天数）。</li>
+<li>密码不可被变更的天数：设置了这个值，则表示从变更密码的日期算起，多少天内无法再次修改密码，如果是0的话，则没有限制</li>
+<li>密码需要重新变更的天数：密码经常更换才能保证安全，为了提醒某些经常不更换密码的用户，可以设置一个天数，强制让用户更换密码，也就是说该用户的密码会在多少天后过期，如果为99999则没有限制</li>
+<li>密码过期预警天数：如果在5中设置了密码需要重新变更的天数，则会在密码过期的前多少天进行提醒，提示用户其密码将在多少天后过期</li>
+<li>密码过期的宽恕时间：如果在5中设置的日期过后，用户仍然没有修改密码，则该用户还可以继续使用的天数</li>
+<li>账号失效日期，过了这个日期账号就不能用了</li>
+<li>保留的</li>
+</ul>
+</li>
+</ul>
+<h4 id="设置用户"><a href="#设置用户" class="headerlink" title="设置用户"></a>设置用户</h4><ul>
+<li><p>创建用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">useradd XXXX</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>设置用户密码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">passwd XXXX</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>删除用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">userdel XXXX</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>切换用户</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">su  XXXX</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="checksec参数"><a href="#checksec参数" class="headerlink" title="checksec参数"></a><code>checksec</code>参数</h4><p>用来查看文件开启了什么保护（溢出保护）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RELRO：RELRO会有Partial RELRO和FULL RELRO，如果开启FULL RELRO，意味着我们无法修改got表</span><br><span class="line">Stack：如果栈中开启Canary found，那么就不能用直接用溢出的方法覆盖栈中返回地址，而且要通过改写指针与局部变量、leak canary、overwrite canary的方法来绕过</span><br><span class="line">NX：NX enabled如果这个保护开启就是意味着栈中数据没有执行权限，以前的经常用的call esp或者jmp esp的方法就不能使用，但是可以利用rop这种方法绕过</span><br><span class="line">PIE：PIE enabled如果程序开启这个地址随机化选项就意味着程序每次运行的时候地址都会变化，而如果没有开PIE的话那么No PIE (0x400000)，括号内的数据就是程序的基地址</span><br><span class="line">FORTIFY：FORTIFY_SOURCE机制对格式化字符串有两个限制(1)包含%n的格式化字符串不能位于程序内存中的可写地址。(2)当使用位置参数时，必须使用范围内的所有参数。所以如果要使用%7$x，你必须同时使用1,2,3,4,5和6。</span><br></pre></td></tr></table></figure>
+
+<h4 id="gdb基本命令"><a href="#gdb基本命令" class="headerlink" title="gdb基本命令"></a><code>gdb</code>基本命令</h4><table>
+<thead>
+<tr>
+<th>命令</th>
+<th>简写</th>
+<th>功能</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>file</td>
+<td></td>
+<td>装入想要调试的可执行文件.</td>
+</tr>
+<tr>
+<td>kill</td>
+<td>k</td>
+<td>终止正在调试的程序.</td>
+</tr>
+<tr>
+<td>list</td>
+<td>l</td>
+<td>列出产生执行文件的源代码的一部分.</td>
+</tr>
+<tr>
+<td>next</td>
+<td>n</td>
+<td>执行一行源代码但不进入函数内部.</td>
+</tr>
+<tr>
+<td>step</td>
+<td>s</td>
+<td>执行一行源代码而且进入函数内部.</td>
+</tr>
+<tr>
+<td>continue</td>
+<td>c</td>
+<td>继续执行程序，直至下一中断或者程序结束。</td>
+</tr>
+<tr>
+<td>run</td>
+<td>r</td>
+<td>执行当前被调试的程序.</td>
+</tr>
+<tr>
+<td>quit</td>
+<td>q</td>
+<td>终止 gdb.</td>
+</tr>
+<tr>
+<td>watch</td>
+<td></td>
+<td>使你能监视一个变量的值而不管它何时被改变.</td>
+</tr>
+<tr>
+<td>catch</td>
+<td></td>
+<td>设置捕捉点.</td>
+</tr>
+<tr>
+<td>thread</td>
+<td>t</td>
+<td>查看当前运行程序的线程信息.</td>
+</tr>
+<tr>
+<td>break</td>
+<td>b</td>
+<td>在代码里设置断点, 这将使程序执行到这里时被挂起.</td>
+</tr>
+<tr>
+<td>make</td>
+<td></td>
+<td>使你能不退出 gdb 就可以重新产生可执行文件.</td>
+</tr>
+<tr>
+<td>shell</td>
+<td></td>
+<td>使你能不离开 gdb 就执行 UNIX shell 命令.</td>
+</tr>
+<tr>
+<td>print</td>
+<td>p</td>
+<td>打印数据内容。</td>
+</tr>
+<tr>
+<td>examine</td>
+<td>x</td>
+<td>打印内存内容。</td>
+</tr>
+<tr>
+<td>backtrace</td>
+<td>bt</td>
+<td>查看函数调用栈的所有信息。</td>
+</tr>
+</tbody></table>
+<h4 id="auditd命令"><a href="#auditd命令" class="headerlink" title="auditd命令"></a><code>auditd</code>命令</h4><p>用来监控文件被什么进程修改</p>
+<p>安装<code>apt-get install auditd</code></p>
+<ul>
+<li><code>auditd</code> 是后台守护进程，负责监控记录</li>
+<li><code>auditctl </code>配置规则的工具</li>
+<li><code>auditsearch</code> 搜索查看</li>
+<li><code>aureport</code> 根据监控记录生成报表</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">auditctl -w /var/spool/cron/crontabs/root -p awr -k asc0t6e</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>-w 指明要监控的文件</li>
+<li>-p  <code>awrx</code> 要监控的操作类型，<code>append</code>,<code> write</code>,<code> read</code>, <code>execute</code></li>
+<li>-k 给当前这条监控规则起个名字，方便搜索过滤</li>
+</ul>
+<p>查看修改纪录：<code>ausearch -i -k asc0t6e</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">type</span>=PROCTITLE msg=audit(12/13/2019 15:13:28.750:99) : proctitle=crontab -l </span><br><span class="line"><span class="built_in">type</span>=PATH msg=audit(12/13/2019 15:13:28.750:99) : item=0 name=crontabs/root inode=580 dev=fd:01 mode=file,600 ouid=root ogid=root rdev=00:00 nametype=NORMAL </span><br><span class="line"><span class="built_in">type</span>=CWD msg=audit(12/13/2019 15:13:28.750:99) :  cwd=/var/spool/cron </span><br><span class="line"><span class="built_in">type</span>=SYSCALL msg=audit(12/13/2019 15:13:28.750:99) : <span class="built_in">arch</span>=x86_64 syscall=open success=<span class="built_in">yes</span> <span class="built_in">exit</span>=3 a0=0x7ffe9bae73f0 a1=O_RDONLY a2=0x1b6 a3=0x0 items=1 ppid=10715 pid=10745 auid=root uid=root gid=root euid=root suid=root fsuid=root egid=root sgid=root fsgid=root <span class="built_in">tty</span>=pts9 ses=410442 <span class="built_in">comm</span>=crontab exe=/usr/bin/crontab key=asc0t6e </span><br></pre></td></tr></table></figure>
+
+<p>上面命令的一些参数详解：</p>
+<ul>
+<li><code>time</code> : 审计时间。</li>
+<li><code>name </code>: 审计对象</li>
+<li><code>cwd</code>: 当前路径</li>
+<li><code>syscall</code> :相关的系统调用</li>
+<li><code>auid</code> : 审计用户<code>ID</code></li>
+<li><code>uid</code> 和 <code>gid</code> : 访问文件的用户<code>ID</code>和用户组<code>ID</code></li>
+<li><code>comm </code>: 用户访问文件的命令</li>
+<li><code>exe</code> :上面命令的可执行文件路径</li>
+</ul>
+<h4 id="挂代理"><a href="#挂代理" class="headerlink" title="挂代理"></a>挂代理</h4><p>在你的右键你的<code>SSR</code>-&gt;选项设置-&gt;打开允许来自局域网的连接</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.github.com/Ascotbe/Image/master/Linux/2.png" alt="image-20191228122354113"></p>
+<p>接着在你的<code>linux</code>上添加如下命令</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#ip为你开SSR那台电脑的内网IP</span></span><br><span class="line"><span class="built_in">export</span> ALL_PROXY=socks5://127.0.0.1:1080</span><br></pre></td></tr></table></figure>
+
+<h4 id="文件的一些小操作"><a href="#文件的一些小操作" class="headerlink" title="文件的一些小操作"></a>文件的一些小操作</h4><ul>
+<li><p>隐藏文件</p>
+<p><code>Linux </code>下创建一个隐藏文件：<code>touch .test.txt</code></p>
+<p><code>touch</code> 命令可以创建一个文件，文件名前面加一个 点 就代表是隐藏文件</p>
+</li>
+<li><p>查看隐藏文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#查看不到隐藏文件</span></span><br><span class="line"><span class="built_in">ls</span> -l</span><br><span class="line"><span class="comment">#可以查看隐藏文件</span></span><br><span class="line"><span class="built_in">ls</span> -al</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>文件属性查看</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsattr  aaa.php</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>锁定文件&amp;解锁文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#锁定</span></span><br><span class="line">chattr +i aa.php</span><br><span class="line"><span class="comment">#解锁</span></span><br><span class="line">chattr -i aa.php</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="进程的一些小操作"><a href="#进程的一些小操作" class="headerlink" title="进程的一些小操作"></a>进程的一些小操作</h4><ul>
+<li><p>进程隐藏<code>libprocesshider</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">github项目地址：https://github.com/gianlucaborello/libprocesshider</span><br></pre></td></tr></table></figure>
+
+<p>利用 <code>LD_PRELOAD</code> 来实现系统函数的劫持，实现如下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 下载程序编译</span></span><br><span class="line">git <span class="built_in">clone</span> https://github.com/gianlucaborello/libprocesshider.git</span><br><span class="line"><span class="built_in">cd</span> libprocesshider/ &amp;&amp; make</span><br><span class="line"><span class="comment"># 移动文件到/usr/local/lib/目录下</span></span><br><span class="line"><span class="built_in">cp</span> libprocesshider.so /usr/local/lib/</span><br><span class="line"><span class="comment"># 把它加载到全局动态连接局</span></span><br><span class="line"><span class="built_in">echo</span> /usr/local/lib/libprocesshider.so &gt;&gt; /etc/ld.so.preload</span><br><span class="line"><span class="comment">#然后运行你的程序即可</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>发现隐藏的进程</p>
+<p><code>unhide </code>是一个小巧的网络取证工具，能够发现那些借助<code>rootkit</code>，<code>LKM</code>及其它技术隐藏的进程和<code>TCP / UDP</code>端口。这个工具在<code>Linux</code>，<code>UNIX</code>类，<code>MS-Windows</code>等操作系统下都可以工作。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#下载地址：http://www.unhide-forensics.info/</span></span><br><span class="line"><span class="comment"># 安装</span></span><br><span class="line">sudo apt-get install unhide</span><br><span class="line"><span class="comment"># 使用</span></span><br><span class="line">unhide [options] test_list</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="主机异常检测"><a href="#主机异常检测" class="headerlink" title="主机异常检测"></a>主机异常检测</h4><p> <code>chkrootkit</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#官网http://www.chkrootkit.org/</span></span><br><span class="line"><span class="comment">#下载</span></span><br><span class="line">wget ftp://ftp.pangeia.com.br/pub/seg/pac/chkrootkit.tar.gz</span><br><span class="line"><span class="comment">#加压</span></span><br><span class="line">tar -zxvf chkrootkit.tar.gz</span><br><span class="line"><span class="built_in">cd</span> chkrootkit</span><br><span class="line"><span class="comment">#运行</span></span><br><span class="line">./chkrootkit</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看当前路径"><a href="#查看当前路径" class="headerlink" title="查看当前路径"></a>查看当前路径</h4><p>可以查看当前所在位置</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">root@ascotbe:/home/user<span class="comment"># pwd -P</span></span><br><span class="line">/home/user</span><br></pre></td></tr></table></figure>
+
+<h4 id="查看系统详细参数"><a href="#查看系统详细参数" class="headerlink" title="查看系统详细参数"></a>查看系统详细参数</h4><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">apt install neofetch</span><br><span class="line"><span class="comment">#然后输入neofetch就能查看</span></span><br><span class="line">root@iZbp19pfnyuhlghdkeobejZ:~<span class="comment"># neofetch</span></span><br><span class="line">       _,met$$$$<span class="variable">$gg</span>.          root@iZbp19pfnyuhlghdkeobejZ </span><br><span class="line">    ,g$$$$$$$$$$$$$$<span class="variable">$P</span>.       ---------------------------- </span><br><span class="line">  ,g$<span class="variable">$P</span><span class="string">&quot;     &quot;</span><span class="string">&quot;&quot;</span>Y$$.<span class="string">&quot;.        OS: Debian GNU/Linux 9.11 (stretch) x86_64 </span></span><br><span class="line"><span class="string"> ,$<span class="variable">$P</span>&#x27;              `$$$.     Model: Alibaba Cloud ECS pc-i440fx-2.1 </span></span><br><span class="line"><span class="string">&#x27;,$<span class="variable">$P</span>       ,ggs.     `$<span class="variable">$b</span>:   Kernel: 4.9.0-11-amd64 </span></span><br><span class="line"><span class="string">`d$$&#x27;     ,<span class="variable">$P</span>&quot;</span><span class="string">&#x27;   .    $$$    Uptime: 8 days, 2 hours, 21 minutes </span></span><br><span class="line"><span class="string"> $$P      d$&#x27;</span>     ,    $<span class="variable">$P</span>    Packages: 734 </span><br><span class="line"> $$:      $$.   -    ,d$$<span class="string">&#x27;    Shell: bash 4.4.12 </span></span><br><span class="line"><span class="string"> $$;      Y$b._   _,d$P&#x27;</span>      Theme: Adwaita [GTK3] </span><br><span class="line"> Y$$.    `.`<span class="string">&quot;Y$$$<span class="variable">$P</span>&quot;</span><span class="string">&#x27;         Icons: Adwaita [GTK3] </span></span><br><span class="line"><span class="string"> `$$b      &quot;-.__              CPU: Intel Xeon E5-2682 v4 (1) @ 2.4GHz </span></span><br><span class="line"><span class="string">  `Y$$                        GPU: Cirrus Logic GD 5446 </span></span><br><span class="line"><span class="string">   `Y$$.                      Memory: 551MB / 2004MB </span></span><br><span class="line"><span class="string">     `$$b.                    ​ </span></span><br><span class="line"><span class="string">       `Y$$b.                 ████████████████████████ </span></span><br><span class="line"><span class="string">          `&quot;Y$b._             ​ </span></span><br><span class="line"><span class="string">              `&quot;&quot;&quot; </span></span><br><span class="line"><span class="string"></span></span><br></pre></td></tr></table></figure>
+
+<h4 id="top命令详细讲解"><a href="#top命令详细讲解" class="headerlink" title="top命令详细讲解"></a>top命令详细讲解</h4><ul>
+<li><p>参数含义</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">top - 01:06:48 up  1:22,  1 user,  load average: 0.06, 0.60, 0.48</span><br><span class="line">Tasks:  29 total,   1 running,  28 sleeping,   0 stopped,   0 zombie</span><br><span class="line">Cpu(s):  0.3% us,  1.0% sy,  0.0% ni, 98.7% <span class="built_in">id</span>,  0.0% wa,  0.0% hi,  0.0% si</span><br><span class="line">Mem:    191272k total,   173656k used,    17616k free,    22052k buffers</span><br><span class="line">Swap:   192772k total,        0k used,   192772k free,   123988k cached</span><br><span class="line"></span><br><span class="line">PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND</span><br><span class="line">root      16   0  7976 2456 1980 S  0.7  1.3   0:11.03 sshd</span><br><span class="line">root      16   0  2128  980  796 R  0.7  0.5   0:02.72 top</span><br><span class="line">root      16   0  1992  632  544 S  0.0  0.3   0:00.90 init</span><br><span class="line">root      34  19     0    0    0 S  0.0  0.0   0:00.00 ksoftirqd/0</span><br><span class="line">root      RT   0     0    0    0 S  0.0  0.0   0:00.00 watchdog/0</span><br></pre></td></tr></table></figure>
+
+<p>统计信息区前五行是系统整体的统计信息。第一行是任务队列信息，同 uptime 命令的执行结果。其内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">01:06:48    当前时间</span><br><span class="line">up 1:22    系统运行时间，格式为时:分</span><br><span class="line">1 user    当前登录用户数</span><br><span class="line">load average: 0.06, 0.60, 0.48    系统负载，即任务队列的平均长度。三个数值分别为 1分钟、5分钟、15分钟前到现在的平均值。</span><br></pre></td></tr></table></figure>
+
+<p>第二、三行为进程和CPU的信息。当有多个CPU时，这些内容可能会超过两行。内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">total 进程总数</span><br><span class="line">running 正在运行的进程数</span><br><span class="line">sleeping 睡眠的进程数</span><br><span class="line">stopped 停止的进程数</span><br><span class="line">zombie 僵尸进程数</span><br><span class="line">Cpu(s): </span><br><span class="line">0.3% us 用户空间占用CPU百分比</span><br><span class="line">1.0% sy 内核空间占用CPU百分比</span><br><span class="line">0.0% ni 用户进程空间内改变过优先级的进程占用CPU百分比</span><br><span class="line">98.7% <span class="built_in">id</span> 空闲CPU百分比</span><br><span class="line">0.0% wa 等待输入输出的CPU时间百分比</span><br><span class="line">0.0%hi：硬件CPU中断占用百分比</span><br><span class="line">0.0%si：软中断占用百分比</span><br><span class="line">0.0%st：虚拟机占用百分比</span><br></pre></td></tr></table></figure>
+
+<p>最后两行为内存信息。内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Mem:</span><br><span class="line">191272k total    物理内存总量</span><br><span class="line">173656k used    使用的物理内存总量</span><br><span class="line">17616k free    空闲内存总量</span><br><span class="line">22052k buffers    用作内核缓存的内存量</span><br><span class="line">Swap: </span><br><span class="line">192772k total    交换区总量</span><br><span class="line">0k used    使用的交换区总量</span><br><span class="line">192772k free    空闲交换区总量</span><br><span class="line">123988k cached    缓冲的交换区总量,内存中的内容被换出到交换区，而后又被换入到内存，但使用过的交换区尚未被覆盖，该数值即为这些内容已存在于内存中的交换区的大小,相应的内存再次被换出时可不必再对交换区写入。</span><br></pre></td></tr></table></figure>
+
+<p>进程信息区统计信息区域的下方显示了各个进程的详细信息。首先来认识一下各列的含义。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">序号  列名    含义</span><br><span class="line">a    PID     进程<span class="built_in">id</span></span><br><span class="line">b    PPID    父进程<span class="built_in">id</span></span><br><span class="line">c    RUSER   Real user name</span><br><span class="line">d    UID     进程所有者的用户<span class="built_in">id</span></span><br><span class="line">e    USER    进程所有者的用户名</span><br><span class="line">f    GROUP   进程所有者的组名</span><br><span class="line">g    TTY     启动进程的终端名。不是从终端启动的进程则显示为 ?</span><br><span class="line">h    PR      优先级</span><br><span class="line">i    NI      <span class="built_in">nice</span>值。负值表示高优先级，正值表示低优先级</span><br><span class="line">j    P       最后使用的CPU，仅在多CPU环境下有意义</span><br><span class="line">k    %CPU    上次更新到现在的CPU时间占用百分比</span><br><span class="line">l    TIME    进程使用的CPU时间总计，单位秒</span><br><span class="line">m    TIME+   进程使用的CPU时间总计，单位1/100秒</span><br><span class="line">n    %MEM    进程使用的物理内存百分比</span><br><span class="line">o    VIRT    进程使用的虚拟内存总量，单位kb。VIRT=SWAP+RES</span><br><span class="line">p    SWAP    进程使用的虚拟内存中，被换出的大小，单位kb。</span><br><span class="line">q    RES     进程使用的、未被换出的物理内存大小，单位kb。RES=CODE+DATA</span><br><span class="line">r    CODE    可执行代码占用的物理内存大小，单位kb</span><br><span class="line">s    DATA    可执行代码以外的部分(数据段+栈)占用的物理内存大小，单位kb</span><br><span class="line">t    SHR     共享内存大小，单位kb</span><br><span class="line">u    nFLT    页面错误次数</span><br><span class="line">v    nDRT    最后一次写入到现在，被修改过的页面数。</span><br><span class="line">w    S       进程状态(D=不可中断的睡眠状态,R=运行,S=睡眠,T=跟踪/停止,Z=僵尸进程)</span><br><span class="line">x    COMMAND 命令名/命令行</span><br><span class="line">y    WCHAN   若该进程在睡眠，则显示睡眠中的系统函数名</span><br><span class="line">z    Flags   任务标志，参考 sched.h</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="增大ELF文件体积"><a href="#增大ELF文件体积" class="headerlink" title="增大ELF文件体积"></a>增大ELF文件体积</h2><h4 id="文件末尾追加数据"><a href="#文件末尾追加数据" class="headerlink" title="文件末尾追加数据"></a>文件末尾追加数据</h4><p>这种方式实现很简单，如下</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-fj5pftdp y]# echo 1111 &gt;&gt; ./id</span><br><span class="line">[root@instance-fj5pftdp y]# ./id</span><br><span class="line">uid=0(root) gid=0(root) 组=0(root)</span><br></pre></td></tr></table></figure>
+
+<p>关键是这样修改后的文件，还能正常执行。</p>
+<h4 id="稀疏文件"><a href="#稀疏文件" class="headerlink" title="稀疏文件"></a>稀疏文件</h4><p>“稀疏文件”的”文件大小”和实际占用磁盘空间是不一致的，比如:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-fj5pftdp y]# ll -h id</span><br><span class="line">-rwxr-xr-x 1 root root 10T 9月   6 20:03 id</span><br><span class="line">[root@instance-fj5pftdp y]# du -sh id</span><br><span class="line">40K id</span><br></pre></td></tr></table></figure>
+
+<p>从上面命令可以看到：”文件大小”是10T，但实际数据只占用40K的磁盘大小。</p>
+<p>对于原理感兴趣的读者，可以参考 <a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=Mzg3NTU3OTgxOA==&mid=2247488282&idx=1&sn=79bdc53ac60e7f1f4a6dca8fbd4f92fd&scene=21#wechat_redirect">深度剖析 Linux cp 的秘密</a> 这篇文章。</p>
+<p>可以利用fallocate、truncate命令，来修改成”稀疏文件”。</p>
+<p>使用起来也很简单，以truncate举例：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-fj5pftdp y]# ls -alh id</span><br><span class="line">-rwxr-xr-x 1 root root 37K 9月   5 20:18 id</span><br><span class="line">[root@instance-fj5pftdp y]# time truncate -s 10T id   // 将id程序稀疏成10T大小</span><br><span class="line"></span><br><span class="line">real 0m0.007s</span><br><span class="line">user 0m0.000s</span><br><span class="line">sys 0m0.007s</span><br><span class="line">[root@instance-fj5pftdp y]# ls -alh id</span><br><span class="line">-rwxr-xr-x 1 root root 10T 9月   5 20:02 id    // 文件大小已经变成10T</span><br><span class="line">[root@instance-fj5pftdp y]# ./id</span><br><span class="line">uid=0(root) gid=0(root) 组=0(root)</span><br></pre></td></tr></table></figure>
+
+<p>这种方式修改文件有两个特点：</p>
+<blockquote>
+<p>文件改动非常快，上面的例子中将id文件大小扩大到”10T”只用了1s不到</p>
+<p>文件大小最大可以是10T以上，但不需要本地磁盘空间真的有10T</p>
+</blockquote>
+<p>当你想下载或者读这个文件(比如<code>cat</code>)时，却是会有实实在在的<code>10T</code>流量。10T流量，按照”10M&#x2F;s”的速度下载，也需要下载291个小时。</p>
+<h4 id="修改inode元数据"><a href="#修改inode元数据" class="headerlink" title="修改inode元数据"></a>修改inode元数据</h4><p>inode元数据包含了文件大小信息，而inode元数据也是存储在磁盘扇区中的，所以应该可以通过修改inode元数据来”伪造”文件大小。</p>
+<p>其实不光大小信息，inode元数据中还包括 文件是否删除、创建时间、修改时间、访问时间 等信息，所以这些都可以被伪造。</p>
+<p>可以通过stat命令查看inode元数据：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-fj5pftdp y]# stat id</span><br><span class="line">  文件：&quot;id&quot;</span><br><span class="line">  大小：37400      块：80         IO 块：4096   普通文件</span><br><span class="line">设备：fd01h/64769d Inode：171252      硬链接：1</span><br><span class="line">权限：(0755/-rwxr-xr-x)  Uid：(    0/    root)   Gid：(    0/    root)</span><br><span class="line">最近访问：2021-09-06 20:27:26.224913458 +0800</span><br><span class="line">最近更改：2021-09-06 20:27:26.218913032 +0800</span><br><span class="line">最近改动：2021-09-06 20:27:26.224913458 +0800</span><br><span class="line">创建时间：-</span><br></pre></td></tr></table></figure>
+
+<p>修改”inode元数据” ，利用debugfs命令，如下：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-fj5pftdp ~]# debugfs -w /dev/vda1</span><br><span class="line">debugfs:  mi /tmp/y/id</span><br><span class="line">                          Mode    [0100755]</span><br><span class="line">                       User ID    [0]</span><br><span class="line">                      Group ID    [0]</span><br><span class="line">                          Size    [37400] 100000      // 这里修改文件大小为100000</span><br><span class="line">                 Creation time    [1630929039]</span><br><span class="line">             ...</span><br><span class="line">debugfs:  quit</span><br><span class="line">[root@instance-fj5pftdp ~]# ll /tmp/y/id</span><br><span class="line">-rwxr-xr-x 1 root root 37400 9月   6 19:50 /tmp/y/id</span><br><span class="line">[root@instance-fj5pftdp ~]# echo 3 &gt; /proc/sys/vm/drop_caches   // 清理inode缓存后，修改才生效</span><br><span class="line">[root@instance-fj5pftdp ~]# ll /tmp/y/id</span><br><span class="line">-rwxr-xr-x 1 root root 100000 9月   6 19:50 /tmp/y/id    // 文件大小变成了100000</span><br><span class="line">[root@instance-fj5pftdp ~]# /tmp/y/id</span><br><span class="line">uid=0(root) gid=0(root) 组=0(root)</span><br></pre></td></tr></table></figure>
+
+<p>在测试过程中，需要读者注意的是：</p>
+<blockquote>
+<p>因为会对磁盘数据做写操作，所以最好找一个没数据的机器做测试</p>
+<p>记得清理inode缓存</p>
+<p>测试时如果使用文件当作设备，在挂载文件系统时去修改文件大小 会不生效。原因未知</p>
+</blockquote>
+<h4 id="向elf文件节中添加垃圾数据"><a href="#向elf文件节中添加垃圾数据" class="headerlink" title="向elf文件节中添加垃圾数据"></a>向elf文件节中添加垃圾数据</h4><p>elf文件中包含很多的<em>节</em>，比如：</p>
+<blockquote>
+<p>.text存放代码</p>
+<p>.data存放初始化的全局变量和静态变量</p>
+</blockquote>
+<p>可以向elf的节（比如.data、.text、.bss等）中写入垃圾数据，而不影响程序的正常运行。</p>
+<p>这种方式和其他三种方式的区别在于：因为可以删掉没用的节，所以就很容易就把”其他三种方式”修改的elf给还原回来。</p>
+<p>比如strip后，文件大小就还原了</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@instance-fj5pftdp y]# ll -h id</span><br><span class="line">-rwxr-xr-x 1 root root 10T 9月   6 20:03 id</span><br><span class="line">[root@instance-fj5pftdp y]# strip id</span><br><span class="line">[root@instance-fj5pftdp y]# ll -h id</span><br><span class="line">-rwxr-xr-x 1 root root 37K 9月   6 20:27 id</span><br></pre></td></tr></table></figure>
+
+<h2 id="内核学习"><a href="#内核学习" class="headerlink" title="内核学习"></a>内核学习</h2><h4 id="软连接和硬连接的区别"><a href="#软连接和硬连接的区别" class="headerlink" title="软连接和硬连接的区别"></a>软连接和硬连接的区别</h4><p>为了解释清楚，我们首先在自己的一个工作目录下创建一个文件，然后对这个文件进行链接的创建：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[ascotbe@linux]$ <span class="built_in">touch</span> myfile &amp;&amp; <span class="built_in">echo</span> <span class="string">&quot;This is a plain text file.&quot;</span> &gt; myfile</span><br><span class="line">[ascotbe@linux]$ <span class="built_in">cat</span> myfile</span><br><span class="line">This is a plain text file.</span><br></pre></td></tr></table></figure>
+
+<p>现在我们创建了一个普通地不能再普通的文件了。然后我们对它创建一个硬链接，并查看一下当前目录：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[ascotbe@linux]$ <span class="built_in">ln</span> myfile hard</span><br><span class="line">[ascotbe@linux]$ <span class="built_in">ls</span> -li</span><br><span class="line"></span><br><span class="line">25869085 -rw-r--r--  2 unixzii  staff  27  7  8 17:39 hard</span><br><span class="line">25869085 -rw-r--r--  2 unixzii  staff  27  7  8 17:39 myfile</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>ls</code> 结果的最左边一列，是文件的 <code>inode</code> 值，你可以简单把它想成 C 语言中的指针。它指向了物理硬盘的一个区块，事实上文件系统会维护一个引用计数，只要有文件指向这个区块，它就不会从硬盘上消失。</p>
+<p>你也看到了，这两个文件就如同一个文件一样，<code>inode</code> 值相同，都指向同一个区块。</p>
+<p>然后我们修改一下刚才创建的 <em>hard</em> 链接文件：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[ascotbe@linux]$ <span class="built_in">echo</span> <span class="string">&quot;New line&quot;</span> &gt;&gt; hard</span><br><span class="line">[ascotbe@linux]$ <span class="built_in">cat</span> myfile</span><br><span class="line"></span><br><span class="line">This is a plain text file.</span><br><span class="line">New line</span><br></pre></td></tr></table></figure>
+
+<p>可以看到，这两个文件果真就是一个文件。<br>下面我们看看软链接（也就是符号链接）和它有什么区别。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">[ascotbe@linux]$ <span class="built_in">ln</span> -s myfile soft</span><br><span class="line">[ascotbe@linux]$ <span class="built_in">ls</span> -li</span><br><span class="line"></span><br><span class="line">25869085 -rw-r--r--  2 unixzii  staff  36  7  8 17:45 hard</span><br><span class="line">25869085 -rw-r--r--  2 unixzii  staff  36  7  8 17:45 myfile</span><br><span class="line">25869216 lrwxr-xr-x  1 unixzii  staff   6  7  8 17:47 soft -&gt; myfile</span><br></pre></td></tr></table></figure>
+
+<p>诶，你会发现，这个软链接的 <code>inode</code> 竟然不一样啊，并且它的文件属性上也有一个 <code>l</code> 的 flag，这就说明它与之前我们创建的两个文件根本不是一个类型。</p>
+<p>下面我们试着删除 <strong>myfile</strong> 文件，然后分别输出软硬链接的文件内容：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[ascotbe@linux]$  <span class="built_in">rm</span> myfile</span><br><span class="line">[ascotbe@linux]$  <span class="built_in">cat</span> hard</span><br><span class="line"></span><br><span class="line">This is a plain text file.</span><br><span class="line">New line</span><br><span class="line">[ascotbe@linux]$  <span class="built_in">cat</span> soft</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span>: soft: No such file or directory</span><br><span class="line">[ascotbe@linux]$  <span class="built_in">cat</span> soft</span><br><span class="line"></span><br><span class="line"><span class="built_in">cat</span>: soft: No such file or directory</span><br></pre></td></tr></table></figure>
+
+<p>之前的硬链接没有丝毫地影响，因为它 <code>inode</code> 所指向的区块由于有一个硬链接在指向它，所以这个区块仍然有效，并且可以访问到。<br>然而软链接的 <code>inode</code> 所指向的内容实际上是保存了一个绝对路径，当用户访问这个文件时，系统会自动将其替换成其所指的文件路径，然而这个文件已经被删除了，所以自然就会显示无法找到该文件了。</p>
+<p>接着我们在软连接的文件中写入文件，被删除的文件就会回来了！！！而硬连接并不会出现这样</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">[ascotbe@linux]$ <span class="built_in">echo</span> <span class="string">&quot;Something&quot;</span> &gt;&gt; soft</span><br><span class="line">[ascotbe@linux]$ <span class="built_in">ls</span></span><br><span class="line"></span><br><span class="line">hard   myfile soft</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>硬链接： 与普通文件没什么不同，<code>inode</code> 都指向同一个文件在硬盘中的区块，删除一个指针不会真正删除文件，只有把所有的指针都删除才会真正删除文件。</li>
+<li>软链接： 保存了其代表的文件的绝对路径，是另外一种文件，在硬盘上有独立的区块，访问时替换自身路径。</li>
+</ul>
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://mp.weixin.qq.com/s/WQeOfZtyKndbDebe66-V_g</span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com">ascotbe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/2019/08/12/LinuxStudyNotes/">https://www.ascotbe.com/2019/08/12/LinuxStudyNotes/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com" target="_blank">ascotbe</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a><a class="post-meta__tags" href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">应急响应</a></div><div class="post_share"><div class="social-share" data-image="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/34.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2019/08/15/Docker/"><img class="prev-cover" src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/24.jpg" onerror="onerror=null;src='/img/404.gif'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Docker笔记</div></div></a></div><div class="next-post pull-right"><a href="/2019/06/29/raspberry/"><img class="next-cover" src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/35.jpg" onerror="onerror=null;src='/img/404.gif'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">P4wnP1全家桶安装及实战</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/07/23/InformationGathering/" title="信息收集总结"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/109.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-23</div><div class="title">信息收集总结</div></div></a></div><div><a href="/2019/09/05/KnowledgeNavigationFile/" title="杂项知识汇总"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/43.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2019-09-05</div><div class="title">杂项知识汇总</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ascotbe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">24</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ascotbe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:ascotbe@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a><a class="social-icon" href="https://steamcommunity.com/id/ascotbe" target="_blank" title=""><i class="iconfont icon-steam"></i></a><a class="social-icon" href="https://twitter.com/asc0t6e" target="_blank" title=""><i class="iconfont icon-twitter"></i></a><a class="social-icon" href="https://t.me/ascotbe" target="_blank" title=""><i class="iconfont icon-telegram"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章都是本人学习笔记仅限交流探讨，禁止利用文章思路进行违法操作，否则与作者无关，如果您不同意请关闭本站 <img src= "/img/loading.gif" data-lazy-src="/img/announcement.gif" style="zoom:75%;" ></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B9%E7%9B%AE%E5%BD%95%E8%A7%A3%E6%9E%90"><span class="toc-number">1.</span> <span class="toc-text">根目录解析</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6"><span class="toc-number">2.</span> <span class="toc-text">日志文件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9F%BA%E7%A1%80%E6%9F%A5%E7%9C%8B%E4%BF%A1%E6%81%AF%E6%9D%82%E9%A1%B9"><span class="toc-number">3.</span> <span class="toc-text">基础查看信息杂项</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%A4root%E4%B9%8B%E5%A4%96%EF%BC%8C%E6%98%AF%E5%90%A6%E8%BF%98%E6%9C%89%E5%85%B6%E5%AE%83%E7%89%B9%E6%9D%83%E7%94%A8%E6%88%B7-uid-%E4%B8%BA0"><span class="toc-number">3.0.1.</span> <span class="toc-text">除root之外，是否还有其它特权用户(uid 为0)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%8F%AF%E4%BB%A5%E8%BF%9C%E7%A8%8B%E7%99%BB%E5%BD%95%E7%9A%84%E5%B8%90%E5%8F%B7%E4%BF%A1%E6%81%AF"><span class="toc-number">3.0.2.</span> <span class="toc-text">可以远程登录的帐号信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%99%BB%E5%BD%95%E5%A4%B1%E8%B4%A5%E4%BF%A1%E6%81%AF"><span class="toc-number">3.0.3.</span> <span class="toc-text">查看登录失败信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E7%99%BB%E5%BD%95%E7%88%86%E7%A0%B4%E7%9A%84%E7%AC%AC%E4%B8%80%E8%A1%8C%E5%92%8C%E6%9C%80%E5%90%8E%E4%B8%80%E8%A1%8C%EF%BC%8C%E7%A1%AE%E8%AE%A4%E7%88%86%E7%A0%B4%E6%97%B6%E9%97%B4%E8%8C%83%E5%9B%B4"><span class="toc-number">3.0.4.</span> <span class="toc-text">输出登录爆破的第一行和最后一行，确认爆破时间范围</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E8%AF%A2%E7%88%86%E7%A0%B4%E7%9A%84IP%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">3.0.5.</span> <span class="toc-text">查询爆破的IP有哪些</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%88%86%E7%A0%B4%E7%94%A8%E6%88%B7%E5%90%8D%E5%AD%97%E5%85%B8%E9%83%BD%E6%9C%89%E5%93%AA%E4%BA%9B%EF%BC%9F"><span class="toc-number">3.0.6.</span> <span class="toc-text">爆破用户名字典都有哪些？</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F%E7%9A%84%E6%97%A5%E6%9C%9F%E3%80%81%E7%94%A8%E6%88%B7%E5%90%8D%E3%80%81IP"><span class="toc-number">3.0.7.</span> <span class="toc-text">登录成功的日期、用户名、IP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lastlog%E5%88%97%E5%87%BA%E6%89%80%E6%9C%89%E7%94%A8%E6%88%B7%E6%9C%80%E8%BF%91%E7%99%BB%E5%BD%95%E7%9A%84%E4%BF%A1%E6%81%AF"><span class="toc-number">3.0.8.</span> <span class="toc-text">lastlog列出所有用户最近登录的信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#last-%E5%88%97%E5%87%BA%E5%BD%93%E5%89%8D%E5%92%8C%E6%9B%BE%E7%BB%8F%E7%99%BB%E5%85%A5%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%94%A8%E6%88%B7%E4%BF%A1%E6%81%AF"><span class="toc-number">3.0.9.</span> <span class="toc-text">last  列出当前和曾经登入系统的用户信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#lastb-%E5%88%97%E5%87%BA%E5%A4%B1%E8%B4%A5%E5%B0%9D%E8%AF%95%E7%9A%84%E7%99%BB%E5%BD%95%E4%BF%A1%E6%81%AF"><span class="toc-number">3.0.10.</span> <span class="toc-text">lastb  列出失败尝试的登录信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%9F%E8%AE%A1%E4%B8%80%E4%B8%8B%E7%99%BB%E5%BD%95%E6%88%90%E5%8A%9F%E7%9A%84IP%E6%9C%89%E5%93%AA%E4%BA%9B"><span class="toc-number">3.0.11.</span> <span class="toc-text">统计一下登录成功的IP有哪些</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%99%A4root%E5%B8%90%E5%8F%B7%E5%A4%96%EF%BC%8C%E5%85%B6%E4%BB%96%E5%B8%90%E5%8F%B7%E6%98%AF%E5%90%A6%E5%AD%98%E5%9C%A8sudo%E6%9D%83%E9%99%90%E3%80%82%E5%A6%82%E9%9D%9E%E7%AE%A1%E7%90%86%E9%9C%80%E8%A6%81%EF%BC%8C%E6%99%AE%E9%80%9A%E5%B8%90%E5%8F%B7%E5%BA%94%E5%88%A0%E9%99%A4sudo%E6%9D%83%E9%99%90"><span class="toc-number">3.0.12.</span> <span class="toc-text">除root帐号外，其他帐号是否存在sudo权限。如非管理需要，普通帐号应删除sudo权限</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A6%81%E7%94%A8%E6%88%96%E5%88%A0%E9%99%A4%E5%A4%9A%E4%BD%99%E5%8F%8A%E5%8F%AF%E7%96%91%E7%9A%84%E5%B8%90%E5%8F%B7"><span class="toc-number">3.0.13.</span> <span class="toc-text">禁用或删除多余及可疑的帐号</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%A2%9E%E5%8A%A0%E4%B8%80%E4%B8%AA%E7%94%A8%E6%88%B7kali%E6%97%A5%E5%BF%97"><span class="toc-number">3.0.14.</span> <span class="toc-text">增加一个用户kali日志</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%88%A0%E9%99%A4%E7%94%A8%E6%88%B7kali%E6%97%A5%E5%BF%97"><span class="toc-number">3.0.15.</span> <span class="toc-text">删除用户kali日志</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#sudo%E6%8E%88%E6%9D%83%E6%89%A7%E8%A1%8C"><span class="toc-number">3.0.16.</span> <span class="toc-text">sudo授权执行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BD%BF%E7%94%A8ps%E5%91%BD%E4%BB%A4%EF%BC%8C%E5%88%86%E6%9E%90%E8%BF%9B%E7%A8%8B"><span class="toc-number">3.0.17.</span> <span class="toc-text">使用ps命令，分析进程</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%93%E9%A1%B9%E4%BD%BF%E7%94%A8"><span class="toc-number">4.</span> <span class="toc-text">专项使用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#SSH%E7%9B%B8%E5%85%B3%E6%93%8D%E4%BD%9C"><span class="toc-number">4.0.1.</span> <span class="toc-text">SSH相关操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#histroy%E5%91%BD%E4%BB%A4"><span class="toc-number">4.0.2.</span> <span class="toc-text">histroy命令</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#netstat%E5%91%BD%E4%BB%A4"><span class="toc-number">4.0.2.1.</span> <span class="toc-text">netstat命令</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E4%B8%8Bpid%E6%89%80%E5%AF%B9%E5%BA%94%E7%9A%84%E8%BF%9B%E7%A8%8B%E6%96%87%E4%BB%B6%E4%BF%A1%E6%81%AF"><span class="toc-number">4.0.3.</span> <span class="toc-text">查看下pid所对应的进程文件信息</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%AE%9A%E6%97%B6%E4%BB%BB%E5%8A%A1"><span class="toc-number">4.0.4.</span> <span class="toc-text">查看定时任务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Bssh%E7%A7%98%E9%92%A5"><span class="toc-number">4.0.5.</span> <span class="toc-text">查看ssh秘钥</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8BCPU%E8%BF%90%E8%A1%8C"><span class="toc-number">4.0.6.</span> <span class="toc-text">查看CPU运行</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BB%93%E6%9D%9F%E8%BF%9B%E7%A8%8B"><span class="toc-number">4.0.7.</span> <span class="toc-text">结束进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E8%BF%9B%E7%A8%8B"><span class="toc-number">4.0.8.</span> <span class="toc-text">查看进程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%BC%80%E6%9C%BA%E5%90%AF%E5%8A%A8%E7%9A%84%E4%B8%80%E4%BA%9B%E8%B7%AF%E5%BE%84"><span class="toc-number">4.0.9.</span> <span class="toc-text">开机启动的一些路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B0%81%E7%A6%81IP"><span class="toc-number">4.0.10.</span> <span class="toc-text">封禁IP</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E6%9C%8D%E5%8A%A1"><span class="toc-number">4.0.11.</span> <span class="toc-text">查看系统服务</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E4%B8%8B%E8%BD%BD"><span class="toc-number">4.0.12.</span> <span class="toc-text">文件下载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%AF%B9%E6%96%87%E4%BB%B6%E8%BF%9B%E8%A1%8C%E9%99%90%E5%88%B6"><span class="toc-number">4.0.13.</span> <span class="toc-text">对文件进行限制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#alias-%E5%AE%9A%E4%B9%89%E6%88%96%E6%98%BE%E7%A4%BA%E5%88%AB%E5%90%8D"><span class="toc-number">4.0.14.</span> <span class="toc-text">alias 定义或显示别名</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#cmatrix%E5%91%BD%E4%BB%A4"><span class="toc-number">4.0.15.</span> <span class="toc-text">cmatrix命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#oneko-%E5%91%BD%E4%BB%A4"><span class="toc-number">4.0.16.</span> <span class="toc-text">oneko 命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%AF%86%E7%A0%81"><span class="toc-number">4.0.17.</span> <span class="toc-text">查看密码</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E7%94%A8%E6%88%B7"><span class="toc-number">4.0.18.</span> <span class="toc-text">设置用户</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#checksec%E5%8F%82%E6%95%B0"><span class="toc-number">4.0.19.</span> <span class="toc-text">checksec参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#gdb%E5%9F%BA%E6%9C%AC%E5%91%BD%E4%BB%A4"><span class="toc-number">4.0.20.</span> <span class="toc-text">gdb基本命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#auditd%E5%91%BD%E4%BB%A4"><span class="toc-number">4.0.21.</span> <span class="toc-text">auditd命令</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%8C%82%E4%BB%A3%E7%90%86"><span class="toc-number">4.0.22.</span> <span class="toc-text">挂代理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">4.0.23.</span> <span class="toc-text">文件的一些小操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BF%9B%E7%A8%8B%E7%9A%84%E4%B8%80%E4%BA%9B%E5%B0%8F%E6%93%8D%E4%BD%9C"><span class="toc-number">4.0.24.</span> <span class="toc-text">进程的一些小操作</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%BB%E6%9C%BA%E5%BC%82%E5%B8%B8%E6%A3%80%E6%B5%8B"><span class="toc-number">4.0.25.</span> <span class="toc-text">主机异常检测</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E5%BD%93%E5%89%8D%E8%B7%AF%E5%BE%84"><span class="toc-number">4.0.26.</span> <span class="toc-text">查看当前路径</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8B%E7%B3%BB%E7%BB%9F%E8%AF%A6%E7%BB%86%E5%8F%82%E6%95%B0"><span class="toc-number">4.0.27.</span> <span class="toc-text">查看系统详细参数</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#top%E5%91%BD%E4%BB%A4%E8%AF%A6%E7%BB%86%E8%AE%B2%E8%A7%A3"><span class="toc-number">4.0.28.</span> <span class="toc-text">top命令详细讲解</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A2%9E%E5%A4%A7ELF%E6%96%87%E4%BB%B6%E4%BD%93%E7%A7%AF"><span class="toc-number">5.</span> <span class="toc-text">增大ELF文件体积</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%87%E4%BB%B6%E6%9C%AB%E5%B0%BE%E8%BF%BD%E5%8A%A0%E6%95%B0%E6%8D%AE"><span class="toc-number">5.0.1.</span> <span class="toc-text">文件末尾追加数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A8%80%E7%96%8F%E6%96%87%E4%BB%B6"><span class="toc-number">5.0.2.</span> <span class="toc-text">稀疏文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9inode%E5%85%83%E6%95%B0%E6%8D%AE"><span class="toc-number">5.0.3.</span> <span class="toc-text">修改inode元数据</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%90%91elf%E6%96%87%E4%BB%B6%E8%8A%82%E4%B8%AD%E6%B7%BB%E5%8A%A0%E5%9E%83%E5%9C%BE%E6%95%B0%E6%8D%AE"><span class="toc-number">5.0.4.</span> <span class="toc-text">向elf文件节中添加垃圾数据</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%86%85%E6%A0%B8%E5%AD%A6%E4%B9%A0"><span class="toc-number">6.</span> <span class="toc-text">内核学习</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AF%E8%BF%9E%E6%8E%A5%E5%92%8C%E7%A1%AC%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-number">6.0.1.</span> <span class="toc-text">软连接和硬连接的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">7.</span> <span class="toc-text">参考文章</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/24/FPV/" title="FPV笔记"><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/151.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="FPV笔记"/></a><div class="content"><a class="title" href="/2022/10/24/FPV/" title="FPV笔记">FPV笔记</a><time datetime="2022-10-24T13:01:07.000Z" title="发表于 2022-10-24 21:01:07">2022-10-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/22/Python/" title="代码审计笔记（Python）"><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/150.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="代码审计笔记（Python）"/></a><div class="content"><a class="title" href="/2022/09/22/Python/" title="代码审计笔记（Python）">代码审计笔记（Python）</a><time datetime="2022-09-22T15:58:53.000Z" title="发表于 2022-09-22 23:58:53">2022-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/14/BadUSB_0x01/" title="简单的BadUSB"><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/149.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="简单的BadUSB"/></a><div class="content"><a class="title" href="/2022/07/14/BadUSB_0x01/" title="简单的BadUSB">简单的BadUSB</a><time datetime="2022-07-14T15:58:53.000Z" title="发表于 2022-07-14 23:58:53">2022-07-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/19/CSGO_0x08/" title="CSGO破解学习(八)"><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/148.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(八)"/></a><div class="content"><a class="title" href="/2022/05/19/CSGO_0x08/" title="CSGO破解学习(八)">CSGO破解学习(八)</a><time datetime="2022-05-19T15:58:53.000Z" title="发表于 2022-05-19 23:58:53">2022-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/12/CSGO_0x07/" title="CSGO破解学习(七)"><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/147.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(七)"/></a><div class="content"><a class="title" href="/2022/05/12/CSGO_0x07/" title="CSGO破解学习(七)">CSGO破解学习(七)</a><time datetime="2022-05-12T15:58:53.000Z" title="发表于 2022-05-12 23:58:53">2022-05-12</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://raw.staticdn.net/Ascotbe/Image/master/Blog/34.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 <i id="heartbeat" class="fa fas fa-heartbeat"></i> By ascotbe</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.ascotbe.com/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', '')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme () {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script src="/js/snowflake.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":true,"model":{"jsonPath":"/live2dw/assets/ots14_3001.model.json"},"display":{"position":"right","width":350,"height":400,"hOffset":-50,"vOffset":0},"mobile":{"show":false},"log":false});</script></body></html>

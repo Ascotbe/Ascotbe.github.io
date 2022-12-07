@@ -1,0 +1,249 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Linux栈溢出总结（0x00） | ascotbe</title><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！    前言  距离第一篇栈溢出学习文章已经过去了1年半了，今天看到一篇文章终于解决了之前的一些疑惑，也理清了很多东西，记录一下，原文地址 1https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;cmLp5aHfqy1-wYiNiqdq-Q">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux栈溢出总结（0x00）">
+<meta property="og:url" content="https://www.ascotbe.com/2022/02/22/StackOverflow_Linux_0x00/index.html">
+<meta property="og:site_name" content="ascotbe">
+<meta property="og:description" content="郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！    前言  距离第一篇栈溢出学习文章已经过去了1年半了，今天看到一篇文章终于解决了之前的一些疑惑，也理清了很多东西，记录一下，原文地址 1https:&#x2F;&#x2F;mp.weixin.qq.com&#x2F;s&#x2F;cmLp5aHfqy1-wYiNiqdq-Q">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/139.jpg">
+<meta property="article:published_time" content="2022-02-22T10:45:42.000Z">
+<meta property="article:modified_time" content="2022-12-07T10:53:31.229Z">
+<meta property="article:author" content="ascotbe">
+<meta property="article:tag" content="栈">
+<meta property="article:tag" content="溢出">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/139.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.ascotbe.com/2022/02/22/StackOverflow_Linux_0x00/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"本篇文章距最近一次更新已过去","messageNext":"天，文章内容有可能过时."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: ascotbe","link":"链接: ","source":"来源: ascotbe","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Linux栈溢出总结（0x00）',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2022-12-07 18:53:31'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3133731_25dh7dx5bg4.css"><link rel="stylesheet" href="/css/beating_icon.css"><link rel="stylesheet" href="/css/mouse.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="ascotbe" type="application/atom+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">24</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-dongwu"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> Contents</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-danger-full"></i><span> Archives</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-zhiwu"></i><span> Categories</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tubiaozhizuomoban-"></i><span> Tags</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw iconfont icon-godot-assets1"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery"><i class="fa-fw iconfont icon-forms_dota_dragon_big"></i><span> Gallery</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw iconfont icon-FaceID"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-maomi_touxiang"></i><span> About</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.staticdn.net/Ascotbe/Image/master/Blog/139.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ascotbe</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-dongwu"></i><span> Home</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> Contents</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-danger-full"></i><span> Archives</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-zhiwu"></i><span> Categories</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tubiaozhizuomoban-"></i><span> Tags</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw iconfont icon-godot-assets1"></i><span> Loophole</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery"><i class="fa-fw iconfont icon-forms_dota_dragon_big"></i><span> Gallery</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw iconfont icon-FaceID"></i><span> Link</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-maomi_touxiang"></i><span> About</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Linux栈溢出总结（0x00）</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-22T10:45:42.000Z" title="发表于 2022-02-22 18:45:42">2022-02-22</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2022-12-07T10:53:31.229Z" title="更新于 2022-12-07 18:53:31">2022-12-07</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%80%86%E5%90%91/">逆向</a><i class="fas fa-angle-right post-meta-separator"></i><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E9%80%86%E5%90%91/%E5%A0%86%E6%A0%88/">堆栈</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">1.9k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>6分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Linux栈溢出总结（0x00）"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="note danger modern"><p>郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！</p>
+</div>
+
+<blockquote>
+<p>前言</p>
+</blockquote>
+<p>距离第一篇栈溢出学习文章已经过去了1年半了，今天看到一篇文章终于解决了之前的一些疑惑，也理清了很多东西，记录一下，原文地址</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://mp.weixin.qq.com/s/cmLp5aHfqy1-wYiNiqdq-Q</span><br></pre></td></tr></table></figure>
+
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.github.com/Ascotbe/Image/master/StackOverflow/50.gif" alt="图片"></p>
+<h2 id="什么是栈"><a href="#什么是栈" class="headerlink" title="什么是栈"></a>什么是栈</h2><p>简单来说，<code>栈</code> 是一种 <code>LIFO（Last In Frist Out，后进先出）</code> 形式的数据结构。栈一般是从高地址向低地址增长，并且栈支持 <code>push（入栈）</code> 和 <code>pop（出栈）</code> 两个操作。如下图所示：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.github.com/Ascotbe/Image/master/StackOverflow/42.png" alt="图片"></p>
+<p><code>push</code> 操作先将 <code>栈顶（sp指针）</code> 向下移动一个位置，然后将数据写入到新的栈顶；而 <code>pop</code> 操作会从 <code>栈顶</code> 读取数据，并且将 <code>栈顶（sp指针）</code> 向上移动一个位置。</p>
+<p>例如，将 0x100 压入栈，过程如下图所示：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.github.com/Ascotbe/Image/master/StackOverflow/43.png" alt="图片"></p>
+<p>我们再来看看 <code>出栈</code> 操作，如下图所示：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.github.com/Ascotbe/Image/master/StackOverflow/44.png" alt="图片"></p>
+<h2 id="栈帧"><a href="#栈帧" class="headerlink" title="栈帧"></a>栈帧</h2><p><code>栈帧</code>，也就是 <code>Sack Frame</code>，其本质就是一种栈，只是这种栈专门用于保存函数调用过程中的各种信息（参数，返回地址，本地变量等）。</p>
+<p><code>栈帧</code> 有 <code>栈顶</code> 和 <code>栈底</code> 之分，其中栈顶的地址最低，栈底的地址最高。SP(栈指针) 就是一直指向栈顶的。在 x86 的 32 位 CPU 中，我们用 <code>%ebp</code> 寄存器指向栈底，也就是基址指针；用 <code>%esp</code> 寄存器指向栈顶，也就是栈指针。下面是一个栈帧的示意图：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.github.com/Ascotbe/Image/master/StackOverflow/45.png" alt="图片"></p>
+<p>一般来说，我们将 <code>%ebp</code> 到 <code>%esp</code> 之间区域当做栈帧。并不是整个栈空间只有一个栈帧，每调用一个函数，就会生成一个新的栈帧。</p>
+<p>在函数调用过程中，我们将调用函数的函数称为：<code>调用者(caller)</code>，将被调用的函数称为：<code>被调用者(callee)</code>。在这个过程中：</p>
+<ul>
+<li><code>调用者</code> 需要知道在哪里获取 <code>被调用者</code> 返回的值（一般存放到 <code>%eax</code> 寄存器）。</li>
+<li><code>被调用者</code> 需要知道传入的参数在哪里和调用完后的返回地址在哪里。</li>
+<li>我们需要保证在 <code>被调用者</code> 返回后，<code>%ebp</code> 和 <code>%esp</code> 寄存器的值应该和调用前一致。</li>
+</ul>
+<h2 id="函数调用"><a href="#函数调用" class="headerlink" title="函数调用"></a>函数调用</h2><p>现在，我们来看看函数调用时，栈帧是如何变化的。</p>
+<p>我们以一个函数调用的实例来解说，代码如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// stack.c</span></span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">add_func</span><span class="params">(<span class="type">int</span> a, <span class="type">int</span> b)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> c, d;</span><br><span class="line"></span><br><span class="line">    c = a;</span><br><span class="line">    d = b;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> c + d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span> *argv[])</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">int</span> total;</span><br><span class="line"></span><br><span class="line">    total = add_func(<span class="number">1</span>, <span class="number">2</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们使用命令 <code>gcc -S -m32 stack.c</code> 来编译上面的代码，获取的汇编代码如下所示（去掉一些无关紧要的信息）：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">add_func:</span><br><span class="line">    pushl   %ebp                // 保存ebp寄存器到栈</span><br><span class="line">    movl    %esp, %ebp          // 把ebp进程设置为esp的值</span><br><span class="line">    subl    $16, %esp           // 为局部变量申请空间</span><br><span class="line">    movl    8(%ebp), %eax       // 把参数a保存到eax寄存器中</span><br><span class="line">    movl    %eax, -8(%ebp)      // 把eax寄存器的值保存到局部变量c中（c = a）</span><br><span class="line">    movl    12(%ebp), %eax      // 把参数b保存到eax寄存器中</span><br><span class="line">    movl    %eax, -4(%ebp)      // 把eax寄存器到值保存到局部变量d中（d = b）</span><br><span class="line">    movl    -8(%ebp), %edx      // 把d的值保存到edx寄存器中</span><br><span class="line">    movl    -4(%ebp), %eax      // 把c的值保存到eax寄存器中</span><br><span class="line">    addl    %edx, %eax          // 将eax寄存器与edx寄存器的值相加，保存到eax中（返回值）</span><br><span class="line">    leave</span><br><span class="line">    ret                         // 函数返回</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<p>可能汇编代码比较难看懂，我们用下面的插图来说明这个调用过程：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.github.com/Ascotbe/Image/master/StackOverflow/46.png" alt="图片"></p>
+<p>如上图所示，调用过程如下：</p>
+<ul>
+<li>在 <code>main()</code> 函数调用 <code>add_func()</code> 函数前，先将调用 <code>add_func()</code> 函数的参数压栈。</li>
+<li>在调用 <code>add_func()</code> 函数时，会将 <code>返回地址</code> 压栈，接着进入 <code>add_func()</code> 函数。</li>
+<li><code>add_func()</code> 函数执行时，会将原来的 <code>ebp寄存器</code> 的值压栈，然后把 <code>ebp寄存器</code> 的设置为 <code>esp寄存器</code> 的值。</li>
+<li>接着 <code>add_func()</code> 函数会为局部变量申请空间，也就是将 <code>esp寄存器</code> 向下移动。</li>
+<li>然后把局部变量 <code>c</code> 设置为参数 <code>a</code> 的值，局部变量 <code>d</code> 设置为 参数 <code>b</code> 的值。</li>
+<li>最后将局部变量 c 和 d 的值相加，放置到 <code>eax寄存器</code> 中（C语言规定以 <code>eax寄存器</code> 传递返回值），然后调用 <code>ret</code> 指令返回到 <code>main()</code> 函数。</li>
+</ul>
+<h2 id="函数返回"><a href="#函数返回" class="headerlink" title="函数返回"></a>函数返回</h2><p>上面介绍了 <code>函数调用</code> 的过程，现在我们来介绍一下函数调用完毕后，从被调用函数返回到原来的函数过程是如何处理的。</p>
+<p>从 <code>add_func()</code> 函数的汇编代码可以看到，当被调用函数执行完毕返回到调用函数前，会执行 <code>leave</code> 指令，这条指令等价于：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">movl %ebp, %esp</span><br><span class="line">popl %ebp</span><br></pre></td></tr></table></figure>
+
+<p>这两条汇编指令的意思是，将 <code>esp寄存器</code> 和 <code>ebp寄存器</code> 恢复到调用函数前的值。</p>
+<p>然后，调用 <code>ret</code> 指令返回到原来的函数。<code>ret</code> 指令会从栈顶获取 <code>返回地址</code>，然后跳转到（<code>jmp指令</code>）此地址继续执行。这时的 <code>栈帧</code> 的结构如下图所示：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.github.com/Ascotbe/Image/master/StackOverflow/47.png" alt="图片"></p>
+<h2 id="栈溢出攻击"><a href="#栈溢出攻击" class="headerlink" title="栈溢出攻击"></a>栈溢出攻击</h2><p>前面说了那么，都是为了 <code>栈溢出攻击</code> 这节作铺垫的。通过前面的学习，我们知道调用函数的 <code>参数</code> 、执行完函数后的 <code>返回地址</code> 和被调用函数的 <code>局部变量</code> 都是存放在栈中的。</p>
+<p>如果在调用函数时，不小心将 <code>返回地址</code> 覆盖了，那么调用完函数后，将不会跳转到原来的函数继续执行，而是跳转到覆盖后的地址执行。如下图所示：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.github.com/Ascotbe/Image/master/StackOverflow/48.png" alt="图片"></p>
+<p>那么，怎样才能把 <code>返回地址</code> 覆盖呢？我们可以通过下面的例子来说明：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;stdint.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> PTR_SIZE 8   <span class="comment">// 指针的大小</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> EBP_SIZE 8   <span class="comment">// ebp寄存器的大小</span></span></span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">inject_callback</span><span class="params">()</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;inject_callback called...\n&quot;</span>);</span><br><span class="line">    <span class="built_in">exit</span>(<span class="number">0</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">void</span> <span class="title function_">func_call</span><span class="params">(<span class="type">char</span> *addr, <span class="type">int</span> len)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">char</span> tmpBuf[<span class="number">16</span>] = &#123;<span class="number">0xff</span>&#125;;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">memcpy</span>(tmpBuf + <span class="number">16</span> + EBP_SIZE, addr, len);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;func_call called...\n&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="type">int</span> <span class="title function_">main</span><span class="params">(<span class="type">int</span> argc, <span class="type">char</span>** argv)</span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="type">uint64_t</span> injectPtr = (<span class="type">uint64_t</span>)&amp;inject_callback;</span><br><span class="line"></span><br><span class="line">    func_call(&amp;injectPtr, PTR_SIZE);</span><br><span class="line"></span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">&quot;main exited...\n&quot;</span>);</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>我们使用以下命令编译上面代码，并且执行：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ gcc stack-overflow.c -fno-stack-protector -o stack-overflow</span><br><span class="line">$ ./stack-overflow</span><br><span class="line">func_call called...</span><br><span class="line">inject_callback called...</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>在编译上面程序时，一定要加上 <code>-fno-stack-protector</code> 参数，否则将会触发栈溢出保护，导致执行失败。</p>
+</blockquote>
+<p>在上面的代码中，我们并没有直接调用 <code>inject_callback()</code> 函数，而是通过把 <code>inject_callback()</code> 函数的地址复制到 <code>func_call()</code> 函数的局部变量 <code>tmpBuf</code> 中。</p>
+<p>由于局部变量 <code>tmpBuf</code> 的类型为字符串数组，而且大小为 16 个字节。但我们复制数据是从 24（16 + 8）处开始复制，已经超出了局部变量 <code>tmpBuf</code> 的大小，如下图所示：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.github.com/Ascotbe/Image/master/StackOverflow/49.png" alt="图片"></p>
+<p>从上图可以看出，<code>func_call()</code> 函数在调用 <code>memcpy()</code> 函数复制数据时，由于不小心用 <code>inject_callback()</code> 函数的地址覆盖了返回地址，导致 <code>func_call()</code> 函数执行完毕后，跳转到 <code>inject_callback()</code> 函数处执行。</p>
+<p>这就是 <code>栈溢出攻击</code> 的原理，而导致 <code>栈溢出攻击</code> 的原因就是：调用 <code>memcpy()</code>、<code>strcpy()</code> 等函数复制数据时，没有对数据的长度进行验证，从而 <code>返回地址</code> 被复制的数据覆盖了。</p>
+<p>黑客可以利用 <code>栈溢出攻击</code> 来把函数的返回地址修改成入侵代码的地址，从而实现攻击的目的。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com">ascotbe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/2022/02/22/StackOverflow_Linux_0x00/">https://www.ascotbe.com/2022/02/22/StackOverflow_Linux_0x00/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com" target="_blank">ascotbe</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%A0%88/">栈</a><a class="post-meta__tags" href="/tags/%E6%BA%A2%E5%87%BA/">溢出</a></div><div class="post_share"><div class="social-share" data-image="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/139.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2022/03/20/CSGO_0x01/"><img class="prev-cover" src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/140.jpg" onerror="onerror=null;src='/img/404.gif'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CSGO破解学习(一)</div></div></a></div><div class="next-post pull-right"><a href="/2021/12/01/WindowsStudyNotes/"><img class="next-cover" src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/134.jpg" onerror="onerror=null;src='/img/404.gif'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Windows学习笔记</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2021/03/26/StackOverflow_Linux_0x03/" title="Linux栈溢出总结（0x03）"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/122.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2021-03-26</div><div class="title">Linux栈溢出总结（0x03）</div></div></a></div><div><a href="/2020/11/20/StackOverflow_Linux_0x02/" title="Linux栈溢出总结（0x02）"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/118.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-20</div><div class="title">Linux栈溢出总结（0x02）</div></div></a></div><div><a href="/2020/11/19/StackOverflow_Linux_0x01/" title="Linux栈溢出总结（0x01）"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/117.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-11-19</div><div class="title">Linux栈溢出总结（0x01）</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ascotbe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">67</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">72</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">24</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ascotbe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:ascotbe@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a><a class="social-icon" href="https://steamcommunity.com/id/ascotbe" target="_blank" title=""><i class="iconfont icon-steam"></i></a><a class="social-icon" href="https://twitter.com/asc0t6e" target="_blank" title=""><i class="iconfont icon-twitter"></i></a><a class="social-icon" href="https://t.me/ascotbe" target="_blank" title=""><i class="iconfont icon-telegram"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章都是本人学习笔记仅限交流探讨，禁止利用文章思路进行违法操作，否则与作者无关，如果您不同意请关闭本站 <img src= "/img/loading.gif" data-lazy-src="/img/announcement.gif" style="zoom:75%;" ></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AF%E6%A0%88"><span class="toc-number">1.</span> <span class="toc-text">什么是栈</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%88%E5%B8%A7"><span class="toc-number">2.</span> <span class="toc-text">栈帧</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%B0%83%E7%94%A8"><span class="toc-number">3.</span> <span class="toc-text">函数调用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%87%BD%E6%95%B0%E8%BF%94%E5%9B%9E"><span class="toc-number">4.</span> <span class="toc-text">函数返回</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%88%E6%BA%A2%E5%87%BA%E6%94%BB%E5%87%BB"><span class="toc-number">5.</span> <span class="toc-text">栈溢出攻击</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2022/10/24/FPV/" title="FPV笔记"><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/151.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="FPV笔记"/></a><div class="content"><a class="title" href="/2022/10/24/FPV/" title="FPV笔记">FPV笔记</a><time datetime="2022-10-24T13:01:07.000Z" title="发表于 2022-10-24 21:01:07">2022-10-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/09/22/Python/" title="代码审计笔记（Python）"><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/150.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="代码审计笔记（Python）"/></a><div class="content"><a class="title" href="/2022/09/22/Python/" title="代码审计笔记（Python）">代码审计笔记（Python）</a><time datetime="2022-09-22T15:58:53.000Z" title="发表于 2022-09-22 23:58:53">2022-09-22</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/07/14/BadUSB_0x01/" title="简单的BadUSB"><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/149.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="简单的BadUSB"/></a><div class="content"><a class="title" href="/2022/07/14/BadUSB_0x01/" title="简单的BadUSB">简单的BadUSB</a><time datetime="2022-07-14T15:58:53.000Z" title="发表于 2022-07-14 23:58:53">2022-07-14</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/19/CSGO_0x08/" title="CSGO破解学习(八)"><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/148.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(八)"/></a><div class="content"><a class="title" href="/2022/05/19/CSGO_0x08/" title="CSGO破解学习(八)">CSGO破解学习(八)</a><time datetime="2022-05-19T15:58:53.000Z" title="发表于 2022-05-19 23:58:53">2022-05-19</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2022/05/12/CSGO_0x07/" title="CSGO破解学习(七)"><img src= "/img/loading.gif" data-lazy-src="https://raw.staticdn.net/Ascotbe/Image/master/BlogCover/147.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(七)"/></a><div class="content"><a class="title" href="/2022/05/12/CSGO_0x07/" title="CSGO破解学习(七)">CSGO破解学习(七)</a><time datetime="2022-05-12T15:58:53.000Z" title="发表于 2022-05-12 23:58:53">2022-05-12</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://raw.staticdn.net/Ascotbe/Image/master/Blog/139.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2022 <i id="heartbeat" class="fa fas fa-heartbeat"></i> By ascotbe</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.ascotbe.com/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', '')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme () {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script src="/js/snowflake.js"></script><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":true,"model":{"jsonPath":"/live2dw/assets/ots14_3001.model.json"},"display":{"position":"right","width":350,"height":400,"hOffset":-50,"vOffset":0},"mobile":{"show":false},"log":false});</script></body></html>
