@@ -1,6 +1,10 @@
 ## 文章列表  
+### **2023-02** (1)  
+- 2023-02-07 [微积分](https://www.ascotbe.com/2023/02/07/FurtherMathematics_0x02/)  
+  
+  
 ### **2022-12** (1)  
-- 2022-12-07 [高等数学](https://www.ascotbe.com/2022/12/07/FurtherMathematics_0x01/)  
+- 2022-12-07 [函数与映射](https://www.ascotbe.com/2022/12/07/FurtherMathematics_0x01/)  
   
   
 ### **2022-10** (1)  
