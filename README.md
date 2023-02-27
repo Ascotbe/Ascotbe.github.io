@@ -1,5 +1,6 @@
 ## 文章列表  
-### **2023-02** (4)  
+### **2023-02** (5)  
+- 2023-02-27 [函数的单调性、曲线的凹凸性、极值](https://www.ascotbe.com/2023/02/27/FurtherMathematics_0x06/)  
 - 2023-02-26 [泰勒展开](https://www.ascotbe.com/2023/02/26/FurtherMathematics_0x05/)  
 - 2023-02-16 [洛必达法则](https://www.ascotbe.com/2023/02/16/FurtherMathematics_0x04/)  
 - 2023-02-14 [微分中值定理](https://www.ascotbe.com/2023/02/14/FurtherMathematics_0x03/)  
