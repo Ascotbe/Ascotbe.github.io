@@ -1,5 +1,6 @@
 ## 文章列表  
-### **2023-03** (1)  
+### **2023-03** (2)  
+- 2023-03-10 [定积分](https://www.ascotbe.com/2023/03/10/FurtherMathematics_0x08/)  
 - 2023-03-05 [不定积分](https://www.ascotbe.com/2023/03/05/FurtherMathematics_0x07/)  
   
   
