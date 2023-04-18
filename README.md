@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2023-04** (1)  
+- 2023-04-17 [空间几何及其方程](https://www.ascotbe.com/2023/04/17/FurtherMathematics_0xA/)  
+  
+  
 ### **2023-03** (3)  
 - 2023-03-20 [向量](https://www.ascotbe.com/2023/03/20/FurtherMathematics_0x09/)  
 - 2023-03-10 [定积分](https://www.ascotbe.com/2023/03/10/FurtherMathematics_0x08/)  
