@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2023-05** (1)  
+- 2023-05-24 [多元函数的基本概念](https://www.ascotbe.com/2023/05/24/FurtherMathematics_0xB/)  
+  
+  
 ### **2023-04** (1)  
 - 2023-04-17 [空间几何及其方程](https://www.ascotbe.com/2023/04/17/FurtherMathematics_0xA/)  
   
