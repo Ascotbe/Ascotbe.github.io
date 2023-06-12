@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2023-06** (1)  
+- 2023-06-11 [偏导数与全微分](https://www.ascotbe.com/2023/06/11/FurtherMathematics_0xC/)  
+  
+  
 ### **2023-05** (1)  
 - 2023-05-24 [多元函数的基本概念](https://www.ascotbe.com/2023/05/24/FurtherMathematics_0xB/)  
   
