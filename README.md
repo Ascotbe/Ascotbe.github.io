@@ -1,5 +1,6 @@
 ## 文章列表  
-### **2023-06** (2)  
+### **2023-06** (3)  
+- 2023-06-24 [隐函数求导](https://www.ascotbe.com/2023/06/24/FurtherMathematics_0xE/)  
 - 2023-06-18 [多元复合函数求导法则](https://www.ascotbe.com/2023/06/18/FurtherMathematics_0xD/)  
 - 2023-06-11 [偏导数与全微分](https://www.ascotbe.com/2023/06/11/FurtherMathematics_0xC/)  
   
