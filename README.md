@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2023-07** (1)  
+- 2023-07-03 [多元函数微分的几何应用](https://www.ascotbe.com/2023/07/03/FurtherMathematics_0xF/)  
+  
+  
 ### **2023-06** (3)  
 - 2023-06-24 [隐函数求导](https://www.ascotbe.com/2023/06/24/FurtherMathematics_0xE/)  
 - 2023-06-18 [多元复合函数求导法则](https://www.ascotbe.com/2023/06/18/FurtherMathematics_0xD/)  
