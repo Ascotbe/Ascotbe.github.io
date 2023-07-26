@@ -1,5 +1,6 @@
 ## 文章列表  
-### **2023-07** (1)  
+### **2023-07** (2)  
+- 2023-07-25 [方向导数与梯度](https://www.ascotbe.com/2023/07/25/FurtherMathematics_0x10/)  
 - 2023-07-03 [多元函数微分的几何应用](https://www.ascotbe.com/2023/07/03/FurtherMathematics_0xF/)  
   
   
