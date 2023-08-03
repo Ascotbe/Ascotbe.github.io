@@ -29,7 +29,7 @@
 - 2023-02-26 [泰勒展开](https://www.ascotbe.com/2023/02/26/FurtherMathematics_0x05/)  
 - 2023-02-16 [洛必达法则](https://www.ascotbe.com/2023/02/16/FurtherMathematics_0x04/)  
 - 2023-02-14 [微分中值定理](https://www.ascotbe.com/2023/02/14/FurtherMathematics_0x03/)  
-- 2023-02-07 [极限、导数、微分学](https://www.ascotbe.com/2023/02/07/FurtherMathematics_0x02/)  
+- 2023-02-07 [极限、导数、微分](https://www.ascotbe.com/2023/02/07/FurtherMathematics_0x02/)  
   
   
 ### **2022-12** (1)  
