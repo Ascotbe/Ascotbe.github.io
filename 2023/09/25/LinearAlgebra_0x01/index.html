@@ -1,0 +1,366 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>向量与行列式 | ascotbe</title><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="向量向量的定义$n$个有序的数$a{1},a{2},\ldots,a{n}$所组成的数组称为$n$维向量，这$n$个数称为该向量的$n$个分量，第$i$个数$a{i}$称为第$i$个分量。$n$维向量可写成一行，也可写成一列。$n$也称为该向量的维数。分别称为行向量和列向量:  $n$维列向量： $\left(\begin{array}{c}a{1}\a{2}\\vdots\a_{n}\end{">
+<meta property="og:type" content="article">
+<meta property="og:title" content="向量与行列式">
+<meta property="og:url" content="https://www.ascotbe.com/2023/09/25/LinearAlgebra_0x01/index.html">
+<meta property="og:site_name" content="ascotbe">
+<meta property="og:description" content="向量向量的定义$n$个有序的数$a{1},a{2},\ldots,a{n}$所组成的数组称为$n$维向量，这$n$个数称为该向量的$n$个分量，第$i$个数$a{i}$称为第$i$个分量。$n$维向量可写成一行，也可写成一列。$n$也称为该向量的维数。分别称为行向量和列向量:  $n$维列向量： $\left(\begin{array}{c}a{1}\a{2}\\vdots\a_{n}\end{">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/171.jpg">
+<meta property="article:published_time" content="2023-09-25T15:58:53.000Z">
+<meta property="article:modified_time" content="2023-09-27T09:53:06.426Z">
+<meta property="article:author" content="ascotbe">
+<meta property="article:tag" content="线代">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/171.jpg"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="canonical" href="https://www.ascotbe.com/2023/09/25/LinearAlgebra_0x01/"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free/css/all.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: undefined,
+  translate: undefined,
+  noticeOutdate: {"limitDay":365,"position":"top","messagePrev":"本篇文章距最近一次更新已过去","messageNext":"天，文章内容有可能过时."},
+  highlight: {"plugin":"highlighjs","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"limitCount":50,"languages":{"author":"作者: ascotbe","link":"链接: ","source":"来源: ascotbe","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。"}},
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.js',
+      css: 'https://cdn.jsdelivr.net/npm/flickr-justified-gallery/dist/fjGallery.min.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: '向量与行列式',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: true,
+  isToc: true,
+  postUpdate: '2023-09-27 17:53:06'
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+    win.saveToLocal = {
+      set: function setWithExpiry(key, value, ttl) {
+        if (ttl === 0) return
+        const now = new Date()
+        const expiryDay = ttl * 86400000
+        const item = {
+          value: value,
+          expiry: now.getTime() + expiryDay,
+        }
+        localStorage.setItem(key, JSON.stringify(item))
+      },
+
+      get: function getWithExpiry(key) {
+        const itemStr = localStorage.getItem(key)
+
+        if (!itemStr) {
+          return undefined
+        }
+        const item = JSON.parse(itemStr)
+        const now = new Date()
+
+        if (now.getTime() > item.expiry) {
+          localStorage.removeItem(key)
+          return undefined
+        }
+        return item.value
+      }
+    }
+  
+    win.getScript = url => new Promise((resolve, reject) => {
+      const script = document.createElement('script')
+      script.src = url
+      script.async = true
+      script.onerror = reject
+      script.onload = script.onreadystatechange = function() {
+        const loadState = this.readyState
+        if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+        script.onload = script.onreadystatechange = null
+        resolve()
+      }
+      document.head.appendChild(script)
+    })
+  
+      win.activateDarkMode = function () {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = function () {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          if (t === 'dark') activateDarkMode()
+          else if (t === 'light') activateLightMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+    const detectApple = () => {
+      if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+        document.documentElement.classList.add('apple')
+      }
+    }
+    detectApple()
+    })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3133731_25dh7dx5bg4.css"><link rel="stylesheet" href="/css/beating_icon.css"><link rel="stylesheet" href="/css/mouse.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="ascotbe" type="application/atom+xml">
+<link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">73</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-dongwu"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 内容</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-danger-full"></i><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-zhiwu"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tubiaozhizuomoban-"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw iconfont icon-godot-assets1"></i><span> 漏洞</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery"><i class="fa-fw iconfont icon-forms_dota_dragon_big"></i><span> 图片</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw iconfont icon-FaceID"></i><span> 友联</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-maomi_touxiang"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.githubusercontent.com/Ascotbe/Image/master/Blog/171.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ascotbe</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-dongwu"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 内容</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-danger-full"></i><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-zhiwu"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tubiaozhizuomoban-"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw iconfont icon-godot-assets1"></i><span> 漏洞</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery"><i class="fa-fw iconfont icon-forms_dota_dragon_big"></i><span> 图片</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw iconfont icon-FaceID"></i><span> 友联</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-maomi_touxiang"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">向量与行列式</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-25T15:58:53.000Z" title="发表于 2023-09-25 23:58:53">2023-09-25</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-27T09:53:06.426Z" title="更新于 2023-09-27 17:53:06">2023-09-27</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E7%BA%BF%E6%80%A7%E4%BB%A3%E6%95%B0/">线性代数</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.1k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="向量与行列式"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/0_1.jpg" alt=""></p>
+<h2 id="向量"><a href="#向量" class="headerlink" title="向量"></a>向量</h2><h3 id="向量的定义"><a href="#向量的定义" class="headerlink" title="向量的定义"></a>向量的定义</h3><p>$n$个有序的数$a<em>{1},a</em>{2},\ldots,a<em>{n}$所组成的数组称为$n$维向量，这$n$个数称为该向量的$n$个分量，第$i$个数$a</em>{i}$称为第$i$个分量。$n$维向量可写成一行，也可写成一列。$n$也称为该向量的维数。分别称为行向量和列向量:</p>
+<ul>
+<li><p>$n$维列向量：</p>
+<p>$\left(\begin{array}{c}a<em>{1}\a</em>{2}\\vdots\a_{n}\end{array}\right)$</p>
+</li>
+<li><p>$n$维行向量：</p>
+<p>$\left(a<em>{1},a</em>{2},\ldots,a<em>{n}\right)\text{或}\left(\begin{array}{llll}a</em>{1}&amp;a<em>{2}&amp;\cdots&amp;a</em>{n}\end{array}\right)$</p>
+</li>
+</ul>
+<h4 id="二维向量"><a href="#二维向量" class="headerlink" title="二维向量"></a>二维向量</h4><p>2维向量$\boldsymbol{u}=\left(\begin{array}{l}u<em>{1}\u</em>{2}\end{array}\right)$其实就是直角坐标系中的一个点；也可以认为它是原点指向$\left(\begin{array}{l}u<em>{1}\u</em>{2}\end{array}\right)$的有向线段。这两种几何意义是完全等效的，在本文档中会混用这两者:</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/1.svg" alt="image-20230926173237446"></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/2.svg" alt="image-20230926173248942"></p>
+<p>所以可认为直角坐标系中的任意点都是向量，也可以认为原点指向某点的有向线段都是向量：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/3.gif" alt=""></p>
+<h4 id="三维向量"><a href="#三维向量" class="headerlink" title="三维向量"></a>三维向量</h4><p>3 维向量也是一样的，比如上一节提到的篮球，它作为三维空间中一个点，本身就是向量；也可以认为原点指向它的有向线段是向量：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/4.png" alt="image-20230926173721977"></p>
+<h4 id="N维向量"><a href="#N维向量" class="headerlink" title="N维向量"></a>N维向量</h4><p>对于更高维的向量，比如想描述一个游戏人物的信息：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/5.png" alt="image-20230926173758510"></p>
+<p>就可以用9维列向量或行向量来表示，但就没有什么几何意义了：</p>
+<p>$\begin{pmatrix}16\8\9\19\15\10\end{pmatrix}$ 或$(16, 8, 9, 19, 15, 10)$</p>
+<h4 id="相等的向量"><a href="#相等的向量" class="headerlink" title="相等的向量"></a>相等的向量</h4><p>如果两个向量的维数相同，且各个分量相等，那么这两个向量相等。比如：</p>
+<p>$\begin{pmatrix}1\2\end{pmatrix}=\begin{pmatrix}1\2\end{pmatrix},\quad\begin{pmatrix}1\2\end{pmatrix}\ne\begin{pmatrix}2\4\end{pmatrix}$</p>
+<p>不区分列向量和行向量的话，下面两个向量也是相等的：</p>
+<p>$\begin{pmatrix}1\2\end{pmatrix}=(1,2)$</p>
+<h4 id="零向量"><a href="#零向量" class="headerlink" title="零向量"></a>零向量</h4><p>如果$n$维向量的所有分量都是0，那么就被称为零向量。比如：</p>
+<p>2 维零向量：$\boldsymbol{0}=\begin{pmatrix}0\0\end{pmatrix}$</p>
+<p>3 维零向量：$\boldsymbol{0}=\begin{pmatrix}0\0\0\end{pmatrix}$</p>
+<p>上面两个向量的几何意义就是平面、空间中的原点，或者认为是起点和终点相同的有向线段：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/8.png" alt=""></p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/9.png" alt=""></p>
+<p>零向量非常特殊：</p>
+<ul>
+<li>长度：零向量的长度为0</li>
+<li>方向：零向量指向任意方向</li>
+<li>夹角：因为零向量指向任意方向，所以它与某一向量的夹角为任意角度</li>
+<li>平行与正交：因为夹角任意，所以零向量与任意向量平行、正交</li>
+</ul>
+<h2 id="行列式"><a href="#行列式" class="headerlink" title="行列式"></a>行列式</h2><h3 id="行列式的本质定义"><a href="#行列式的本质定义" class="headerlink" title="行列式的本质定义"></a>行列式的本质定义</h3><p>一个2阶行列式的计算是这样的：$\left|\begin{array}{ll}a<em>{11}&amp;a</em>{12}\a<em>{21}&amp;a</em>{22}\end{array}\right|=a<em>{11}a</em>{22}-a<em>{12}a</em>{21}$。这是一个什么样的计算规则？它背后有什么样的意义？</p>
+<p>首先我们设$\vec a_1$的长度（模）为$l$，$\vec a_2$的长度（模）为$m$，$\vec a_1$与$x$轴正向的夹角为$\alpha$，$\vec a_2$与$x$轴正向的夹角为$\beta$</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/6.png" alt="image-20230925193756478" style="zoom:50%;" /></p>
+<p>通过上图我们可以推导出如下公式</p>
+<p>$\begin{align}S<em>{\square O A B C} &amp; =l \cdot m \cdot \sin (\beta-\alpha) \&amp; =l \cdot m(\sin \beta \cos \alpha-\cos \beta \sin \alpha) \&amp; =l \cos \alpha \cdot m \sin \beta-l \sin \alpha \cdot m \cos \beta \&amp; =a</em>{11} a<em>{22}-a</em>{12} a_{21}\end{align}$</p>
+<p>于是根据上面公式我们可以得出</p>
+<p>$\begin{align}\left|\begin{array}{ll}a<em>{11} &amp; a</em>{12} \a<em>{21} &amp; a</em>{22}\end{array}\right|=a<em>{11} a</em>{22}-a<em>{12} a</em>{21}=S_{\square O A B C}\end{align}$</p>
+<p>我们看到了一个极其直观有趣的结论：<strong>2阶行列式是由两个2维向量组成的，其(运算规则的)结果为以这两个向量为邻边的平行四边形的面积</strong>。这不仅得出了2阶行列式的计算规则，也能够清楚地看到其几何意义。</p>
+<p>3阶行列式$D<em>{3}=\left|\begin{array}{lll}a</em>{11}&amp;a<em>{12}&amp;a</em>{13}\a<em>{21}&amp;a</em>{22}&amp;a<em>{23}\a</em>{31}&amp;a<em>{32}&amp;a</em>{33}\end{array}\right|$是由<strong>三个3维向量$\boldsymbol{\alpha}<em>{1}=\left[a</em>{11},a<em>{12},a</em>{13}\right],\boldsymbol{\alpha}<em>{2}=\left[a</em>{21},a<em>{22},a</em>{23}\right],\boldsymbol{\alpha}<em>{3}=\left[a</em>{31},a<em>{32},a</em>{33}\right]$组成的，其结果为以这三个向量为邻边的平行六面体的体积</strong>。</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/7.png" alt="image-20230926171557984" style="zoom:50%;" /></p>
+<p>依此类推，我们便可以给出$n$阶行列式$D<em>{n}=\left|\begin{array}{ccc}a</em>{11}&amp;\cdots&amp;a<em>{1n}\\vdots&amp;&amp;\vdots\a</em>{n1}&amp;\cdots&amp;a<em>{mn}\end{array}\right|$的本质定义：**$n$阶行列式是由$n$个$n$维向量$\boldsymbol{\alpha}</em>{1}=\left[a<em>{11},a</em>{12},\cdots,a<em>{1n}\right],\boldsymbol{\alpha}</em>{2}=\left[a<em>{21},a</em>{22},\cdots,a<em>{2n}\right],\cdots,\boldsymbol{\alpha}</em>{n}=\left[a<em>{n1},a</em>{n2},\cdots,a_{nn}\right]$组成的，其(运算规则的)结果为以这$n$个向量为邻边的$n$维图形的体积**。</p>
+<h3 id="线性相关与线性无关"><a href="#线性相关与线性无关" class="headerlink" title="线性相关与线性无关"></a>线性相关与线性无关</h3><p>以3阶行列式为例，若$D<em>{3}\neq0$，则意味着体积不为0，则称组成该行列式的三个向量线性无关；若$D</em>{3}=0$，则称线性相关。</p>
+<h4 id="线性无关"><a href="#线性无关" class="headerlink" title="线性无关"></a>线性无关</h4><p>RGB称为三原色，意思就是这三种颜色是最基本的颜色，缺一不可：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/10.png" alt=""></p>
+<p>上述三个颜色中的任意一种都不可能被另外两种颜色混合出来，假如用向量来表示这三种颜色：</p>
+<p>$\boldsymbol{R}=\begin{pmatrix}255\0\0\end{pmatrix},\quad \boldsymbol{G}=\begin{pmatrix}0\255\0\end{pmatrix},\quad \boldsymbol{B}=\begin{pmatrix}0\0\255\end{pmatrix}$</p>
+<p>可以说这三者组成的向量组：</p>
+<p>$\mathcal{A}={\boldsymbol{R},\boldsymbol{G},\boldsymbol{B}}$</p>
+<p>是线性无关的。因此三原色是线性无关在美术中的一个例子。</p>
+<h4 id="线性相关"><a href="#线性相关" class="headerlink" title="线性相关"></a>线性相关</h4><p>海棠红可以通过三原色混合得到：</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/11.png" alt=""></p>
+<p>或者说海棠红可以通过RGB线性组合得到：</p>
+<p>海棠红=$R+\frac{52}{255}G+\frac{85}{255}B$</p>
+<p>那么下面这个向量组：</p>
+<p>$\mathcal{A}={\boldsymbol{R},\boldsymbol{G},\boldsymbol{B},$海棠红$}$</p>
+<p>就是线性相关的。这就是线性相关在美术中的一个例子。</p>
+<h4 id="几何上面的例子"><a href="#几何上面的例子" class="headerlink" title="几何上面的例子"></a>几何上面的例子</h4><p>通俗的说，线性相关是指两个向量从同一个起点出发，同方向或者反方向的前进组成的，如果是在二维中两向量无法组成一个平面，三维中三个向量无法组成一个空间。下图为线性相关$\boldsymbol{v_1}$和$\boldsymbol{v_2}$可以互相线性表示</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/12.png" alt="image-20230927134800112"></p>
+<p>下图为线性无关，$\boldsymbol{v_3}$和$\boldsymbol{v_4}$不能互相线性表示</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/LinearAlgebra/13.png" alt="image-20230927134903040"></p>
+<h3 id="行列式的性质"><a href="#行列式的性质" class="headerlink" title="行列式的性质"></a>行列式的性质</h3><p><mark class="hl-label green">性质1</mark> 行列互换，其值不变，即$|\boldsymbol{A}|=\left|\boldsymbol{A}^{\mathrm{T}}\right|$</p>
+<p><mark class="hl-label green">性质2</mark> 若行列式中某行(列)元素全为零，则行列式为零。</p>
+<p><mark class="hl-label green">性质3</mark> 若行列式中某行(列)元素有公因子$k(k\neq0)$，则k可提到行列式外面，即</p>
+<p>$\left|\begin{array}{cccc}<br>a<em>{11} &amp; a</em>{12} &amp; \cdots &amp; a<em>{1 n} \<br>\vdots &amp; \vdots &amp; &amp; \vdots \<br>k a</em>{i 1} &amp; k a<em>{i 2} &amp; \cdots &amp; k a</em>{i n} \<br>\vdots &amp; \vdots &amp; &amp; \vdots \<br>a<em>{n 1} &amp; a</em>{n 2} &amp; \cdots &amp; a<em>{m}<br>\end{array}\right|=k\left|\begin{array}{cccc}<br>a</em>{11} &amp; a<em>{12} &amp; \cdots &amp; a</em>{1 n} \<br>\vdots &amp; \vdots &amp; &amp; \vdots \<br>a<em>{i 1} &amp; a</em>{i 2} &amp; \cdots &amp; a<em>{i n} \<br>\vdots &amp; \vdots &amp; &amp; \vdots \<br>a</em>{n 1} &amp; a<em>{n 2} &amp; \cdots &amp; a</em>{m}<br>\end{array}\right|$</p>
+<p><mark class="hl-label green">性质4</mark> 行列式中某行(列)元素均是两个元素之和，则可拆成两个行列式之和，即</p>
+<p>$\left|\begin{array}{cccc}<br>a<em>{11} &amp; a</em>{12} &amp; \cdots &amp; a<em>{1 n} \<br>\vdots &amp; \vdots &amp; &amp; \vdots \<br>a</em>{i 1}+b<em>{i 1} &amp; a</em>{i 2}+b<em>{i 2} &amp; \cdots &amp; a</em>{i n}+b<em>{i n} \<br>\vdots &amp; \vdots &amp; &amp; \vdots \<br>a</em>{n 1} &amp; a<em>{n 2} &amp; \cdots &amp; a</em>{m n}<br>\end{array}\right|=\left|\begin{array}{cccc}<br>a<em>{11} &amp; a</em>{12} &amp; \cdots &amp; a<em>{1 n} \<br>\vdots &amp; \vdots &amp; &amp; \vdots \<br>a</em>{i 1} &amp; a<em>{i 2} &amp; \cdots &amp; a</em>{i n} \<br>\vdots &amp; \vdots &amp; &amp; \vdots \<br>a<em>{n 1} &amp; a</em>{n 2} &amp; \cdots &amp; a<em>{m n}<br>\end{array}\right|+\left|\begin{array}{cccc}<br>a</em>{11} &amp; a<em>{12} &amp; \cdots &amp; a</em>{1 n} \<br>\vdots &amp; \vdots &amp; &amp; \vdots \<br>b<em>{i 1} &amp; b</em>{i 2} &amp; \cdots &amp; b<em>{i n} \<br>\vdots &amp; \vdots &amp; &amp; \vdots \<br>a</em>{n 1} &amp; a<em>{n 2} &amp; \cdots &amp; a</em>{m}<br>\end{array}\right|$</p>
+<p><mark class="hl-label green">性质5</mark> 行列式中两行(列)互换，行列式的值反号。</p>
+<p><mark class="hl-label green">性质6</mark> 行列式中的两行(列)元素相等或对应成比例，则行列式为零。</p>
+<p><mark class="hl-label green">性质7</mark> 行列式中某行(列)的k倍加到另一行(列)，行列式的值不变。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com">ascotbe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/2023/09/25/LinearAlgebra_0x01/">https://www.ascotbe.com/2023/09/25/LinearAlgebra_0x01/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com" target="_blank">ascotbe</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%BA%BF%E4%BB%A3/">线代</a></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/171.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="next-post pull-full"><a href="/2023/09/11/FurtherMathematics_0x11/"><img class="next-cover" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/170.jpg" onerror="onerror=null;src='/img/404.gif'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">重积分</div></div></a></div></nav><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ascotbe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">73</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ascotbe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:ascotbe@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a><a class="social-icon" href="https://steamcommunity.com/id/ascotbe" target="_blank" title=""><i class="iconfont icon-steam"></i></a><a class="social-icon" href="https://twitter.com/asc0t6e" target="_blank" title=""><i class="iconfont icon-twitter"></i></a><a class="social-icon" href="https://t.me/ascotbe" target="_blank" title=""><i class="iconfont icon-telegram"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章都是本人学习笔记仅限交流探讨，禁止利用文章思路进行违法操作，否则与作者无关，如果您不同意请关闭本站<img src= "/img/loading.gif" data-lazy-src="/img/announcement2.gif" style="zoom:25%;" ></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%91%E9%87%8F"><span class="toc-number">1.</span> <span class="toc-text">向量</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%91%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="toc-number">1.1.</span> <span class="toc-text">向量的定义</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BA%8C%E7%BB%B4%E5%90%91%E9%87%8F"><span class="toc-number">1.1.1.</span> <span class="toc-text">二维向量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%B8%89%E7%BB%B4%E5%90%91%E9%87%8F"><span class="toc-number">1.1.2.</span> <span class="toc-text">三维向量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#N%E7%BB%B4%E5%90%91%E9%87%8F"><span class="toc-number">1.1.3.</span> <span class="toc-text">N维向量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%9B%B8%E7%AD%89%E7%9A%84%E5%90%91%E9%87%8F"><span class="toc-number">1.1.4.</span> <span class="toc-text">相等的向量</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9B%B6%E5%90%91%E9%87%8F"><span class="toc-number">1.1.5.</span> <span class="toc-text">零向量</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F"><span class="toc-number">2.</span> <span class="toc-text">行列式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E6%9C%AC%E8%B4%A8%E5%AE%9A%E4%B9%89"><span class="toc-number">2.1.</span> <span class="toc-text">行列式的本质定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3%E4%B8%8E%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3"><span class="toc-number">2.2.</span> <span class="toc-text">线性相关与线性无关</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E6%97%A0%E5%85%B3"><span class="toc-number">2.2.1.</span> <span class="toc-text">线性无关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%BA%BF%E6%80%A7%E7%9B%B8%E5%85%B3"><span class="toc-number">2.2.2.</span> <span class="toc-text">线性相关</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%87%A0%E4%BD%95%E4%B8%8A%E9%9D%A2%E7%9A%84%E4%BE%8B%E5%AD%90"><span class="toc-number">2.2.3.</span> <span class="toc-text">几何上面的例子</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E5%88%97%E5%BC%8F%E7%9A%84%E6%80%A7%E8%B4%A8"><span class="toc-number">2.3.</span> <span class="toc-text">行列式的性质</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/09/25/LinearAlgebra_0x01/" title="向量与行列式"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/171.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="向量与行列式"/></a><div class="content"><a class="title" href="/2023/09/25/LinearAlgebra_0x01/" title="向量与行列式">向量与行列式</a><time datetime="2023-09-25T15:58:53.000Z" title="发表于 2023-09-25 23:58:53">2023-09-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/11/FurtherMathematics_0x11/" title="重积分"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/170.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="重积分"/></a><div class="content"><a class="title" href="/2023/09/11/FurtherMathematics_0x11/" title="重积分">重积分</a><time datetime="2023-09-11T15:58:53.000Z" title="发表于 2023-09-11 23:58:53">2023-09-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/25/FurtherMathematics_0x10/" title="方向导数、梯度与多元函数的极致与最值"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/169.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="方向导数、梯度与多元函数的极致与最值"/></a><div class="content"><a class="title" href="/2023/07/25/FurtherMathematics_0x10/" title="方向导数、梯度与多元函数的极致与最值">方向导数、梯度与多元函数的极致与最值</a><time datetime="2023-07-25T15:58:53.000Z" title="发表于 2023-07-25 23:58:53">2023-07-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/03/FurtherMathematics_0xF/" title="多元函数微分的几何应用"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/168.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="多元函数微分的几何应用"/></a><div class="content"><a class="title" href="/2023/07/03/FurtherMathematics_0xF/" title="多元函数微分的几何应用">多元函数微分的几何应用</a><time datetime="2023-07-03T15:58:53.000Z" title="发表于 2023-07-03 23:58:53">2023-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/24/FurtherMathematics_0xE/" title="隐函数求导"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/167.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="隐函数求导"/></a><div class="content"><a class="title" href="/2023/06/24/FurtherMathematics_0xE/" title="隐函数求导">隐函数求导</a><time datetime="2023-06-24T15:58:53.000Z" title="发表于 2023-06-24 23:58:53">2023-06-24</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://raw.githubusercontent.com/Ascotbe/Image/master/Blog/171.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 <i id="heartbeat" class="fa fas fa-heartbeat"></i> By ascotbe</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.ascotbe.com/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+  window.MathJax = {
+    tex: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"]],
+      tags: 'ams'
+    },
+    chtml: {
+      scale: 1.1
+    },
+    options: {
+      renderActions: {
+        findScript: [10, doc => {
+          for (const node of document.querySelectorAll('script[type^="math/tex"]')) {
+            const display = !!node.type.match(/; *mode=display/)
+            const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display)
+            const text = document.createTextNode('')
+            node.parentNode.replaceChild(text, node)
+            math.start = {node: text, delim: '', n: 0}
+            math.end = {node: text, delim: '', n: 0}
+            doc.math.push(math)
+          }
+        }, ''],
+        insertScript: [200, () => {
+          document.querySelectorAll('mjx-container').forEach(node => {
+            if (node.hasAttribute('display')) {
+              btf.wrap(node, 'div', { class: 'mathjax-overflow' })
+            } else {
+              btf.wrap(node, 'span', { class: 'mathjax-overflow' })
+            }
+          });
+        }, '', false]
+      }
+    }
+  }
+  
+  const script = document.createElement('script')
+  script.src = 'https://cdn.jsdelivr.net/npm/mathjax/es5/tex-mml-chtml.min.js'
+  script.id = 'MathJax-script'
+  script.async = true
+  document.head.appendChild(script)
+} else {
+  MathJax.startup.document.state(0)
+  MathJax.texReset()
+  MathJax.typeset()
+}</script><script>function loadUtterances () {
+  let ele = document.createElement('script')
+  ele.setAttribute('id', 'utterances_comment')
+  ele.setAttribute('src', 'https://utteranc.es/client.js')
+  ele.setAttribute('repo', 'Ascotbe/Ascotbe.github.io')
+  ele.setAttribute('issue-term', 'pathname')
+  let nowTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+  ele.setAttribute('theme', nowTheme)
+  ele.setAttribute('crossorigin', 'anonymous')
+  ele.setAttribute('async', 'true')
+  document.getElementById('utterances-wrap').insertAdjacentElement('afterbegin',ele)
+}
+
+function utterancesTheme () {
+  const iframe = document.querySelector('.utterances-frame')
+  if (iframe) {
+    const theme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'photon-dark' : 'github-light'
+    const message = {
+      type: 'set-theme',
+      theme: theme
+    };
+    iframe.contentWindow.postMessage(message, 'https://utteranc.es');
+  }
+}
+
+if ('Utterances' === 'Utterances' || !true) {
+  if (true) btf.loadComment(document.getElementById('utterances-wrap'), loadUtterances)
+  else loadUtterances()
+} else {
+  function loadOtherComment () {
+    loadUtterances()
+  }
+}</script></div><script src="/js/snowflake.js"></script><div class="aplayer no-destroy" data-id="2276118625" data-server="netease" data-type="playlist" data-fixed="true"  data-mini="playlist" data-autoplay="true"> </div><script defer="defer" id="ribbon" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/dist/canvas-ribbon.min.js" size="150" alpha="0.6" zIndex="-1" mobile="false" data-click="false"></script><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/aplayer/dist/APlayer.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/metingjs/dist/Meting.min.js"></script><script src="https://cdn.jsdelivr.net/npm/pjax/pjax.min.js"></script><script>let pjaxSelectors = ["link[rel=\"canonical\"]","meta[property=\"og:image\"]","meta[property=\"og:title\"]","meta[property=\"og:url\"]","head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+
+  // removeEventListener scroll 
+  window.tocScrollFn && window.removeEventListener('scroll', window.tocScrollFn)
+  window.scrollCollect && window.removeEventListener('scroll', scrollCollect)
+
+  document.getElementById('rightside').style.cssText = "opacity: ''; transform: ''"
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+
+  typeof disqusjs === 'object' && disqusjs.destroy()
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof chatBtnFn === 'function' && chatBtnFn()
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', (e) => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":true,"model":{"jsonPath":"/live2dw/assets/ots14_3001.model.json"},"display":{"position":"right","width":350,"height":400,"hOffset":-50,"vOffset":0},"mobile":{"show":false},"log":false});</script></body></html>
