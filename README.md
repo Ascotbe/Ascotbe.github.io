@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2023-11** (1)  
+- 2023-11-20 [Windows程序自删除](https://www.ascotbe.com/2023/11/20/ProgramSelfDelete/)  
+  
+  
 ### **2023-09** (2)  
 - 2023-09-25 [向量与行列式](https://www.ascotbe.com/2023/09/25/LinearAlgebra_0x01/)  
 - 2023-09-11 [重积分](https://www.ascotbe.com/2023/09/11/FurtherMathematics_0x11/)  
