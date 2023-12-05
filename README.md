@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2023-12** (1)  
+- 2023-12-05 [矩阵](https://www.ascotbe.com/2023/12/05/LinearAlgebra_0x03/)  
+  
+  
 ### **2023-11** (2)  
 - 2023-11-28 [行列式的结题思路](https://www.ascotbe.com/2023/11/28/LinearAlgebra_0x02/)  
 - 2023-11-20 [Windows程序自删除](https://www.ascotbe.com/2023/11/20/ProgramSelfDelete/)  
