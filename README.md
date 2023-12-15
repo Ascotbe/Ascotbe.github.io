@@ -1,6 +1,6 @@
 ## 文章列表  
 ### **2023-12** (1)  
-- 2023-12-05 [矩阵](https://www.ascotbe.com/2023/12/05/LinearAlgebra_0x03/)  
+- 2023-12-05 [矩阵定义与基本运算](https://www.ascotbe.com/2023/12/05/LinearAlgebra_0x03/)  
   
   
 ### **2023-11** (2)  
