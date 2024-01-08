@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2024-01** (1)  
+- 2024-01-08 [矩阵函数](https://www.ascotbe.com/2024/01/08/LinearAlgebra_0x05/)  
+  
+  
 ### **2023-12** (2)  
 - 2023-12-15 [矩阵的逆](https://www.ascotbe.com/2023/12/15/LinearAlgebra_0x04/)  
 - 2023-12-05 [矩阵定义与基本运算](https://www.ascotbe.com/2023/12/05/LinearAlgebra_0x03/)  
