@@ -1,6 +1,7 @@
 ## 文章列表  
-### **2024-01** (3)  
-- 2024-01-12 [线性组合与线性相关](https://www.ascotbe.com/2024/01/12/LinearAlgebra_0x07/)  
+### **2024-01** (4)  
+- 2024-01-24 [齐次方程与非齐次方程](https://www.ascotbe.com/2024/01/24/LinearAlgebra_0x08/)  
+- 2024-01-12 [线性组合与线性相关、向量空间、张成空间](https://www.ascotbe.com/2024/01/12/LinearAlgebra_0x07/)  
 - 2024-01-10 [矩阵的秩](https://www.ascotbe.com/2024/01/10/LinearAlgebra_0x06/)  
 - 2024-01-08 [矩阵函数](https://www.ascotbe.com/2024/01/08/LinearAlgebra_0x05/)  
   
