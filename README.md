@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2024-02** (1)  
+- 2024-02-01 [特征向量与特征值](https://www.ascotbe.com/2024/02/01/LinearAlgebra_0x10/)  
+  
+  
 ### **2024-01** (5)  
 - 2024-01-27 [矩阵和向量求导](https://www.ascotbe.com/2024/01/27/LinearAlgebra_0x09/)  
 - 2024-01-24 [齐次方程与非齐次方程](https://www.ascotbe.com/2024/01/24/LinearAlgebra_0x08/)  
