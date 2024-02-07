@@ -1,5 +1,6 @@
 ## 文章列表  
-### **2024-02** (1)  
+### **2024-02** (2)  
+- 2024-02-06 [矩阵的相似与对角化](https://www.ascotbe.com/2024/02/06/LinearAlgebra_0x11/)  
 - 2024-02-01 [特征向量与特征值](https://www.ascotbe.com/2024/02/01/LinearAlgebra_0x10/)  
   
   

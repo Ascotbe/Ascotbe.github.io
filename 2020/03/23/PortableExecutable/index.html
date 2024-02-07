@@ -1,9 +1,9 @@
-<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Windows PE结构解析 | ascotbe</title><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！  前言 不管你是逆向领域，还是开发领域，异或是病毒编写者（红蓝对抗），都需要对PE文件有详细的了解，由于自己是个菜逼然后需要用到修改PE结构来达到某些免杀的操作，既然这样我就祭出菜逼大杀器Google百度来自行学习，本篇文章主要都是摘抄各位师">
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"><title>Windows PE结构解析 | ascotbe</title><meta name="author" content="ascotbe"><meta name="copyright" content="ascotbe"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！  前言不管你是逆向领域，还是开发领域，异或是病毒编写者（红蓝对抗），都需要对PE文件有详细的了解，由于自己是个菜逼然后需要用到修改PE结构来达到某些免杀的操作，既然这样我就祭出菜逼大杀器Google百度来自行学习，本篇文章主要都是摘抄各位师傅">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Windows PE结构解析">
 <meta property="og:url" content="https://www.ascotbe.com/2020/03/23/PortableExecutable/index.html">
 <meta property="og:site_name" content="ascotbe">
-<meta property="og:description" content="郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！  前言 不管你是逆向领域，还是开发领域，异或是病毒编写者（红蓝对抗），都需要对PE文件有详细的了解，由于自己是个菜逼然后需要用到修改PE结构来达到某些免杀的操作，既然这样我就祭出菜逼大杀器Google百度来自行学习，本篇文章主要都是摘抄各位师">
+<meta property="og:description" content="郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！  前言不管你是逆向领域，还是开发领域，异或是病毒编写者（红蓝对抗），都需要对PE文件有详细的了解，由于自己是个菜逼然后需要用到修改PE结构来达到某些免杀的操作，既然这样我就祭出菜逼大杀器Google百度来自行学习，本篇文章主要都是摘抄各位师傅">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/89.jpg">
 <meta property="article:published_time" content="2020-03-23T15:45:42.000Z">
@@ -143,16 +143,13 @@
     }
     detectApple()
     })(window)</script><link rel="stylesheet" href="//at.alicdn.com/t/c/font_3133731_25dh7dx5bg4.css"><link rel="stylesheet" href="/css/beating_icon.css"><link rel="stylesheet" href="/css/mouse.css"><meta name="generator" content="Hexo 5.4.2"><link rel="alternate" href="/atom.xml" title="ascotbe" type="application/atom+xml">
-<link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-dongwu"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 内容</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-danger-full"></i><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-zhiwu"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tubiaozhizuomoban-"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw iconfont icon-godot-assets1"></i><span> 漏洞</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery"><i class="fa-fw iconfont icon-forms_dota_dragon_big"></i><span> 图片</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw iconfont icon-FaceID"></i><span> 友联</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-maomi_touxiang"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.githubusercontent.com/Ascotbe/Image/master/Blog/89.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ascotbe</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-dongwu"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 内容</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-danger-full"></i><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-zhiwu"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tubiaozhizuomoban-"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw iconfont icon-godot-assets1"></i><span> 漏洞</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery"><i class="fa-fw iconfont icon-forms_dota_dragon_big"></i><span> 图片</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw iconfont icon-FaceID"></i><span> 友联</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-maomi_touxiang"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Windows PE结构解析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-03-23T15:45:42.000Z" title="发表于 2020-03-23 23:45:42">2020-03-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Windows%E7%AC%94%E8%AE%B0/">Windows笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.5k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>25分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Windows PE结构解析"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="note danger modern"><p>郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！</p>
+<link href="https://cdn.bootcss.com/KaTeX/0.11.1/katex.min.css" rel="stylesheet" /></head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpeg" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">95</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><hr/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-dongwu"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 内容</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-danger-full"></i><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-zhiwu"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tubiaozhizuomoban-"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw iconfont icon-godot-assets1"></i><span> 漏洞</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery"><i class="fa-fw iconfont icon-forms_dota_dragon_big"></i><span> 图片</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw iconfont icon-FaceID"></i><span> 友联</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-maomi_touxiang"></i><span> 关于</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('https://raw.githubusercontent.com/Ascotbe/Image/master/Blog/89.jpg')"><nav id="nav"><span id="blog_name"><a id="site-name" href="/">ascotbe</a></span><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw iconfont icon-dongwu"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page group hide" href="javascript:void(0);"><i class="fa-fw fas fa-list"></i><span> 内容</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/archives/"><i class="fa-fw iconfont icon-danger-full"></i><span> 归档</span></a></li><li><a class="site-page child" href="/categories/"><i class="fa-fw iconfont icon-zhiwu"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw iconfont icon-tubiaozhizuomoban-"></i><span> 标签</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/Loophole"><i class="fa-fw iconfont icon-godot-assets1"></i><span> 漏洞</span></a></div><div class="menus_item"><a class="site-page" href="/Gallery"><i class="fa-fw iconfont icon-forms_dota_dragon_big"></i><span> 图片</span></a></div><div class="menus_item"><a class="site-page" href="/Link/"><i class="fa-fw iconfont icon-FaceID"></i><span> 友联</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw iconfont icon-maomi_touxiang"></i><span> 关于</span></a></div></div><div id="toggle-menu"><a class="site-page"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Windows PE结构解析</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2020-03-23T15:45:42.000Z" title="发表于 2020-03-23 23:45:42">2020-03-23</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2023-01-05T06:17:01.848Z" title="更新于 2023-01-05 14:17:01">2023-01-05</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/Windows%E7%AC%94%E8%AE%B0/">Windows笔记</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">7.4k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>25分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Windows PE结构解析"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><div class="note danger modern"><p>郑重声明：文中所涉及的技术、思路和工具仅供以安全为目的的学习交流使用，如果您不同意请关闭该页面！任何人不得将其用于非法用途以及盈利等目的，否则后果自行承担！</p>
 </div>
-<h2 id="前言">前言</h2>
-<p>不管你是逆向领域，还是开发领域，异或是病毒编写者（红蓝对抗），都需要对PE文件有详细的了解，由于自己是个菜逼然后需要用到修改PE结构来达到某些免杀的操作，既然这样我就祭出菜逼大杀器<s>Google</s>百度来自行学习，本篇文章主要都是摘抄各位师傅们的文章，加上菜逼我的理解混合在一起的，如果有哪些地方理解错了或者填错了请各位师傅斧正！！</p>
-<img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/1.png" alt="img" style="zoom:50%;" />
-<h2 id="总体介绍">总体介绍</h2>
-<p>可执行文件(<code>Executable File</code>)是指可以由操作系统直接加载执行的文件，在<code>Windows</code>操作系统中可执行文件就是PE文件结构，在<code>Linux</code>下则是ELF文件，下面这张图就是PE文件格式的图片(来自看雪)，非常大一张图片，其实PE格式就是各种结构体的结合，<code>Windows</code>下PE文件的各种结构体在<code>WinNT.h</code>这个头文件中，可以在VS（宇宙无敌第一编译器）中查询。</p>
+<h2 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h2><p>不管你是逆向领域，还是开发领域，异或是病毒编写者（红蓝对抗），都需要对PE文件有详细的了解，由于自己是个菜逼然后需要用到修改PE结构来达到某些免杀的操作，既然这样我就祭出菜逼大杀器<del>Google</del>百度来自行学习，本篇文章主要都是摘抄各位师傅们的文章，加上菜逼我的理解混合在一起的，如果有哪些地方理解错了或者填错了请各位师傅斧正！！</p>
+<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/1.png" alt="img" style="zoom:50%;" /></p>
+<h2 id="总体介绍"><a href="#总体介绍" class="headerlink" title="总体介绍"></a>总体介绍</h2><p>可执行文件(<code>Executable File</code>)是指可以由操作系统直接加载执行的文件，在<code>Windows</code>操作系统中可执行文件就是PE文件结构，在<code>Linux</code>下则是ELF文件，下面这张图就是PE文件格式的图片(来自看雪)，非常大一张图片，其实PE格式就是各种结构体的结合，<code>Windows</code>下PE文件的各种结构体在<code>WinNT.h</code>这个头文件中，可以在VS（宇宙无敌第一编译器）中查询。</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/2.jpg" alt="img"></p>
-<h2 id="pe文件整体结构">PE文件整体结构</h2>
-<p>PE结构可以大致分为:</p>
+<h2 id="PE文件整体结构"><a href="#PE文件整体结构" class="headerlink" title="PE文件整体结构"></a>PE文件整体结构</h2><p>PE结构可以大致分为:</p>
 <ul>
 <li>DOS部分</li>
 <li>PE文件头</li>
@@ -162,37 +159,31 @@
 </ul>
 <p>依旧用看雪的图来，看雪NB~奥利给！</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/3.png" alt="img"></p>
-<h2 id="pe指纹-dos头">PE指纹（DOS头）</h2>
-<p>我们需要清楚的概念是PE指纹，也就是判断一个文件是否是PE文件的依据，首先是根据文件的前两个字节是否为<code>4D 5A</code>，也就是<code>MZ</code>，接着第四行的最后4个字节表示的是NT头的起始位置，我们使用32位程序作为分析</p>
+<h2 id="PE指纹（DOS头）"><a href="#PE指纹（DOS头）" class="headerlink" title="PE指纹（DOS头）"></a>PE指纹（DOS头）</h2><p>我们需要清楚的概念是PE指纹，也就是判断一个文件是否是PE文件的依据，首先是根据文件的前两个字节是否为<code>4D 5A</code>，也就是<code>MZ</code>，接着第四行的最后4个字节表示的是NT头的起始位置，我们使用32位程序作为分析</p>
 <p>DOS头里面分为（分<code>Header</code>和<code>DOS</code>存根）</p>
 <blockquote>
-<h5 id="header结构-00000000-0000003f-共64个字节">Header结构(00000000 - 0000003F，共64个字节)</h5>
-</blockquote>
+<h5 id="Header结构-00000000-0000003F，共64个字节"><a href="#Header结构-00000000-0000003F，共64个字节" class="headerlink" title="Header结构(00000000 - 0000003F，共64个字节)"></a>Header结构(00000000 - 0000003F，共64个字节)</h5></blockquote>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/4.png" alt="2"></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_DOS_HEADER</span> &#123; </span><br><span class="line">  USHORT e_magic;    <span class="comment">// DOS签名“MZ--&gt;Mark Zbikowski（设计了DOS的工程师）” -&gt; 4D 5A </span></span><br><span class="line">  USHORT e_cblp;     <span class="comment">// 文件最后页的字节数 -&gt; 00 90 -&gt; 144</span></span><br><span class="line">  USHORT e_cp;       <span class="comment">// 文件页数 -&gt; 00 30 -&gt; 48</span></span><br><span class="line">  USHORT e_crlc;     <span class="comment">// 重定义元素个数 -&gt; 00 00</span></span><br><span class="line">  USHORT e_cparhdr;  <span class="comment">// 头部尺寸，以段落为单位 -&gt; 00 04</span></span><br><span class="line">  USHORT e_minalloc; <span class="comment">// 所需的最小附加段 -&gt; 00 00</span></span><br><span class="line">  USHORT e_maxalloc; <span class="comment">// 所需的最大附加段 -&gt; FF FF</span></span><br><span class="line">  USHORT e_ss;       <span class="comment">// 初始的SS值（相对偏移量） -&gt; 00 00</span></span><br><span class="line">  USHORT e_sp;       <span class="comment">// 初始的SP值 -&gt; 00 B8 -&gt; 184</span></span><br><span class="line">  USHORT e_csum;     <span class="comment">// 校验和 -&gt; 00 00</span></span><br><span class="line">  USHORT e_ip;       <span class="comment">// 初始的IP值 -&gt; 00 00</span></span><br><span class="line">  USHORT e_cs;       <span class="comment">// 初始的CS值（相对偏移量） -&gt; 00 00</span></span><br><span class="line">  USHORT e_lfarlc;   <span class="comment">// 重分配表文件地址 -&gt; 00 40 -&gt; 64</span></span><br><span class="line">  USHORT e_ovno;     <span class="comment">// 覆盖号 -&gt; 00 00</span></span><br><span class="line">  USHORT e_res[<span class="number">4</span>];   <span class="comment">// 保留字 -&gt; 00 00 00 00 00 00 00 00</span></span><br><span class="line">  USHORT e_oemid;    <span class="comment">// OEM标识符（相对e_oeminfo） -&gt; 00 00</span></span><br><span class="line">  USHORT e_oeminfo;  <span class="comment">// OEM信息 -&gt; 00 00</span></span><br><span class="line">  USHORT e_res2[<span class="number">10</span>]; <span class="comment">// 保留字 -&gt; 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 </span></span><br><span class="line">  LONG e_lfanew;     <span class="comment">// 指示NT头的偏移，也是DOS存根的结束位置（根据不同文件拥有可变值） -&gt; 00 00 01 08 -&gt; 264</span></span><br><span class="line">&#125; IMAGE_DOS_HEADER, *PIMAGE_DOS_HEADER;</span><br></pre></td></tr></table></figure>
 <p>注意Win+Intel的电脑上大部分采用”小端法”，字节在内存中储存方式是倒过来的。</p>
 <p>重要参数为<code>e_magic</code>和<code>e_lfanew</code>，且<code>e_lfanew</code>的值在文件偏移量处0x3c的位置，大小4字节</p>
 <p>前者是标识PE指纹的一部分，后者则是寻找PE文件头的部分，除了这两个成员，其他成员全部用0填充都不会影响程序正常运行，所以我们不需要过多的对其他部分深究</p>
 <blockquote>
-<h5 id="dos存根-00000040-x">DOS存根（00000040 - X）</h5>
-</blockquote>
+<h5 id="DOS存根（00000040-X）"><a href="#DOS存根（00000040-X）" class="headerlink" title="DOS存根（00000040 - X）"></a>DOS存根（00000040 - X）</h5></blockquote>
 <p>存根的大小是变的，起始位置为<code>40h</code>，结束位置由<code>30h</code>中最后面4个字节决定的</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/5.png" alt="2"></p>
 <p>DOS存根则是一段简单的DOS程序，主要用来输出类似<code>This program cannot be run in DOS mode.</code>的提示语句。即使没有DOS存根，程序也能正常执行。</p>
-<h2 id="nt头-pe头">NT头（PE头）</h2>
-<p>PE最重要的头，长度由DOS头 <code>e_lfanew</code> 决定</p>
-<h3 id="image-nt-headers"><strong>IMAGE_NT_HEADERS</strong></h3>
-<p>从PE字符串开始到<code>.text</code>字符串结束，如下图画出的，大小为<code>f8h</code></p>
+<h2 id="NT头（PE头）"><a href="#NT头（PE头）" class="headerlink" title="NT头（PE头）"></a>NT头（PE头）</h2><p>PE最重要的头，长度由DOS头 <code>e_lfanew</code> 决定</p>
+<h3 id="IMAGE-NT-HEADERS"><a href="#IMAGE-NT-HEADERS" class="headerlink" title="IMAGE_NT_HEADERS"></a><strong>IMAGE_NT_HEADERS</strong></h3><p>从PE字符串开始到<code>.text</code>字符串结束，如下图画出的，大小为<code>f8h</code></p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/6.png" alt="2"></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 32位程序的NT_HEADERS</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_NT_HEADERS</span> &#123;</span><br><span class="line">    DWORD                   Signature;      <span class="comment">// [0x00] PE标识 // 0x4550</span></span><br><span class="line">    IMAGE_FILE_HEADER       FileHeader;     <span class="comment">// [0x04] 文件基本信息</span></span><br><span class="line">    IMAGE_OPTIONAL_HEADER32 OptionalHeader; <span class="comment">// [0x18] 文件扩展信息</span></span><br><span class="line">&#125; IMAGE_NT_HEADERS32, *PIMAGE_NT_HEADERS32;</span><br><span class="line"><span class="comment">// 64位程序的NT_HEADERS64</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_NT_HEADERS64</span> &#123;</span><br><span class="line">    DWORD                   Signature;      <span class="comment">// [0x00] PE标识 // 0x4550</span></span><br><span class="line">    IMAGE_FILE_HEADER       FileHeader;     <span class="comment">// [0x04] 文件基本信息</span></span><br><span class="line">    IMAGE_OPTIONAL_HEADER64 OptionalHeader; <span class="comment">// [0x18] 文件扩展信息</span></span><br><span class="line">&#125; IMAGE_NT_HEADERS64, *PIMAGE_NT_HEADERS64;</span><br></pre></td></tr></table></figure>
 <p>然后里面分别有<code>3</code>个字段分别是<code>Signature</code>，<code>IMAGE_FILE_HEADER结构体</code>，<code>IMAGE_OPTIONAL_HEADER结构体</code>大小分别是<code>04h</code>，<code>14h</code>，<code>e0h</code></p>
-<h4 id="signatur"><strong>Signatur</strong></h4>
-<p>也称作PE签名，这个成员和DOS头的MZ标记一样都是一个PE文件的标准特征，如果把这个PE签名修改后，程序也是不会正常运行的(跳出黑窗口打印<code>This program cannot be run in DOS mode</code>然后闪退，可能是因为修改PE签名后无法识别后续内容的关系吧)。</p>
-<h4 id="image-file-header"><strong>IMAGE_FILE_HEADER</strong></h4>
-<p>其中有4个重要的成员，若设置不正确，将会导致文件无法正常运行。</p>
+<h4 id="Signatur"><a href="#Signatur" class="headerlink" title="Signatur"></a><strong>Signatur</strong></h4><p>也称作PE签名，这个成员和DOS头的MZ标记一样都是一个PE文件的标准特征，如果把这个PE签名修改后，程序也是不会正常运行的(跳出黑窗口打印<code>This program cannot be run in DOS mode</code>然后闪退，可能是因为修改PE签名后无法识别后续内容的关系吧)。</p>
+<h4 id="IMAGE-FILE-HEADER"><a href="#IMAGE-FILE-HEADER" class="headerlink" title="IMAGE_FILE_HEADER"></a><strong>IMAGE_FILE_HEADER</strong></h4><p>其中有4个重要的成员，若设置不正确，将会导致文件无法正常运行。</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/7.png" alt="2"></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_FILE_HEADER</span> &#123; </span><br><span class="line">        WORD    Machine;              <span class="comment">// Intel 386以及后续 -&gt; 01 4c -&gt; 兼容32位Intel X86芯片</span></span><br><span class="line">        							  							<span class="comment">// x64:8664	可以运行在什么平台上 任意:0</span></span><br><span class="line">        WORD    NumberOfSections;     <span class="comment">// 指文件中存在的节段（又称节区）数量，也就是节表中的项数 -&gt; 00 07 -&gt; 7</span></span><br><span class="line">        DWORD   TimeDateStamp;        <span class="comment">// PE文件的创建时间，一般有连接器填写 -&gt; 5D 37 24 CC -&gt;1563894988</span></span><br><span class="line">        DWORD   PointerToSymbolTable; <span class="comment">// COFF文件符号表在文件中的偏移 -&gt; 00 00 00 00</span></span><br><span class="line">        DWORD   NumberOfSymbols;      <span class="comment">// 符号表的数量 -&gt; 00 00 00 00</span></span><br><span class="line">        WORD    SizeOfOptionalHeader; <span class="comment">// 指出IMAGE_OPTIONAL_HEADER32结构体的长度。-&gt;  00 E0 -&gt; 224字节</span></span><br><span class="line">                                      <span class="comment">// PE32+格式文件中使用的是IMAGE_OPTIONAL_HEADER64结构体，</span></span><br><span class="line">                                      <span class="comment">// 这两个结构体尺寸是不相同的，所以需要在SizeOfOptionalHeader中指明大小。</span></span><br><span class="line">        WORD    Characteristics;      <span class="comment">// 标识文件的属性，二进制中每一位代表不同属性 -&gt; 01 02</span></span><br><span class="line">&#125; IMAGE_FILE_HEADER, *PIMAGE_FILE_HEADER;</span><br></pre></td></tr></table></figure>
 <p>第1部分（20个字节）</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -248,395 +239,61 @@
 </tr>
 </tbody>
 </table>
+</div>
 <ul>
-<li>
-<p><code>Machine</code></p>
+<li><p><code>Machine</code></p>
 <p>所表示的是计算机的体系结构类型，也就是说这个成员可以指定该PE文件能够在32位还是在64位CPU上执行。如果强行更改该数值程序就会报错。镜像文件仅能运行于指定处理器或者能够模拟指定处理器的系统上。</p>
 <p>具体机器类型如下图</p>
-<table>
-<thead>
-<tr>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0x0</td>
-<td>适用于任何类型处理器</td>
-</tr>
-<tr>
-<td>0x1d3</td>
-<td>Matsushita AM33处理器</td>
-</tr>
-<tr>
-<td>0x8664</td>
-<td>x64处理器</td>
-</tr>
-<tr>
-<td>0x1c0</td>
-<td>ARM小尾处理器</td>
-</tr>
-<tr>
-<td>0xebc</td>
-<td>EFI字节码处理器</td>
-</tr>
-<tr>
-<td><strong>0x14c</strong></td>
-<td><strong>Intel 386或后继处理器及其兼容处理器</strong></td>
-</tr>
-<tr>
-<td>0x200</td>
-<td>Intel Itanium处理器</td>
-</tr>
-<tr>
-<td>0x9041</td>
-<td>Mitsubishi M32R小尾处理器</td>
-</tr>
-<tr>
-<td>0x266</td>
-<td>MIPS16处理器</td>
-</tr>
-<tr>
-<td>0x366</td>
-<td>带FPU的MIPS处理器</td>
-</tr>
-<tr>
-<td>0x466</td>
-<td>带FPU的MIPS16处理器</td>
-</tr>
-<tr>
-<td>0x1f0</td>
-<td>PowerPC小尾处理器</td>
-</tr>
-<tr>
-<td>0x1f1</td>
-<td>带符点运算支持的PowerPC处理器</td>
-</tr>
-<tr>
-<td>0x166</td>
-<td>MIPS小尾处理器</td>
-</tr>
-<tr>
-<td>0x1a2</td>
-<td>Hitachi SH3处理器</td>
-</tr>
-<tr>
-<td>0x1a3</td>
-<td>Hitachi SH3 DSP处理器</td>
-</tr>
-<tr>
-<td>0x1a6</td>
-<td>Hitachi SH4处理器</td>
-</tr>
-<tr>
-<td>0x1a6</td>
-<td>Hitachi SH5处理器</td>
-</tr>
-<tr>
-<td>0x1c2</td>
-<td>Thumb处理器</td>
-</tr>
-<tr>
-<td>0x169</td>
-<td>MIPS小尾WCE v2处理器</td>
-</tr>
-</tbody>
-</table>
+<p>| 值        | 描述                                    |<br>| ————- | ———————————————————- |<br>| 0x0       | 适用于任何类型处理器                    |<br>| 0x1d3     | Matsushita AM33处理器                   |<br>| 0x8664    | x64处理器                               |<br>| 0x1c0     | ARM小尾处理器                           |<br>| 0xebc     | EFI字节码处理器                         |<br>| <strong>0x14c</strong> | <strong>Intel 386或后继处理器及其兼容处理器</strong> |<br>| 0x200     | Intel Itanium处理器                     |<br>| 0x9041    | Mitsubishi M32R小尾处理器               |<br>| 0x266     | MIPS16处理器                            |<br>| 0x366     | 带FPU的MIPS处理器                       |<br>| 0x466     | 带FPU的MIPS16处理器                     |<br>| 0x1f0     | PowerPC小尾处理器                       |<br>| 0x1f1     | 带符点运算支持的PowerPC处理器           |<br>| 0x166     | MIPS小尾处理器                          |<br>| 0x1a2     | Hitachi SH3处理器                       |<br>| 0x1a3     | Hitachi SH3 DSP处理器                   |<br>| 0x1a6     | Hitachi SH4处理器                       |<br>| 0x1a6     | Hitachi SH5处理器                       |<br>| 0x1c2     | Thumb处理器                             |<br>| 0x169     | MIPS小尾WCE v2处理器                    |</p>
 </li>
-<li>
-<p><code>NumberOfSections</code></p>
+<li><p><code>NumberOfSections</code></p>
 <p>从<code>010 Editor</code>模版上验证节区数量</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/12.png" alt="image-20200421231446813"></p>
 </li>
-<li>
-<p><code>TimeDateStamp</code></p>
+<li><p><code>TimeDateStamp</code></p>
 <p>它的含义是时间戳，用于表示该PE文件创建的时间，时间是从国际协调时间也就是<code>1970年1月1日00:00</code>起开始计数的，计数单位是秒</p>
 </li>
-<li>
-<p><code>SizeOfOptionalHeader</code><br>
-它存储该PE文件的可选PE头的大小，在32位PE文件中可选头大小为0xE0，64位可选头大小为0xF0。正因为如此，所以就必须通过该成员来确定可选PE头的大小。</p>
+<li><p><code>SizeOfOptionalHeader</code><br>它存储该PE文件的可选PE头的大小，在32位PE文件中可选头大小为0xE0，64位可选头大小为0xF0。正因为如此，所以就必须通过该成员来确定可选PE头的大小。</p>
 </li>
-<li>
-<p><code>Characteristics</code></p>
+<li><p><code>Characteristics</code></p>
 <p>域包含镜像文件属性的标志。以下加粗的是常用的属性。当前定义了以下值（由低位往高位）</p>
-<table>
-<thead>
-<tr>
-<th>位置</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>它表明此文件不包含基址重定位信息，因此必须被加载到其首选基地址上。如果基地址不可用，加载器会报错。</td>
-</tr>
-<tr>
-<td>1</td>
-<td>它表明此镜像文件是合法的。看起来有点多此一举，但又不能少。</td>
-</tr>
-<tr>
-<td>2</td>
-<td>保留，必须为0。</td>
-</tr>
-<tr>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td>4</td>
-<td></td>
-</tr>
-<tr>
-<td>5</td>
-<td>应用程序可以处理大于2GB的地址。</td>
-</tr>
-<tr>
-<td>6</td>
-<td>保留，必须为0。</td>
-</tr>
-<tr>
-<td>7</td>
-<td></td>
-</tr>
-<tr>
-<td>8</td>
-<td>机器类型基于32位体系结构。</td>
-</tr>
-<tr>
-<td>9</td>
-<td>调试信息已经从此镜像文件中移除。</td>
-</tr>
-<tr>
-<td>10</td>
-<td>如果此镜像文件在可移动介质上，完全加载它并把它复制到交换文件中。几乎不用</td>
-</tr>
-<tr>
-<td>11</td>
-<td>如果此镜像文件在网络介质上，完全加载它并把它复制到交换文件中。几乎不用</td>
-</tr>
-<tr>
-<td>12</td>
-<td>此镜像文件是系统文件，而不是用户程序。</td>
-</tr>
-<tr>
-<td>13</td>
-<td>此镜像文件是动态链接库（DLL）。</td>
-</tr>
-<tr>
-<td>14</td>
-<td>此文件只能运行于单处理器机器上。</td>
-</tr>
-<tr>
-<td>15</td>
-<td>保留，必须为0。</td>
-</tr>
-</tbody>
-</table>
+<p>| 位置 | 描述                                                         |<br>| —— | —————————————————————————————— |<br>| 0    | 它表明此文件不包含基址重定位信息，因此必须被加载到其首选基地址上。如果基地址不可用，加载器会报错。 |<br>| 1    | 它表明此镜像文件是合法的。看起来有点多此一举，但又不能少。   |<br>| 2    | 保留，必须为0。                                              |<br>| 3    |                                                              |<br>| 4    |                                                              |<br>| 5    | 应用程序可以处理大于2GB的地址。                              |<br>| 6    | 保留，必须为0。                                              |<br>| 7    |                                                              |<br>| 8    | 机器类型基于32位体系结构。                                   |<br>| 9    | 调试信息已经从此镜像文件中移除。                             |<br>| 10   | 如果此镜像文件在可移动介质上，完全加载它并把它复制到交换文件中。几乎不用 |<br>| 11   | 如果此镜像文件在网络介质上，完全加载它并把它复制到交换文件中。几乎不用 |<br>| 12   | 此镜像文件是系统文件，而不是用户程序。                       |<br>| 13   | 此镜像文件是动态链接库（DLL）。                              |<br>| 14   | 此文件只能运行于单处理器机器上。                             |<br>| 15   | 保留，必须为0。                                              |</p>
 </li>
 </ul>
-<h4 id="image-optional-header"><strong>IMAGE_OPTIONAL_HEADER</strong></h4>
-<p>其中有9个重要参数，设置错误会导致文件无法运行</p>
+<h4 id="IMAGE-OPTIONAL-HEADER"><a href="#IMAGE-OPTIONAL-HEADER" class="headerlink" title="IMAGE_OPTIONAL_HEADER"></a><strong>IMAGE_OPTIONAL_HEADER</strong></h4><p>其中有9个重要参数，设置错误会导致文件无法运行</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/8.png" alt="2"></p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_OPTIONAL_HEADER</span> &#123; </span><br><span class="line">        WORD    Magic;                      <span class="comment">// 魔数 32位为0x10B，64位为0x20B，ROM镜像为0x107</span></span><br><span class="line">        BYTE    MajorLinkerVersion;         <span class="comment">// 链接器的主版本号 -&gt; 0C</span></span><br><span class="line">        BYTE    MinorLinkerVersion;         <span class="comment">// 链接器的次版本号 -&gt; 00</span></span><br><span class="line">        DWORD   SizeOfCode;                 <span class="comment">// 代码节大小，一般放在“.text”节里，必须是FileAlignment的整数倍 -&gt; 00 41 56 00</span></span><br><span class="line">        DWORD   SizeOfInitializedData;      <span class="comment">// 已初始化数大小，一般放在“.data”节里，必须是FileAlignment的整数倍 -&gt; 00 0B A2 00</span></span><br><span class="line">        DWORD   SizeOfUninitializedData;    <span class="comment">// 未初始化数大小，一般放在“.bss”节里，必须是FileAlignment的整数倍 -&gt; 00 00 00 00</span></span><br><span class="line">        DWORD   AddressOfEntryPoint;        <span class="comment">// 指出程序最先执行的代码起始地址(RVA) -&gt; 00 1F A9 D3</span></span><br><span class="line">        DWORD   BaseOfCode;                 <span class="comment">// 代码基址，当镜像被加载进内存时代码节的开头RVA。必须是SectionAlignment的整数倍 -&gt; 00 00 10 00</span></span><br><span class="line">        DWORD   BaseOfData;                 <span class="comment">// 数据基址，当镜像被加载进内存时数据节的开头RVA。必须是SectionAlignment的整数倍 -&gt; 00 00 10 00</span></span><br><span class="line">                                            <span class="comment">// 在64位文件中此处被并入紧随其后的ImageBase中。</span></span><br><span class="line">        DWORD   ImageBase;                  <span class="comment">// 当加载进内存时，镜像的第1个字节的首选地址。</span></span><br><span class="line">                                            <span class="comment">// WindowEXE默认ImageBase值为00400000，DLL文件的ImageBase值为10000000，也可以指定其他值。</span></span><br><span class="line">                                            <span class="comment">// 执行PE文件时，PE装载器先创建进程，再将文件载入内存，</span></span><br><span class="line">                                            <span class="comment">// 然后把EIP寄存器的值设置为ImageBase+AddressOfEntryPoint</span></span><br><span class="line">                                            <span class="comment">// PE文件的Body部分被划分成若干节段，这些节段储存着不同类别的数据。</span></span><br><span class="line">        DWORD   SectionAlignment;           <span class="comment">// SectionAlignment指定了节段在内存中的最小单位， -&gt; 00 00 10 00</span></span><br><span class="line">        DWORD   FileAlignment;              <span class="comment">// FileAlignment指定了节段在磁盘文件中的最小单位，-&gt; 00 00 02 00</span></span><br><span class="line">                                            <span class="comment">// SectionAlignment必须大于或者等于FileAlignment</span></span><br><span class="line"></span><br><span class="line">        WORD    MajorOperatingSystemVersion;<span class="comment">// 主系统的主版本号 -&gt; 00 06</span></span><br><span class="line">        WORD    MinorOperatingSystemVersion;<span class="comment">// 主系统的次版本号 -&gt; 00 00</span></span><br><span class="line">        WORD    MajorImageVersion;          <span class="comment">// 镜像的主版本号 -&gt; 00 00</span></span><br><span class="line">        WORD    MinorImageVersion;          <span class="comment">// 镜像的次版本号 -&gt; 00 00</span></span><br><span class="line">        WORD    MajorSubsystemVersion;      <span class="comment">// 子系统的主版本号 -&gt; 00 06</span></span><br><span class="line">        WORD    MinorSubsystemVersion;      <span class="comment">// 子系统的次版本号 -&gt; 00 00</span></span><br><span class="line">        DWORD   Win32VersionValue;          <span class="comment">// 保留，必须为0 -&gt; 00 00 00 00</span></span><br><span class="line">        DWORD   SizeOfImage;                <span class="comment">// 当镜像被加载进内存时的大小，包括所有的文件头。向上舍入为SectionAlignment的倍数。</span></span><br><span class="line">                                            <span class="comment">// 一般文件大小与加载到内存中的大小是不同的。 -&gt; 00 6C 80 00</span></span><br><span class="line">        DWORD   SizeOfHeaders;              <span class="comment">// 所有头的总大小，向上舍入为FileAlignment的倍数。</span></span><br><span class="line">                                            <span class="comment">// 可以以此值作为PE文件第一节的文件偏移量。-&gt; 00 00 04 00</span></span><br><span class="line">        DWORD   CheckSum;                   <span class="comment">// 镜像文件的校验和 -&gt; 00 00 00 00</span></span><br><span class="line">        WORD    Subsystem;                  <span class="comment">// 运行此镜像所需的子系统 -&gt; 00 03 -&gt; Windows字符模式（CUI）子系统（从命令提示符启动的）具体可以看下面的Windows子系统表格</span></span><br><span class="line">                                            <span class="comment">// 用来区分系统驱动文件（*.sys)与普通可执行文件（*.exe，*.dll)</span></span><br><span class="line">        WORD    DllCharacteristics;         <span class="comment">// DLL标识 -&gt; 81 40 可以参考下面表格DLL特征</span></span><br><span class="line">        DWORD   SizeOfStackReserve;         <span class="comment">// 最大栈大小。CPU的堆栈。默认是1MB。-&gt; 00 10 00 00</span></span><br><span class="line">        DWORD   SizeOfStackCommit;          <span class="comment">// 初始提交的堆栈大小。默认是4KB -&gt; 00 00 10 00</span></span><br><span class="line">        DWORD   SizeOfHeapReserve;          <span class="comment">// 最大堆大小。编译器分配的。默认是1MB -&gt;00 10 00 00</span></span><br><span class="line">        DWORD   SizeOfHeapCommit;           <span class="comment">// 初始提交的局部堆空间大小。默认是4K -&gt;00 00 10 00</span></span><br><span class="line">        DWORD   LoaderFlags;                <span class="comment">// 保留，必须为0 -&gt; 00 00 00 00</span></span><br><span class="line">        DWORD   NumberOfRvaAndSizes;        <span class="comment">// 指定DataDirectory的数组个数，由于以前发行的Windows NT的原因，它只能为16。 -&gt; 00 00 00 10</span></span><br><span class="line">        IMAGE_DATA_DIRECTORY DataDirectory[IMAGE_NUMBEROF_DIRECTORY_ENTRIES]; </span><br><span class="line">    &#125; IMAGE_OPTIONAL_HEADER32, *PIMAGE_OPTIONAL_HEADER32;</span><br><span class="line"></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_DATA_DIRECTORY</span> &#123;  </span><br><span class="line">    DWORD   VirtualAddress;  </span><br><span class="line">    DWORD   Size;  </span><br><span class="line">&#125; IMAGE_DATA_DIRECTORY, *PIMAGE_DATA_DIRECTORY;</span><br></pre></td></tr></table></figure>
 <p>还需要知道的是，程序的真正入口点 = <code>ImageBase + AddressOfEntryPoint</code></p>
 <ul>
-<li>
-<p><code>Magic</code><br>
-这个无符号整数指出了镜像文件的状态，此成员可以是以下的值</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">宏定义</th>
-<th style="text-align:center">数值</th>
-<th style="text-align:center">描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">IMAGE_NT_OPTIONAL_HDR32_MAGIC</td>
-<td style="text-align:center">0x010B</td>
-<td style="text-align:center">表明这是一个32位镜像文件。</td>
-</tr>
-<tr>
-<td style="text-align:left">IMAGE_NT_OPTIONAL_HDR64_MAGIC</td>
-<td style="text-align:center">0x020B</td>
-<td style="text-align:center">表明这是一个64位镜像文件。</td>
-</tr>
-<tr>
-<td style="text-align:left">IMAGE_ROM_OPTIONAL_HDR_MAGIC</td>
-<td style="text-align:center">0x0107</td>
-<td style="text-align:center">表明这是一个ROM镜像。</td>
-</tr>
-</tbody>
-</table>
+<li><p><code>Magic</code><br>这个无符号整数指出了镜像文件的状态，此成员可以是以下的值</p>
+<p>| 宏定义                        |  数值  |            描述            |<br>| :—————————————— | :——: | :————————————: |<br>| IMAGE_NT_OPTIONAL_HDR32_MAGIC | 0x010B | 表明这是一个32位镜像文件。 |<br>| IMAGE_NT_OPTIONAL_HDR64_MAGIC | 0x020B | 表明这是一个64位镜像文件。 |<br>| IMAGE_ROM_OPTIONAL_HDR_MAGIC  | 0x0107 |   表明这是一个ROM镜像。    |</p>
 </li>
-<li>
-<p><code>AddressOfEntryPoint</code><br>
-　　该成员保存着文件被执行时的入口地址，它是一个RVA。如果想要在一个可执行文件中附加了一段代码并且要让这段代码首先被执行，就可以通过更改入口地址到目标代码上，然后再跳转回原有的入口地址。</p>
+<li><p><code>AddressOfEntryPoint</code><br>　　该成员保存着文件被执行时的入口地址，它是一个RVA。如果想要在一个可执行文件中附加了一段代码并且要让这段代码首先被执行，就可以通过更改入口地址到目标代码上，然后再跳转回原有的入口地址。</p>
 </li>
-<li>
-<p><code>ImageBase</code><br>
-该成员指定了文件被执行时优先被装入的地址，如果这个地址已经被占用，那么程序装载器就会将它载入其他地址。当文件被载入其他地址后，就必须通过重定位表进行资源的重定位，这就会变慢文件的载入速度。而装载到ImageBase指定的地址就不会进行资源重定位。</p>
+<li><p><code>ImageBase</code><br>该成员指定了文件被执行时优先被装入的地址，如果这个地址已经被占用，那么程序装载器就会将它载入其他地址。当文件被载入其他地址后，就必须通过重定位表进行资源的重定位，这就会变慢文件的载入速度。而装载到ImageBase指定的地址就不会进行资源重定位。</p>
 </li>
-<li>
-<p><code>SectionAlignment</code><br>
-该成员指定了文件被装入内存时，节区的对齐单位。节区被装入内存的虚拟地址必须是该成员的整数倍，以字节为单位，并且该成员的值必须大于等于FileAlignment的值。该成员的默认大小为系统的页面大小。</p>
+<li><p><code>SectionAlignment</code><br>该成员指定了文件被装入内存时，节区的对齐单位。节区被装入内存的虚拟地址必须是该成员的整数倍，以字节为单位，并且该成员的值必须大于等于FileAlignment的值。该成员的默认大小为系统的页面大小。</p>
 </li>
-<li>
-<p><code>FileAlignment</code><br>
-该成员指定了文件在硬盘上时，节区的对齐单位。节区在硬盘上的地址必须是该成员的整数倍，以字节为单位，并且该成员的值必须大于等于FileAlignment的值。该值应为200h到10000h(含)之间的2的幂。默认为200h。如果SectionAlignment的值小于系统页面大小，则FileAlignment的值必须等于SectionAlignment的值。</p>
+<li><p><code>FileAlignment</code><br>该成员指定了文件在硬盘上时，节区的对齐单位。节区在硬盘上的地址必须是该成员的整数倍，以字节为单位，并且该成员的值必须大于等于FileAlignment的值。该值应为200h到10000h(含)之间的2的幂。默认为200h。如果SectionAlignment的值小于系统页面大小，则FileAlignment的值必须等于SectionAlignment的值。</p>
 </li>
-<li>
-<p><code>SizeOfImage</code><br>
-该成员指定了文件载入内存后的总体大小，包含所有的头部信息。并且它的值必须是<code>SectionAlignment</code>的整数倍。</p>
+<li><p><code>SizeOfImage</code><br>该成员指定了文件载入内存后的总体大小，包含所有的头部信息。并且它的值必须是<code>SectionAlignment</code>的整数倍。</p>
 </li>
-<li>
-<p><code>Subsystem</code></p>
+<li><p><code>Subsystem</code></p>
 <p>定义了以下值以确定运行镜像所需的<code>Windows</code>子系统（如果存在）</p>
-<table>
-<thead>
-<tr>
-<th>值</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>0</td>
-<td>未知子系统</td>
-</tr>
-<tr>
-<td><strong>1</strong></td>
-<td><strong>设备驱动程序和Native Windows进程</strong></td>
-</tr>
-<tr>
-<td><strong>2</strong></td>
-<td><strong>Windows图形用户界面（GUI）子系统（一般程序）</strong></td>
-</tr>
-<tr>
-<td><strong>3</strong></td>
-<td><strong>Windows字符模式（CUI）子系统（从命令提示符启动的）</strong></td>
-</tr>
-<tr>
-<td>7</td>
-<td>Posix字符模式子系统</td>
-</tr>
-<tr>
-<td>9</td>
-<td>Windows CE</td>
-</tr>
-<tr>
-<td>10</td>
-<td>可扩展固件接口（EFI）应用程序</td>
-</tr>
-<tr>
-<td>11</td>
-<td>带引导服务的EFI驱动程序</td>
-</tr>
-<tr>
-<td>12</td>
-<td>带运行时服务的EFI驱动程序</td>
-</tr>
-<tr>
-<td>13</td>
-<td>EFI ROM镜像</td>
-</tr>
-<tr>
-<td>14</td>
-<td>XBOX</td>
-</tr>
-</tbody>
-</table>
+<p>| 值    | 描述                                                   |<br>| ——- | ——————————————————————————— |<br>| 0     | 未知子系统                                             |<br>| <strong>1</strong> | <strong>设备驱动程序和Native Windows进程</strong>                   |<br>| <strong>2</strong> | <strong>Windows图形用户界面（GUI）子系统（一般程序）</strong>       |<br>| <strong>3</strong> | <strong>Windows字符模式（CUI）子系统（从命令提示符启动的）</strong> |<br>| 7     | Posix字符模式子系统                                    |<br>| 9     | Windows CE                                             |<br>| 10    | 可扩展固件接口（EFI）应用程序                          |<br>| 11    | 带引导服务的EFI驱动程序                                |<br>| 12    | 带运行时服务的EFI驱动程序                              |<br>| 13    | EFI ROM镜像                                            |<br>| 14    | XBOX                                                   |</p>
 </li>
-<li>
-<p><code>DllCharacteristics</code>域定义了以下值</p>
-<table>
-<thead>
-<tr>
-<th>位置</th>
-<th>描述</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>1</td>
-<td>保留，必须为0。</td>
-</tr>
-<tr>
-<td>2</td>
-<td></td>
-</tr>
-<tr>
-<td>3</td>
-<td></td>
-</tr>
-<tr>
-<td>4</td>
-<td></td>
-</tr>
-<tr>
-<td>5</td>
-<td>官方文档缺失</td>
-</tr>
-<tr>
-<td>6</td>
-<td>官方文档缺失</td>
-</tr>
-<tr>
-<td>7</td>
-<td>DLL可以在加载时被重定位。</td>
-</tr>
-<tr>
-<td>8</td>
-<td>强制进行代码完整性校验。</td>
-</tr>
-<tr>
-<td>9</td>
-<td>镜像兼容于NX。</td>
-</tr>
-<tr>
-<td>10</td>
-<td>可以隔离，但并不隔离此镜像。</td>
-</tr>
-<tr>
-<td>11</td>
-<td>不使用结构化异常（SE）处理。</td>
-</tr>
-<tr>
-<td>12</td>
-<td>不绑定镜像。</td>
-</tr>
-<tr>
-<td>13</td>
-<td>保留，必须为0。</td>
-</tr>
-<tr>
-<td>14</td>
-<td>WDM驱动程序。</td>
-</tr>
-<tr>
-<td>15</td>
-<td>官方文档缺失</td>
-</tr>
-<tr>
-<td>16</td>
-<td>可以用于终端服务器。</td>
-</tr>
-</tbody>
-</table>
+<li><p><code>DllCharacteristics</code>域定义了以下值</p>
+<p>| 位置 | 描述                         |<br>| —— | —————————————— |<br>| 1    | 保留，必须为0。              |<br>| 2    |                              |<br>| 3    |                              |<br>| 4    |                              |<br>| 5    | 官方文档缺失                 |<br>| 6    | 官方文档缺失                 |<br>| 7    | DLL可以在加载时被重定位。    |<br>| 8    | 强制进行代码完整性校验。     |<br>| 9    | 镜像兼容于NX。               |<br>| 10   | 可以隔离，但并不隔离此镜像。 |<br>| 11   | 不使用结构化异常（SE）处理。 |<br>| 12   | 不绑定镜像。                 |<br>| 13   | 保留，必须为0。              |<br>| 14   | WDM驱动程序。                |<br>| 15   | 官方文档缺失                 |<br>| 16   | 可以用于终端服务器。         |</p>
 </li>
 </ul>
-<h5 id="image-data-directory"><strong>IMAGE_DATA_DIRECTORY</strong></h5>
-<p>数据目录结构，里面列举了导入表、导出表、重定位表等一系列表</p>
+<h5 id="IMAGE-DATA-DIRECTORY"><a href="#IMAGE-DATA-DIRECTORY" class="headerlink" title="IMAGE_DATA_DIRECTORY"></a><strong>IMAGE_DATA_DIRECTORY</strong></h5><p>数据目录结构，里面列举了导入表、导出表、重定位表等一系列表</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_DATA_DIRECTORY</span> &#123;  </span><br><span class="line">    DWORD   VirtualAddress;    <span class="comment">//指向某个数据的相对虚拟地址</span></span><br><span class="line">    DWORD   Size;              <span class="comment">//某个数据块的大小</span></span><br><span class="line">&#125; IMAGE_DATA_DIRECTORY, *PIMAGE_DATA_DIRECTORY;</span><br></pre></td></tr></table></figure>
 <p>在<code>010 Editor</code>中打开的目录如下，里面每个表都是一个完整的<code>IMAGE_DATA_DIRECTORY</code>结构体<img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/13.png" alt="image-20200422000024112"></p>
-<h2 id="节表">节表</h2>
-<p>节表的结构如下</p>
+<h2 id="节表"><a href="#节表" class="headerlink" title="节表"></a>节表</h2><p>节表的结构如下</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_SECTION_HEADER</span> &#123;</span><br><span class="line">    BYTE    Name[IMAGE_SIZEOF_SHORT_NAME]; <span class="comment">// ASCII字符串 可自定义 只截取8个字节</span></span><br><span class="line">    <span class="keyword">union</span> &#123;                                <span class="comment">// 该节在没有对齐之前的真实尺寸,该值可以不准确</span></span><br><span class="line">            DWORD   PhysicalAddress;</span><br><span class="line">            DWORD   VirtualSize;</span><br><span class="line">    &#125; Misc;                                <span class="comment">// 节大小</span></span><br><span class="line">    DWORD   VirtualAddress;                <span class="comment">// 内存中的偏移地址</span></span><br><span class="line">    DWORD   SizeOfRawData;                 <span class="comment">// 节在文件中对齐的尺寸</span></span><br><span class="line">    DWORD   PointerToRawData;              <span class="comment">// 节区在文件中的偏移</span></span><br><span class="line">    DWORD   PointerToRelocations;          <span class="comment">// 重定位的偏移(用于OBJ文件)</span></span><br><span class="line">    DWORD   PointerToLinenumbers;          <span class="comment">// 行号表的偏移(用于调试)</span></span><br><span class="line">    WORD    NumberOfRelocations;           <span class="comment">// 重定位表的数量(用于OBJ文件)</span></span><br><span class="line">    WORD    NumberOfLinenumbers;           <span class="comment">// 行号表数量(用于调试)</span></span><br><span class="line">    DWORD   Characteristics;               <span class="comment">// 节的属性</span></span><br><span class="line">&#125; IMAGE_SECTION_HEADER, *PIMAGE_SECTION_HEADER;</span><br></pre></td></tr></table></figure>
 <p>以<strong>kernel23.dll</strong>举例，里面有6个节表，每个节表代表一个<code>IMAGE_SECTION_HEADER</code>结构体<img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/14.png" alt="image-20200421235002248"></p>
 <p>节表格式如下</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -709,32 +366,24 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>单独一个节表的详细结构如下图</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/15.png" alt="image-20200421235345057"></p>
 <ul>
-<li>
-<p><code>Name</code><br>
-这是一个8字节的ASCII字符串，长度不足8字节时用0x00填充可执行文件不支持长度超过8字节的节名。对于支持超过字节长度的文件来说，此成员会包含斜杠(/)，并在后面跟随一个用ASCII表示的十进制数字，该数字是字符串表的偏移量。</p>
+<li><p><code>Name</code><br>这是一个8字节的ASCII字符串，长度不足8字节时用0x00填充可执行文件不支持长度超过8字节的节名。对于支持超过字节长度的文件来说，此成员会包含斜杠(/)，并在后面跟随一个用ASCII表示的十进制数字，该数字是字符串表的偏移量。</p>
 </li>
-<li>
-<p><code>VirtualAddress</code><br>
-　　指定了该节区装入内存虚拟空间后的地址，这个地址是一个相对虚拟地址(RVA)，它的值一般是SectionAlignment的整数倍。它加上ImageBase后才是真正的虚拟地址。</p>
+<li><p><code>VirtualAddress</code><br>　　指定了该节区装入内存虚拟空间后的地址，这个地址是一个相对虚拟地址(RVA)，它的值一般是SectionAlignment的整数倍。它加上ImageBase后才是真正的虚拟地址。</p>
 </li>
-<li>
-<p><code>SizeOfRawData</code><br>
-　　指定了该节区在硬盘上初始化数据的大小，以字节为单位。它的值必须是FileAlignment的整数倍，如果小于Misc.VirtualSize，那么该部分的其余部分将用0x00填充。如果该部分仅包含未初始化的数据，那么这个值将会为零。</p>
+<li><p><code>SizeOfRawData</code><br>　　指定了该节区在硬盘上初始化数据的大小，以字节为单位。它的值必须是FileAlignment的整数倍，如果小于Misc.VirtualSize，那么该部分的其余部分将用0x00填充。如果该部分仅包含未初始化的数据，那么这个值将会为零。</p>
 </li>
-<li>
-<p><code>PointerToRawData</code><br>
-指出零该节区在硬盘文件中的地址，这个数值是从文件头开始算起的偏移量，也就是说这个地址是一个文件偏移地址(FOA)。它的值必须是FileAlignment的整数倍。如果这个部分仅包含未初始化的数据，则将此成员设置为零。</p>
+<li><p><code>PointerToRawData</code><br>指出零该节区在硬盘文件中的地址，这个数值是从文件头开始算起的偏移量，也就是说这个地址是一个文件偏移地址(FOA)。它的值必须是FileAlignment的整数倍。如果这个部分仅包含未初始化的数据，则将此成员设置为零。</p>
 </li>
-<li>
-<p><code>Characteristics</code><br>
-该成员指出了该节区的属性特征。其中的不同数据位代表了不同的属性，这些数据位组合起来就是这个节的属性特征，比较常见的定义如下，更多信息见 <code>winnt.h</code> 的定义</p>
+<li><p><code>Characteristics</code><br>该成员指出了该节区的属性特征。其中的不同数据位代表了不同的属性，这些数据位组合起来就是这个节的属性特征，比较常见的定义如下，更多信息见 <code>winnt.h</code> 的定义</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_CNT_CODE               0x00000020  <span class="comment">// 此节包含代码</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_CNT_INITIALIZED_DATA   0x00000040  <span class="comment">// 此节包含已初始化数据</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_CNT_UNINITIALIZED_DATA 0x00000080  <span class="comment">// 此节包含未初始化数据</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_LNK_INFO               0x00000200  <span class="comment">// 此节包含注释或其他类型信息</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_LNK_REMOVE             0x00000800  <span class="comment">// 此节不会成为映像的一部分</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_LNK_COMDAT             0x00001000  <span class="comment">// 此节包含COM数据</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_NO_DEFER_SPEC_EXC      0x00004000  <span class="comment">// 在此节的TLB项中重置异常控制位</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_GPREL                  0x00008000  <span class="comment">// 此节可以访问GP相关内容</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_LNK_NRELOC_OVFL        0x01000000  <span class="comment">// 此节包含扩展重定位信息</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_MEM_DISCARDABLE        0x02000000  <span class="comment">// 此节可以被丢弃(比如重定位.reloc节)</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_MEM_NOT_CACHED         0x04000000  <span class="comment">// 此节不可以缓存</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_MEM_NOT_PAGED          0x08000000  <span class="comment">// 此节不可以分页</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_MEM_SHARED             0x10000000  <span class="comment">// 此节是共享的</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_MEM_EXECUTE            0x20000000  <span class="comment">// 此节是可执行的</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_MEM_READ               0x40000000  <span class="comment">// 此节是可读的</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> IMAGE_SCN_MEM_WRITE              0x80000000  <span class="comment">// 此节是可写的</span></span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
 <p>虽然每个节的名称可以随意定义，但是也有一些约定俗成的名称，如下</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -817,42 +466,30 @@
 </tr>
 </tbody>
 </table>
-<h2 id="导入表">导入表</h2>
-<p>导出表(Import Table)，主要就是标注了需要导入使用的一些DLL文件</p>
+</div>
+<h2 id="导入表"><a href="#导入表" class="headerlink" title="导入表"></a>导入表</h2><p>导出表(Import Table)，主要就是标注了需要导入使用的一些DLL文件</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_IMPORT_DESCRIPTOR</span> &#123;</span><br><span class="line">    <span class="keyword">union</span> &#123;</span><br><span class="line">        DWORD   Characteristics;            <span class="comment">// 0 for terminating null import descriptor</span></span><br><span class="line">        DWORD   OriginalFirstThunk;         <span class="comment">// RVA 指向 INT (PIMAGE_THUNK_DATA结构数组)</span></span><br><span class="line">    &#125; DUMMYUNIONNAME;</span><br><span class="line">    DWORD   TimeDateStamp;                  <span class="comment">// 时间戳多数情况可忽略  如果是0xFFFFFFFF表示IAT表被绑定为函数地址</span></span><br><span class="line">    DWORD   ForwarderChain;                 <span class="comment">// 转发链，如果不转发则为0 </span></span><br><span class="line">    DWORD   Name;							              <span class="comment">// 导入DLL文件名的RVA地址</span></span><br><span class="line">    DWORD   FirstThunk;                     <span class="comment">// 导入地址表(IAT)的RVA地址</span></span><br><span class="line">&#125; IMAGE_IMPORT_DESCRIPTOR;</span><br><span class="line"><span class="keyword">typedef</span> IMAGE_IMPORT_DESCRIPTOR UNALIGNED *PIMAGE_IMPORT_DESCRIPTOR;</span><br></pre></td></tr></table></figure>
 <p>如下图可知道，需要用到的dll文件</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/16.png" alt="image-20200422001214627"></p>
-<h4 id="exe文件载入后对应的导入表结构图">EXE文件载入后对应的导入表结构图</h4>
-<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/10.png" alt="载入后导入表结构图"></p>
-<h4 id="exe文件载入前对应的导入表结构图">EXE文件载入前对应的导入表结构图</h4>
-<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/11.png" alt="载入前导入表结构图"></p>
-<h2 id="导出表">导出表</h2>
-<p>导出表(Export Table)一般是<code>DLL</code>文件用的比较多，<code>exe</code>文件很少有导出表，导出表的数据结构如下</p>
+<h4 id="EXE文件载入后对应的导入表结构图"><a href="#EXE文件载入后对应的导入表结构图" class="headerlink" title="EXE文件载入后对应的导入表结构图"></a>EXE文件载入后对应的导入表结构图</h4><p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/10.png" alt="载入后导入表结构图"></p>
+<h4 id="EXE文件载入前对应的导入表结构图"><a href="#EXE文件载入前对应的导入表结构图" class="headerlink" title="EXE文件载入前对应的导入表结构图"></a>EXE文件载入前对应的导入表结构图</h4><p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/11.png" alt="载入前导入表结构图"></p>
+<h2 id="导出表"><a href="#导出表" class="headerlink" title="导出表"></a>导出表</h2><p>导出表(Export Table)一般是<code>DLL</code>文件用的比较多，<code>exe</code>文件很少有导出表，导出表的数据结构如下</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_EXPORT_DIRECTORY</span> &#123;</span><br><span class="line">    DWORD   Characteristics;          <span class="comment">// 保留,恒为0x00000000</span></span><br><span class="line">    DWORD   TimeDateStamp;            <span class="comment">// 时间戳</span></span><br><span class="line">    WORD    MajorVersion;             <span class="comment">// 主版本号，一般不赋值</span></span><br><span class="line">    WORD    MinorVersion;             <span class="comment">// 子版本号，一般不赋值</span></span><br><span class="line">    DWORD   Name;                     <span class="comment">// 指针指向该导出表文件名字符串</span></span><br><span class="line">    DWORD   Base;                     <span class="comment">// 导出函数起始序号,索引基数</span></span><br><span class="line">    DWORD   NumberOfFunctions;        <span class="comment">// 导出地址表中的成员个数</span></span><br><span class="line">    DWORD   NumberOfNames;            <span class="comment">// 导出名称表中的成员个数</span></span><br><span class="line">    DWORD   AddressOfFunctions;       <span class="comment">// 指针指向导出函数地址表(EAT)</span></span><br><span class="line">    DWORD   AddressOfNames;           <span class="comment">// 指针指向导出函数名称表(ENT)</span></span><br><span class="line">    DWORD   AddressOfNameOrdinals;    <span class="comment">// 指针指向导出函数序号表</span></span><br><span class="line">&#125; IMAGE_EXPORT_DIRECTORY, *PIMAGE_EXPORT_DIRECTORY;</span><br></pre></td></tr></table></figure>
 <ul>
-<li><code>AddressOfFunctions</code><br>
-这个值是一个4字节的RVA地址，他可以用来定位导出表中所有函数的地址表，这个地址表可以当作一个成员宽度为4的数组进行处理，它的长度由NumberOfFunctions进行限定，地址表中的成员也是一个RVA地址，在内存中加上ImageBase后才是函数真正的地址。</li>
-<li><code>AddressOfNames</code><br>
-这个值是一个4字节的RVA地址，他可以用来定位导出表中所有函数的名称表，这个名称表也可以当作一个成员宽度为4的数组进行处理，它的长度由NumberOfNames进行限定，名称表的成员也是一个RVA地址，在FIleBuffer状态下需要进行RVA到FOA的转换才能真正找到函数名称。</li>
-<li><code>AddressOfNameOrdinals</code><br>
-　　这个值是一个4字节的RVA地址，他可以用来定位导出表中所有函数的序号表，这个序号表可以当作一个成员宽度为2的数组进行处理，它的长度由NumberOfNames进行限定，名称表的成员是一个函数序号，该序号用于通过名称获取函数地址。</li>
-<li><code>NumberOfFunctions</code><br>
-注意，这个值并不是真的函数数量，他是通过函数序号表中最大的序号减去最小的序号再加上一得到的，例如：一共导出了3个函数，序号分别是：0、2、4，NumberOfFunctions = 4 - 0 + 1 = 5个。</li>
+<li><code>AddressOfFunctions</code><br>这个值是一个4字节的RVA地址，他可以用来定位导出表中所有函数的地址表，这个地址表可以当作一个成员宽度为4的数组进行处理，它的长度由NumberOfFunctions进行限定，地址表中的成员也是一个RVA地址，在内存中加上ImageBase后才是函数真正的地址。</li>
+<li><code>AddressOfNames</code><br>这个值是一个4字节的RVA地址，他可以用来定位导出表中所有函数的名称表，这个名称表也可以当作一个成员宽度为4的数组进行处理，它的长度由NumberOfNames进行限定，名称表的成员也是一个RVA地址，在FIleBuffer状态下需要进行RVA到FOA的转换才能真正找到函数名称。</li>
+<li><code>AddressOfNameOrdinals</code><br>　　这个值是一个4字节的RVA地址，他可以用来定位导出表中所有函数的序号表，这个序号表可以当作一个成员宽度为2的数组进行处理，它的长度由NumberOfNames进行限定，名称表的成员是一个函数序号，该序号用于通过名称获取函数地址。</li>
+<li><code>NumberOfFunctions</code><br>注意，这个值并不是真的函数数量，他是通过函数序号表中最大的序号减去最小的序号再加上一得到的，例如：一共导出了3个函数，序号分别是：0、2、4，NumberOfFunctions = 4 - 0 + 1 = 5个。</li>
 </ul>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/17.png" alt="image-20200422000611876"></p>
-<h4 id="通过函数名查找函数地址">通过函数名查找函数地址</h4>
-<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/18.png" alt="按函数名查找函数地址"></p>
-<h4 id="通过函数序号查找函数地址">通过函数序号查找函数地址</h4>
-<p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/19.png" alt="通过函数序号查找函数地址"></p>
-<h2 id="重定位表">重定位表</h2>
-<p>系统在加载DLL文件时，并不是每次都能加载到预期的 <code>ImageBase</code> 基址上，所以DLL都存在 <code>基址重定位表</code>，<br>
-用来修正相关的地址信息，另外EXE的 <code>动态基址</code> 技术，也是用 <code>基址重定位表</code> 实现的。</p>
-<p>PE文件中的重定位信息是由多个 <code>IMAGE_BASE_RELOCATION</code> 结构体组成的，每个结构体只描述一个 <code>4KB</code> 大小<br>
-的分页内重定位信息，也就是 <code>0x1000</code> 字节，因此结构体中 <code>VirtualAddress</code> 的值总是为 <code>0x1000</code> 的倍数。</p>
+<h4 id="通过函数名查找函数地址"><a href="#通过函数名查找函数地址" class="headerlink" title="通过函数名查找函数地址"></a>通过函数名查找函数地址</h4><p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/18.png" alt="按函数名查找函数地址"></p>
+<h4 id="通过函数序号查找函数地址"><a href="#通过函数序号查找函数地址" class="headerlink" title="通过函数序号查找函数地址"></a>通过函数序号查找函数地址</h4><p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/19.png" alt="通过函数序号查找函数地址"></p>
+<h2 id="重定位表"><a href="#重定位表" class="headerlink" title="重定位表"></a>重定位表</h2><p>系统在加载DLL文件时，并不是每次都能加载到预期的 <code>ImageBase</code> 基址上，所以DLL都存在 <code>基址重定位表</code>，<br>用来修正相关的地址信息，另外EXE的 <code>动态基址</code> 技术，也是用 <code>基址重定位表</code> 实现的。</p>
+<p>PE文件中的重定位信息是由多个 <code>IMAGE_BASE_RELOCATION</code> 结构体组成的，每个结构体只描述一个 <code>4KB</code> 大小<br>的分页内重定位信息，也就是 <code>0x1000</code> 字节，因此结构体中 <code>VirtualAddress</code> 的值总是为 <code>0x1000</code> 的倍数。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_BASE_RELOCATION</span> &#123;</span><br><span class="line">	DWORD VirtualAddress;    <span class="comment">// 需要重定位数据的起始RVA</span></span><br><span class="line">	DWORD SizeOfBlock;       <span class="comment">// 本结构与TypeOffset总大小</span></span><br><span class="line">  <span class="comment">//WORD  TypeOffset[1];   // 原则上不属于本结构</span></span><br><span class="line">&#125; IMAGE_BASE_RELOCATION, *PIMAGE_BASE_RELOCATION;</span><br></pre></td></tr></table></figure>
-<p>重定位的本质非常简单，就是比较实际加载地址与 <code>ImageBase</code> 的值，如果相等则不需要做任何操作，如果<br>
-不相等就需要把重定位表中指定的地址处加上这个差值。</p>
+<p>重定位的本质非常简单，就是比较实际加载地址与 <code>ImageBase</code> 的值，如果相等则不需要做任何操作，如果<br>不相等就需要把重定位表中指定的地址处加上这个差值。</p>
 <p><code>TypeOffset</code> 由两部分数据组成，<code>高4位</code> 表示 <code>类型</code>，<code>低12位</code> 表示 <code>偏移</code>。类型定义如下</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -909,23 +546,19 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>重定位表结构如下图所示</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/28.png" alt="结构图"></p>
-<h2 id="资源表">资源表</h2>
-<p>资源表用来存储程序的各种界面数据，比如菜单、图标、版本信息等，其结构体如下</p>
+<h2 id="资源表"><a href="#资源表" class="headerlink" title="资源表"></a>资源表</h2><p>资源表用来存储程序的各种界面数据，比如菜单、图标、版本信息等，其结构体如下</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_RESOURCE_DIRECTORY</span> &#123;</span><br><span class="line">	DWORD Characteristics;        <span class="comment">// 资源属性标识，通常为0x00000000</span></span><br><span class="line">	DWORD TimeDateStamp;          <span class="comment">// 资源建立的时间</span></span><br><span class="line">	WORD  MajorVersion;           <span class="comment">// 资源主版本，通常为0x0004</span></span><br><span class="line">	WORD  MinorVersion;           <span class="comment">// 资源子版本，通常为0x0000</span></span><br><span class="line">	WORD  NumberOfNamedEntries;   <span class="comment">// 资源名称条目个数</span></span><br><span class="line">	WORD  NumberOfIdEntries;      <span class="comment">// 资源ID条目个数</span></span><br><span class="line">&#125; IMAGE_RESOURCE_DIRECTORY, *PIMAGE_RESOURCE_DIRECTORY;</span><br></pre></td></tr></table></figure>
-<p>资源在PE文件中是以目录结构的形式存在的，一般情况下这个目录分3层，从根目录开始分别为资源类型、<br>
-目录资源ID、资源代码页。每层的头部是一个 <code>IMAGE_RESOURCE_DIRECTORY</code> 结构，并且在其后面跟着一个<br>
-<code>IMAGE_RESOURCE_DIRECTORY_ENTRY</code> 结构数组，然后结构数组的每个成员则分别指向下一层目录结构。</p>
+<p>资源在PE文件中是以目录结构的形式存在的，一般情况下这个目录分3层，从根目录开始分别为资源类型、<br>目录资源ID、资源代码页。每层的头部是一个 <code>IMAGE_RESOURCE_DIRECTORY</code> 结构，并且在其后面跟着一个<br><code>IMAGE_RESOURCE_DIRECTORY_ENTRY</code> 结构数组，然后结构数组的每个成员则分别指向下一层目录结构。</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_RESOURCE_DIRECTORY_ENTRY</span> &#123;</span><br><span class="line">  <span class="keyword">union</span> &#123;</span><br><span class="line">    <span class="keyword">struct</span> &#123;</span><br><span class="line">      DWORD NameOffset : <span class="number">31</span>;        <span class="comment">// 资源名偏移</span></span><br><span class="line">      DWORD NameIsString : <span class="number">1</span>;       <span class="comment">// 资源名为字符串</span></span><br><span class="line">     &#125;;</span><br><span class="line">    DWORD Name;                     <span class="comment">// 资源/语言类型</span></span><br><span class="line">    WORD  Id;                       <span class="comment">// 资源数字ID</span></span><br><span class="line">   &#125;;</span><br><span class="line">  <span class="keyword">union</span> &#123;</span><br><span class="line">    DWORD OffsetToData;             <span class="comment">// 数据偏移地址</span></span><br><span class="line">    <span class="keyword">struct</span> &#123;</span><br><span class="line">      DWORD OffsetToDirectory : <span class="number">31</span>; <span class="comment">// 子目录偏移地址</span></span><br><span class="line">      DWORD DataIsDirectory : <span class="number">1</span>;    <span class="comment">// 数据为目录</span></span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;;</span><br><span class="line">&#125; IMAGE_RESOURCE_DIRECTORY_ENTRY, *PIMAGE_RESOURCE_DIRECTORY_ENTRY;</span><br></pre></td></tr></table></figure>
-<p>第一个联合体的信息，是根据当前结构体所处的目录层次来决定的，位于 <code>第1层</code> 目录时 <code>Name</code> 有效，保存的<br>
-信息是 <code>资源类型</code>。位于 <code>第2层</code> 目录时 <code>Id</code> 或 <code>结构体</code> 有效，取决于此资源的 <code>索引方式</code>，如果用的是 <code>编号索引</code><br>
-就是 <code>Id</code> 有效，否则 <code>结构体</code> 有效。位于 <code>第3层</code> 目录时 <code>Name</code> 有效，保存的信息是 <code>语言类型</code>。</p>
-<p>第二个联合体的信息，理论上是根据具体情况而定的，如果下级是一个 <code>子目录</code> 的话，那么就是 <code>结构体</code> 生效，<br>
-如果下级是 <code>资源数据</code> 则是字段 <code>OffsetToData</code> 生效。</p>
+<p>第一个联合体的信息，是根据当前结构体所处的目录层次来决定的，位于 <code>第1层</code> 目录时 <code>Name</code> 有效，保存的<br>信息是 <code>资源类型</code>。位于 <code>第2层</code> 目录时 <code>Id</code> 或 <code>结构体</code> 有效，取决于此资源的 <code>索引方式</code>，如果用的是 <code>编号索引</code><br>就是 <code>Id</code> 有效，否则 <code>结构体</code> 有效。位于 <code>第3层</code> 目录时 <code>Name</code> 有效，保存的信息是 <code>语言类型</code>。</p>
+<p>第二个联合体的信息，理论上是根据具体情况而定的，如果下级是一个 <code>子目录</code> 的话，那么就是 <code>结构体</code> 生效，<br>如果下级是 <code>资源数据</code> 则是字段 <code>OffsetToData</code> 生效。</p>
 <p>当 <code>NameIsString</code> 为 <code>1</code> 时，<code>NameOffset</code> 指向一个 <code>IMAGE_RESOURCE_DIR_STRING_U</code> 结构体</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_RESOURCE_DIR_STRING_U</span> &#123;</span><br><span class="line">    WORD  Length;        <span class="comment">// 字符串的字节数</span></span><br><span class="line">    WCHAR NameString[<span class="number">1</span>]; <span class="comment">// 字符串的内容信息</span></span><br><span class="line">&#125; IMAGE_RESOURCE_DIR_STRING_U, *PIMAGE_RESOURCE_DIR_STRING_U;</span><br></pre></td></tr></table></figure>
 <p>当 <code>Name</code> 位于 <code>第1层</code> 目录时表示的 <code>资源类型</code> 如下表所示</p>
+<div class="table-container">
 <table>
 <thead>
 <tr>
@@ -980,13 +613,13 @@
 </tr>
 </tbody>
 </table>
+</div>
 <p>在经过3层目录的索引后，最后是一个 <code>IMAGE_RESOURCE_DATA_ENTRY</code> 结构体，定义如下</p>
 <figure class="highlight c++"><table><tr><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="keyword">struct</span> <span class="title class_">_IMAGE_RESOURCE_DATA_ENTRY</span> &#123;</span><br><span class="line">	DWORD OffsetToData;   <span class="comment">// 资源数据的RVA</span></span><br><span class="line">	DWORD Size;           <span class="comment">// 资源数据的大小</span></span><br><span class="line">	DWORD CodePage;	      <span class="comment">// 代码页</span></span><br><span class="line">	DWORD Reserved;	      <span class="comment">// 保留字段，通常为0x00000000</span></span><br><span class="line">&#125; IMAGE_RESOURCE_DATA_ENTRY, *PIMAGE_RESOURCE_DATA_ENTRY;</span><br></pre></td></tr></table></figure>
 <p>资源表的3层目录关系，如下图所示</p>
 <p><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/PE/29.png" alt="关系图"></p>
-<h2 id="参考文章">参考文章</h2>
-<figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://thunderjie.github.io/2019/03/27/PE%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3/</span><br><span class="line">https://blog.csdn.net/qiming_zhang/article/details/7309909#3.2.1</span><br><span class="line">https://www.jianshu.com/p/d2fb0fed3b25</span><br><span class="line">https://bbs.pediy.com/thread-217241.htm</span><br><span class="line">https://bbs.pediy.com/thread-252795.htm</span><br></pre></td></tr></table></figure>
-</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com">ascotbe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/2020/03/23/PortableExecutable/">https://www.ascotbe.com/2020/03/23/PortableExecutable/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com" target="_blank">ascotbe</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PE/">PE</a></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/89.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/03/31/raspberry_monitor_0x02/"><img class="prev-cover" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/90.jpg" onerror="onerror=null;src='/img/404.gif'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">利用树莓派来监听任务目标(下)</div></div></a></div><div class="next-post pull-right"><a href="/2020/03/16/C++NamingConvention/"><img class="next-cover" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/88.jpg" onerror="onerror=null;src='/img/404.gif'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C++命名规范</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/07/05/PortableExecutableParser/" title="PE解析器"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/104.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-05</div><div class="title">PE解析器</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ascotbe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">94</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ascotbe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:ascotbe@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a><a class="social-icon" href="https://steamcommunity.com/id/ascotbe" target="_blank" title=""><i class="iconfont icon-steam"></i></a><a class="social-icon" href="https://twitter.com/asc0t6e" target="_blank" title=""><i class="iconfont icon-twitter"></i></a><a class="social-icon" href="https://t.me/ascotbe" target="_blank" title=""><i class="iconfont icon-telegram"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章都是本人学习笔记仅限交流探讨，禁止利用文章思路进行违法操作，否则与作者无关，如果您不同意请关闭本站<img src= "/img/loading.gif" data-lazy-src="/img/announcement2.gif" style="zoom:25%;" ></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E4%BD%93%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">总体介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pe%E6%96%87%E4%BB%B6%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">PE文件整体结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#pe%E6%8C%87%E7%BA%B9-dos%E5%A4%B4"><span class="toc-number">4.</span> <span class="toc-text">PE指纹（DOS头）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#header%E7%BB%93%E6%9E%84-00000000-0000003f-%E5%85%B164%E4%B8%AA%E5%AD%97%E8%8A%82"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">Header结构(00000000 - 0000003F，共64个字节)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#dos%E5%AD%98%E6%A0%B9-00000040-x"><span class="toc-number">4.0.0.2.</span> <span class="toc-text">DOS存根（00000040 - X）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nt%E5%A4%B4-pe%E5%A4%B4"><span class="toc-number">5.</span> <span class="toc-text">NT头（PE头）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#image-nt-headers"><span class="toc-number">5.1.</span> <span class="toc-text">IMAGE_NT_HEADERS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#signatur"><span class="toc-number">5.1.1.</span> <span class="toc-text">Signatur</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#image-file-header"><span class="toc-number">5.1.2.</span> <span class="toc-text">IMAGE_FILE_HEADER</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#image-optional-header"><span class="toc-number">5.1.3.</span> <span class="toc-text">IMAGE_OPTIONAL_HEADER</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#image-data-directory"><span class="toc-number">5.1.3.1.</span> <span class="toc-text">IMAGE_DATA_DIRECTORY</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%82%E8%A1%A8"><span class="toc-number">6.</span> <span class="toc-text">节表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E8%A1%A8"><span class="toc-number">7.</span> <span class="toc-text">导入表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#exe%E6%96%87%E4%BB%B6%E8%BD%BD%E5%85%A5%E5%90%8E%E5%AF%B9%E5%BA%94%E7%9A%84%E5%AF%BC%E5%85%A5%E8%A1%A8%E7%BB%93%E6%9E%84%E5%9B%BE"><span class="toc-number">7.0.1.</span> <span class="toc-text">EXE文件载入后对应的导入表结构图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#exe%E6%96%87%E4%BB%B6%E8%BD%BD%E5%85%A5%E5%89%8D%E5%AF%B9%E5%BA%94%E7%9A%84%E5%AF%BC%E5%85%A5%E8%A1%A8%E7%BB%93%E6%9E%84%E5%9B%BE"><span class="toc-number">7.0.2.</span> <span class="toc-text">EXE文件载入前对应的导入表结构图</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E8%A1%A8"><span class="toc-number">8.</span> <span class="toc-text">导出表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E5%87%BD%E6%95%B0%E5%90%8D%E6%9F%A5%E6%89%BE%E5%87%BD%E6%95%B0%E5%9C%B0%E5%9D%80"><span class="toc-number">8.0.1.</span> <span class="toc-text">通过函数名查找函数地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E5%87%BD%E6%95%B0%E5%BA%8F%E5%8F%B7%E6%9F%A5%E6%89%BE%E5%87%BD%E6%95%B0%E5%9C%B0%E5%9D%80"><span class="toc-number">8.0.2.</span> <span class="toc-text">通过函数序号查找函数地址</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E4%BD%8D%E8%A1%A8"><span class="toc-number">9.</span> <span class="toc-text">重定位表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E8%A1%A8"><span class="toc-number">10.</span> <span class="toc-text">资源表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">11.</span> <span class="toc-text">参考文章</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/01/LinearAlgebra_0x10/" title="特征向量与特征值"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/180.png" onerror="this.onerror=null;this.src='/img/404.gif'" alt="特征向量与特征值"/></a><div class="content"><a class="title" href="/2024/02/01/LinearAlgebra_0x10/" title="特征向量与特征值">特征向量与特征值</a><time datetime="2024-02-01T15:58:53.000Z" title="发表于 2024-02-01 23:58:53">2024-02-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/27/LinearAlgebra_0x09/" title="矩阵和向量求导"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/180.png" onerror="this.onerror=null;this.src='/img/404.gif'" alt="矩阵和向量求导"/></a><div class="content"><a class="title" href="/2024/01/27/LinearAlgebra_0x09/" title="矩阵和向量求导">矩阵和向量求导</a><time datetime="2024-01-27T15:58:53.000Z" title="发表于 2024-01-27 23:58:53">2024-01-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/24/LinearAlgebra_0x08/" title="齐次方程与非齐次方程"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/179.png" onerror="this.onerror=null;this.src='/img/404.gif'" alt="齐次方程与非齐次方程"/></a><div class="content"><a class="title" href="/2024/01/24/LinearAlgebra_0x08/" title="齐次方程与非齐次方程">齐次方程与非齐次方程</a><time datetime="2024-01-24T15:58:53.000Z" title="发表于 2024-01-24 23:58:53">2024-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/12/LinearAlgebra_0x07/" title="线性组合与线性相关、向量空间、张成空间"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/178.png" onerror="this.onerror=null;this.src='/img/404.gif'" alt="线性组合与线性相关、向量空间、张成空间"/></a><div class="content"><a class="title" href="/2024/01/12/LinearAlgebra_0x07/" title="线性组合与线性相关、向量空间、张成空间">线性组合与线性相关、向量空间、张成空间</a><time datetime="2024-01-12T15:58:53.000Z" title="发表于 2024-01-12 23:58:53">2024-01-12</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/10/LinearAlgebra_0x06/" title="矩阵的秩"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/177.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="矩阵的秩"/></a><div class="content"><a class="title" href="/2024/01/10/LinearAlgebra_0x06/" title="矩阵的秩">矩阵的秩</a><time datetime="2024-01-10T15:58:53.000Z" title="发表于 2024-01-10 23:58:53">2024-01-10</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://raw.githubusercontent.com/Ascotbe/Image/master/Blog/89.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 <i id="heartbeat" class="fa fas fa-heartbeat"></i> By ascotbe</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.ascotbe.com/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
+<h2 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h2><figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line">https://thunderjie.github.io/2019/03/27/PE%E7%BB%93%E6%9E%84%E8%AF%A6%E8%A7%A3/</span><br><span class="line">https://blog.csdn.net/qiming_zhang/article/details/7309909#3.2.1</span><br><span class="line">https://www.jianshu.com/p/d2fb0fed3b25</span><br><span class="line">https://bbs.pediy.com/thread-217241.htm</span><br><span class="line">https://bbs.pediy.com/thread-252795.htm</span><br></pre></td></tr></table></figure>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com">ascotbe</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="https://www.ascotbe.com/2020/03/23/PortableExecutable/">https://www.ascotbe.com/2020/03/23/PortableExecutable/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.ascotbe.com" target="_blank">ascotbe</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/PE/">PE</a></div><div class="post_share"><div class="social-share" data-image="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/89.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc/sharejs/dist/js/social-share.min.js" defer></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2020/03/31/raspberry_monitor_0x02/"><img class="prev-cover" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/90.jpg" onerror="onerror=null;src='/img/404.gif'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">利用树莓派来监听任务目标(下)</div></div></a></div><div class="next-post pull-right"><a href="/2020/03/16/C++NamingConvention/"><img class="next-cover" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/88.jpg" onerror="onerror=null;src='/img/404.gif'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">C++命名规范</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2020/07/05/PortableExecutableParser/" title="PE解析器"><img class="cover" src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/104.jpg" alt="cover"><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2020-07-05</div><div class="title">PE解析器</div></div></a></div></div></div><hr/><div id="post-comment"><div class="comment-head"><div class="comment-headline"><i class="fas fa-comments fa-fw"></i><span> 评论</span></div></div><div class="comment-wrap"><div><div id="utterances-wrap"></div></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src= "/img/loading.gif" data-lazy-src="/img/avatar.jpeg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">ascotbe</div><div class="author-info__description"></div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">95</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">74</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">26</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/ascotbe"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="mailto:ascotbe@gmail.com" target="_blank" title=""><i class="fa fa-envelope"></i></a><a class="social-icon" href="https://steamcommunity.com/id/ascotbe" target="_blank" title=""><i class="iconfont icon-steam"></i></a><a class="social-icon" href="https://twitter.com/asc0t6e" target="_blank" title=""><i class="iconfont icon-twitter"></i></a><a class="social-icon" href="https://t.me/ascotbe" target="_blank" title=""><i class="iconfont icon-telegram"></i></a><a class="social-icon" href="/atom.xml" target="_blank" title=""><i class="fa fa-rss"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">所有文章都是本人学习笔记仅限交流探讨，禁止利用文章思路进行违法操作，否则与作者无关，如果您不同意请关闭本站<img src= "/img/loading.gif" data-lazy-src="/img/announcement2.gif" style="zoom:25%;" ></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E4%BD%93%E4%BB%8B%E7%BB%8D"><span class="toc-number">2.</span> <span class="toc-text">总体介绍</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PE%E6%96%87%E4%BB%B6%E6%95%B4%E4%BD%93%E7%BB%93%E6%9E%84"><span class="toc-number">3.</span> <span class="toc-text">PE文件整体结构</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#PE%E6%8C%87%E7%BA%B9%EF%BC%88DOS%E5%A4%B4%EF%BC%89"><span class="toc-number">4.</span> <span class="toc-text">PE指纹（DOS头）</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#Header%E7%BB%93%E6%9E%84-00000000-0000003F%EF%BC%8C%E5%85%B164%E4%B8%AA%E5%AD%97%E8%8A%82"><span class="toc-number">4.0.0.1.</span> <span class="toc-text">Header结构(00000000 - 0000003F，共64个字节)</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#DOS%E5%AD%98%E6%A0%B9%EF%BC%8800000040-X%EF%BC%89"><span class="toc-number">4.0.0.2.</span> <span class="toc-text">DOS存根（00000040 - X）</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#NT%E5%A4%B4%EF%BC%88PE%E5%A4%B4%EF%BC%89"><span class="toc-number">5.</span> <span class="toc-text">NT头（PE头）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#IMAGE-NT-HEADERS"><span class="toc-number">5.1.</span> <span class="toc-text">IMAGE_NT_HEADERS</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Signatur"><span class="toc-number">5.1.1.</span> <span class="toc-text">Signatur</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IMAGE-FILE-HEADER"><span class="toc-number">5.1.2.</span> <span class="toc-text">IMAGE_FILE_HEADER</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#IMAGE-OPTIONAL-HEADER"><span class="toc-number">5.1.3.</span> <span class="toc-text">IMAGE_OPTIONAL_HEADER</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#IMAGE-DATA-DIRECTORY"><span class="toc-number">5.1.3.1.</span> <span class="toc-text">IMAGE_DATA_DIRECTORY</span></a></li></ol></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%8A%82%E8%A1%A8"><span class="toc-number">6.</span> <span class="toc-text">节表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%85%A5%E8%A1%A8"><span class="toc-number">7.</span> <span class="toc-text">导入表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#EXE%E6%96%87%E4%BB%B6%E8%BD%BD%E5%85%A5%E5%90%8E%E5%AF%B9%E5%BA%94%E7%9A%84%E5%AF%BC%E5%85%A5%E8%A1%A8%E7%BB%93%E6%9E%84%E5%9B%BE"><span class="toc-number">7.0.1.</span> <span class="toc-text">EXE文件载入后对应的导入表结构图</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#EXE%E6%96%87%E4%BB%B6%E8%BD%BD%E5%85%A5%E5%89%8D%E5%AF%B9%E5%BA%94%E7%9A%84%E5%AF%BC%E5%85%A5%E8%A1%A8%E7%BB%93%E6%9E%84%E5%9B%BE"><span class="toc-number">7.0.2.</span> <span class="toc-text">EXE文件载入前对应的导入表结构图</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AF%BC%E5%87%BA%E8%A1%A8"><span class="toc-number">8.</span> <span class="toc-text">导出表</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E5%87%BD%E6%95%B0%E5%90%8D%E6%9F%A5%E6%89%BE%E5%87%BD%E6%95%B0%E5%9C%B0%E5%9D%80"><span class="toc-number">8.0.1.</span> <span class="toc-text">通过函数名查找函数地址</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%80%9A%E8%BF%87%E5%87%BD%E6%95%B0%E5%BA%8F%E5%8F%B7%E6%9F%A5%E6%89%BE%E5%87%BD%E6%95%B0%E5%9C%B0%E5%9D%80"><span class="toc-number">8.0.2.</span> <span class="toc-text">通过函数序号查找函数地址</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%87%8D%E5%AE%9A%E4%BD%8D%E8%A1%A8"><span class="toc-number">9.</span> <span class="toc-text">重定位表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%B5%84%E6%BA%90%E8%A1%A8"><span class="toc-number">10.</span> <span class="toc-text">资源表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8F%82%E8%80%83%E6%96%87%E7%AB%A0"><span class="toc-number">11.</span> <span class="toc-text">参考文章</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item"><a class="thumbnail" href="/2024/02/06/LinearAlgebra_0x11/" title="矩阵的相似与对角化"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/182.jpg" onerror="this.onerror=null;this.src='/img/404.gif'" alt="矩阵的相似与对角化"/></a><div class="content"><a class="title" href="/2024/02/06/LinearAlgebra_0x11/" title="矩阵的相似与对角化">矩阵的相似与对角化</a><time datetime="2024-02-06T15:58:53.000Z" title="发表于 2024-02-06 23:58:53">2024-02-06</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/02/01/LinearAlgebra_0x10/" title="特征向量与特征值"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/180.png" onerror="this.onerror=null;this.src='/img/404.gif'" alt="特征向量与特征值"/></a><div class="content"><a class="title" href="/2024/02/01/LinearAlgebra_0x10/" title="特征向量与特征值">特征向量与特征值</a><time datetime="2024-02-01T15:58:53.000Z" title="发表于 2024-02-01 23:58:53">2024-02-01</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/27/LinearAlgebra_0x09/" title="矩阵和向量求导"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/180.png" onerror="this.onerror=null;this.src='/img/404.gif'" alt="矩阵和向量求导"/></a><div class="content"><a class="title" href="/2024/01/27/LinearAlgebra_0x09/" title="矩阵和向量求导">矩阵和向量求导</a><time datetime="2024-01-27T15:58:53.000Z" title="发表于 2024-01-27 23:58:53">2024-01-27</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/24/LinearAlgebra_0x08/" title="齐次方程与非齐次方程"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/179.png" onerror="this.onerror=null;this.src='/img/404.gif'" alt="齐次方程与非齐次方程"/></a><div class="content"><a class="title" href="/2024/01/24/LinearAlgebra_0x08/" title="齐次方程与非齐次方程">齐次方程与非齐次方程</a><time datetime="2024-01-24T15:58:53.000Z" title="发表于 2024-01-24 23:58:53">2024-01-24</time></div></div><div class="aside-list-item"><a class="thumbnail" href="/2024/01/12/LinearAlgebra_0x07/" title="线性组合与线性相关、向量空间、张成空间"><img src= "/img/loading.gif" data-lazy-src="https://raw.githubusercontent.com/Ascotbe/Image/master/BlogCover/178.png" onerror="this.onerror=null;this.src='/img/404.gif'" alt="线性组合与线性相关、向量空间、张成空间"/></a><div class="content"><a class="title" href="/2024/01/12/LinearAlgebra_0x07/" title="线性组合与线性相关、向量空间、张成空间">线性组合与线性相关、向量空间、张成空间</a><time datetime="2024-01-12T15:58:53.000Z" title="发表于 2024-01-12 23:58:53">2024-01-12</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('https://raw.githubusercontent.com/Ascotbe/Image/master/Blog/89.jpg')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 <i id="heartbeat" class="fa fas fa-heartbeat"></i> By ascotbe</div><div class="footer_custom_text">Hi, welcome to my <a href="https://www.ascotbe.com/">blog</a>!</div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside_config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><a id="to_comment" href="#post-comment" title="直达评论"><i class="fas fa-comments"></i></a><button id="go-up" type="button" title="回到顶部"><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui/dist/fancybox.umd.min.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload/dist/lazyload.iife.min.js"></script><div class="js-pjax"><script>if (!window.MathJax) {
   window.MathJax = {
     tex: {
       inlineMath: [ ['$','$'], ["\\(","\\)"]],
