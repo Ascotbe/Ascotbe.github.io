@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2024-04** (1)  
+- 2024-04-22 [PE文件内存加载](https://www.ascotbe.com/2024/04/22/PortableExecutableFileMemoryLoading/)  
+  
+  
 ### **2024-02** (3)  
 - 2024-02-27 [二次型](https://www.ascotbe.com/2024/02/27/LinearAlgebra_0x12/)  
 - 2024-02-06 [矩阵的相似与对角化](https://www.ascotbe.com/2024/02/06/LinearAlgebra_0x11/)  
@@ -225,6 +229,10 @@
   
 ### **2017-12** (1)  
 - 2017-12-04 [TCP/IP](https://www.ascotbe.com/2017/12/04/NetworkProtocol/)  
+  
+  
+### **1024-03** (1)  
+- 1024-03-05 [](https://www.ascotbe.com/1024/03/05/ProbabilityTheory_0x01/)  
   
   
 ### **1022-01** (2)  
