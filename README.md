@@ -1,4 +1,9 @@
 ## 文章列表  
+### **2024-05** (2)  
+- 2024-05-06 [如何理解梯度下降法？](https://www.ascotbe.com/2024/05/06/HowToUnderstandGradientDescent/)  
+- 2024-05-01 [如何理解线性回归？](https://www.ascotbe.com/2024/05/01/HowToUnderstandLinearRegression/)  
+  
+  
 ### **2024-04** (1)  
 - 2024-04-22 [PE文件内存加载](https://www.ascotbe.com/2024/04/22/PortableExecutableFileMemoryLoading/)  
   
