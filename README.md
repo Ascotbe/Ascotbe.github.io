@@ -1,6 +1,7 @@
 ## 文章列表  
-### **2024-05** (2)  
+### **2024-05** (3)  
 - 2024-05-06 [如何理解梯度下降法？](https://www.ascotbe.com/2024/05/06/HowToUnderstandGradientDescent/)  
+- 2024-05-04 [如何理解最小二乘法？](https://www.ascotbe.com/2024/05/04/HowToUnderstandTheLeastSquaresMethod/)  
 - 2024-05-01 [如何理解线性回归？](https://www.ascotbe.com/2024/05/01/HowToUnderstandLinearRegression/)  
   
   
