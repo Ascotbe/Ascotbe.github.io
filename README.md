@@ -1,5 +1,6 @@
 ## 文章列表  
-### **2024-05** (4)  
+### **2024-05** (5)  
+- 2024-05-16 [Softmax回归实现](https://www.ascotbe.com/2024/05/16/SoftmaxRegression/)  
 - 2024-05-10 [线性回归实现](https://www.ascotbe.com/2024/05/10/LinearRegression/)  
 - 2024-05-06 [如何理解梯度下降法？](https://www.ascotbe.com/2024/05/06/HowToUnderstandGradientDescent/)  
 - 2024-05-04 [如何理解最小二乘法？](https://www.ascotbe.com/2024/05/04/HowToUnderstandTheLeastSquaresMethod/)  
