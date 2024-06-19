@@ -1,5 +1,7 @@
 ## 文章列表  
-### **2024-06** (1)  
+### **2024-06** (3)  
+- 2024-06-19 [自动求导](https://www.ascotbe.com/2024/06/19/PyTorch/AutomaticDifferentiation/)  
+- 2024-06-16 [张量](https://www.ascotbe.com/2024/06/16/PyTorch/Tensor/)  
 - 2024-06-14 [PyTorch图像处理](https://www.ascotbe.com/2024/06/14/PyTorchImageProcessing/)  
   
   
