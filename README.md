@@ -1,14 +1,6 @@
 ## 文章列表  
-### **2024-06** (3)  
-- 2024-06-19 [自动求导](https://www.ascotbe.com/2024/06/19/PyTorch/AutomaticDifferentiation/)  
-- 2024-06-16 [张量](https://www.ascotbe.com/2024/06/16/PyTorch/Tensor/)  
-- 2024-06-14 [PyTorch图像处理](https://www.ascotbe.com/2024/06/14/PyTorchImageProcessing/)  
-  
-  
-### **2024-05** (6)  
+### **2024-05** (4)  
 - 2024-05-28 [John the Ripper破解密码](https://www.ascotbe.com/2024/05/28/JohnTheRipper/)  
-- 2024-05-16 [Softmax回归实现](https://www.ascotbe.com/2024/05/16/SoftmaxRegression/)  
-- 2024-05-10 [线性回归实现](https://www.ascotbe.com/2024/05/10/LinearRegression/)  
 - 2024-05-06 [如何理解梯度下降法？](https://www.ascotbe.com/2024/05/06/HowToUnderstandGradientDescent/)  
 - 2024-05-04 [如何理解最小二乘法？](https://www.ascotbe.com/2024/05/04/HowToUnderstandTheLeastSquaresMethod/)  
 - 2024-05-01 [如何理解线性回归？](https://www.ascotbe.com/2024/05/01/HowToUnderstandLinearRegression/)  
