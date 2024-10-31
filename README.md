@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2024-10** (1)  
+- 2024-10-31 [NAS选配与搭建](https://www.ascotbe.com/2024/10/31/NAS/)  
+  
+  
 ### **2024-05** (4)  
 - 2024-05-28 [John the Ripper破解密码](https://www.ascotbe.com/2024/05/28/JohnTheRipper/)  
 - 2024-05-06 [如何理解梯度下降法？](https://www.ascotbe.com/2024/05/06/HowToUnderstandGradientDescent/)  
