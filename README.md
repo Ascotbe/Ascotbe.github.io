@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2024-12** (1)  
+- 2024-12-13 [Wazuh](https://www.ascotbe.com/2024/12/13/Wazuh/)  
+  
+  
 ### **2024-11** (1)  
 - 2024-11-25 [群辉中使用selenium和v2ray联动](https://www.ascotbe.com/2024/11/25/NAS_0x02/)  
   
