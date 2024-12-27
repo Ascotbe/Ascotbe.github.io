@@ -1,5 +1,6 @@
 ## 文章列表  
-### **2024-12** (1)  
+### **2024-12** (2)  
+- 2024-12-27 [CodeQL学习笔记](https://www.ascotbe.com/2024/12/27/CodeQL/)  
 - 2024-12-13 [Wazuh](https://www.ascotbe.com/2024/12/13/Wazuh/)  
   
   
@@ -254,9 +255,8 @@
 - 1024-03-05 [](https://www.ascotbe.com/1024/03/05/ProbabilityTheory_0x01/)  
   
   
-### **1022-01** (2)  
+### **1022-01** (1)  
 - 1022-01-20 [Windows漏洞分析](https://www.ascotbe.com/1022/01/20/WindowsVulnerabilityAnalysis/)  
-- 1022-01-06 [CodeQL学习笔记](https://www.ascotbe.com/1022/01/06/CodeQL/)  
   
   
 ### **1021-07** (1)  
