@@ -1,6 +1,10 @@
 ## 文章列表  
+### **2025-06** (1)  
+- 2025-06-27 [Wazuh配置auditd日志](https://www.ascotbe.com/2025/06/27/Wazuh_0x02/)  
+  
+  
 ### **2025-05** (2)  
-- 2025-05-28 [Tetragon搭建](https://www.ascotbe.com/2025/05/28/Tetragon/)  
+- 2025-05-28 [Tetragon搭建](https://www.ascotbe.com/2025/05/28/Tetragon_0x01/)  
 - 2025-05-13 [Elkeid搭建](https://www.ascotbe.com/2025/05/13/Elkeid/)  
   
   
@@ -10,7 +14,7 @@
   
 ### **2024-12** (2)  
 - 2024-12-27 [CodeQL学习笔记](https://www.ascotbe.com/2024/12/27/CodeQL/)  
-- 2024-12-13 [Wazuh](https://www.ascotbe.com/2024/12/13/Wazuh/)  
+- 2024-12-13 [Wazuh搭建](https://www.ascotbe.com/2024/12/13/Wazuh_0x01/)  
   
   
 ### **2024-11** (1)  
