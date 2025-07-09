@@ -1,4 +1,8 @@
 ## 文章列表  
+### **2025-07** (1)  
+- 2025-07-09 [Wazuh远程下发配置](https://www.ascotbe.com/2025/07/09/Wazuh_0x03/)  
+  
+  
 ### **2025-06** (1)  
 - 2025-06-27 [Wazuh配置auditd日志](https://www.ascotbe.com/2025/06/27/Wazuh_0x02/)  
   
